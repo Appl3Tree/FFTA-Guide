@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
+import mapGif from "./assets/ffta-map.gif";
 
 const keyify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
@@ -6084,7 +6085,7 @@ const FFTAProgressionGuide: React.FC = () => {
       >
         <div className="space-y-3">
           <img
-            src="https://64.media.tumblr.com/e07fe7840fbbd3ca6abde6378245b9d6/tumblr_inline_ph09u7zzNr1qlaths_250.gif"
+            src={mapGif}
             alt="FFTA World Map"
             className="w-full rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
           />
@@ -6343,12 +6344,6 @@ const FFTAProgressionGuide: React.FC = () => {
                     <List l="Prerequisites" a={q.prerequisites} />
                     <List l="Rewards" a={q.reward} />
                     <List l="Enemies" a={q.enemies} />
-
-                    {q.notes && (
-                      <div className="mt-1 italic text-zinc-700 dark:text-zinc-300">
-                        {q.notes}
-                      </div>
-                    )}
                   </div>
                 </div>
               </label>
@@ -6362,6 +6357,18 @@ const FFTAProgressionGuide: React.FC = () => {
     );
   };
 
+const KV = ({ l, v }: { l: string; v?: string }) =>
+  v ? <div><b>{l}:</b> {v}</div> : null;
+
+const List = ({ l, a }: { l: string; a?: string[] }) =>
+  a && a.length ? (
+    <div>
+      <div className="font-semibold">{l}:</div>
+      <ul className="list-disc list-inside">
+        {a.map((s, i) => <li key={i}>{s}</li>)}
+      </ul>
+    </div>
+  ) : null;
 
   
   return (
