@@ -631,7 +631,7 @@ const MISSION_REF: QuestRef[] = [
           "Brown Rabbits",
           "White Kupos",
           "Yellow Powerz",
-        ],
+        ],`],
         reward: [`22600 Gil`, `Peytral`, `1x Random Item`, `1x Random Card`, `available_for: "25 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Summoner`],
