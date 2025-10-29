@@ -354,7 +354,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Nubswood`,
-        prerequisites: [`After completion of Mission #2 Thesis Hunt. Kingmoon`, `only`, `Completed Thesis Hunt (#002)`],
+                prerequisites: [
+          "Completed Thesis Hunt. Kingmoon (#002)",
+          "only",
+        ],
         reward: [`4600 Gil`, `Flower Vase`, `1x Random Item`],
         difficulty: `Medium`,
         enemies: [`White Monk`, `Soldier`, `White Mage`, `Black Mage (Dolce)`],
@@ -366,7 +369,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1800il`,
         location: `Jeraw Sands`,
-        prerequisites: [`After completion of Mission #13 The Bounty. Bardmoon`, `only`, `Completed Jagd Hunt (#012)`],
+                prerequisites: [
+          "Completed Jagd Hunt (#012)",
+          "Completed The Bounty. Bardmoon (#013)",
+          "only",
+        ],
         reward: [`13600 Gil`, `2x Random Item`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Thief`, `Time Mage`, `White Monk`],
@@ -378,7 +385,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Giza Plains`,
-        prerequisites: [`After completion of Mission #2 Thesis Hunt. Madmoon`, `only`, `Completed Herb Picking (#001)`],
+                prerequisites: [
+          "Completed Herb Picking (#001)",
+          "Completed Thesis Hunt. Madmoon (#002)",
+          "only",
+        ],
         reward: [`2800 Gil`, `1x Random Item`],
         difficulty: `Medium`,
         enemies: [`Archer`, `Thief`, `Gladiator`, `Alchemist (Diaghilev)`],
@@ -390,7 +401,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2200 Gil`,
         location: `Uladon Bog`,
-        prerequisites: [`After completion of Mission #15 Scouring Time. Sagemoon`, `only`, `Completed Scouring Time (#015)`],
+                prerequisites: [
+          "Completed Scouring Time. Sagemoon (#015)",
+          "only",
+        ],
         reward: [`18000 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Archer`, `Bishop`, `Summoner`, `Templar (Kenan)`],
@@ -402,7 +416,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `4800 Gil`,
         location: `Jagd Helje`,
-        prerequisites: [`After completion of Mission #64 Den of Evil. Huntmoon`, `only`, `Completed Present Day (#020)`, `Completed Den of Evil (#064)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Den of Evil. Huntmoon (#064)",
+          "only",
+        ],
         reward: [`45000 Gil`, `Secret Item (Zanmato)`, `1x Random Item`, `2x`, `Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Gunner`],
@@ -414,7 +432,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2700 Gil`,
         location: `Jagd Alhi`,
-        prerequisites: [`After completion of Mission #65 Exploration. Kingmoon`, `only`, `Completed The Bounty (#013)`, `Completed Wanted! (#025)`, `Completed Exploration (#065)`],
+                prerequisites: [
+          "Completed The Bounty (#013)",
+          "Completed Wanted! (#025)",
+          "Completed Exploration. Kingmoon (#065)",
+          "only",
+        ],
         reward: [`22600 Gil`, `Onlyone`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Archer`, `Fighter`, `Gladiator`, `Illusionist (Lodion)`],
@@ -426,7 +449,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3300 Gil`,
         location: `Baguba Port`,
-        prerequisites: [`After completion of Mission #102 Wyrms Awaken`, `Completed Desert Patrol (#017)`, `Completed Wyrms Awaken (#102)`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Completed Wyrms Awaken (#102)",
+        ],
         reward: [`16000 Gil`, `Wyrmstone`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Archer`, `Hunter`, `Icedrake`],
@@ -438,7 +464,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Koringwood`,
-        prerequisites: [`After receiving the Mission Item "The Hero Gaol`, `Completed Hot Awakening (#008)`, `Examined The Hero Gaol`],
+                prerequisites: [
+          ",",
+          "After receiving the Mission Item",
+        ],
         reward: [`0 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Bomb`, `Goblin`, `Icedrake`],
@@ -450,7 +479,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Aisenfield`,
-        prerequisites: [`After completion of Mission #32 Tower Ruins`, `Completed Hot Awakening (#008)`, `Completed Tower Ruins (#032)`],
+                prerequisites: [
+          "Completed Hot Awakening (#008)",
+          "Completed Tower Ruins (#032)",
+        ],
         reward: [`0 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Fighter`, `Archer x2`],
@@ -462,7 +494,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Eluut Sands`,
-        prerequisites: [`After completion of Mission #33 Battle In Aisen`, `Completed Desert Patrol (#017)`, `Completed Battle In Aisen (#033)`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Completed Battle In Aisen (#033)",
+        ],
         reward: [`0 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Bomb`, `Antlion`, `Icedrake`, `Red Panther`],
@@ -474,7 +509,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1700 Gil`,
         location: `Salikawood`,
-        prerequisites: [`After completion of Mission #34 Magewyrm`, `Completed Desert Patrol (#017)`, `Completed Magewyrm (#034)`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Completed Magewyrm (#034)",
+        ],
         reward: [`0 Gil`, `Ayvuir Red`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Time Mage`, `White Mage`, `Defender x2`],
@@ -486,7 +524,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Eluut Sands`,
-        prerequisites: [`After receiving the Mission Item "The Hero Gaol`, `Completed Twisted Flow (#005)`, `Completed Village Hunt (#037)`, `Examined The Hero Gaol`],
+                prerequisites: [
+          ",",
+          "After receiving the Mission Item",
+        ],
         reward: [`0 Gil`, `Ayvuir Blue`, `1x Random Item`, `Req. Skills: Combat/Lvl.10`],
         difficulty: `Slightly Hard`,
         enemies: [`Gunner`, `Time Mage`, `Black Mage`, `Mog Knight x2`],
@@ -498,7 +539,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Eluut Sands`,
-        prerequisites: [`After completion of Mission #3 The Cheetahs`, `Completed The Cheetahs (#003)`],
+                prerequisites: ["Completed The Cheetahs (#003)"],
         reward: [`4200 Gil`, `1x Random Item`],
         difficulty: `Medium`,
         enemies: [`Coeurl`, `Goblin`, `Antlion x3`],
@@ -510,7 +551,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Cyril`,
-        prerequisites: [`After completion of Mission #1 Herb Picking`, `Completed Herb Picking (#001)`],
+                prerequisites: ["Completed Herb Picking (#001)"],
         reward: [`3600 Gil`, `Sprinkler`, `1x Random Item`, `available_for: "10 Days`],
         difficulty: `Medium`,
         enemies: [`Bomb x4`],
@@ -522,7 +563,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2400 Gil`,
         location: `Muscadet`,
-        prerequisites: [`After completion of Mission #15 Scouring Time. Muscadet`, `Pub only`, `Completed Scouring Time (#015)`],
+                prerequisites: [
+          "Completed Scouring Time. Muscadet (#015)",
+          "Pub only",
+        ],
         reward: [`11400 Gil`, `Tonberrian`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Tonberry x2`],
@@ -534,7 +578,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `800 Gil`,
         location: `Bervenia Palace`,
-        prerequisites: [`After completion of Mission #20 Present Day. Kingmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Kingmoon (#020)",
+          "only",
+        ],
         reward: [`7000 Gil`, `Sequence`, `1x Random Item`, `Secret Item (1x Random`, `Card)`, `available_for: "15 Days`],
         difficulty: `Medium`,
         enemies: [`Defender`, `Illusionist`],
@@ -546,7 +593,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `800 Gil`,
         location: `Bervenia Palace`,
-        prerequisites: [`After completion of Mission #20 Present Day. Madmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Madmoon (#020)",
+          "only",
+        ],
         reward: [`7000 Gil`, `Sapere Aude`, `1x Random Item`, `Secret Item (1x`, `Random Card)`, `available_for: "15 Days`],
         difficulty: `Medium`,
         enemies: [`White Mage`, `Black Mage`],
@@ -558,7 +608,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `800 Gil`,
         location: `Bervenia Palace`,
-        prerequisites: [`After completion of Mission #20 Present Day. Huntmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Huntmoon (#020)",
+          "only",
+        ],
         reward: [`7000 Gil`, `Acadia Hat`, `1x Random Item`, `Secret Item (1x`, `Random Card)`, `available_for: "15 Days`],
         difficulty: `Medium`,
         enemies: [`Archer`, `Gladiator`, `White Mage`],
@@ -570,7 +623,15 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Bervenia Palace`,
-        prerequisites: [`After completion of side-mission engagements with`, `Brown Rabbits`, `Blue Genius`, `Yellow Powerz`, `and the`, `White Kupos`, `Completed To Ambervale (#022)`, `Completed White Kupos [League]`],
+                prerequisites: [
+          "Completed To Ambervale (#022)",
+          "After completion of side-mission engagements with",
+          "and the",
+          "Blue Genius",
+          "Brown Rabbits",
+          "White Kupos",
+          "Yellow Powerz",
+        ],`],
         reward: [`22600 Gil`, `Peytral`, `1x Random Item`, `1x Random Card`, `available_for: "25 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Summoner`],
@@ -582,7 +643,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Lutia Pass`,
-        prerequisites: [`After completion of Mission #1 Herb Picking`, `Completed Herb Picking (#001)`],
+                prerequisites: ["Completed Herb Picking (#001)"],
         reward: [`3600 Gil`, `1x Random Item`],
         difficulty: `Slightly Hard`,
         enemies: [`Goblin`, `Red Panther x2`],
@@ -594,7 +655,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Lutia Pass`,
-        prerequisites: [`After completion of Mission #44 Snow in Lutia`, `Completed Herb Picking (#001)`, `Completed Snow In Lutia (#044)`],
+                prerequisites: [
+          "Completed Herb Picking (#001)",
+          "Completed Snow in Lutia (#044)",
+        ],
         reward: [`4000 Gil`, `2x Random Items`],
         difficulty: `Slightly Hard`,
         enemies: [`Floateye`, `Red Panther x2`, `Black Mage (Gelato)`],
@@ -606,7 +670,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `900 Gil`,
         location: `Lutia Pass`,
-        prerequisites: [`After completion of Mission #44 Snow in Lutia`, `Completed Herb Picking (#001)`, `Completed Snow In Lutia (#044)`],
+                prerequisites: [
+          "Completed Herb Picking (#001)",
+          "Completed Snow in Lutia (#044)",
+        ],
         reward: [`4000 Gil`, `Gedegg Soup`, `available_for: "25 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Ice Flan x2`, `Zombie x2 (Colin`],
@@ -618,7 +685,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1000 Gil`,
         location: `Roda Volcano`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`],
+                prerequisites: ["Completed Diamond Rain (#007)"],
         reward: [`7000 Gil`, `Gedegg Soup`, `1x Random Item`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Bomb x3`, `Firewyrm x2`],
@@ -630,7 +697,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1500 Gil`,
         location: `Koringwood`,
-        prerequisites: [`After completion of Mission #8 Hot Awakening`, `Completed Hot Awakening (#008)`],
+                prerequisites: ["Completed Hot Awakening (#008)"],
         reward: [`7800 Gil`, `Secret Item (Topaz Armring)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Skills: Tracking/Lvl.7`, `available_for: "15 Days`],
         difficulty: `Easy`,
         enemies: [`Sprite x2`, `Zombie x2`],
@@ -642,7 +709,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Ulei River`,
-        prerequisites: [`After completion of Mission #3 Desert Peril`, `Completed Desert Peril (#004)`],
+                prerequisites: [
+          "Completed Desert Peril (#003)",
+          "Completed Desert Peril (#004)",
+        ],
         reward: [`5200 Gil`, `2x Random Items`, `available_for: "15 Days`],
         difficulty: `Medium`,
         enemies: [`Goblin`, `Sprite`, `Lamia x2`],
@@ -654,7 +724,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Cyril`,
-        prerequisites: [`After completion of Mission #113 Watching You`, `Completed The Cheetahs (#003)`, `Completed Watching You (#113)`],
+                prerequisites: [
+          "Completed The Cheetahs (#003)",
+          "Completed Watching You (#113)",
+        ],
         reward: [`4600 Gil`, `Vesper`, `1x Random Item`, `Req. Items: Ahriman Eye`, `available_for: "25 Days`],
         difficulty: `Easy`,
         enemies: [`Floateye x2`, `Ahriman`],
@@ -666,7 +739,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1800 Gil`,
         location: `Gotor Sands`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`0 Gil`, `Blue Rose`, `1x Random Item`, `2x Random Cards`, `Req. Items: Flower Vase`, `available_for: "15 Days`],
         difficulty: `Medium`,
         enemies: [`Sprite`, `Antlion x2`, `Red Panther x2`],
@@ -678,7 +751,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1800 Gil`,
         location: `Kudik Peaks`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt`, `Completed Jagd Hunt (#012)`],
+                prerequisites: ["Completed Jagd Hunt (#012)"],
         reward: [`9000 Gil`, `2x Random Items`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Easy`,
         enemies: [`Cream`, `Coeurl`, `Red Panther x3`, `a Cream`, `and a Coeurl`],
@@ -690,7 +763,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3600 Gil`,
         location: `Baguba Port`,
-        prerequisites: [`After completion of Mission #105 Smuggle Bust`, `Completed The Big Find (#016)`, `Completed Smuggle Bust (#105)`],
+                prerequisites: [
+          "Completed The Big Find (#016)",
+          "Completed Smuggle Bust (#105)",
+        ],
         reward: [`18000 Gil`, `Tiger Hide`, `1x Random Item`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Gunner`, `Archer`, `Thief x2`, `Hunter x2`],
@@ -702,7 +778,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Materiwood`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`16000 Gil`, `Trichord`, `1x Random Item`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Sprite`, `Red Panther`],
@@ -714,7 +790,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `200 Gil`,
         location: `Giza Plains`,
-        prerequisites: [`After completion of Mission #3 The Cheetahs`, `Completed The Cheetahs (#003)`],
+                prerequisites: ["Completed The Cheetahs (#003)"],
         reward: [`1600 Gil`, `White Flowers`, `1x Random Item`, `available_for: "25 Days`],
         difficulty: `Easy`,
         enemies: [`Antlion x3`, `Goblin`, `Red Cap`],
@@ -726,7 +802,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `5000 Gil`,
         location: `Siena Gorge`,
-        prerequisites: [`After completion of Mission #23 Over The Hill. Gossip`, `with Ezel at Cadoan Card Keeper`, `Completed To Ambervale (#022)`, `Seen Ezel's New Idea Cutscene`],
+                prerequisites: [
+          "Completed To Ambervale (#022)",
+          "Completed Over The Hill. Gossip (#023)",
+          "Seen Ezel",
+          "with Ezel at Cadoan Card Keeper",
+        ],
         reward: [`34000 Gil`, `Amber`, `1x Random Item`, `Allmighty Card`],
         difficulty: `Slightly Hard`,
         enemies: [`Ninja`, `Gunner`, `Defender`, `Time Mage`],
@@ -738,7 +819,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `800 Gil`,
         location: `Sprohm`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Materite Now! (#019)`],
+                prerequisites: [
+          "Completed Materite Now! (#019)",
+          "Completed Present Day (#020)",
+        ],
         reward: [`7000 Gil`, `Secret Item (Helje Key)`, `1x Random Item`, `1x`, `Random Card`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Templar x2`, `Defender x2`],
@@ -750,7 +834,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1500 Gil`,
         location: `Nargai Cave`,
-        prerequisites: [`After completion of Mission #114 Golden Gil`, `Completed Emerald Keep (#010)`, `Completed Golden Gil (#114)`],
+                prerequisites: [
+          "Completed Emerald Keep (#010)",
+          "Completed Golden Gil (#114)",
+        ],
         reward: [`7000 Gil`, `2x Random Items`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Lamia`, `Odd Statue x2`],
@@ -762,7 +849,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2400 Gil`,
         location: `Deti Plains`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`],
+                prerequisites: ["Completed To Ambervale (#022)"],
         reward: [`18000 Gil`, `Sketchbook`, `1x Random Item`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Archer`, `Thief x2`],
@@ -774,7 +861,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `4000 Gil`,
         location: `Ozmonfield`,
-        prerequisites: [`After completion of Mission #66 A Dragon's Aid`, `Completed Quiet Sands (#018)`, `Completed A Dragon's Aid (#066)`],
+                prerequisites: [
+          "Completed A Dragon (#066)",
+          ",",
+        ],
         reward: [`36000 Gil`, `2x Random Items`, `2x Random Cards`, `available_for: "10 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Summoner`, `Alchemist`],
@@ -786,7 +876,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `900 Gil`,
         location: `Jagd Dorsa`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`],
+                prerequisites: ["Completed The Bounty (#013)"],
         reward: [`7000 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Thief`, `Ninja`, `Gunner`, `Black Mage`],
@@ -798,7 +888,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `900 Gil`,
         location: `Cadoan`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Twisted Flow (#005)`],
+                prerequisites: [
+          "Completed Twisted Flow (#005)",
+          "Completed Antilaws (#006)",
+        ],
         reward: [`4600 Gil`, `Secret Item (The Hero Gaol)`, `1x Random Item`],
         difficulty: `Medium`,
         enemies: [`Lamia x3`],
@@ -810,7 +903,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2400 Gil`,
         location: `Gotor Sands`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`, `Completed Prof In Trouble (#046)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Prof In Trouble (#046)",
+        ],
         reward: [`18000 Gil`, `2x Random Items`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Bomb`, `Ahriman`, `Odd Statue x2`],
@@ -822,7 +918,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2400 Gil`,
         location: `Tubola Cave`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`],
+                prerequisites: ["Completed Present Day (#020)"],
         reward: [`22600 Gil`, `1x Random Item`, `2x Random Cards`, `Req. Items: Helje Key`, `Req. Skills: Combat/Lvl.25`],
         difficulty: `Slightly Hard`,
         enemies: [`Bishop`, `Time Mage`, `White Mage`, `Black Mage`],
@@ -834,7 +930,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `900 Gil`,
         location: `Gotor Sands`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`0 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Coeurl`, `Ice Flan`, `Coeurl`, `an Ice Flan`],
@@ -846,7 +942,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `6300 Gil`,
         location: `Cyril`,
-        prerequisites: [`After completion of Mission #102 Wyrms Awaken`, `Completed Desert Patrol (#017)`, `Completed Wyrms Awaken (#102)`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Completed Wyrms Awaken (#102)",
+        ],
         reward: [`31600 Gil`, `2x Random Items`, `2x Random Cards`, `Req. Items: Wyrmstone`, `available_for: "25 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Icedrake`, `Dragoon x2`],
@@ -858,7 +957,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Deti Plains`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Completed Lucky Charm (#191)`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Completed Lucky Charm (#191)",
+          "Clear Game",
+        ],
         reward: [`27000 Gil`, `Ally Finder2`, `1x Random Item`, `2x Random Cards`, `Req. Items: Rabbit Tail`],
         difficulty: `Medium`,
         enemies: [`Coeurl (Meow)`],
@@ -870,7 +973,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `600 Gil`,
         location: `Cyril`,
-        prerequisites: [`After completion of Mission #2 Thesis Hunt`, `Completed Thesis Hunt (#002)`],
+                prerequisites: ["Completed Thesis Hunt (#002)"],
         reward: [`3600 Gil`, `2x Random Items`],
         difficulty: `Medium`,
         enemies: [`Thief (Dabarosa)`],
@@ -882,7 +985,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Capture`,
         cost: `400 Gil`,
         location: `Sprohm`,
-        prerequisites: [`After completion of Mission #68 Fowl Thief and reading`, `Area Freed!" rumor`, `Completed Thesis Hunt (#002)`, `Read Thief Exposed`],
+                prerequisites: [
+          "Completed Fowl Thief and reading (#068)",
+          ",",
+          "Area Freed!",
+        ],
         reward: [`2400 Gil`, `2x Random Items`],
         difficulty: `Medium`,
         enemies: [`White Mage`, `Thief (Warose)`],
@@ -894,7 +1001,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `800 Gil`,
         location: `Giza Plains`,
-        prerequisites: [`After completion of Mission #69 Free Sprohm! and reading`, `Our Heroes" rumor. Sprohm Pub only`, `Completed Thesis Hunt (#002)`, `Read Area Freed!`],
+                prerequisites: [
+          "Completed Free Sprohm! and reading (#069)",
+          ",",
+          "Our Heroes",
+        ],
         reward: [`6400 Gil`, `2x Random Items`],
         difficulty: `Slightly Hard`,
         enemies: [`Black Mage`],
@@ -906,7 +1017,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1000 Gil`,
         location: `Nubswood`,
-        prerequisites: [`After completion of Mission #70 Raven's Oath and reading`, `Borzoi's Plan" rumor. Sprohm Pub only`, `Completed Antilaws (#006)`, `Read Borzoi's Plan`],
+                prerequisites: [
+          "Completed Raven (#070)",
+          ",",
+          "s Plan",
+        ],
         reward: [`7000 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Hard`,
         enemies: [`White Mage (Batalise)`, `Black Mage (Golitaire)`, `a Black Mage`],
@@ -918,7 +1033,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `800 Gil`,
         location: `Lutia Pass`,
-        prerequisites: [`After completion of Mission #8 Hot Awakening. Sprohm Pub`, `only`, `Completed Antilaws (#006)`, `Completed Nubswood Base (#071)`],
+                prerequisites: [
+          "Completed Antilaws (#006)",
+          "Completed Hot Awakening. Sprohm Pub (#008)",
+          "Completed Nubswood Base (#071)",
+          "only",
+        ],
         reward: [`6000 Gil`, `2x Random Items`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Hard`,
         enemies: [`Black Mage`, `Time Mage (Steraiz)`],
@@ -930,7 +1050,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1000 Gil`,
         location: `Cyril`,
-        prerequisites: [`After completion of Mission #72 Lutia Mop-up. Cyril Pub`, `only`, `Completed Antilaws (#006)`, `Completed Lutia Mop-up (#072)`],
+                prerequisites: [
+          "Completed Antilaws (#006)",
+          "Completed Lutia Mop-up. Cyril Pub (#072)",
+          "only",
+        ],
         reward: [`7200 Gil`, `Secret Item (Shijin Shield)`, `2x Random Cards`, `Req. Skills: Combat/Lvl. 12`],
         difficulty: `Hard`,
         enemies: [`White Monk`, `White Mage`, `Fighter (Gukko)`],
@@ -942,7 +1066,14 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1500 Gil`,
         location: `Cadoan`,
-        prerequisites: [`After completion of Mission #75 and reading "Foreign`, `Ship" and "Crime Ring" rumor. Cadoan Pub only`, `Completed Antilaws (#006)`, `Read Crime Ring`],
+                prerequisites: [
+          "Completed Antilaws (#006)",
+          "Completed and reading (#075)",
+          ",",
+          "and",
+          "Read Crime Ring",
+          "rumor. Cadoan Pub only",
+        ],
         reward: [`8200 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Easy`,
         enemies: [`Bomb x4`, `Bomb`],
@@ -954,7 +1085,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Capture`,
         cost: `600 Gil`,
         location: `Cyril`,
-        prerequisites: [`After completion of Mission #74 Cadoan Watch and reading`, `The Redwings" rumor. Cadoan Pub only`, `Completed Antilaws (#006)`, `Read The Redwings`],
+                prerequisites: [
+          "Completed Cadoan Watch and reading (#074)",
+          ",",
+          "The Redwings",
+        ],
         reward: [`2400 Gil`, `Secret Item (Red Robe)`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Mog Knight x2`],
@@ -966,7 +1101,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1200 Gil`,
         location: `Roda Volcano`,
-        prerequisites: [`After completion of Mission #75 Free Cadoan and reading`, `Falgabird" rumor`, `Completed Diamond Rain (#007)`, `Read Falgabird`],
+                prerequisites: [
+          "Completed Free Cadoan and reading (#075)",
+          ",",
+          "Falgabird",
+        ],
         reward: [`4600 Gil`, `Fire Sigil`, `Secret Item (Random Item)`, `2x Random`, `Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Mog Knight x3`, `Lamia (Marilis)`],
@@ -978,7 +1117,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Capture`,
         cost: `600 Gil`,
         location: `Baguba Port`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt and reading`, `TheSpiritstone" rumor`, `Completed Jagd Hunt (#012)`, `Read The Spiritstone`],
+                prerequisites: [
+          "Completed Jagd Hunt and reading (#012)",
+          ",",
+          "TheSpiritstone",
+        ],
         reward: [`2400 Gil`, `Secret Item (Delta Fang)`, `1x Random Item`, `2x`, `Random Cards`],
         difficulty: `Medium`,
         enemies: [`Naga x3`],
@@ -990,7 +1133,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1200 Gil`,
         location: `Nargai Cave`,
-        prerequisites: [`After completion of Mission #77 Free Baguba! and reading`, `The Sages" rumor`, `Completed Jagd Hunt (#012)`, `Read The Sages`],
+                prerequisites: [
+          "Completed Free Baguba! and reading (#077)",
+          ",",
+          "The Sages",
+        ],
         reward: [`18000 Gil`, `Water Sigil`, `Secret Item (Random Item)`, `2x`, `Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Mog Knight x3`, `Ice Flan (Kraken)`, `Flan`],
@@ -1002,7 +1149,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1200 Gil`,
         location: `Koringwood`,
-        prerequisites: [`After completion of Mission #77 Free Baguba! and reading`, `The Sages" rumor`, `Completed Jagd Hunt (#012)`, `Read The Sages`],
+                prerequisites: [
+          "Completed Free Baguba! and reading (#077)",
+          ",",
+          "The Sages",
+        ],
         reward: [`18000 Gil`, `Wind Sigil`, `Secret Item (Random Item)`, `2x`, `Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Mog Knight x3`],
@@ -1014,7 +1165,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1200 Gil`,
         location: `Aisenfield`,
-        prerequisites: [`After completion of Mission #77 Free Baguba! and reading`, `The Sages" rumor`, `Completed Jagd Hunt (#012)`, `Read The Sages`],
+                prerequisites: [
+          "Completed Free Baguba! and reading (#077)",
+          ",",
+          "The Sages",
+        ],
         reward: [`18000 Gil`, `Earth Sigil`, `Secret Item (Random Item)`, `2x`, `Random Cards`],
         difficulty: `Hard`,
         enemies: [`Mog Knight x3`],
@@ -1026,7 +1181,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `4000 Gil`,
         location: `Salikawood`,
-        prerequisites: [`After completion of Mission #77 Free Baguba! and reading`, `The Sages" rumor`, `Completed Jagd Hunt (#012)`, `Read The Sages`],
+                prerequisites: [
+          "Completed Free Baguba! and reading (#077)",
+          ",",
+          "The Sages",
+        ],
         reward: [`22600 Gil`, `Secret Item (Reaper Cloak)`, `2x Random Cards`, `Req. Items: Spiritstone`],
         difficulty: `Hard`,
         enemies: [`Defender x2`, `Mog Knight x2`],
@@ -1038,7 +1197,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Capture`,
         cost: `600 Gil`,
         location: `Muscadet`,
-        prerequisites: [`After completion of Mission #81 The Redwings and`, `reading "Grissom's End" rumor. Muscadet Pub only`, `Completed Scouring Time (#015)`, `Read Weird Minstrel`],
+                prerequisites: [
+          "Completed The Redwings and (#081)",
+          ",",
+          "reading",
+          "s End",
+        ],
         reward: [`2400 Gil`, `Secret Item (Hanya Helm)`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Assassin x2 (Celia`],
@@ -1050,7 +1214,13 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Ulei River`,
-        prerequisites: [`After completion of Mission #82 Free Muscadet! and`, `reading the "ForeignFiends" rumor`, `Completed Scouring Time (#015)`, `Read Foreign Fiends`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed Free Muscadet! and (#082)",
+          "Read Foreign Fiends",
+          "reading the",
+          "rumor",
+        ],
         reward: [`18000 Gil`, `2x Random Item`, `2x Random Cards`],
         difficulty: `Medium`,
     },
@@ -1061,7 +1231,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Baguba Port`,
-        prerequisites: [`After completion of Mission #83 ForeignFiend`, `Completed Scouring Time (#015)`, `Completed Foreign Fiend (#83)`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed ForeignFiend (#083)",
+        ],
         reward: [`20400 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
     },
@@ -1072,7 +1245,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2500 Gil`,
         location: `Uladon Bog`,
-        prerequisites: [`After completion of Mission #84 ForeignFiend`, `Completed Scouring Time (#015)`, `Completed Foreign Fiend (#84)`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed ForeignFiend (#084)",
+        ],
         reward: [`22600 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
     },
@@ -1083,7 +1259,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `4000 Gil`,
         location: `Nubswood`,
-        prerequisites: [`After completion of Mission #85 ForeignFiend`, `Completed Scouring Time (#015)`, `Completed Foreign Fiend (#85)`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed ForeignFiend (#085)",
+        ],
         reward: [`34000 Gil`, `Secret Item (Dread Soul)`, `Secret Item (Judge`, `Coat)`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
     },
@@ -1094,7 +1273,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Capture`,
         cost: `400 Gil`,
         location: `Bervenia Palace`,
-        prerequisites: [`After completion of Mission #24 Royal Valley and freeing`, `all areas`, `Clear Game`, `Read Gukko's Return`],
+                prerequisites: [
+          "Completed Royal Valley and freeing (#024)",
+          "all areas",
+          "Clear Game",
+          "Read Gukko",
+        ],
         reward: [`2400 Gil`, `Rukavi Soul`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Hard`,
         enemies: [`Apanda x2`, `Archademon x2`],
@@ -1106,7 +1290,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Roda Volcano`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Clear Game",
+        ],
         reward: [`22600 Gil`, `Ogma's Seal`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
     },
@@ -1117,7 +1304,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Materiwood`,
-        prerequisites: [`After completion of Mission #88 The Worldwyrm`, `Clear Game`, `Completed The Worldwyrm (#088)`],
+                prerequisites: [
+          "Completed The Worldwyrm (#088)",
+          "Clear Game",
+        ],
         reward: [`18000 Gil`, `Esteroth`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Thief`, `Time Mage`, `Black Mage`],
@@ -1129,7 +1319,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Ozmonfield`,
-        prerequisites: [`After completion of Mission #89 Moogle Bride`, `Clear Game`, `Completed Moogle Bride (#089)`],
+                prerequisites: [
+          "Completed Moogle Bride (#089)",
+          "Clear Game",
+        ],
         reward: [`13600 Gil`, `Master Brave`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Medium`,
     },
@@ -1140,7 +1333,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `2400 Gil`,
         location: `Delia Dunes`,
-        prerequisites: [`After completion of Mission #17 Desert Patrol`, `Completed Desert Patrol (#017)`, `Completed Down To Earth (#152)`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Completed Down To Earth (#152)",
+        ],
         reward: [`18000 Gil`, `Chirijiraden`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Fighter`, `Fighter might win`],
@@ -1152,7 +1348,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1000 Gil`,
         location: `Eluut Sands`,
-        prerequisites: [`After completion of Mission #10 Emerald Keep`, `Completed Emerald Keep (#010)`, `Completed Pirates Ahoy (#124)`],
+                prerequisites: [
+          "Completed Emerald Keep (#010)",
+          "Completed Pirates Ahoy (#124)",
+        ],
         reward: [`8200 Gil`, `Secret Item (Last Letter)`, `1x Random Item`, `2x`, `Random Cards`],
         difficulty: `Medium`,
     },
@@ -1163,7 +1362,7 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `1700 Gil`,
         location: `Salikawood`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`],
+                prerequisites: ["Completed Scouring Time (#015)"],
         reward: [`13600 Gil`, `Heretic Rod`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Jelly x2`, `Ice Flan x2`],
@@ -1175,7 +1374,10 @@ const MISSION_REF: QuestRef[] = [
         type: `Encounter`,
         cost: `1500 Gil`,
         location: `Deti Plains`,
-        prerequisites: [`After completion of Mission #21 Hidden Vein`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Hidden Vein (#021)",
+        ],
         reward: [`13600 Gil`, `Secret Item (Bangaa Helm)`, `1x Random Item`, `2x`, `Random Cards`],
         difficulty: `Easy`,
     },
@@ -1186,7 +1388,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `5000 Gil`,
         location: `Jagd Helje`,
-        prerequisites: [`After completion of Mission #24 Royal Valley and Mission`, `Clear Game`, `Completed Thorny Dreams (#193)`, `Completed Den of Evil (#064)`],
+                prerequisites: [
+          "Completed Royal Valley and Mission (#024)",
+          "Completed Den of Evil (#064)",
+          "Completed Thorny Dreams (#193)",
+          "Clear Game",
+        ],
         reward: [`40600 Gil`, `Secret Item (Malbow)`, `1x Random Item`, `2x Random`, `Cards`, `available_for: "20 Days`],
         difficulty: `Medium`,
     },
@@ -1197,7 +1404,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `4500 Gil`,
         location: `Jagd Ahli`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Completed Missing Meow (#067)`, `Completed Exploration (#065)`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Completed Exploration (#065)",
+          "Completed Missing Meow (#067)",
+          "Clear Game",
+        ],
         reward: [`36000 Gil`, `Ninja Tabi`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Hard`,
         enemies: [`Assassin x2`, `Ninja x3 (Hanzou)`],
@@ -1209,7 +1421,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Jagd Dorsa`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Completed Beastly Gun (#284)`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Completed Beastly Gun (#284)",
+          "Clear Game",
+        ],
         reward: [`22600 Gil`, `Secret Item (Ebon Blade)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Items: Spiritstone/Bent Sword`],
         difficulty: `Medium`,
     },
@@ -1220,7 +1436,12 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `3600 Gil`,
         location: `Baguba Port`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Completed Carrot! (#095)`, `Completed Den of Evil (#064)`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Completed Den of Evil (#064)",
+          "Completed Carrot! (#095)",
+          "Clear Game",
+        ],
         reward: [`27000 Gil`, `Secret Item (Excalibur2)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Items: Rusty Sword/Mysidia Alloy`],
         difficulty: `Medium`,
         enemies: [`Templar (Buckles)`, `As a Templar`],
@@ -1232,7 +1453,11 @@ const MISSION_REF: QuestRef[] = [
         type: `Engagement`,
         cost: `5000 Gil`,
         location: `Siena Gorge`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Completed Alchemist Boy (#192)`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Completed Alchemist Boy (#192)",
+          "Clear Game",
+        ],
         reward: [`31600 Gil`, `Secret Item (Masamune 100)`, `1x Random Item`, `2x Random Cards`, `Req. Items: Zodiac Ore/Blood Apple`],
         difficulty: `Hard`,
         enemies: [`A master Gladiator`],
@@ -1243,7 +1468,12 @@ const MISSION_REF: QuestRef[] = [
         description: `There was a flood at the monster bank, and many of the monsters got out! Please capture those still on the loose! ~ Monster Bank Administration`,
         type: `Encounter`,
         cost: `1200 Gil`,
-        prerequisites: [`Capture at least five monsters and talk to Monster Bank`, `administrator at Cyril`, `Completed Magic Wood (#009)`, `Seen Monster Escape Cutscene`],
+                prerequisites: [
+          "Completed Magic Wood (#009)",
+          "administrator at Cyril",
+          "Capture at least five monsters and talk to Monster Bank",
+          "Seen Monster Escape Cutscene",
+        ],
         reward: [`8800 Gil`, `1x Random Item`, `2x Random Cards`, `available_for: "20 Days`],
         difficulty: `Medium`,
         enemies: [`Coeurl`, `Ahriman`, `Red Cap`],
@@ -1254,7 +1484,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Bandit clans are stealing work and attacking without warning! They're giving us clans a bad name. Help us round them up. ~ Clan Center`,
         type: `Encounter`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #4 Desert Peril`, `Completed Desert Peril (#004)`],
+                prerequisites: ["Completed Desert Peril (#004)"],
         reward: [`4600 Gil`, `2x Random Item`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Thief`, `Archer`, `Black Mage`, `White Mage`],
@@ -1265,7 +1495,7 @@ const MISSION_REF: QuestRef[] = [
         description: `The dragons sleeping in Roda Volcano are awake and heading towards Baguba! Please help us hold them off. ~ Delia Royal Watchpost`,
         type: `Encounter`,
         cost: `2700 Gil`,
-        prerequisites: [`After completion of Mission #17 Desert Patrol`, `Completed Desert Patrol (#017)`],
+                prerequisites: ["Completed Desert Patrol (#017)"],
         reward: [`22600 Gil`, `2x Random Items`, `2x Random Cards`, `available_for: "35 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Icedrake`, `Firewyrm x2`, `Thundrake x2`],
@@ -1276,7 +1506,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Professor Auggie's found a mythril vein in Tubola Cave using one of his new inventions! Talk to him -- you might get rich!`,
         type: `Encounter`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #63 Missing Prof`, `Completed Present Day (#020)`, `Completed Missing Prof (#063)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Missing Prof (#063)",
+        ],
         reward: [`7000 Gil`, `Secret Item (Silvril)`, `1x Random Card`],
         difficulty: `Medium`,
         enemies: [`Illusionist`],
@@ -1287,7 +1520,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Someone stole my latest scoop article, and I'll bet it was those guys at the Sprohm News. Get them before they reach Sprohm! ~ Eraile, Daily Baguba`,
         type: `Encounter`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`9000 Gil`, `1x Random Item`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Easy`,
         enemies: [`Soldier`, `Thief x2`, `White Monk`],
@@ -1298,7 +1531,10 @@ const MISSION_REF: QuestRef[] = [
         description: `We suspect a clan is smuggling rare monsters in boxes, but we can't move until we have proof! Can you look into it? ~ Dellar, Palace Guard`,
         type: `Encounter`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`, `Completed Poachers (#108)`],
+                prerequisites: [
+          "Completed The Big Find (#016)",
+          "Completed Poachers (#108)",
+        ],
         reward: [`13600 Gil`, `Secret Item (Chocobo Skin)`, `1x Random Item`, `2x`, `Random Cards`, `available_for: "40 Days`],
         difficulty: `Slightly Hard`,
         enemies: ["Hunter", "Beastmaster", "Malboro x2", "Mystery Box x2"],
@@ -1309,7 +1545,11 @@ const MISSION_REF: QuestRef[] = [
         description: `There's an underground resistance, trading anti-laws to defy the palace's rule! Try trading, you might get something good! ~ Ezel`,
         type: `Encounter`,
         cost: `1200 Gil`,
-        prerequisites: [`Gossip with Ezel at Cadoan Card Keeper`, `Completed Antilaws (#006)`, `Seen Antilaw Resistance Cutscene`],
+                prerequisites: [
+          "Completed Antilaws (#006)",
+          "Gossip with Ezel at Cadoan Card Keeper",
+          "Seen Antilaw Resistance Cutscene",
+        ],
         reward: [`6000 Gil`, `2x Random Item`, `1x Random Card`, `available_for: "25 Days`],
         difficulty: `Easy`,
         enemies: [`Fighter`, `Time Mage`, `Thief (Thomson)`],
@@ -1320,7 +1560,10 @@ const MISSION_REF: QuestRef[] = [
         description: `We've run into a tough blade biter, and well, we've bit off more than we can chew! Please help! ~ Ritz`,
         type: `Encounter`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`, `Completed S.O.S. (#048)`],
+                prerequisites: [
+          "Completed Quiet Sands (#018)",
+          "Completed S.O.S. (#048)",
+        ],
         reward: [`4600 Gil`, `Beastspear`, `1x Random Card`, `available_for: "25 Days`],
         difficulty: `Easy`,
         enemies: [`Bomb`, `Antlion`],
@@ -1331,7 +1574,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Oh, the fur of the kudik tiger -- that sheen! That silky feel! It's hard to come by, unless you happen to know a good poacher... ~ Flore, Ample Noblewoman`,
         type: `Encounter`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #52 Friend Trouble`, `Completed Jagd Hunt (#012)`, `Completed Friend Trouble (#052)`],
+                prerequisites: [
+          "Completed Jagd Hunt (#012)",
+          "Completed Friend Trouble (#052)",
+        ],
         reward: [`11400 Gil`, `Secret Item (Tiger Hide)`, `1x Random Item`, `2x`, `Random Cards`, `available_for: "25 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Archer x2`, `Gunner x2`, `Hunter x2`],
@@ -1342,7 +1588,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Signs of snow spotted! When the earth shines in seven hues, the snow fairies appear. Watch the weather with care. `,
         type: `Encounter`,
         cost: `1200`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`],
+                prerequisites: ["Completed The Bounty (#013)"],
         reward: [`9000 Gil`, `1x Random Item`, `2x Random Cards`, `available_for: "20 Days`],
         difficulty: `Easy`,
         enemies: [`Sprite`, `Ice Flan`],
@@ -1353,7 +1599,10 @@ const MISSION_REF: QuestRef[] = [
         description: `H-Help! A man named Weaver wants me dead. Yes, it was my fault his family died, but I've repented! ~ Celebrant, Gelzak Church`,
         type: `Encounter`,
         cost: `700 Gil`,
-        prerequisites: [`After completion of Mission #287 Weaver's War`, `Completed Pale Company (#011)`, `Completed Weaver's War (#287)`],
+                prerequisites: [
+          "Completed Weaver (#287)",
+          ",",
+        ],
         reward: [`13600 Gil`, `2x Random Items`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Medium`,
         enemies: [`Archer`, `Gladiator`, `Black Mage`, `Fighter x2 (Weaver)`],
@@ -1364,7 +1613,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I mis-sorted the mail, and now the delivery man's off to Cadoan! Stop that mail, use ANY MEANS NECESSARY. I'll take responsibility. ~ Marko, Mail Sorter`,
         type: `Encounter`,
         cost: `2400 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`],
+                prerequisites: ["Completed Pale Company (#011)"],
         reward: [`11400 Gil`, `1x Random Item`, `2x Random Cards`, `available_for: "25 Days`],
         difficulty: `Easy`,
         enemies: [`Gunner`, `Archer`, `Soldier`],
@@ -1375,7 +1624,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Yo, Clan [Your Clan Name]. You're quite popular lately. There's still time for you to join us at Clan Bahan... or else! ~ Mintz, Deputy Clan Boss`,
         type: `Encounter`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #4 Desert Peril`, `Completed Desert Peril (#004)`],
+                prerequisites: ["Completed Desert Peril (#004)"],
         reward: [`4200 Gil`, `2x Random Items`, `Req. Skills: Negotiate/Lvl.4`, `available_for: "25 Days`],
         difficulty: `Slightly Hard`,
         enemies: [`Thief`, `Archer`, `White Mage`, `Black Mage`, `Soldier (Mintz)`],
@@ -1386,7 +1635,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I think I'm being watched. People say I'm just paranoid, but I've been hearing flapping wings at night! Please investigate. ~ Titi, Shy Student`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #3 The Cheetahs`, `Completed The Cheetahs (#003)`],
+                prerequisites: ["Completed The Cheetahs (#003)"],
         reward: [`2800 Gil`, `Ahriman Eye`, `1x Random Item`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1395,7 +1644,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I want you to research the origin of the golden gil in my shop. If it's really from the Age of Kings, it could be good for sales. ~ Shopkeeper, The Golden Gil`,
         type: `Dispatch`,
         cost: `800 Gil`,
-        prerequisites: [`After completion of Mission #10 Emerald Keep`, `Completed Emerald Keep (#010)`],
+                prerequisites: ["Completed Emerald Keep (#010)"],
         reward: [`6400 Gil`, `Ancient Coins`, `1x Random Item`, `Dispatch Time: 20 Days`],
     },
     {
@@ -1404,7 +1653,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I've been challenged to a duel, but I'm scared. Will you go in my place? Just pretend to be me, OK? ~ Viscount Gatt`,
         type: `Dispatch`,
         cost: `300 Gil`,
-        prerequisites: [`After completion of Mission #1 Herb Picking`, `Completed Herb Picking (#001)`],
+                prerequisites: ["Completed Herb Picking (#001)"],
         reward: [`1800 Gil`, `1x Random Item`, `Req. Jobs: Soldier`, `Dispatch Time: 3 Days`],
     },
     {
@@ -1413,7 +1662,10 @@ const MISSION_REF: QuestRef[] = [
         description: `We need someone to offer holy water at the shrine on the old Gulug Volcano. The female ghost is up to her old tricks again. ~ Oktoma, Townsperson`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day. Huntmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Huntmoon (#020)",
+          "only",
+        ],
         reward: [`11800 Gil`, `Fire Sigil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1422,7 +1674,10 @@ const MISSION_REF: QuestRef[] = [
         description: `A legendary city of water lies at the bottom of Bisebina Lake. We need constant updates -- please dive and report. ~ Hickle, Legend Researcher`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day. Madmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Madmoon (#020)",
+          "only",
+        ],
         reward: [`11800 Gil`, `Water Sigil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1431,7 +1686,10 @@ const MISSION_REF: QuestRef[] = [
         description: `They say there's a mirage tower in the desert, where you can find crystalized wind! The wind's good this year, maybe some's there? ~ Bran, Streetear`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day. Bardmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Bardmoon (#020)",
+          "only",
+        ],
         reward: [`11800 Gil`, `Wind Sigil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1440,7 +1698,10 @@ const MISSION_REF: QuestRef[] = [
         description: `There is a barren land to the east, where no grass will grow. I want to know why! Bring me soil, as much as you can. ~ Powell, Researcher`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day. Sagemoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Sagemoon (#020)",
+          "only",
+        ],
         reward: [`13200 Gil`, `Earth Sigil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1449,7 +1710,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Mages! Want to compete in the Cadoan Mage Tourney? The tourney will be split by class in a fight to see who's the strongest! ~ Mage Tourney Committee`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Quiet Sands (#018)`],
+                prerequisites: [
+          "Completed Quiet Sands (#018)",
+          "Completed Present Day (#020)",
+        ],
         reward: [`10600 Gil`, `Magic Trophy`, `1x Random Item`, `Secret Item`, `(1x Random Card)`, `Req. Jobs: Black Mage`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1458,7 +1722,10 @@ const MISSION_REF: QuestRef[] = [
         description: `The Sprohm Battle Tourney is accepting contestants. Fight for glory and honor! We've also prepared the usual monetary award... ~ Battle Tourney Committee`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed Scouring Time (#015)`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed The Big Find (#016)",
+        ],
         reward: [`4200 Gil`, `Fight Trophy`, `1x Random Item`, `Secret Item`, `(1x Random Card)`, `Req. Jobs: Fighter`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1467,7 +1734,7 @@ const MISSION_REF: QuestRef[] = [
         description: `There will be a sporting event at our academy soon, but missing one member for our popular marathon team. Looking for a replacement. ~ Pollan, Blue Team Leader`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`],
+                prerequisites: ["Completed Diamond Rain (#007)"],
         reward: [`5200 Gil`, `Sport Trophy`, `1x Random Item`, `2x Random Cards`, `Req. Jobs: Juggler`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1476,7 +1743,7 @@ const MISSION_REF: QuestRef[] = [
         description: `A hungry ghost hound is causing a panic at the Earlchad Monastery and raiding the pantry. Please put it to rest. ~ Baldi, Head Monk`,
         type: `Dispatch`,
         cost: `900 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Antilaws (#006)`],
+                prerequisites: ["Completed Antilaws (#006)"],
         reward: [`4200 Gil`, `Elda's Cup`, `1x Random Item`, `2x Random Cards`, `Req. Items: Dragon Bone`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1485,7 +1752,7 @@ const MISSION_REF: QuestRef[] = [
         description: `We have reports that a large pirate band will be passing through our waters soon. We need good steel and young muscles! ~ Wilhem, Coast Guard`,
         type: `Dispatch`,
         cost: `800 Gil`,
-        prerequisites: [`After completion of Mission #10 Emerald Keep`, `Completed Emerald Keep (#010)`],
+                prerequisites: ["Completed Emerald Keep (#010)"],
         reward: [`6400 Gil`, `Coast Medal`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1494,7 +1761,11 @@ const MISSION_REF: QuestRef[] = [
         description: `A group of youths are protest the capture of their friends at a castle in the south. Talk sense into them! ~ Hansrich, Security Chief`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #8 Hot Awakening. Huntmoon`, `only`, `Completed Hot Awakening (#008)`, `Completed Morning Woes (#151)`],
+                prerequisites: [
+          "Completed Hot Awakening. Huntmoon (#008)",
+          "Completed Morning Woes (#151)",
+          "only",
+        ],
         reward: [`4600 Gil`, `Guard Medal`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1503,7 +1774,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Looking for brave souls who will bring wine to sooth the parched throats of our heroes in battle. Come equipped for combat. ~ Devon, War Council Officer`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`],
+                prerequisites: ["Completed Scouring Time (#015)"],
         reward: [`7000 Gil`, `Rainbowite`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1512,7 +1783,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I've broken my lady's favorite music box. Please, repair it if you can. I would so much like to see her smile again. ~ Tirara, Maidservant`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #276 Good Bread`, `Completed Desert Patrol (#017)`, `Completed Good Bread (#276)`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Completed Good Bread (#276)",
+        ],
         reward: [`11400 Gil`, `Cat's Tears`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 15 Days`],
     },
     {
@@ -1521,7 +1795,10 @@ const MISSION_REF: QuestRef[] = [
         description: `My best hunting falcon, "Hyperion", has been gone for a day. Perhaps he is looking for his late master? Please find him! ~ Arno, Falconer`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`, `Completed Sword Needed (#277)`],
+                prerequisites: [
+          "Completed Quiet Sands (#018)",
+          "Completed Sword Needed (#277)",
+        ],
         reward: [`11400 Gil`, `Dame's Blush`, `1x Random Item`, `2x Random Cards`, `Req. Items: Skull`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1530,7 +1807,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Bandits are active in Goras Pass and are cutting off our trade routes. Please stop them before we go out of business! ~ Feugo, Wilhem & Co. `,
         type: `Dispatch`,
         cost: `1500 Gil`,
-        prerequisites: [`After completion of Mission #165 Hundred-Eye`, `Completed Scouring Time (#015)`, `Completed Hundred-Eye (#165)`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed Hundred-Eye (#165)",
+        ],
         reward: [`7800 Gil`, `Thunderstone`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -1539,7 +1819,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Many of our children have never seen the stars due to the mists that cover our land most of the year. Can you help us? ~ Ulg, Astronomer`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`9000 Gil`, `Stormstone`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1548,7 +1828,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I'm afraid we've run out of adamantite. We can't run a business like this! Find us some, and I will make adaman alloy for you. ~ Elbo, Workshop Vargi`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`],
+                prerequisites: ["Completed The Bounty (#013)"],
         reward: [`0 Gil`, `Adaman Alloy`, `1x Random Item`, `2x Random Cards`, `Req. Items: Adamantite/Adamantite`, `Req. Skills: Smithing/Lvl.15`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1557,7 +1837,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Now taking orders for mysidia alloy. Only 10 orders can be filled, first come first served. Thank you. ~ Deunon, Workshop Rool`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt`, `Completed Jagd Hunt (#012)`],
+                prerequisites: ["Completed Jagd Hunt (#012)"],
         reward: [`0 Gil`, `Mysidia Alloy`, `1x Random Item`, `2x Random Cards`, `Req. Items: Adamantite/Sivril`, `Req. Skills: Smithing/Lvl.15`, `Dispatch Time: 15 Days`],
     },
     {
@@ -1566,7 +1846,7 @@ const MISSION_REF: QuestRef[] = [
         description: `It's time for us to get back to work. Bring us good materials and we'll make you the best crusite alloy gil can buy! ~ Sabak, Workshop Berk`,
         type: `Dispatch`,
         cost: `1800 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`],
+                prerequisites: ["Completed Pale Company (#011)"],
         reward: [`0 Gil`, `Crusite Alloy`, `1x Random Item`, `2x Random Cards`, `Req. Items: Zodiac Ore/Zodiac Ore`, `Req. Skills: Smithing/Lvl.15`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1575,7 +1855,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I found a creepy road in the Ophanwood with faceless dolls all lined up. I can't bring myself to walk past -- are they safe? ~ Edist, Taylor`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`10800 Gil`, `Blood Shawl`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -1584,7 +1864,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I quit work, but I'm still concerned about my old co-workers. Please bring them fairy wings that they may sweep in style. ~ Mables, Former Maidservant`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now`, `Completed Materite Now! (#019)`],
+                prerequisites: ["Completed Materite Now (#019)"],
         reward: [`10000 Gil`, `Ahriman Wing`, `1x Random Item`, `2x Random Cards`, `Req. Items: Fairy Wing`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -1593,7 +1873,7 @@ const MISSION_REF: QuestRef[] = [
         description: `A large amount of gil, meant to pay for the Lady Tiana's medicine, has been stolen from Baron Ianna, and he wants it back. ~ Carnen, Streetear`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now`, `Completed Materite Now! (#019)`],
+                prerequisites: ["Completed Materite Now (#019)"],
         reward: [`10600 Gil`, `Fairy Wing`, `1x Random Item`, `2x Random Cards`, `Req. Items: Stolen Gil`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1602,7 +1882,10 @@ const MISSION_REF: QuestRef[] = [
         description: `My teacher's secret recipe says "stir without rest for seven days and seven nights." Will someone please stir for me!? ~ Hihat, Alchemist Adept`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Quiet Sands (#018)",
+          "Completed Present Day (#020)",
+        ],
         reward: [`11800 Gil`, `Goldcap`, `1x Random Item`, `2x Random Cards`, `Req. Items: Ancient Bills`, `Dispatch Time: 15 Days`],
     },
     {
@@ -1611,7 +1894,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Selbaden Church is up to something. The Father has been meeting in secret with merchant types. I bet there's shady deals afoot. ~ Sayen, Townsperson`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #281 Janitor Duty`, `Completed Present Day (#020)`, `Completed Janitor Duty (#281)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Janitor Duty (#281)",
+        ],
         reward: [`10600 Gil`, `Life Water`, `1x Random Item`, `Req. Items: Secret Books`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1620,7 +1906,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I restored artwork for a living, but I'm out of paints. I need some rock from the mountains... Only the hardy need apply. ~ Rosseni, Atelier Wite`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #3 The Cheetahs`, `Completed The Cheetahs (#003)`, `Completed Life Or Death (#210)`],
+                prerequisites: [
+          "Completed The Cheetahs (#003)",
+          "Completed Life Or Death (#210)",
+        ],
         reward: [`2800 Gil`, `Ancient Text`, `1x Random Item`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1629,7 +1918,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Please retrieve Estel's heirloom from the HQ of the greedy "Neighbor" merchant network! Justice must be done! ~ Fago, Ally of Justice`,
         type: `Dispatch`,
         cost: `800 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Magic Wood (#009)`],
+                prerequisites: ["Completed Magic Wood (#009)"],
         reward: [`6000 Gil`, `Justice Badge`, `2x Random Items`, `1x Random Card`, `Req. Items: Neighbor Pin`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -1638,7 +1927,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I must tell her how I feel yet I lack the courage to lift a quill. Perhaps the air-light feather from an ahriman wing would do. ~ Hernie, Timid Youth`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`],
+                prerequisites: ["Completed To Ambervale (#022)"],
         reward: [`13200 Gil`, `Friend Pin`, `1x Random Item`, `2x Random Cards`, `Req. Items: Ahriman Wing`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1647,7 +1936,10 @@ const MISSION_REF: QuestRef[] = [
         description: `The wails of a soldier's ghost are troubling folk near the ruins of a church on an old battlefield in the east. Please help. ~ Marvin, Town Official`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`, `Completed Young Love (#141)`],
+                prerequisites: [
+          "Completed To Ambervale (#022)",
+          "Completed Young Love (#141)",
+        ],
         reward: [`12400 Gil`, `Edaroya Tome`, `1x Random Item`, `Req. Items: Tranquil Box`, `Req. Skills: Track/Lvl.40`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1656,7 +1948,10 @@ const MISSION_REF: QuestRef[] = [
         description: `My whole class's "Ancient Studies" homework was stolen! If he had some ancient object, we could do it again... Help! ~ Babins, 4th Grade Swords`,
         type: `Dispatch`,
         cost: `200 Gil`,
-        prerequisites: [`After completion of Mission #1 Herb Picking`, `Completed Thesis Hunt (#002)`],
+                prerequisites: [
+          "Completed Herb Picking (#001)",
+          "Completed Thesis Hunt (#002)",
+        ],
         reward: [`1800 Gil`, `Homework`, `1x Random Item`, `Req. Items: Ancient Medal`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1665,7 +1960,7 @@ const MISSION_REF: QuestRef[] = [
         description: `They're rebuilding the Sart Clocktower that burned the other day. Never know what you might find in the rubble, eh? ~ Tysner, Streetear`,
         type: `Dispatch`,
         cost: `1800 Gil`,
-        prerequisites: [`After completion of Mission #17 Desert Patrol`, `Completed Desert Patrol (#017)`],
+                prerequisites: ["Completed Desert Patrol (#017)"],
         reward: [`9000 Gil`, `Dictionary`, `1x Random Item`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1674,7 +1969,7 @@ const MISSION_REF: QuestRef[] = [
         description: `A goblin stole my favorite monster guide and buried it under a rock! I'll give you a copy if you get mine back for me! ~ Ian, Inquisitive Youth `,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #4 Desert Peril`, `Completed Desert Peril (#004)`],
+                prerequisites: ["Completed Desert Peril (#004)"],
         reward: [`3600 Gil`, `Monster Guide`, `1x Random Item`, `Req. Items: Mythril Pick`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1683,7 +1978,7 @@ const MISSION_REF: QuestRef[] = [
         description: `We got the secret books proving Selbaden Church's shady deals, but I'm scared they'll find it! How can I relax!? ~ Anonymous`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`],
+                prerequisites: ["Completed To Ambervale (#022)"],
         reward: [`11400 Gil`, `Secret Books`, `1x Random Item`, `2x Random Cards`, `Req. Items: Stilpool Scroll`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1692,7 +1987,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Ah, Locuna! I am but a servant, and you a noble's daughter. Our love cannot be, but I must tell you how I feel! Poem, anyone? ~ Cristo, Lovestruck Youth`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`10000 Gil`, `Rat Tail`, `1x Random Item`, `Req. Items: Stilpool Scroll`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1701,7 +1996,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Looking for someone to model for a statue to be put in the Royal Library's new wing. Youth, beauty, and physique a plus. ~ Cesare, Artist`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Twisted Flow (#005)`],
+                prerequisites: [
+          "Completed Twisted Flow (#005)",
+          "Completed Antilaws (#006)",
+        ],
         reward: [`4600 Gil`, `Stradivari`, `1x Random Item`, `2x Random Cards`, `Req. Items: Tonberry Lamp`, `Req. Skills: Craft/Lvl.10`, `Dispatch Time: 30 Days`],
     },
     {
@@ -1710,7 +2008,7 @@ const MISSION_REF: QuestRef[] = [
         description: `The town clocktower has been struck by lightning, and the 12:00 gemstone lost. Need people to help with restoration. ~ Market Square Association`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`11400 Gil`, `Clock Post`, `1x Random Item`, `2x Random Cards`, `Req. Items: Cat's Tears`, `Req. Jobs: Gadgeteer`, `Dispatch Time: 20 Days`],
     },
     {
@@ -1719,7 +2017,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Nothing is more dear to me than my son, Lukel, yet he has never done well on tests. Won't someone tutor him? ~ Mrs. Kulel`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Antilaws (#006)`],
+                prerequisites: ["Completed Antilaws (#006)"],
         reward: [`3600 Gil`, `Fountain Pen`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1728,7 +2026,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Our rooster, Nikki, has taken to crowing well before sunrise. Now the neighbors are complaing! Won't someone please help? ~ Mulchin, Grocer`,
         type: `Dispatch`,
         cost: `900 Gil`,
-        prerequisites: [`After completion of Mission #8 Hot Awakening`, `Completed Hot Awakening (#008)`],
+                prerequisites: ["Completed Hot Awakening (#008)"],
         reward: [`5200 Gil`, `Earplugs`, `1x Random Item`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1737,7 +2035,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I have the incredible power to make things float just by looking at them. Problem is, I can't make them stop floating! Help! ~ Talkof, Psychic`,
         type: `Dispatch`,
         cost: `200 Gil`,
-        prerequisites: [`After completion of Mission #4 Desert Peril`, `Completed Desert Peril (#004)`],
+                prerequisites: ["Completed Desert Peril (#004)"],
         reward: [`3400 Gil`, `Crystal`, `1x Random Item`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1746,7 +2044,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I had a dog when I worked in the Meden Mines. Could you find her bones and hold a memorial service in the mines for her? ~ Hugo, Baker`,
         type: `Dispatch`,
         cost: `900 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`],
+                prerequisites: ["Completed Scouring Time (#015)"],
         reward: [`8200 Gil`, `Old Statue`, `1x Random Item`, `2x Random Cards`, `Req. Items: Animal Bone`, `Dispatch Time: 20 Days`],
     },
     {
@@ -1755,7 +2053,7 @@ const MISSION_REF: QuestRef[] = [
         description: `We're looking for a few good "neighbors"! Won't you join our world- wid network? ~ Pewl, Neighbor Network`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #10 Emerald Keep`, `Completed Emerald Keep (#010)`],
+                prerequisites: ["Completed Emerald Keep (#010)"],
         reward: [`5200 Gil`, `Neighbor Pin`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1764,7 +2062,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Some shady character are after our leader, Kerry! Can you help? Please don't let anyone know we hired you. ~ Ed, Assistant Leader`,
         type: `Dispatch`,
         cost: `800 Gil`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`],
+                prerequisites: ["Completed Diamond Rain (#007)"],
         reward: [`5400 Gil`, `Broken Sword`, `1x Random Item`, `2x Random Cards`, `Req. Items: Bomb Shell`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1773,7 +2071,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I can't think of a single plot hook! Not a word of dialogue! Somebody please bring me an action-packed adventure novel. ~ Ruel, Novelist Apprentice`,
         type: `Dispatch`,
         cost: `800 Gil`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt`, `Completed Jagd Hunt (#012)`],
+                prerequisites: ["Completed Jagd Hunt (#012)"],
         reward: [`10000 Gil`, `Broken Sword`, `1x Random Item`, `2x Random Cards`, `Req. Items: Runba's Tale`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1782,7 +2080,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Coo," the star of our Royal Zoo, has escaped and the zookeeper blames himself. An adventure novel should cheer him up. ~ Zoon, Zoomaster`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`],
+                prerequisites: ["Completed The Bounty (#013)"],
         reward: [`10000 Gil`, `Bent Sword`, `1x Random Item`, `2x Random Cards`, `Req. Items: Runba's Tale`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1791,7 +2089,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Looking for someone to judge the final match in a historic fight. My blade vs. his spells! Current score: 100 to 100. ~ Nukkle, Soldier`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`],
+                prerequisites: ["Completed Scouring Time (#015)"],
         reward: [`8800 Gil`, `Rusty Spear`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1800,7 +2098,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Could you help me appraise a work by Clif Lusac, the Muse of the Sea? Someone said it's a fake! I'll give you a badge! ~ Olwen, Art Dealer`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #21 Materite Now`, `Completed Materite Now! (#019)`],
+                prerequisites: [
+          "Completed Materite Now! (#019)",
+          "Completed Materite Now (#021)",
+        ],
         reward: [`11400 Gil`, `Feather Badge`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -1809,7 +2110,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Only a sharp eye can find the best items! If you need an "insignia," bring me an item worthy of my eye! ~ E'oi the Elder`,
         type: `Dispatch`,
         cost: `2700 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`],
+                prerequisites: ["Completed Pale Company (#011)"],
         reward: [`0 Gil`, `Insignia`, `1x Random Item`, `2x Random Cards`, `Req. Items: Feather Badge/Delta Fang`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -1818,7 +2119,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Our hill once called "The Sun's Home" is now called "The Hill of Mists." Can you find out why? ~ Nache, Townsperson`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #17 Desert Patrol`, `Completed Desert Patrol (#017)`],
+                prerequisites: ["Completed Desert Patrol (#017)"],
         reward: [`10000 Gil`, `Ally Finder`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 20 Days`],
     },
     {
@@ -1827,7 +2128,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Lately, kids have been forming gangs and beating up on other kids. Maybe if we distract them with something they'd stop. ~ Victor, School Principal`,
         type: `Dispatch`,
         cost: `2700 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Magic Wood (#009)`],
+                prerequisites: ["Completed Magic Wood (#009)"],
         reward: [`11400 Gil`, `Ally Finder2`, `1x Random Item`, `2x Random Cards`, `Req. Items: Dame's Blush/Ally Finder`, `Req. Skills: Smithing/Lvl.20`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -1836,7 +2137,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Needed: charm for curing stage fright. I want the cutest girl in town, Ms. Rina, to notice me in the play, but I'm too nervous! ~ Emporio, Young Actor`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`10600 Gil`, `Tranquil Box`, `1x Random Item`, `Req. Items: Old Statue`, `Dispatch Time: 15 Days`],
     },
     {
@@ -1845,7 +2146,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My little brothers hid my diary somewhere in my house. I need you to find it before -- gasp -- my parents do!!! ~ Edwina, Concerned Girl`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #5 Twisted Flow`, `Completed Twisted Flow (#005)`],
+                prerequisites: ["Completed Twisted Flow (#005)"],
         reward: [`3600 Gil`, `Loaded Dice`, `1x Random Item`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1854,7 +2155,11 @@ const MISSION_REF: QuestRef[] = [
         description: `The great hunter Hundred-Eye's daughter, Kailea, has just started hunting; but frankly, she sucks. Someone please train her!`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed Scouring Time (#015)`, `Completed Wine Delivery (#126)`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed The Big Find (#016)",
+          "Completed Wine Delivery (#126)",
+        ],
         reward: [`9000 Gil`, `Snake Shield`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Battles`],
     },
     {
@@ -1863,7 +2168,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Need someone to find a runaway child and give him some homeknit clothes. The clothes will be ready as soon as I find thread. ~ Gina, Marun Orphanage`,
         type: `Dispatch`,
         cost: `800 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Magic Wood (#009)`],
+                prerequisites: ["Completed Magic Wood (#009)"],
         reward: [`5400 Gil`, `Stasis Rope`, `1x Random Item`, `Req. Items: Black Thread`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1872,7 +2177,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Dig me a nice cave home. My bizarre experiments have earned me the moniker of "Mad Alchemist." Now I want to live alone. ~ Galdinas, Alchemist`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #3 The Cheetahs`, `Completed The Cheetahs (#003)`],
+                prerequisites: ["Completed The Cheetahs (#003)"],
         reward: [`3400 Gil`, `Mythril Pick`, `1x Random Item`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1881,7 +2186,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Wanted: caravan guards. We are traveling merchants who sell our goods from town to town. We expect bandits in the pass ahead. ~ Sirocco, Caravan Leader`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`],
+                prerequisites: ["Completed Diamond Rain (#007)"],
         reward: [`4600 Gil`, `Caravan Musk`, `1x Random Item`, `2x Random Cards`, `Req. Items: Elda's Cup`, `Dispatch Time: 20 Days`],
     },
     {
@@ -1890,7 +2195,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Needed: potion advice. Making the ultimate love potion is my life work. I'll be rich and famous for all time! ~ Dandarc, Palace Alchemist`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Emerald Keep (#010)`],
+                prerequisites: [
+          "Completed Magic Wood (#009)",
+          "Completed Emerald Keep (#010)",
+        ],
         reward: [`6000 Gil`, `Love Potion`, `1x Random Item`, `2x Random Cards`, `Req. Jobs: Alchemist`, `Dispatch Time: 15 Days`],
     },
     {
@@ -1899,7 +2207,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Our husband-and-ife comedy routine needs some pizzazz. Flashy magic and headdresses should do the trick. Can you help? ~ Will and Tita`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #8 Hot Awakening`, `Completed Hot Awakening (#008)`],
+                prerequisites: ["Completed Hot Awakening (#008)"],
         reward: [`4600 Gil`, `Tonberry Lamp`, `1x Random Item`, `Req. Items: Bomb Shell`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1908,7 +2216,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I need someone to heal my wounds so I can get my revenge on those stinking lizard bangaas that lured my platoon into a trap! ~ Gecklan, Platoon Leader`,
         type: `Dispatch`,
         cost: `3500 Gil`,
-        prerequisites: [`After completion of Mission #17 Desert Patrol`, `Completed Desert Patrol (#017)`],
+                prerequisites: ["Completed Desert Patrol (#017)"],
         reward: [`7600 Gil`, `Stilpool Scroll`, `1x Random Item`, `Req. Skills: Magic/Lvl.25`, `Req. Jobs: White Mage`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -1917,7 +2225,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Someone's frozen our village's only spring, and it's not thawing. Our children are thirsty! Please help us. ~ Nino, Shepard`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #5 Twisted Flow`, `Completed Twisted Flow (#005)`],
+                prerequisites: ["Completed Twisted Flow (#005)"],
         reward: [`3400 Gil`, `Dragon Bone`, `1x Random Item`, `Dispatch Time: 20 Days`],
     },
     {
@@ -1926,7 +2234,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Tonight's the night of my big date, and my dress and shoes are perfect, but I can't find my perfume anywhere! Help! ~ Lucy, Party Girl `,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Magic Wood (#009)`],
+                prerequisites: ["Completed Magic Wood (#009)"],
         reward: [`5200 Gil`, `Animal Bone`, `1x Random Item`, `2x Random Cards`, `Req. Items: Caravan Musk`, `Dispatch Time: 15 Days`],
     },
     {
@@ -1935,7 +2243,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I found a message in a bottle: a cry for help from a southern isle! If only I could send something -- water even! ~ Luis, Flower Seller`,
         type: `Dispatch`,
         cost: `1800 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`],
+                prerequisites: ["Completed To Ambervale (#022)"],
         reward: [`13200 Gil`, `Skull`, `1x Random Item`, `2x Random Cards`, `Req. Items: Life Water`, `Req. Jobs: Time Mage`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -1944,7 +2252,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My son is in the attic, pretending to be a monster that doesn't like homework! Maybe showing him a dictionary would work. ~ Sihaya, Mother of Three`,
         type: `Dispatch`,
         cost: `700 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Antilaws (#006)`],
+                prerequisites: ["Completed Antilaws (#006)"],
         reward: [`6400 Gil`, `Clock Gear`, `1x Random Item`, `2x Random Cards`, `Req. Items: Dictionary`, `Dispatch Time: 5 Days`],
     },
     {
@@ -1953,7 +2261,11 @@ const MISSION_REF: QuestRef[] = [
         description: `There's a lot of firearms coming into town lately. Thankfully, we've had no injuries... yet. Check into this matter with me. ~ Senole, Town Watch`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Emerald Keep (#010)`, `Completed Lost Heirloom (#140)`],
+                prerequisites: [
+          "Completed Emerald Keep (#010)",
+          "Completed Pale Company (#011)",
+          "Completed Lost Heirloom (#140)",
+        ],
         reward: [`5400 Gil`, `Gun Gear`, `1x Random Item`, `2x Random Cards`, `Req. Jobs: Gunner`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -1962,7 +2274,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Our editor used to be so fast we called him "Blue Bolt." But he's lost it of late. We need something to jog his memory! ~ Elu, Cyril Times Reporter`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`9000 Gil`, `Silk Bloom`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -1971,7 +2283,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Needed: speech trainer. I can't speak well. I'm always saying too much, or not enough! Please help! ~ Luhoche, Little Girl`,
         type: `Dispatch`,
         cost: `950 Gil`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`],
+                prerequisites: ["Completed The Bounty (#013)"],
         reward: [`7000 Gil`, `Moon Bloom`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -1980,7 +2292,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My face was cut in a duel that I recklessly started. I wish to keep the scar as a penance, but how do I keep it from healing? ~ Tingel, Knight`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`],
+                prerequisites: ["Completed Scouring Time (#015)"],
         reward: [`9000 Gil`, `Blood Apple`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -1989,7 +2301,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Adventurer Phis seeks for the sign to the sky mirage city of Punevam. Get this: he says it's some kind of mushroom! Ridiculous! ~ Hoysun, Pub Customer`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`11400 Gil`, `Magic Fruit`, `1x Random Item`, `2x Random Cards`, `Req. Items: Goldcap`, `Dispatch Time: 10 Days`],
     },
     {
@@ -1998,7 +2310,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I'm not long for this world, but I would like to see the town clock again before I go... Grandma always loved it. ~ Barus, Old Soldier`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`10600 Gil`, `Power Fruit`, `1x Random Item`, `2x Random Cards`, `Req. Items: Clock Gear/Clock Post`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -2007,7 +2319,7 @@ const MISSION_REF: QuestRef[] = [
         description: `With all the sun we've been getting, we fear a drought. We need people to help open the sluice gates at Mitoralo. ~ Hinnel, Dam Official`,
         type: `Dispatch`,
         cost: `1800 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`9600 Gil`, `Stolen Gil`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 20 Days`],
     },
     {
@@ -2016,7 +2328,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I found stacks of old bills at my house, but I want old medals with pictures of the goddess on them! Like to trade? ~ Gelp, Antiques Collector`,
         type: `Dispatch`,
         cost: `1800 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`],
+                prerequisites: ["Completed Present Day (#020)"],
         reward: [`1200 Gil`, `Ancient Bills`, `1x Random Item`, `2x Random Cards`, `Req. Items: Ancient Medal`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2025,7 +2337,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Has your clan put in its order for adaman alloy? It sells out quick, so get your order in soon! How about our shop? ~ Elbo, Workshop Vargi`,
         type: `Dispatch`,
         cost: `2500 Gil`,
-        prerequisites: [`After completion of Mission #87 Free Bervenia!`, `Clear Game`, `Completed Free Bervenia! (#087)`],
+                prerequisites: [
+          "Completed Free Bervenia! (#087)",
+          "Clear Game",
+        ],
         reward: [`0 Gil`, `Adaman Alloy`, `1x Random Item`, `2x Random Cards`, `Req. Items: Adamantite/Adamantite`, `Req. Skills: Smithing/Lvl.35`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2034,7 +2349,10 @@ const MISSION_REF: QuestRef[] = [
         description: `It was recently discovered that mysidia alloy is enchanted with ancient magic! Better buy some before the prices go up! ~ Deunon, Workshop Rol`,
         type: `Dispatch`,
         cost: `3000 Gil`,
-        prerequisites: [`After completion of Mission #184 Adaman Order`, `Clear Game`, `Completed Adaman Order (#184)`],
+                prerequisites: [
+          "Completed Adaman Order (#184)",
+          "Clear Game",
+        ],
         reward: [`0 Gil`, `Mysidia Alloy`, `1x Random Item`, `2x Random Cards`, `Req. Items: Adamantite/Silvril`, `Req. Skills: Smithing/Lvl.35`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2043,7 +2361,10 @@ const MISSION_REF: QuestRef[] = [
         description: `If you made a shield and a sword from the strongest of all alloys -- crusite -- which would be stronger? Come and let's find out! ~ Sabak, Workshop Berk`,
         type: `Dispatch`,
         cost: `3000 Gil`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Clear Game",
+        ],
         reward: [`0 Gil`, `Crusite Alloy`, `1x Random Item`, `2x Random Cards`, `Req. Items: Zodiac Ore/Zodiac Ore`, `Req. Skills: Smithing/Lvl.35`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -2052,7 +2373,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Announcing: Casino Party. Test your luck at our one-night-only casino party! All welcome. ~ Matim, Steward`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Clear Game",
+        ],
         reward: [`18000 Gil`, `Rat Tail`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2061,7 +2385,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I seek my childhood tutor, Yoel. I have a promise to keep to him. It means very much to me. ~ Count Anet`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #187 Lucky Night`, `Clear Game`, `Completed Lucky Night (#187)`],
+                prerequisites: [
+          "Completed Lucky Night (#187)",
+          "Clear Game",
+        ],
         reward: [`11400 Gil`, `Rusty Sword`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -2070,7 +2397,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I don't want to have to move, but it has started raining far too much around my house. Please find out why. ~ Ivan, Gold Sculptor`,
         type: `Dispatch`,
         cost: `1800 Gil`,
-        prerequisites: [`After completion of Mission #187 Lucky Night`, `Clear Game`, `Completed Lucky Night (#187)`],
+                prerequisites: [
+          "Completed Lucky Night (#187)",
+          "Clear Game",
+        ],
         reward: [`13600 Gil`, `Broken Sword`, `1x Random Item`, `2x Random Cards`, `Req. Jobs: Red Mage`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -2079,7 +2409,10 @@ const MISSION_REF: QuestRef[] = [
         description: `We are the Lightning Brothers, bound by blood-oath and iron law! Why don't you try joining us and see if you like it? ~ LBs, Emissaries of Justice`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #189 Why Am I Wet?`, `Clear Game`, `Completed Why Am I Wet? (#189)`],
+                prerequisites: [
+          "Completed Why Am I Wet? (#189)",
+          "Clear Game",
+        ],
         reward: [`18000 Gil`, `Bent Sword`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 40 Days`],
     },
     {
@@ -2088,7 +2421,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Someone please find me an item that will lose to no bad luck, and a charm or spell to ward off evil spells. I'm fighting! ~ Milea, Determined Lady`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #189 Why Am I Wet?`, `Clear Game`, `Completed Why Am I Wet? (#189)`],
+                prerequisites: [
+          "Completed Why Am I Wet? (#189)",
+          "Clear Game",
+        ],
         reward: [`9000 Gil`, `Rusty Spear`, `1x Random Item`, `2x Random Cards`, `Req. Items: Rat Tail`, `Dispatch Time: 40 Days`],
     },
     {
@@ -2097,7 +2433,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Please stop my brother, Hasmir before someone gets hurt. He thinks he's an alchemist but all he makes is smoke and explosions! ~ Gretzel, Townsgirl`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #191 Lucky Charm`, `Clear Game`, `Completed Lucky Charm (#191)`],
+                prerequisites: [
+          "Completed Lucky Charm (#191)",
+          "Clear Game",
+        ],
         reward: [`4600 Gil`, `Insignia`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2106,7 +2445,10 @@ const MISSION_REF: QuestRef[] = [
         description: `The bangaa girl "Eleono" ssleepss in the Thoussand-Thorn Wood. Looking for a clanner to find out why she ssleepss. ~ Vajiri, Bangaa`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #187 Lucky Night`, `Clear Game`, `Completed Lucky Night (#187)`],
+                prerequisites: [
+          "Completed Lucky Night (#187)",
+          "Clear Game",
+        ],
         reward: [`16000 Gil`, `Blood Apple`, `1x Random Item`, `Dispatch Time: 20 Days`],
     },
     {
@@ -2115,7 +2457,12 @@ const MISSION_REF: QuestRef[] = [
         description: `The town Cyril has fallen into the hands of Clan Borzoi. We need you set a trap to get them out of our town! ~ Cyril Town Watch`,
         type: `Capture`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #68 Fowl Thief`, `and reading`, `Thief Exposed!" rumor`, `Completed Thesis Hunt (#002)`, `Read Thief Exposed`],
+                prerequisites: [
+          "Completed Fowl Thief (#068)",
+          ",",
+          "and reading",
+          "Thief Exposed!",
+        ],
         reward: [`2400 Gil`, `2x Random Items`, `Dispatch Time: 3 Days`],
     },
     {
@@ -2124,7 +2471,13 @@ const MISSION_REF: QuestRef[] = [
         description: `I need a ship to take to the barbarian lands. It's just me, so a small craft will do. ~ Strange Warrior`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #73 Borzoi Falling`, `and`, `reading "Borzoi's End" rumor`, `Completed Antilaws (#006)`, `Read Borzoi's End`],
+                prerequisites: [
+          "Completed Borzoi Falling (#073)",
+          ",",
+          "and",
+          "reading",
+          "s End",
+        ],
         reward: [`4200 Gil`, `2x Random Items`, `2x Random Cards`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -2133,7 +2486,11 @@ const MISSION_REF: QuestRef[] = [
         description: `Bring me the sigils of "fire" and "wind." I shall craft from them a mind ceffyl, needed to make a spiritstone. ~ Melmin, Sage of the West`,
         type: `Dispatch`,
         cost: `3800 Gil`,
-        prerequisites: [`After completion of Mission #77 Free Baguba! and reading`, `The Sages" rumor`, `Completed Jagd Hunt (#012)`, `Read The Sages`],
+                prerequisites: [
+          "Completed Free Baguba! and reading (#077)",
+          ",",
+          "The Sages",
+        ],
         reward: [`0 Gil`, `Mind Ceffyl`, `Req. Items: Fire Sigil/Wind Sigil`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -2142,7 +2499,11 @@ const MISSION_REF: QuestRef[] = [
         description: `Bring me the sigils of "earth" and "water." I shall craft from them a body ceffyl, needed to make a spiritstone. ~ Bastra, Sage of the East`,
         type: `Dispatch`,
         cost: `3800 Gil`,
-        prerequisites: [`After completion of Mission #77 Free Baguba! and reading`, `The Sages" rumor`, `Completed Jagd Hunt (#012)`, `Read The Sages`],
+                prerequisites: [
+          "Completed Free Baguba! and reading (#077)",
+          ",",
+          "The Sages",
+        ],
         reward: [`0 Gil`, `Body Ceffyl`, `Req. Items: Earth Sigil/Water Sigil`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -2151,7 +2512,11 @@ const MISSION_REF: QuestRef[] = [
         description: `Bring the two ceffyls to me, and I shall use my alchemy to craft a spiritstone for you. ~ Kespas, Sage of the South`,
         type: `Dispatch`,
         cost: `3800 Gil`,
-        prerequisites: [`After completion of Mission #77 Free Baguba! and reading`, `The Sages" rumor`, `Completed Jagd Hunt (#012)`, `Read The Sages`],
+                prerequisites: [
+          "Completed Free Baguba! and reading (#077)",
+          ",",
+          "The Sages",
+        ],
         reward: [`0 Gil`, `Spiritstone`, `Req. Items: Mind Ceffyl/Body Ceffyl`, `Dispatch Time: 4 Battles`],
     },
     {
@@ -2160,7 +2525,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I've got a new boyfriend! He's a brave knight, with chestnut hair. Could you tell our fortune with the white thread? ~ Carena, Young Girl`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #2 Thesis Hunt. Bardmoon`, `only`, `Completed Thesis Hunt (#002)`],
+                prerequisites: [
+          "Completed Thesis Hunt. Bardmoon (#002)",
+          "only",
+        ],
         reward: [`3400 Gil`, `Magic Medal`, `1x Random Item`, `Req. Items: White Thread`, `Req. Jobs: White Mage`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2169,7 +2537,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Need: Help during the Chocobo spawning season. - Private room - Meals - No experience required - Childcare - Any race ~ Sasasha, Chocobo Ranch`,
         type: `Dispatch`,
         cost: `200 Gil`,
-        prerequisites: [`After completion of Mission #2 Thesis Hunt. Bardmoon`, `only`, `Completed Thesis Hunt (#002)`],
+                prerequisites: [
+          "Completed Thesis Hunt. Bardmoon (#002)",
+          "only",
+        ],
         reward: [`100 Gil`, `Chocobo Egg`, `1x Random Item`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2178,7 +2549,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Have you heard of the skypole on the southern peninsula? They it's a stairway to the gods! I'd like to see that! ~ Tay, Streetear`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #2 Thesis Hunt`, `Completed Thesis Hunt (#002)`],
+                prerequisites: ["Completed Thesis Hunt (#002)"],
         reward: [`2400 Gil`, `Ancient Medal`, `1x Random Item`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2187,7 +2558,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Looking for people to join in a survey of the Istar Ruins to be held again this year. See ancient history first hand! ~ Rekka, Relics Board`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now!`, `Completed Materite Now! (#019)`],
+                prerequisites: ["Completed Materite Now! (#019)"],
         reward: [`10800 Gil`, `Ancient Medal`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2196,7 +2567,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Zezena Mines: Discovery of the Parum Family, scene of mechanist innovation! We must dig until we find a new mine shaft! Dig! ~ Zezena Mines Co.`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day. Madmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day. Madmoon (#020)",
+          "only",
+        ],
         reward: [`11800 Gil`, `Zodiac Ore`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -2205,7 +2579,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Before the Bell Mines became known for mythril, they were silver mines. Help me look for leftover silver near the west wall. ~ Hoholum, Gayl Stoneworks`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt`, `Completed Jagd Hunt (#012)`],
+                prerequisites: ["Completed Jagd Hunt (#012)"],
         reward: [`3400 Gil`, `Silvril`, `1x Random Item`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2214,7 +2588,10 @@ const MISSION_REF: QuestRef[] = [
         description: `In the western edge of the Materiwood, materite can be gathered with ease if you go at the right time. Go have a look! ~ Sals, Pub Customer`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws. Kingmoon only`, `Completed Twisted Flow (#005)`],
+                prerequisites: [
+          "Completed Twisted Flow (#005)",
+          "Completed Antilaws. Kingmoon only (#006)",
+        ],
         reward: [`0 Gil`, `Materite`, `1x Random Item`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2223,7 +2600,12 @@ const MISSION_REF: QuestRef[] = [
         description: `A giant worm is causing considerable damage to our fields as it looks for leestones in the ground. Someone please stop it! ~ Anton, Farmers' Guild`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #148 You Immortal. Huntmoon`, `only`, `Completed Emerald Keep (#010)`, `Completed You`, `Immortal (#148)`],
+                prerequisites: [
+          "Completed Emerald Keep (#010)",
+          "Completed You Immortal. Huntmoon (#148)",
+          "Completed You",
+          "only",
+        ],
         reward: [`2800 Gil`, `Leestone`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2232,7 +2614,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I found a turtle burial ground at a mountain shrine. I keep going back in hopes that I might find some adamantite! ~ Catess, Traveler`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Antilaws (#006)`, `Completed Hungry Ghost (#123)`],
+                prerequisites: [
+          "Completed Antilaws (#006)",
+          "Completed Hungry Ghost (#123)",
+        ],
         reward: [`2400 Gil`, `Adamantite`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2241,7 +2626,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I've been at this equation for months. Never have I been so stumped in my life! Won't someone take a crack at this with me? ~ Kosyne, Mathematician`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`],
+                prerequisites: ["Completed Diamond Rain (#007)"],
         reward: [`4200 Gil`, `Black Thread`, `2x Random Items`, `1x Random Card`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2250,7 +2635,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Wanted: bodyguard. I witnessed a crime and now must appear in court. Please protect me until the day of the trial. ~ Bode, Townsperson`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`],
+                prerequisites: ["Completed Diamond Rain (#007)"],
         reward: [`4600 Gil`, `Black Thread`, `Lost Gun`, `Req. Jobs: Defender`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -2259,7 +2644,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I'll never finish on time. I have to borrow someone's notes. Can you find some for me, or I'll never get this homework done! ~ Felhon, Student`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #3 The Cheetahs`, `Completed The Cheetahs (#003)`],
+                prerequisites: ["Completed The Cheetahs (#003)"],
         reward: [`2400 Gil`, `Black Thread`, `1x Random Item`, `Req. Items: Homework`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -2268,7 +2653,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Wanted: performer to entertain at the birthday party of Karlos, the second son of the Marquis Ealdoring. ~ Jung, Streatear`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Magic Wood (#009)`],
+                prerequisites: ["Completed Magic Wood (#009)"],
         reward: [`4600 Gil`, `White Thread`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2277,7 +2662,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Could you bring my father to me? I promise I won't speak harshly to him. I just want to visit Mother's grave. Thank you. ~ Ren, Notary Public`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #270 The Performer`, `Completed Magic Wood (#009)`, `Completed The Performer (#270)`],
+                prerequisites: [
+          "Completed Magic Wood (#009)",
+          "Completed The Performer (#270)",
+        ],
         reward: [`11400 Gil`, `White Thread`, `1x Random Item`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2286,7 +2674,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Know you Milese of the Kefeus acting troupe? I'm her biggest fan! Won't you give her this song I've written? ~ Valerio, Composer`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #4 Desert Peril`, `Completed Desert Peril (#004)`],
+                prerequisites: ["Completed Desert Peril (#004)"],
         reward: [`2800 Gil`, `White Thread`, `1x Random Item`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2295,7 +2683,7 @@ const MISSION_REF: QuestRef[] = [
         description: `We're looking for a few good skinners to help skin chocobo. It's not much of a living, but someone's got to do it! ~ Navarro, Chocobo Ranch`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`],
+                prerequisites: ["Completed Pale Company (#011)"],
         reward: [`3600 Gil`, `Chocobo Skin`, `1x Random Card`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2304,7 +2692,7 @@ const MISSION_REF: QuestRef[] = [
         description: `We need workers to help rein in the wild waters of the Pilos River in Andarna before it floods again! Please help. ~ Haagen, Townsperson`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`],
+                prerequisites: ["Completed Pale Company (#011)"],
         reward: [`5400 Gil`, `Magic Cloth`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2313,7 +2701,11 @@ const MISSION_REF: QuestRef[] = [
         description: `Hello again! It's me, Gonzales, from the magic cloth shop! I'm trading magic cloth for magic cotton -- got any? ~ Gonzales, Magic Cloth Shop`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #13 The Bounty. Sagemoon`, `only`, `Completed Hot Awakening (#008)`],
+                prerequisites: [
+          "Completed Hot Awakening (#008)",
+          "Completed The Bounty. Sagemoon (#013)",
+          "only",
+        ],
         reward: [`0 Gil`, `Magic Cloth`, `1x Random Item`, `1x Random Card`, `Req. Items: Magic Cotton`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2322,7 +2714,7 @@ const MISSION_REF: QuestRef[] = [
         description: `It's the season when the typhoons come blowing from the south again. I need to find a way to protect my cotton crop! ~ Kerney, Townsperson`,
         type: `Dispatch`,
         cost: `950 Gil`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`],
+                prerequisites: ["Completed The Bounty (#013)"],
         reward: [`7000 Gil`, `Magic Cotton`, `1x Random Card`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -2331,7 +2723,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My son wants me to win him a toy in the shooting game at the next carnival. Won't somebody give me shooting lessons? ~ Bijard, Theologan`,
         type: `Dispatch`,
         cost: `950 Gil`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`],
+                prerequisites: ["Completed The Bounty (#013)"],
         reward: [`7800 Gil`, `Bomb Shell`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2340,7 +2732,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My favorite toy is the champion of justice, but my friend Amigoh says it's just a rubber monster. Who's right? ~ Zels, Young Boy`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #10 Emerald Keep`, `Completed Emerald Keep (#010)`],
+                prerequisites: ["Completed Emerald Keep (#010)"],
         reward: [`5200 Gil`, `Bomb Shell`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2349,7 +2741,10 @@ const MISSION_REF: QuestRef[] = [
         description: `A pack of panthers has appeared in a wood far to the south. Somebody clear them out before they hurt someone! ~ Iguas, Townsperson`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time. Huntmoon`, `only`, `Completed Scouring Time (#015)`],
+                prerequisites: [
+          "Completed Scouring Time. Huntmoon (#015)",
+          "only",
+        ],
         reward: [`4600 Gil`, `Panther Hide`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2358,7 +2753,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Want some delicious jerky? Come help out at my store! We have to make 5,000 sticks of jerky this year. ~ Godon, Butcher`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time. Kingmoon`, `only`, `Completed Scouring Time (#015)`],
+                prerequisites: [
+          "Completed Scouring Time. Kingmoon (#015)",
+          "only",
+        ],
         reward: [`4200 Gil`, `Jerky`, `1x Random Card`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2367,7 +2765,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Needed: live-in help. We're looking to increase our fields again this year. All welcome! Don't worry, you'll be paid! ~ Farmer's Guild`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt. Madmoon only`, `Completed Jagd Hunt (#012)`],
+                prerequisites: ["Completed Jagd Hunt. Madmoon only (#012)"],
         reward: [`3600 Gil`, `Gysahl Greens`, `1x Random Card`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2376,7 +2774,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Strange fires have been breaking out near our powder store. It has to be a rival guild. Maybe you could ambush them? ~ Dabum, Fireworks Guild`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`9600 Gil`, `Magic Medal`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2385,7 +2783,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Wanted: tester. Help test our amazing new form of illumination, guaranteed to change the lives of city dwellers! ~ Better Living Labs`,
         type: `Dispatch`,
         cost: `1300 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`10000 Gil`, `Chocobo Egg`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2394,7 +2792,10 @@ const MISSION_REF: QuestRef[] = [
         description: `A lost malboro child from a nest in the pond has wandered into town! Please return it to its parents before someone gets hurt. ~ Jonnie, Ice Cream Man`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt. Madmoon only`, `Completed The Bounty (#013)`],
+                prerequisites: [
+          "Completed Jagd Hunt. Madmoon only (#012)",
+          "Completed The Bounty (#013)",
+        ],
         reward: [`4200 Gil`, `Cyril Ice`, `1x Random Item`, `1x Random Card`, `Req. Items: Chocobo Egg`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2403,7 +2804,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Wanted: register clerk & part-time floor scrubber at The Chocobo's Kweh. ~ Rolana, The Chocobo's Kweh`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands. Bardmoon`, `only`, `Completed Quiet Sands (#018)`],
+                prerequisites: [
+          "Completed Quiet Sands. Bardmoon (#018)",
+          "only",
+        ],
         reward: [`4600 Gil`, `Choco Bread`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2412,7 +2816,7 @@ const MISSION_REF: QuestRef[] = [
         description: `They're holding a welcome party at the furniture store, and they want me to perform some tricks! Somebody teach me! ~ Xiao, Furniture Seller`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`9600 Gil`, `Choco Gratin`, `1x Random Item`, `2x Random Card`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2421,7 +2825,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Being away from home for 10 years, I've started to really miss my mama's gratin. Won't someone make me some kupo gratin? ~ Takatoka, Machinist`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`],
+                prerequisites: ["Completed Scouring Time (#015)"],
         reward: [`9000 Gil`, `Choco Gratin`, `1x Random Item`, `2x Random Cards`, `Req. Items: Chocobo Egg/Gysahl Greens`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2430,7 +2834,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I ran into a cave while I was digging a well, and there's something inside! Maybe you could lure it out with some bread? ~ Meuk, Well Digger`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now!`, `Completed Materite Now! (#019)`],
+                prerequisites: ["Completed Materite Now! (#019)"],
         reward: [`9600 Gil`, `Grownup Bread`, `1x Random Item`, `2x Random Cards`, `Req. Items: Choco Bread`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2439,7 +2843,10 @@ const MISSION_REF: QuestRef[] = [
         description: `For years I gave her my all and now she's left and taken my savings with her. I going for a drink, want to come along? ~ Omar, Townsperson`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #234 Bread Woes`, `Completed Materite Now! (#019)`, `Completed Bread Woes (#234)`],
+                prerequisites: [
+          "Completed Materite Now! (#019)",
+          "Completed Bread Woes (#234)",
+        ],
         reward: [`10600 Gil`, `Malboro Wine`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2448,7 +2855,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Come make magic sheepskin vellum with me! I'll show you the pen is mightier than the sword. Bring some magic cotton with you! ~ Chikk, Paper Maker`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #17 Desert Patrol`, `Completed Desert Patrol (#017)`],
+                prerequisites: ["Completed Desert Patrol (#017)"],
         reward: [`4600 Gil`, `Magic Vellum`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -2457,7 +2864,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I want to write novels about mountain climbing, but I'm not very good at it. I need a rope that won't ever break! ~ Torfo, Apprentice Novelist`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`],
+                prerequisites: ["Completed Present Day (#020)"],
         reward: [`11400 Gil`, `Runba's Tale`, `1x Random Item`, `2x Random Cards`, `Req. Items: Stasis Rope`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -2466,7 +2873,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Someone please drive off the wailing spirit that haunts the pass near town. Hearing it sucks the strength right out of me! ~ Gillom, Townsperson`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`],
+                prerequisites: ["Completed Present Day (#020)"],
         reward: [`11800 Gil`, `Runba's Tale`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 20 Days`],
     },
     {
@@ -2475,7 +2882,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I've been trying to make a bread that kids will love, but it's tough going. What I need now is a good bread to sooth MY taste buds. ~ Noluado, Baker`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`10800 Gil`, `Kiddy Bread`, `1x Random Item`, `2x Random Cards`, `Req. Items: Choco Bread`, `Dispatch Time: 20 Days`],
     },
     {
@@ -2484,7 +2891,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Needed: able clan members to help clean my room. All you have to do is put a few thousand books back on their shelves! ~ Mimin, Scholar`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day! Sagemoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day! Sagemoon (#020)",
+          "only",
+        ],
         reward: [`12400 Gil`, `Encyclopedia`, `1x Random Card`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2493,7 +2903,10 @@ const MISSION_REF: QuestRef[] = [
         description: `My lucky rabbit tail found me a wonderful husband! But now we're married, I think I need a little more luck. Got a tail for me? ~ Bibilina, Lucky Lady`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day! Madmoon`, `only`, `Completed Present Day (#020)`],
+                prerequisites: [
+          "Completed Present Day! Madmoon (#020)",
+          "only",
+        ],
         reward: [`10800 Gil`, `Rabbit Tail`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2502,7 +2915,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Come enjoy the Danbukwood and get back to nature! Buy some wood and bring it home for that woodsy feeling all year long! ~ Yeesa Tourism Board`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale. Huntmoon`, `only`, `Completed To Ambervale (#022)`],
+                prerequisites: [
+          "Completed To Ambervale. Huntmoon (#022)",
+          "only",
+        ],
         reward: [`4600 Gil`, `Danbukwood`, `1x Random Item`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2511,7 +2927,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I've got tons of orders for moonwood chairs! Get me some moonwood from the deep Foma Jungle, if you would. No pun intended. ~ Gueguerre, Wood Craftsman`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale. Huntmoon`, `only`, `Completed To Ambervale (#022)`],
+                prerequisites: [
+          "Completed To Ambervale. Huntmoon (#022)",
+          "only",
+        ],
         reward: [`4600 Gil`, `Moonwood`, `1x Random Item`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2520,7 +2939,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I need a telaq flower, a strange blossom that blooms only a few times a year deep within a cave -- a cave with monsters. ~ Shelm, Alchemist`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`],
+                prerequisites: ["Completed To Ambervale (#022)"],
         reward: [`6000 Gil`, `Telaq Flower`, `1x Random Item`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2529,7 +2948,11 @@ const MISSION_REF: QuestRef[] = [
         description: `A bug infestation has hit Giza Plains, and it will reach the town if we don't take action! Someone help drive those critters away! ~ Noris, Townsperson`,
         type: `Capture`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #194 Free Cyril`, `Completed Thesis Hunt (#002)`, `Giza Plains not Freed`],
+                prerequisites: [
+          "Completed Thesis Hunt (#002)",
+          "Completed Free Cyril (#194)",
+          "Giza Plains not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2538,7 +2961,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I opened a shop in Lutia Pass, but not a single customer has come yet! I think I need to advertise. Could you pass out flyers? ~ Bintz, Tool Shop`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #4 Desert Peril`, `Completed Desert Peril (#004)`, `Lutia Pass not Freed`],
+                prerequisites: [
+          "Completed Desert Peril (#004)",
+          "Lutia Pass not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2547,7 +2973,11 @@ const MISSION_REF: QuestRef[] = [
         description: `Rock turtles have been attacking travelers in the Nubswood. Use this "shellout" to get rid of them, please. ~ Hoelik, Townsperson`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Antilaws (#006)`, `Nubswood not Freed`, `Completed Raven's Oath (#070)`],
+                prerequisites: [
+          "Completed Antilaws (#006)",
+          "Completed Raven",
+          "Nubswood not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2556,7 +2986,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I'm trying to reforest the Eluut Sands in an attempt to tame the beasts that live there. Bring me a desert plant for study. ~ Karenne, Herbologist`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`, `Eluut Sands not Freed`],
+                prerequisites: [
+          "Completed Diamond Rain (#007)",
+          "Eluut Sands not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2565,7 +2998,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Somebody get the word out: there's fine fish to be had in the upper waters of the Ulei River! ~ Holt, Angler`,
         type: `Capture`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #8 Hot Awakening`, `Completed Hot Awakening (#008)`, `Ulei River not Freed`],
+                prerequisites: [
+          "Completed Hot Awakening (#008)",
+          "Ulei River not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2574,7 +3010,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Somebody spread the word that those rumors of bandits in Aisenfield are a bunch of lies. It's bad for business! ~ Chocobo Shop, Aisen Branch`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Magic Wood (#009)`, `Aisenfield not Freed`],
+                prerequisites: [
+          "Completed Magic Wood (#009)",
+          "Aisenfield not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2583,7 +3022,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Roda Volcano's been active lately. Someone needs to go to the road at the base of the cone and clean off the chunks of lava. ~ Naricys, Geologist `,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #10 Emerald Keep`, `Completed Emerald Keep (#010)`, `Roda Volcano not Freed`],
+                prerequisites: [
+          "Completed Emerald Keep (#010)",
+          "Roda Volcano not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2592,7 +3034,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Please light the waypoints in the Koringwood. They are vital landmarks for helping travelers find their way. Thank you. ~ Zeshika, Woodland Guide`,
         type: `Capture`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`, `Koringwood not Freed`],
+                prerequisites: [
+          "Completed Pale Company (#011)",
+          "Koringwood not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -2601,7 +3046,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I plan on cutting a path through the Salikawood. I'll do some reforesting, too! I can't pay much, but I really need help. ~ Laycher, Innkeeper`,
         type: `Capture`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt`, `Completed Jagd Hunt (#012)`, `Salikawood not Freed`],
+                prerequisites: [
+          "Completed Jagd Hunt (#012)",
+          "Salikawood not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -2610,7 +3058,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Monsters can't stand the smell of the flower that grows deep in Nargai Cave. Great for ensuring a safe voyage! Help me get one. ~ Buck, Bontanist`,
         type: `Capture`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #13 The Bounty`, `Completed The Bounty (#013)`, `Nargai Cave not Freed`],
+                prerequisites: [
+          "Completed The Bounty (#013)",
+          "Nargai Cave not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -2619,7 +3070,11 @@ const MISSION_REF: QuestRef[] = [
         description: `A rock slide has blocked off the road to the Kudik Peaks. Looking for people to help clear it off. ~ Jagark, Mountain Patrol`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #14 Golden Clock`, `Completed Scouring Time (#015)`, `Kudik Peaks not Freed`],
+                prerequisites: [
+          "Completed Golden Clock (#014)",
+          "Completed Scouring Time (#015)",
+          "Kudik Peaks not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -2628,7 +3083,10 @@ const MISSION_REF: QuestRef[] = [
         description: `One of the ruins in Jeraw Sands is supposed to be the entrance to an underground cave! Please investigate. ~ Gadfly, Ivalice Tours`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`, `Jeraw Sands not Freed`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Jeraw Sands not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -2637,7 +3095,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Won't someone help me build a bridge over Uladon Bog? It would really speed up travel. ~ Iluluna, Young Girl`,
         type: `Capture`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`, `Uladon Bog not Freed`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Uladon Bog not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 7 Enemies`],
     },
     {
@@ -2646,7 +3107,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Find the oasis said to lay hidden in Gotor Sands. If we could draw water from there, it would be a great boon to travelers. ~ Gabela, Traveling Merchant`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`, `Gotor Sands not Freed`],
+                prerequisites: [
+          "Completed The Big Find (#016)",
+          "Gotor Sands not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 7 Enemies`],
     },
     {
@@ -2655,7 +3119,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Please find out where the dragonflies of Delia Dunes live. Their wings are a vital ingredient for making medicine. ~ Carulea, Alchemist`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #17 Desert Patrol`, `Completed Desert Patrol (#017)`, `Delia Dunes not Freed`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Delia Dunes not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 7 Enemies`],
     },
     {
@@ -2664,7 +3131,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Bladebugs, the natural enemy of all monsters, are said to gather on the river that flows deep in the Materiwood. Find them! ~ Winetz, Entomologist`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`, `Materiwood not Freed`],
+                prerequisites: [
+          "Completed Quiet Sands (#018)",
+          "Materiwood not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 7 Enemies`],
     },
     {
@@ -2673,7 +3143,10 @@ const MISSION_REF: QuestRef[] = [
         description: `They say that the crystals are making monsters go crazy... I wonder about silvril? Get some from Tubola Cave for me! ~ Phol, Researcher`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`, `Tubola Cave not Freed`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Tubola Cave not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 7 Enemies`],
     },
     {
@@ -2682,7 +3155,10 @@ const MISSION_REF: QuestRef[] = [
         description: `They say armor fashioned from a wyrmgod scale will withstand any attack! Find a scale in the ruins on the Deti Plains for me. ~ Takukulu, Armorer`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`, `Deti Plains not Freed`],
+                prerequisites: [
+          "Completed To Ambervale (#022)",
+          "Deti Plains not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -2691,7 +3167,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I want you to confirm the old rumor that there is poison on the winds that blow through Siena Gorge. I'll pay you! ~ Cal, Lover of Gossip`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`, `Siena Gorge not Freed`],
+                prerequisites: [
+          "Completed To Ambervale (#022)",
+          "Siena Gorge not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -2700,7 +3179,11 @@ const MISSION_REF: QuestRef[] = [
         description: `I'm thinking of building a gladitorial arena in Jagd Ahli. A lawless sport for a lawless zone! Help me find a good spot. ~ Pakanon, Architect`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #65 Exploration`, `Clear Game`, `Jagd Ahli not Freed`, `Completed Exploration (#065)`],
+                prerequisites: [
+          "Completed Exploration (#065)",
+          "Clear Game",
+          "Jagd Ahli not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -2709,7 +3192,11 @@ const MISSION_REF: QuestRef[] = [
         description: `I dropped something very important to me in a ruin in Jagd Helje. Please find it! ~ Ekal, Astrologer`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #64 Den Of Evil`, `Clear Game`, `Jagd Helje not Freed`, `Completed Den of Evil (#064)`],
+                prerequisites: [
+          "Completed Den Of Evil (#064)",
+          "Clear Game",
+          "Jagd Helje not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -2718,7 +3205,12 @@ const MISSION_REF: QuestRef[] = [
         description: `Please kill the jagdsaurus that plagues Jagd Dorsa. He'll come out if you go in there alone, I guarantee it. ~ Handog, Townsperson`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Jagd Dorsa not Freed`, `Seen 24 05`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Clear Game",
+          "Jagd Dorsa not Freed",
+          "Seen 24 05",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 15 Enemies`],
     },
     {
@@ -2727,7 +3219,11 @@ const MISSION_REF: QuestRef[] = [
         description: `The nest of the chomper beetles from Ozmonfield was found in Ambervale! Please use this "bugoff" to drive them away! ~ Dalaben, Ranch Manager`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #263 Ozmonfield`, `Clear Game`, `Ambervale not Freed`, `Completed Ozmonfield (#263)`],
+                prerequisites: [
+          "Completed Ozmonfield (#263)",
+          "Ambervale not Freed",
+          "Clear Game",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 7 Enemies`],
     },
     {
@@ -2736,7 +3232,12 @@ const MISSION_REF: QuestRef[] = [
         description: `The chomper beetles found in Ozmonfield are eating my chocobo feed. Please use this "bug-B-gone" to drive them away! ~ Dalaben, Ranch Manager`,
         type: `Capture`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Ozmonfield not Freed`, `Completed A Dragon's Aid (#066)`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Clear Game",
+          "Completed A Dragon",
+          "Ozmonfield not Freed",
+        ],
         reward: [`2400 Gil`, `1x Random Item`, `1x Random Card`, `Dispatch Time: 7 Enemies`],
     },
     {
@@ -2745,7 +3246,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Announcing the biggest even of the year: the Cyril Swordsmanship Competition! Test your strength and skill! ~ Cyril Event Committee`,
         type: `Dispatch`,
         cost: `300 Gil`,
-        prerequisites: [`After completion of Mission #2 Thesis Hunt`, `Completed Thesis Hunt (#002)`],
+                prerequisites: ["Completed Thesis Hunt (#002)"],
         reward: [`1800 Gil`, `Secret Item (Victor Sword)`, `1x Random Item`, `Req. Jobs: Fencer`, `Dispatch Time: 1 Battle`],
     },
     {
@@ -2754,7 +3255,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Need: part-time teachers. Help apprentices in a wide variety of jobs learn the tricks of your trade! ~ Oks, Newbie Hall Chief`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #3 The Cheetahs`, `Completed The Cheetahs (#003)`, `Completed Earthy Colors (#139)`],
+                prerequisites: [
+          "Completed The Cheetahs (#003)",
+          "Completed Earthy Colors (#139)",
+        ],
         reward: [`2400 Gil`, `Onion Sword`, `1x Random Item`, `Req. Skills: Combat/Lvl.5`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2763,7 +3267,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I saw the matron casting a spell on that nasty doll! That must be the cause of my lady's illness, it must be. Please, help my lady! ~ Eselle, Maidservant`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: [`After completion of Mission #5 Twisted Flow`, `Completed Twisted Flow (#005)`],
+                prerequisites: ["Completed Twisted Flow (#005)"],
         reward: [`3400 Gil`, `Soulsaber`, `1x Random Item`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2772,7 +3276,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My son is so overweight he can hardly move. Someone get him out of his room! I don't care how you do it. ~ Joyce, Warehouse Monitor`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #6 Antilaws`, `Completed Antilaws (#006)`],
+                prerequisites: ["Completed Antilaws (#006)"],
         reward: [`5400 Gil`, `Oblige`, `1x Random Item`, `2x Random Cards`, `Req. Items: Jerky`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2781,7 +3285,10 @@ const MISSION_REF: QuestRef[] = [
         description: `My friend was arrested unfairly! While we look for the real criminal, I'd like to send him some good food. Do you know of any? ~ Theo, Fruitseller`,
         type: `Dispatch`,
         cost: `800 Gil`,
-        prerequisites: [`After completion of Mission #7 Diamond Rain`, `Completed Diamond Rain (#007)`, `Completed The Witness (#209)`],
+                prerequisites: [
+          "Completed Diamond Rain (#007)",
+          "Completed The Witness (#209)",
+        ],
         reward: [`6400 Gil`, `Rhomphaia`, `1x Random Item`, `2x Random Cards`, `Req. Items: Choco Gratin`, `Req. Skills: Appraise/Lvl.18`, `Dispatch Time: 20 Days`],
     },
     {
@@ -2790,7 +3297,7 @@ const MISSION_REF: QuestRef[] = [
         description: `A turtle monster guards a fabulous treasure at an ancient shrine in Alba Cave. Distract him with some food and it's yours! ~ Mumusen, Pub Customer`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #8 Hot Awakening`, `Completed Hot Awakening (#008)`],
+                prerequisites: ["Completed Hot Awakening (#008)"],
         reward: [`6000 Gil`, `Secret Item (Beastsword)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Items: Jerky`, `Req. Jobs: Blue Mage`, `Dispatch Time: 4 Battles`],
     },
     {
@@ -2799,7 +3306,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I've performed in many lands, but I've never had a hit. Maybe it's just bad luck? Got anything to make fortune smile on me? ~ Mamek, Traveling Performer`,
         type: `Dispatch`,
         cost: `1100 Gil`,
-        prerequisites: [`After completion of Mission #9 Magic Wood`, `Completed Magic Wood (#009)`],
+                prerequisites: ["Completed Magic Wood (#009)"],
         reward: [`9600 Gil`, `Tonberrian`, `1x Random Item`, `2x Random Cards`, `Req. Items: Rabbit Tail`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2808,7 +3315,7 @@ const MISSION_REF: QuestRef[] = [
         description: `That guy in the corner's a fabulous tenor. We want him for our chorus group, but he refuses to join. Won't you convince him? ~ Arthin, Chorus Lead`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`],
+                prerequisites: ["Completed Pale Company (#011)"],
         reward: [`6400 Gil`, `Aerial Hole`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2817,7 +3324,10 @@ const MISSION_REF: QuestRef[] = [
         description: `A tree grows on the duke's land, and every spring a woman comes and looks at its roots. Could you check if something's there? ~ Eukanne, Ducal Maid`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #12 Jagd Hunt. Cadoan Pub`, `only`, `Completed Jagd Hunt (#012)`],
+                prerequisites: [
+          "Completed Jagd Hunt. Cadoan Pub (#012)",
+          "only",
+        ],
         reward: [`7000 Gil`, `Charfire`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2826,7 +3336,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I woke in this town with no memory or items but this staff. Please trade me a magic medal for it--I must repay the inkeep. ~ Weathervane Inn, Room 3`,
         type: `Dispatch`,
         cost: `300 Gil`,
-        prerequisites: [`After completion of Mission #131 Adaman Alloy`, `Completed The Bounty (#013)`, `Completed Adaman Alloy (#131)`],
+                prerequisites: [
+          "Completed The Bounty (#013)",
+          "Completed Adaman Alloy (#131)",
+        ],
         reward: [`600 Gil`, `Power Staff`, `1x Random Item`, `2x Random Cards`, `Req. Items: Magic Medal/Magic Medal`, `Dispatch Time: 15 Days`],
     },
     {
@@ -2835,7 +3348,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My buddy says that on full moon nights, the reaper comes down from the moon to a manse on the hill and someone dies! Is it true? ~ Nud, Future Streetear`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #15 Scouring Time`, `Completed Scouring Time (#015)`],
+                prerequisites: ["Completed Scouring Time (#015)"],
         reward: [`8800 Gil`, `Crescent Bow`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2844,7 +3357,7 @@ const MISSION_REF: QuestRef[] = [
         description: `My father is a postman, but he fell off his dogsled and hurt himself bad. I have to help him! Teach me how to ride a dogsled! ~ Rikk, Postman's Son`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`],
+                prerequisites: ["Completed The Big Find (#016)"],
         reward: [`8800 Gil`, `Marduk Bow`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2853,7 +3366,10 @@ const MISSION_REF: QuestRef[] = [
         description: `There's a bowyer outside town that makes the best bows in the land, but he only makes them if you bring him good bread! ~ Arco, Pub Customer`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Desert Patrol (#017)`],
+                prerequisites: [
+          "Completed Desert Patrol (#017)",
+          "Completed Quiet Sands (#018)",
+        ],
         reward: [`0 Gil`, `Arbalest`, `1x Random Item`, `2x Random Cards`, `Req. Items: Kiddy Bread/Grownup Bread`, `Dispatch Time: 5 Days`],
     },
     {
@@ -2862,7 +3378,7 @@ const MISSION_REF: QuestRef[] = [
         description: `There's a sword fighting competition coming up, and one of our team can't make it. Looking for a good swordsman to replace her! ~ Lotus, Swordsman`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`9000 Gil`, `Bangaa Spike`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2871,7 +3387,7 @@ const MISSION_REF: QuestRef[] = [
         description: `Those Nightwailers are out there singing every night. Noisy bunch, but bring 'em the materials, and they'll make you an instrument.`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #18 Quiet Sands`, `Completed Quiet Sands (#018)`],
+                prerequisites: ["Completed Quiet Sands (#018)"],
         reward: [`12400 Gil`, `Secret Item (Fell Castanets)`, `1x Random Item`, `2x Random Cards`, `Req. Items: Danbukwood/Moonwood`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -2880,7 +3396,7 @@ const MISSION_REF: QuestRef[] = [
         description: `The best dancer in town has gone off to the city to be a star... I'd like to make a toast to her success. Got a drink? ~ Deuxhart, Townsperson`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now!`, `Completed Materite Now! (#019)`],
+                prerequisites: ["Completed Materite Now! (#019)"],
         reward: [`9600 Gil`, `Magic Hands`, `1x Random Item`, `2x Random Cards`, `Req. Items: Malboro Wine`, `Dispatch Time: 7 Days`],
     },
     {
@@ -2889,7 +3405,7 @@ const MISSION_REF: QuestRef[] = [
         description: `They say that on full-moon nights something scary happens if you look at the mirror in one of the dorm rooms! Is it true? Help! ~ Eluiotte, Frightened Girl`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now!`, `Completed Materite Now! (#019)`],
+                prerequisites: ["Completed Materite Now! (#019)"],
         reward: [`10800 Gil`, `Reverie Shield`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -2898,7 +3414,7 @@ const MISSION_REF: QuestRef[] = [
         description: `What a great parade that was! Which reminds me, they're looking for people to help clean up all the trash. You interested? ~ Grek, Pub Customer`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`],
+                prerequisites: ["Completed Present Day (#020)"],
         reward: [`11400 Gil`, `Parade Helm`, `1x Random Item`, `2x Random Cards`, `Dispatch Time: 20 Days`],
     },
     {
@@ -2907,7 +3423,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I live a cursed life, but now I'm getting married, and nothing can go wrong! I need some kind of charm to ward off evil spirits! ~ Domure, Unlucky Man`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`],
+                prerequisites: ["Completed Present Day (#020)"],
         reward: [`13200 Gil`, `Magic Robe`, `1x Random Item`, `2x Random Cards`, `Req. Items: Blood Shawl`, `Dispatch Time: 3 Enemies`],
     },
     {
@@ -2916,7 +3432,7 @@ const MISSION_REF: QuestRef[] = [
         description: `The rainbow-furred corral is the fastest animal in the world, and one's loose on Duke Casell's land. Someone please feed it! ~ Falco, Animal Lover`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`],
+                prerequisites: ["Completed To Ambervale (#022)"],
         reward: [`12600 Gil`, `Fire Mitts`, `1x Random Item`, `2x Random Cards`, `Req. Items: Choco Gratin`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2925,7 +3441,11 @@ const MISSION_REF: QuestRef[] = [
         description: `Want a gun as strong and fast as a wild beast? Just bring me two little items I need, and it's all yours, free. ~ Strives, Musketeer`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #24 Royal Valley`, `Clear Game`, `Completed C8`],
+                prerequisites: [
+          "Completed Royal Valley (#024)",
+          "Clear Game",
+          "Completed C8",
+        ],
         reward: [`0 Gil`, `Calling Gun`, `1x Random Item`, `2x Random Cards`, `Req. Items: Insignia`, `Ally Finder2`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2934,7 +3454,10 @@ const MISSION_REF: QuestRef[] = [
         description: `You can make amazingly strong swords with just a little adaman alloy. Too bad it's so hard to come by... ~ Gilgame, Young Blacksmith`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now!`, `Completed Materite Now! (#019)`, `Completed She's Gone (#230)`],
+                prerequisites: [
+          "Completed Materite Now! (#019)",
+          "Completed She",
+        ],
         reward: [`10600 Gil`, `Secret Item (Adaman Blade)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Items: Adaman Alloy/Broken Sword`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -2943,7 +3466,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I finally got the famed sword "ragnarok," but it's a fake! Just bring me the right materials and I can make one of these, easy! ~ Hoek, Swordsmith`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #122 Run For Fun`, `Completed Diamond Rain (#007)`, `Completed Run For Fun (#122)`],
+                prerequisites: [
+          "Completed Diamond Rain (#007)",
+          "Completed Run For Fun (#122)",
+        ],
         reward: [`9000 Gil`, `Secret Item (Nagrarok)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Items: Bent Sword/Rainbowite`, `Dispatch Time: 10 Days`],
     },
     {
@@ -2952,7 +3478,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I lost my family to those godless scoundrels in the Gelzak Church. Help me make a good sword so that I might avenge them! ~ Weaver, Knight`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #11 Pale Company`, `Completed Pale Company (#011)`],
+                prerequisites: ["Completed Pale Company (#011)"],
         reward: [`10600 Gil`, `Zankplus`, `1x Random Item`, `2x Random Cards`, `Req. Items: Crusite Alloy/Blood Apple`, `Dispatch Time: 5 Enemies`],
     },
     {
@@ -2961,7 +3487,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I found the designs for making the same sword used by a legendary swordsman! But, the ingredients are hard to find. Please help. ~ Belitz, Archaeologist`,
         type: `Dispatch`,
         cost: `1500 Gil`,
-        prerequisites: [`After completion of Mission #232 Novel Ascent`, `Completed Present Day (#020)`, `Completed Novel Ascent (#232)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Novel Ascent (#232)",
+        ],
         reward: [`12600 Gil`, `Secret Item (Master Sword)`, `1x Random Item`, `Req. Items: Thunderstone/Stormstone`, `Req. Jobs: Soldier`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -2970,7 +3499,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Due to the recent drop in weapon availability, we at Teldot Workshop are now offering refurbishing. Make old blades new! ~ Workshop Teldot`,
         type: `Dispatch`,
         cost: `4000 Gil`,
-        prerequisites: [`After completion of Mission #213 Oh Milese`, `Completed Desert Peril (#004)`, `Completed Oh Milese (#213)`],
+                prerequisites: [
+          "Completed Desert Peril (#004)",
+          "Completed Oh Milese (#213)",
+        ],
         reward: [`0 Gil`, `Lurebreaker`, `1x Random Item`, `Req. Items: Broken Sword`, `Dispatch Time: 20 Days`],
     },
     {
@@ -2979,7 +3511,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I've found a way to make the usually brittle leestone hard as steel! Bring me leestone and I'll make you a weapon. ~ Ukes, Traveling Smith`,
         type: `Dispatch`,
         cost: `4000 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`],
+                prerequisites: ["Completed To Ambervale (#022)"],
         reward: [`0 Gil`, `Secret Item (Tabarise)`, `1x Random Item`, `2x Random`, `Cards`, `Req. Items: Rusty Sword/Leestone`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -2988,7 +3520,11 @@ const MISSION_REF: QuestRef[] = [
         description: `I hope to use the smithing knowledge I gained abroad to make swords with the materials available here. Know any good materials? ~ Da'jerma, Swordsmith`,
         type: `Dispatch`,
         cost: `4500 Gil`,
-        prerequisites: [`After completion of Mission #94 Sorry Friend`, `Completed Present Day (#020)`, `Completed Sorry`, `Friend (#094)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Sorry Friend (#094)",
+          "Completed Sorry",
+        ],
         reward: [`0 Gil`, `Secret Item (Silkmoon)`, `1x Random Item`, `2x Random`, `Cards`, `Req. Items: Silk Bloom/Moon Bloom`, `Dispatch Time: 4 Battles`],
     },
     {
@@ -2997,7 +3533,10 @@ const MISSION_REF: QuestRef[] = [
         description: `Once, long ago, a bolt of godsfire hit a shrine to the esper Odin. When the smoke cleared, they found a spear -- the Odinlance.`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [`After completion of Mission #22 To Ambervale`, `Completed To Ambervale (#022)`, `Completed Ghosts Of War (#142)`],
+                prerequisites: [
+          "Completed To Ambervale (#022)",
+          "Completed Ghosts Of War (#142)",
+        ],
         reward: [`12600 Gil`, `Odin Lance`, `1x Random Item`, `2x Random Cards`, `Req. Items: Rusty Spear/Mysidia Alloy`, `Dispatch Time: 4 Battles`],
     },
     {
@@ -3006,7 +3545,7 @@ const MISSION_REF: QuestRef[] = [
         description: `I met a bard in the woods who said he'd sold his soul to some fiend. If you want a dark instrument, he's the one to ask. ~ Rayches, Pub Customer`,
         type: `Dispatch`,
         cost: `5500 Gil`,
-        prerequisites: [`After completion of Mission #19 Materite Now!`, `Completed Materite Now! (#019)`],
+                prerequisites: ["Completed Materite Now! (#019)"],
         reward: [`0 Gil`, `Secret Item (Dark Fiddle)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Items: Stradivari/Black Thread`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -3015,7 +3554,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I heard that Thousand-Barrel, that gun maker that lives up in Gilba Pass, invented a new gun! Got to be powerful, that. ~ Tetero, Pub Customer`,
         type: `Dispatch`,
         cost: `4000 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`, `Completed Sword Stuff (#291)`],
+                prerequisites: [
+          "Completed Present Day (#020)",
+          "Completed Sword Stuff (#291)",
+        ],
         reward: [`0 Gil`, `Bindsnipe`, `1x Random Item`, `2x Random Cards`, `Req. Items: Crusite Alloy/Gun Gear`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -3024,7 +3566,10 @@ const MISSION_REF: QuestRef[] = [
         description: `To all black mages: in order to raise the status of our clan brothers, we will give you a black hat. Wear it well! ~ Black Mage Society`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Quiet Sands (#018)`],
+                prerequisites: [
+          "Completed Quiet Sands (#018)",
+          "Completed Present Day (#020)",
+        ],
         reward: [`0 Gil`, `Black Hat`, `1x Random Item`, `2x Random Cards`, `Req. Items: Black Thread/Magic Cloth`, `Req. Jobs: Black Mage`, `Dispatch Time: 3 Battles`],
     },
     {
@@ -3033,7 +3578,7 @@ const MISSION_REF: QuestRef[] = [
         description: `hat girl that's always standing on the pier must be chilly. I'd like to give her a hat, but which one? She's a white mage.`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: [`After completion of Mission #20 Present Day`, `Completed Present Day (#020)`],
+                prerequisites: ["Completed Present Day (#020)"],
         reward: [`10800 Gil`, `White Hat`, `1x Random Item`, `2x Random Cards`, `Req. Items: White Thread/Magic Cloth`, `Dispatch Time: 30 Days`],
     },
     {
@@ -3042,7 +3587,11 @@ const MISSION_REF: QuestRef[] = [
         description: `I could make some wicked strong armor if I had some adaman alloy. Just... it's so hard to get, you know? ~ Gilgame, Young Blacksmith`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed Scouring Time (#015)`, `Completed Mama's Taste (#228)`],
+                prerequisites: [
+          "Completed Scouring Time (#015)",
+          "Completed The Big Find (#016)",
+          "Completed Mama",
+        ],
         reward: [`9000 Gil`, `Adaman Armor`, `1x Random Item`, `2x Random Cards`, `Req. Items: Adaman Alloy/Rat Tail`, `Dispatch Time: 2 Battles`],
     },
     {
@@ -3051,7 +3600,10 @@ const MISSION_REF: QuestRef[] = [
         description: `If you can bring me some materite, I believe I can make an outstanding suit of armor. I'll give you the suit. How about it? ~ Pepeiro, Alchemist`,
         type: `Dispatch`,
         cost: `2700 Gil`,
-        prerequisites: [`After completion of Mission #16 The Big Find`, `Completed The Big Find (#016)`, `Completed Dog Days (#275)`],
+                prerequisites: [
+          "Completed The Big Find (#016)",
+          "Completed Dog Days (#275)",
+        ],
         reward: [`0 Gil`, `Materia Armor`, `1x Random Item`, `2x Random Cards`, `Req. Items: Materite/Materite`, `Dispatch Time: 10 Enemies`],
     },
     {
@@ -3060,7 +3612,10 @@ const MISSION_REF: QuestRef[] = [
         description: `I hear Brint Mea, the popular brand, is looking for new designs. Probably trying to win customers back from Galmia Pepe! ~ Mit, Pub Customer`,
         type: `Dispatch`,
         cost: `600 Gil`,
-        prerequisites: [`After completion of Mission #150 An Education`, `Completed Antilaws (#006)`, `Completed An Education (#150)`],
+                prerequisites: [
+          "Completed Antilaws (#006)",
+          "Completed An Education (#150)",
+        ],
         reward: [`4600 Gil`, `Secret Item (Brint Set)`, `1x Random Item`, `2x`, `Random Cards`, `Req. Items: Chocobo Skin/Magic Cotton`, `Dispatch Time: 10 Days`],
     },
     {
@@ -3069,7 +3624,11 @@ const MISSION_REF: QuestRef[] = [
         description: `Both Galmia Pepe and Brint Mea are looking for new designs! The fate of the fashion world hangs on the balance on this one! ~ Phale, Fashion Expert`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: [`After completion of Mission #299 Fashion World`, `Completed Magic Wood (#009)`, `Completed The Performer (#270)`],
+                prerequisites: [
+          "Completed Magic Wood (#009)",
+          "Completed The Performer (#270)",
+          "Completed Fashion World (#299)",
+        ],
         reward: [`11800 Gil`, `Galmia Set`, `1x Random Item`, `2x Random Cards`, `Req. Items: Chocobo Skin/Magic Cotton`, `Dispatch Time: 5 Days`],
     },
   ];
