@@ -5656,10 +5656,11 @@ const FFTAProgressionGuide: React.FC = () => {
     return m;
   }, []);
   const questTotal = MISSION_REF.length;
+  const questKey = (num: number) => keyify(`quest-global:${num}`);
   const questDone = useMemo(
     () =>
       MISSION_REF.reduce(
-        (n, q) => n + (checked[keyify(`quest-global:${q.number}`)] ? 1 : 0),
+        (n, q) => n + (checked[questKey(q.number)] ? 1 : 0),
         0
       ),
     [checked]
@@ -6115,7 +6116,7 @@ const FFTAProgressionGuide: React.FC = () => {
     );
   };
 
-  const RefList: React.FC<{ type: "blue" | "cap" | "mission"; names: (string[] | number) }> = ({
+  const RefList: React.FC<{ type: "blue" | "cap" | "mission"; names: (string[] | number[]) }> = ({
     type,
     names,
   }) => {
@@ -6129,6 +6130,7 @@ const FFTAProgressionGuide: React.FC = () => {
         // ----- BLUE -----
         if (type === "blue" && typeof n === "string") {
           const id = keyify(`blue:${n}`);
+          const isChecked = !!checked[id];
           const b = BLUE_MAGIC_REF.find((x) => x.name === n);
           if (!b) return null;
           return (
@@ -6140,7 +6142,7 @@ const FFTAProgressionGuide: React.FC = () => {
                 <input
                   type="checkbox"
                   className="mt-1 accent-blue-600 dark:accent-blue-400"
-                  checked={!!checked[id]}
+                  checked={isChecked}
                   onChange={() => setCheck(id)}
                 />
                 <div>
@@ -6216,6 +6218,7 @@ const FFTAProgressionGuide: React.FC = () => {
           const c = CAPTURE_REF.find((x) => x.monster === n);
           if (!c) return null;
           const id = keyify(`cap:${c.monster}`);
+          const isChecked = !!checked[id];
           return (
             <li
               key={`cap-${n}`}
@@ -6225,7 +6228,7 @@ const FFTAProgressionGuide: React.FC = () => {
                 <input
                   type="checkbox"
                   className="mt-1 accent-green-600 dark:accent-green-400"
-                  checked={!!checked[id]}
+                  checked={isChecked}
                   onChange={() => setCheck(id)}
                 />
                 <div>
@@ -6306,7 +6309,9 @@ const FFTAProgressionGuide: React.FC = () => {
         if (type === "mission" && typeof n === "number") {
           const q = MISSION_REF.find((q) => q.number === n);
           if (!q) return null;
-          const id = keyify(`quest-global:${q.number}`);
+          const id = questKey(n);
+          const isChecked = !!checked[id];
+
           return (
             <li
               key={`mission-${n}`}
@@ -6316,41 +6321,45 @@ const FFTAProgressionGuide: React.FC = () => {
                 <input
                   type="checkbox"
                   className="mt-1 accent-purple-600 dark:accent-purple-400"
-                  checked={!!checked[id]}
+                  checked={isChecked}
                   onChange={() => setCheck(id)}
                 />
                 <div>
                   <div className={`font-semibold ${tagColor}`}>
                     #{String(q.number).padStart(3, "0")} — {q.name}
-                    {q.location && (
-                      <span className="ml-2 text-xs text-zinc-500 dark:text-zinc-400">
-                        @ {q.location}
-                      </span>
-                    )}
                   </div>
 
-                  {q.description && (
-                    <div className="text-sm text-zinc-800 dark:text-zinc-200 mt-1">
-                      {q.description}
-                    </div>
+                  {/* Hide everything below when checked */}
+                  {!isChecked && (
+                    <>
+                      {q.location && (
+                        <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                          ({q.location})
+                        </div>
+                      )}
+
+                      {q.description && (
+                        <div className="text-sm text-zinc-800 dark:text-zinc-200 mt-1">
+                          {q.description}
+                        </div>
+                      )}
+
+                      <div className="text-xs mt-1 space-y-1 text-zinc-900 dark:text-zinc-100">
+                        <KV l="Type" v={q.type} />
+                        <KV l="Difficulty" v={q.difficulty} />
+                        <KV l="Cost" v={q.cost} />
+                        <KV l="Location" v={q.location} />
+                        <List l="Prerequisites" a={q.prerequisites} />
+                        <List l="Rewards" a={q.reward} />
+                        <List l="Enemies" a={q.enemies} />
+                      </div>
+                    </>
                   )}
-
-                  <div className="text-xs mt-1 space-y-1 text-zinc-900 dark:text-zinc-100">
-                    <KV l="Type" v={q.type} />
-                    <KV l="Difficulty" v={q.difficulty} />
-                    <KV l="Cost" v={q.cost} />
-                    <KV l="Location" v={q.location} />
-
-                    <List l="Prerequisites" a={q.prerequisites} />
-                    <List l="Rewards" a={q.reward} />
-                    <List l="Enemies" a={q.enemies} />
-                  </div>
                 </div>
               </label>
             </li>
           );
         }
-
         return null;
       })}
     </ul>
@@ -6491,17 +6500,30 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           const side = b.sidequests || [];
           const recs = b.recruits || [];
           const miss = b.missables || [];
+          const quest = b.sidequests || [];
 
           const blueDoneLocal = blueNames.reduce(
-            (n, nm) => n + (checked[keyify(`blue:${nm}`)] ? 1 : 0),
+            (n, b) => n + (checked[keyify(`blue:${b}`)] ? 1 : 0),
             0
           );
           const capDoneLocal = capNames.reduce(
-            (n, nm) => n + (checked[keyify(`cap:${nm}`)] ? 1 : 0),
+            (n, c) => n + (checked[keyify(`cap:${c}`)] ? 1 : 0),
             0
           );
           const sideDoneLocal = side.reduce(
-            (n, s) => n + (checked[keyify(`side:${s}`)] ? 1 : 0),
+            (n, s) => n + (checked[keyify(`quest-global:${s}`)] ? 1 : 0),
+            0
+          );
+          const recsDoneLocal = recs.reduce(
+            (n, r) => n + (checked[keyify(`recruit:${r}`)] ? 1 : 0),
+            0
+          );
+          const missDoneLocal = miss.reduce(
+            (n, m) => n + (checked[keyify(`miss-global:${m}`)] ? 1 : 0),
+            0
+          );
+          const questDoneLocal = quest.reduce(
+            (n, q) => n + (checked[keyify(`quest-global:${q}`)] ? 1 : 0),
             0
           );
 
@@ -6615,7 +6637,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     >
                       <ul className="space-y-2 text-sm">
                         {side.map((num) => {
-                          const id = keyify(`side:${num}`);
+                          const id = keyify(`quest-global:${num}`);
                           const q = missionMap.get(num);
                           return (
                             <li
