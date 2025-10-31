@@ -6413,12 +6413,6 @@ const FFTAProgressionGuide: React.FC = () => {
         tone="purple"
         right={<></>}
       >
-        <div className="space-y-3">
-          <img
-            src={mapGif}
-            alt="FFTA World Map"
-            className="w-full rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
-          />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
             {placements.map((loc) => {
               const m = MAP_PLACEMENTS[loc];
@@ -6440,6 +6434,12 @@ const FFTAProgressionGuide: React.FC = () => {
               );
             })}
           </div>
+        <div className="space-y-3">
+          <img
+            src={mapGif}
+            alt="FFTA World Map"
+            className="w-full rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+          />
         </div>
       </Panel>
     );

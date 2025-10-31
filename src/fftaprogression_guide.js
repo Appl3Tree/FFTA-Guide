@@ -6046,12 +6046,12 @@ const FFTAProgressionGuide = () => {
         },
     ];
     const MapPanel = ({ placements }) => {
-        return (_jsx(Panel, { title: "World Map Placements", border: "border-purple-600", buttonColor: "bg-purple-600", tone: "purple", right: _jsx(_Fragment, {}), children: _jsxs("div", { className: "space-y-3", children: [_jsx("img", { src: mapGif, alt: "FFTA World Map", className: "w-full rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10" }), _jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-2 text-sm", children: placements.map((loc) => {
-                            const m = MAP_PLACEMENTS[loc];
-                            if (!m)
-                                return null;
-                            return (_jsxs("div", { className: "flex items-start gap-2 bg-purple-50 dark:bg-purple-900/10 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: [_jsxs("span", { className: "font-mono font-bold text-purple-700 dark:text-purple-300 min-w-[2rem]", children: [m.number, "."] }), _jsx("div", { className: "flex-1", children: _jsx("span", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: m.title }) })] }, loc));
-                        }) })] }) }));
+        return (_jsxs(Panel, { title: "World Map Placements", border: "border-purple-600", buttonColor: "bg-purple-600", tone: "purple", right: _jsx(_Fragment, {}), children: [_jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-2 text-sm", children: placements.map((loc) => {
+                        const m = MAP_PLACEMENTS[loc];
+                        if (!m)
+                            return null;
+                        return (_jsxs("div", { className: "flex items-start gap-2 bg-purple-50 dark:bg-purple-900/10 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: [_jsxs("span", { className: "font-mono font-bold text-purple-700 dark:text-purple-300 min-w-[2rem]", children: [m.number, "."] }), _jsx("div", { className: "flex-1", children: _jsx("span", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: m.title }) })] }, loc));
+                    }) }), _jsx("div", { className: "space-y-3", children: _jsx("img", { src: mapGif, alt: "FFTA World Map", className: "w-full rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10" }) })] }));
     };
     const RefList = ({ type, names, }) => {
         const tagColor = type === "blue"
