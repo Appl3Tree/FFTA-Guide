@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { useMemo, useState, useId } from "react";
+import { useMemo, useState, useId, useRef } from "react";
 import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
 import mapGif from "./assets/ffta-map.gif";
 const keyify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -202,7 +202,7 @@ You’ll also encounter a creature called a Cream, which resists most physical d
         enemies: [`Totema (Famfrit)`, `Floateye x2`, `Ahriman x2`],
         strategy: `Marche cautiously steps into the Ulei River area and, after a brief look around, decides that nothing appears out of the ordinary. Suddenly, a dark vortex materializes in the center of the field. Instinctively, Marche readies himself, but before he can react, the warp pulls him in and transports him to a mysterious temple-like place.
 
-Disoriented, Marche surveys his surroundings until his eyes land on a glowing crystal ahead. Just as he begins to approach, a commanding voice echoes through the air, demanding to know his name. Nervously, Marche responds — and from the crystal emerges a strange being who identifies himself as **Famfrit**, the Totema guarding this first crystal. Though he doesn’t seem openly hostile at first, Famfrit quickly summons two Floateyes and two Ahrimans to defend the area and challenges Marche to battle.
+Disoriented, Marche surveys his surroundings until his eyes land on a glowing crystal ahead. Just as he begins to approach, a commanding voice echoes through the air, demanding to know his name. Nervously, Marche responds — and from the crystal emerges a strange being who identifies himself as Famfrit, the Totema guarding this first crystal. Though he doesn’t seem openly hostile at first, Famfrit quickly summons two Floateyes and two Ahrimans to defend the area and challenges Marche to battle.
 
 Your objective is to defeat the boss, Famfrit. If your team is at a decent level, the fight should go smoothly. A good tactic is to inflict Sleep on Famfrit early, then focus on eliminating the lesser monsters while he’s incapacitated. Once the field is clear, have Marche or your strongest attacker close in to strike Famfrit — you’ll even land a free hit as he wakes. Be aware that one of the Ahrimans knows the *Roulette* ability, which can instantly KO a random unit on either side. Stay persistent, manage your positioning carefully, and chip away at Famfrit’s HP until he finally falls.
 `,
@@ -230,7 +230,7 @@ Your objective is to defeat the boss, Famfrit. If your team is at a decent level
         ],
         strategy: `It turns out that the suspicious Nu Mou you previously encountered in Cadoan is now in serious trouble. Marche, ever the well-meaning hero, decides to step in and help — even though it might not be the smartest move to rush to the aid of a complete stranger. Whether this Nu Mou is a criminal or just caught in the wrong place at the wrong time remains to be seen.
 
-This fight pits your clan against six enemies. You’ll soon learn that the Nu Mou’s name is **Ezel Berbier**, a renowned Hermetic. He’ll assist you in battle, though he doesn’t actually attack directly. His special ability, *Azoth*, can inflict Sleep on every opponent — but since you can’t control him, whether or not he uses it is unpredictable. You’ll also encounter a new unit type here: the **Illusionist**. Illusionists use *Phantasm* spells that strike every target on the battlefield without needing to aim manually.
+This fight pits your clan against six enemies. You’ll soon learn that the Nu Mou’s name is Ezel Berbier, a renowned Hermetic. He’ll assist you in battle, though he doesn’t actually attack directly. His special ability, *Azoth*, can inflict Sleep on every opponent — but since you can’t control him, whether or not he uses it is unpredictable. You’ll also encounter a new unit type here: the Illusionist. Illusionists use *Phantasm* spells that strike every target on the battlefield without needing to aim manually.
 
 The encounter can be difficult, but manageable with the right priorities. If your team has low Magic Resistance, take out the Illusionist first to reduce the field-wide damage. If your squad struggles with physical defense, make the Fighter and Defender your initial targets instead. The Hunter and Ninja positioned toward the back should be dealt with last. Keep your attacks consistent, maintain awareness of your formation, and above all — make sure Ezel survives the battle.
 `,
@@ -248,11 +248,11 @@ The encounter can be difficult, but manageable with the right priorities. If you
         reward: [`10600 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
         enemies: [`Bomb`, `Lamia`, `Ice Flan`, `Icedrake`],
-        strategy: `Check the enemy lineup for this mission — it’s entirely made up of monsters, many of which have valuable skills that a Blue Mage or Morpher can learn. Because of this, it’s a good idea to bring along a **Beastmaster** (with a Blue Mage to capture abilities) or a **Hunter** to help manage them. That said, don’t underestimate the fight; it’s tougher than it looks, so field your strongest units alongside your skill-learners.
+        strategy: `Check the enemy lineup for this mission — it’s entirely made up of monsters, many of which have valuable skills that a Blue Mage or Morpher can learn. Because of this, it’s a good idea to bring along a Beastmaster (with a Blue Mage to capture abilities) or a Hunter to help manage them. That said, don’t underestimate the fight; it’s tougher than it looks, so field your strongest units alongside your skill-learners.
 
-Most of the enemies are standard monsters, but the **Ice Flan** stands out. As with all Flan types, physical attacks barely hurt it, so rely on magic instead — specifically Fire spells, which it’s weak against. One of your Black Mages should already know *Fire*, making quick work of it. The two **Icedrakes** are especially dangerous, each with distinct skills: one uses *Ice Breath* (a Dragoon-style attack), while the other has *Mighty Guard*. Both pack a serious punch, so approach them carefully.
+Most of the enemies are standard monsters, but the Ice Flan stands out. As with all Flan types, physical attacks barely hurt it, so rely on magic instead — specifically Fire spells, which it’s weak against. One of your Black Mages should already know *Fire*, making quick work of it. The two Icedrakes are especially dangerous, each with distinct skills: one uses *Ice Breath* (a Dragoon-style attack), while the other has *Mighty Guard*. Both pack a serious punch, so approach them carefully.
 
-Start the battle by targeting the **Lamia** and **Ice Flan** with ranged Fire attacks. Once they’re down, focus on eliminating the first Icedrake, then move on to the second. The **Bomb** poses little threat and can be saved for last — it doesn’t offer anything useful for learning or loot. Once the Ice Flan and Icedrakes are gone, the rest of the encounter plays out like a standard monster brawl.
+Start the battle by targeting the Lamia and Ice Flan with ranged Fire attacks. Once they’re down, focus on eliminating the first Icedrake, then move on to the second. The Bomb poses little threat and can be saved for last — it doesn’t offer anything useful for learning or loot. Once the Ice Flan and Icedrakes are gone, the rest of the encounter plays out like a standard monster brawl.
 `,
     },
     {
@@ -270,7 +270,7 @@ Start the battle by targeting the **Lamia** and **Ice Flan** with ranged Fire at
         enemies: [`Ultima Crystal x8`],
         strategy: `When Marche reaches the Roda Volcano, he immediately starts complaining about the heat. Suddenly, the ground shakes violently, and a dark warp materializes at the center of the area. Marche quickly realizes that this must mean another crystal is nearby—but before he can react, the warp expands and pulls him in.
 
-When the scene fades back in, everything looks completely different from the first crystal encounter. The gloomy, gray tones of the previous temple are replaced with vibrant colors and fluttering butterflies. Marche even comments on how beautiful and peaceful it feels compared to before. But just as he approaches the crystal, several glowing **Ultima Crystals** appear around him. It seems this won’t be as simple as he hoped.
+When the scene fades back in, everything looks completely different from the first crystal encounter. The gloomy, gray tones of the previous temple are replaced with vibrant colors and fluttering butterflies. Marche even comments on how beautiful and peaceful it feels compared to before. But just as he approaches the crystal, several glowing Ultima Crystals appear around him. It seems this won’t be as simple as he hoped.
 
 These Ultima Crystals are the Totema themselves, though they differ greatly from Famfrit. They can’t move at all and act more like stationary defenses for the crystal. Their main ability, *Logos*, can Charm units and lower both Attack and Defense, making it extremely irritating to deal with.
 
@@ -294,13 +294,13 @@ Focus on taking down one Crystal at a time while keeping your team spread out to
         enemies: [`Archer`, `Time Mage`, `Black Mage`, `Thief x2`, `Summoner`],
         strategy: `Deep within Koringwood, a band of illegal lumberjacks is cutting down enchanted trees to sell for profit. Fortunately, Marche arrives just in time to put a stop to their scheme—so it’s time to engage.
 
-You’ll be facing **seven enemies** in this mission, all fairly strong in their own ways. With only five of your own units (including Marche), you’ll be at a numerical disadvantage. That said, if you focus on the biggest threats first, the fight becomes much more manageable. It’s also worth dedicating one slot to a **White Mage** for healing support.
+You’ll be facing seven enemies in this mission, all fairly strong in their own ways. With only five of your own units (including Marche), you’ll be at a numerical disadvantage. That said, if you focus on the biggest threats first, the fight becomes much more manageable. It’s also worth dedicating one slot to a White Mage for healing support.
 
-At the start of the battle, the two **Thieves** will likely move first. They’re not particularly dangerous, so you can safely ignore them early on unless you’re worried about stolen items—in which case, inflicting **Blind** on them is a good precaution. The **Sniper** can deal some damage but doesn’t have many abilities to worry about. The **Archer**, however, should be taken out quickly to prevent her from using debilitating attacks like *Aim: Arm* or *Aim: Legs*.
+At the start of the battle, the two Thieves will likely move first. They’re not particularly dangerous, so you can safely ignore them early on unless you’re worried about stolen items—in which case, inflicting Blind on them is a good precaution. The Sniper can deal some damage but doesn’t have many abilities to worry about. The Archer, however, should be taken out quickly to prevent her from using debilitating attacks like *Aim: Arm* or *Aim: Legs*.
 
-The remaining enemies are all **magic users**, which gives you a big tactical opening. If possible, bring a **Templar** or anyone capable of casting **Silence**. The **Time Mage**, **Summoner**, and **Black Mage** become completely harmless once Silenced, so keep that status effect active while you focus on other targets. Deal with the melee units first, then clean up the spellcasters once the field is under control.
+The remaining enemies are all magic users, which gives you a big tactical opening. If possible, bring a Templar or anyone capable of casting Silence. The Time Mage, Summoner, and Black Mage become completely harmless once Silenced, so keep that status effect active while you focus on other targets. Deal with the melee units first, then clean up the spellcasters once the field is under control.
 
-Although you’re outnumbered, smart use of **status effects** can easily turn the tide. Rely on **Blind**, **Silence**, and other disabling abilities to keep enemies locked down for several turns. With careful planning and steady control, this battle becomes much smoother—and victory is well within reach.
+Although you’re outnumbered, smart use of status effects can easily turn the tide. Rely on Blind, Silence, and other disabling abilities to keep enemies locked down for several turns. With careful planning and steady control, this battle becomes much smoother—and victory is well within reach.
 `,
     },
     {
@@ -350,15 +350,15 @@ Your main goal is to defeat Babus. If your team is strong enough, focus entirely
         enemies: [`Icedrake`, `Firewrym`, `Thundrake`, `Totema (Adrammelech)`],
         strategy: `For this next story mission, Marche ventures into the Nargai Cave to investigate rumors of a ghost. A small glowing orb appears before him, and instead of fear, he feels strangely calm. “Funny,” he says, “here I am looking at a ghost, but I don’t feel scared at all.” The orb begins to move deeper into the cave, and Marche, curious, follows it—only to be caught off guard when a warp suddenly engulfs him.
 
-When the scene fades back in, Marche finds himself in another temple—clearly the site of another crystal. The ghost briefly vanishes, then reappears near the crystal. From it emerges the Totema **Adrammelech**, who absorbs the ghost and declares that no one may approach his masters’ domain. Unfazed, Marche readies himself for battle as Adrammelech summons his dragon minions.
+When the scene fades back in, Marche finds himself in another temple—clearly the site of another crystal. The ghost briefly vanishes, then reappears near the crystal. From it emerges the Totema Adrammelech, who absorbs the ghost and declares that no one may approach his masters’ domain. Unfazed, Marche readies himself for battle as Adrammelech summons his dragon minions.
 
 This fight is a significant jump in difficulty compared to the earlier Totema encounters. Bring a strong party of six, including a White Mage or similar support unit. The dragons don’t have high Speed, so you’ll likely move first, but their power should not be underestimated.
 
-You’ll face three dragons: a **Firewyrm**, **Icedrake**, and **Thundrake**. Each uses its respective elemental breath attack—*Fire Breath*, *Ice Breath*, and *Bolt Breath*. The Icedrake may also use *Mighty Guard* to boost its allies’ defenses. Some dragons have *Geomancy* or *Weapon Atk+* to enhance their magic or physical strength, but they’re manageable if controlled early.
+You’ll face three dragons: a Firewyrm, Icedrake, and Thundrake. Each uses its respective elemental breath attack—*Fire Breath*, *Ice Breath*, and *Bolt Breath*. The Icedrake may also use *Mighty Guard* to boost its allies’ defenses. Some dragons have *Geomancy* or *Weapon Atk+* to enhance their magic or physical strength, but they’re manageable if controlled early.
 
 Adrammelech himself is the real threat. His signature move, *Firestream*, deals massive fire-elemental damage—roughly twice as strong as Famfrit’s *Breath of God*. He also uses *Lightspeed* to ignore reaction abilities, *Howl of Rage* to reduce Speed for nearby units, and *Soul Sphere* to drain MP, so keep your spellcasters at a distance.
 
-To gain control of the battle, open by inflicting **Disable**, **Immobilize**, or **Blind** on the dragons to keep them from interfering. Once they’re under control, direct your full attention to Adrammelech. Concentrate your strongest melee attackers on him while your support units focus on healing and buffs. With steady pressure and a few well-timed strikes, you’ll bring down this formidable Bangaa Totema and claim victory over the crystal.
+To gain control of the battle, open by inflicting Disable, Immobilize, or Blind on the dragons to keep them from interfering. Once they’re under control, direct your full attention to Adrammelech. Concentrate your strongest melee attackers on him while your support units focus on healing and buffs. With steady pressure and a few well-timed strikes, you’ll bring down this formidable Bangaa Totema and claim victory over the crystal.
 `,
     },
     {
@@ -401,17 +401,17 @@ Your best move is to take down the Assassin and Ninja first, as they pose the gr
         reward: [`17200 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Fighter`, `Time Mage`, `Black Mage`],
-        strategy: `You know the routine by now—track down the unknown wanderer on the world map. When you arrive on the battlefield, you’ll come face to face with **Clan Ox**. At first, things seem calm, but one of their members suddenly recognizes Marche, saying he looks exactly like the bounty they’ve been hunting. Turns out, you’re the target.
+        strategy: `You know the routine by now—track down the unknown wanderer on the world map. When you arrive on the battlefield, you’ll come face to face with Clan Ox. At first, things seem calm, but one of their members suddenly recognizes Marche, saying he looks exactly like the bounty they’ve been hunting. Turns out, you’re the target.
 
 So much for helping them out—since surrender isn’t an option, it’s time to fight your way through. Hopefully, you brought a healer and maybe some ranged attackers, because this group is no joke.
 
-Your enemies include a **Sage**, **Paladin**, **Fighter**, **Red Mage**, **Time Mage**, and **Black Mage**. The Paladin may seem like the biggest threat with his strong attack power, but his skillset is limited—he only uses *Saint Cross* and *Drop Weapon*. He can heal, though he rarely bothers to.
+Your enemies include a Sage, Paladin, Fighter, Red Mage, Time Mage, and Black Mage. The Paladin may seem like the biggest threat with his strong attack power, but his skillset is limited—he only uses *Saint Cross* and *Drop Weapon*. He can heal, though he rarely bothers to.
 
-The **Fighter** is much more dangerous physically. His high Weapon Attack and standard Fighter techniques make him a prime candidate to take down early. On the magical side, the **Black Mage** is the most destructive. With Magic Power around the 200 range and access to “-aga” level spells, he can hit incredibly hard if left alone.
+The Fighter is much more dangerous physically. His high Weapon Attack and standard Fighter techniques make him a prime candidate to take down early. On the magical side, the Black Mage is the most destructive. With Magic Power around the 200 range and access to “-aga” level spells, he can hit incredibly hard if left alone.
 
-The **Sage** could have been trouble, but this one’s weaker than most. Thankfully, he doesn’t know *Giga Flare*. He does have *Reflex*, which blocks basic Fight attacks, so make sure to use abilities or magic to deal with him. The **Red Mage** isn’t much of a problem either—she lacks *Doublecast* and doesn’t have the stats to make an impact. The **Time Mage** can be annoying, though, especially if he uses *Quicken* to speed up the Fighter right after you’ve taken damage. That combo can turn deadly fast.
+The Sage could have been trouble, but this one’s weaker than most. Thankfully, he doesn’t know *Giga Flare*. He does have *Reflex*, which blocks basic Fight attacks, so make sure to use abilities or magic to deal with him. The Red Mage isn’t much of a problem either—she lacks *Doublecast* and doesn’t have the stats to make an impact. The Time Mage can be annoying, though, especially if he uses *Quicken* to speed up the Fighter right after you’ve taken damage. That combo can turn deadly fast.
 
-Your best opening move is to **Disable** the Fighter and Paladin to neutralize their melee threat. After that, **Silence** the casters to limit their magic output. A utility unit that can inflict those conditions will make this battle far easier, supported by your strongest physical and magical attackers, plus a healer for backup.
+Your best opening move is to Disable the Fighter and Paladin to neutralize their melee threat. After that, Silence the casters to limit their magic output. A utility unit that can inflict those conditions will make this battle far easier, supported by your strongest physical and magical attackers, plus a healer for backup.
 
 If you play carefully and avoid rushing in, this fight isn’t too difficult, especially for a story mission. But if you charge in without a plan, Clan Ox will quickly overwhelm you. Stay composed, control the field, and you’ll walk away from this one without much trouble.
 `,
@@ -541,15 +541,15 @@ use X-Potions constantly. Defeat Babus and the Fruits to win.
 
 Right on cue, Marche walks in — and of course, he’s the target. Despite being surrounded by six enemies, he barely reacts, muttering only a casual “Huh?” before the fight begins. You’ll be facing six opponents this time, so bring five reliable, well-balanced units and get ready for battle.
 
-Your enemies include two Fighters, two Thieves, and two Bishops. It’s a straightforward mix, but you’ll still need to be cautious. **Strikeback** and **Bonecrusher** are the two abilities that can punish reckless attacks, so avoid hitting when your accuracy is low. A missed swing could mean taking heavy counter damage.
+Your enemies include two Fighters, two Thieves, and two Bishops. It’s a straightforward mix, but you’ll still need to be cautious. Strikeback and Bonecrusher are the two abilities that can punish reckless attacks, so avoid hitting when your accuracy is low. A missed swing could mean taking heavy counter damage.
 
-The **Fighters** come with a range of attacks: Rush, Air Render, Far Fist, Wild Swing, Beatdown, and Blitz. Fortunately, these skills are divided between the two of them. If you take down the Fighter with *Wild Swing*, *Far Fist*, and *Beatdown* early, those threats are gone for good.
+The Fighters come with a range of attacks: Rush, Air Render, Far Fist, Wild Swing, Beatdown, and Blitz. Fortunately, these skills are divided between the two of them. If you take down the Fighter with *Wild Swing*, *Far Fist*, and *Beatdown* early, those threats are gone for good.
 
-The **Thieves** are more troublesome due to *Steal: Weapon* and *Steal: Ability*. Losing a weapon or skill mid-battle can make things far harder than necessary. Try to disable or immobilize them from a distance before they get close enough to steal. Other than that, they don’t deal much direct damage.
+The Thieves are more troublesome due to *Steal: Weapon* and *Steal: Ability*. Losing a weapon or skill mid-battle can make things far harder than necessary. Try to disable or immobilize them from a distance before they get close enough to steal. Other than that, they don’t deal much direct damage.
 
-Lastly, the **Bishops** use low-tier spells like *Water* and *Aero*, with *Holy* being their only significant source of damage. They can also heal with *Cura* and drain JP, but their offense isn’t especially threatening.
+Lastly, the Bishops use low-tier spells like *Water* and *Aero*, with *Holy* being their only significant source of damage. They can also heal with *Cura* and drain JP, but their offense isn’t especially threatening.
 
-The safest plan is to deal with the **Thieves** first so you don’t lose gear or abilities. Once they’re down, turn your focus to the **Fighters**, who will probably be pressing your front line by then. Leave the **Bishops** for last since they don’t pose a major threat. Defeat all enemies to complete the mission.
+The safest plan is to deal with the Thieves first so you don’t lose gear or abilities. Once they’re down, turn your focus to the Fighters, who will probably be pressing your front line by then. Leave the Bishops for last since they don’t pose a major threat. Defeat all enemies to complete the mission.
 `,
     },
     {
@@ -569,13 +569,13 @@ The safest plan is to deal with the **Thieves** first so you don’t lose gear o
 
 The palace still wants you captured, and this enemy clan has come to collect. Since there’s no talking your way out of this, you’ll have to fight through. Bring six units for this battle; your enemies consist of Bangaa and Humans. Apart from the Bishop, the enemy party is entirely physical, so consider bringing some strong magic users like Morphers or Sages. They’ll have enough defense to survive melee hits while exploiting the enemies’ weaker magic resistance.
 
-The **White Monk** at the front uses techniques such as Whirlwind, Air Render, Earth Render, and Far Fist. While his abilities can cover a lot of ground, his weapon attack is low, so his standard hits won’t do much damage. Behind him, a **Gladiator** uses the elemental Spellblade attacks—Fire Sword, Bolt Sword, and Ice Sword—each adding magical damage to his strikes.
+The White Monk at the front uses techniques such as Whirlwind, Air Render, Earth Render, and Far Fist. While his abilities can cover a lot of ground, his weapon attack is low, so his standard hits won’t do much damage. Behind him, a Gladiator uses the elemental Spellblade attacks—Fire Sword, Bolt Sword, and Ice Sword—each adding magical damage to his strikes.
 
-Two **Soldiers** make up the human side of the group. The first uses the typical “Break” skills—Powerbreak, Mindbreak, and Magicbreak—and can Berserk your units with Provoke. The other Soldier is less threatening, with only Powerbreak, Mindbreak, and Speedbreak, plus Mug, which steals Gil while dealing light damage.
+Two Soldiers make up the human side of the group. The first uses the typical “Break” skills—Powerbreak, Mindbreak, and Magicbreak—and can Berserk your units with Provoke. The other Soldier is less threatening, with only Powerbreak, Mindbreak, and Speedbreak, plus Mug, which steals Gil while dealing light damage.
 
-At the center is a **Defender**, who looks intimidating but isn’t too dangerous once you understand his moves. Tremor pushes back nearby units, Drop Weapon can disarm your characters, and Mow Down deals area damage but leaves him exposed afterward by dropping his Evade to zero. The **Dragoon** is stronger and more annoying, with Lancet to absorb HP and elemental breath attacks like Fire Breath and Bolt Breath.
+At the center is a Defender, who looks intimidating but isn’t too dangerous once you understand his moves. Tremor pushes back nearby units, Drop Weapon can disarm your characters, and Mow Down deals area damage but leaves him exposed afterward by dropping his Evade to zero. The Dragoon is stronger and more annoying, with Lancet to absorb HP and elemental breath attacks like Fire Breath and Bolt Breath.
 
-The **Bishop** is the group’s only magic user. His spells include Water for damage, Dispel to remove buffs, and Break to inflict Petrify. Once the Bishop falls, the enemy loses their only source of healing aside from items.
+The Bishop is the group’s only magic user. His spells include Water for damage, Dispel to remove buffs, and Break to inflict Petrify. Once the Bishop falls, the enemy loses their only source of healing aside from items.
 
 Start by taking down the Bishop first to eliminate magic and healing threats. After that, shift to the physical attackers—especially the Gladiator and Dragoon. Since most of your enemies have higher weapon defense than magic resistance, magic-based attacks are very effective here. Keep an eye out for the Bishop’s Return Magic ability, though, as it can reflect your spells. Once you stabilize the fight, the remaining enemies will fall quickly, and you’ll come out on top.
 `,
@@ -597,17 +597,17 @@ Start by taking down the Bishop first to eliminate magic and healing threats. Af
 
 It’s the location of the fifth and final crystal. Llednar disappears briefly, but as Marche moves forward, he reappears and orders Marche not to proceed any further. When Marche refuses, Llednar strikes, and the battle begins. Just as things look grim, Judgemaster Cid arrives and intervenes. Using an antilaw, Cid bans Llednar’s strongest attack, Omega, but the fight continues regardless. You’ll now have to face Biskmatar Llednar himself.
 
-Llednar summons two Templars and two Titanias, while you can deploy five of your own units. The **Templars** are dangerous front-line fighters with high attack power. Watch for their use of *Silence*, *Soul Sphere*, and *Rasp*, which drain MP. They can also cast *Astra* to nullify status effects, *Lifebreak* to deal damage based on missing HP, and *Warcry* to lower Speed.
+Llednar summons two Templars and two Titanias, while you can deploy five of your own units. The Templars are dangerous front-line fighters with high attack power. Watch for their use of *Silence*, *Soul Sphere*, and *Rasp*, which drain MP. They can also cast *Astra* to nullify status effects, *Lifebreak* to deal damage based on missing HP, and *Warcry* to lower Speed.
 
-The **Titanias** aren’t as physically strong, but their spell *LV?D Holy* can be deadly. If the day of the month matches a unit’s level, that unit will take heavy Holy damage. They can also use *Angel Whisper* to heal and revive allies with Auto-Life.
+The Titanias aren’t as physically strong, but their spell *LV?D Holy* can be deadly. If the day of the month matches a unit’s level, that unit will take heavy Holy damage. They can also use *Angel Whisper* to heal and revive allies with Auto-Life.
 
 Llednar himself is the greatest threat. His attack power is incredibly high, and even without Omega, he’s devastating. His abilities include *Abyss* (deals damage and inflicts Poison), *Life Render* (deals damage and inflicts Doom), *Heart Render* (damages MP), *Ripcircle* (damages nearby units), and *Furycircle* (damages and knocks back surrounding units). However, no matter how much damage you deal, Llednar cannot be killed. The only way to win is to defeat his allies and survive until Cid steps in to banish Llednar with a Red Card.
 
 Once Llednar disappears, Marche continues deeper into the dunes, where the final crystal awaits.
 
-Judgemaster Cid gives Marche a chance to leave, but Marche refuses, determined to finish what he started. As he steps into the final chamber, the Totema **Mateus** appears—the Totema of the Humans. Mateus shifts forms, appearing first as Ritz, then Doned, then Mewt, and finally as Marche himself. Recognizing the illusion, Marche steels himself for battle.
+Judgemaster Cid gives Marche a chance to leave, but Marche refuses, determined to finish what he started. As he steps into the final chamber, the Totema Mateus appears—the Totema of the Humans. Mateus shifts forms, appearing first as Ritz, then Doned, then Mewt, and finally as Marche himself. Recognizing the illusion, Marche steels himself for battle.
 
-The illusionary forms transform into four **Vampires**, while **Mateus** remains at the center. This is the toughest Totema battle yet, so prepare carefully. Bring a **White Mage** to counter the Vampires’ status effects and strong physical attackers to handle Mateus.
+The illusionary forms transform into four Vampires, while Mateus remains at the center. This is the toughest Totema battle yet, so prepare carefully. Bring a White Mage to counter the Vampires’ status effects and strong physical attackers to handle Mateus.
 
 The Vampires use dangerous abilities, including *LV? S-Flare*, which deals heavy damage to all units sharing the same last digit in their level. They also use *Zombify* to turn allies into the undead and *Miasma* to poison and damage your team.
 
@@ -632,17 +632,17 @@ Before the fight, cast *Protect* and *Shell* on your team to reduce incoming dam
         enemies: [`Summoner`, `White Mage`],
         strategy: `Marche discovers a piece of Materite deep within the Materiwood, and for a moment, everything seems to be going smoothly. Just as he starts to relax, a group of Viera bandits appears from behind. Somehow, they knew he was there—and it turns out Doned was the one who tipped them off. There’s no turning back now; it’s time to fight.
 
-You can bring six units into this battle. It’s best to equip gear that protects against status effects, especially instant KO. The **Assassin** is the most dangerous enemy here thanks to her abilities *Shadowbind* and *Last Breath*. *Shadowbind* inflicts Stop, freezing your unit in place, while *Last Breath* causes an instant KO—something you’ll want to avoid at all costs.
+You can bring six units into this battle. It’s best to equip gear that protects against status effects, especially instant KO. The Assassin is the most dangerous enemy here thanks to her abilities *Shadowbind* and *Last Breath*. *Shadowbind* inflicts Stop, freezing your unit in place, while *Last Breath* causes an instant KO—something you’ll want to avoid at all costs.
 
-The **Sniper** can also be troublesome with her precision attacks. She uses *Aim: Armor*, *Aim: Weapon*, and *Aim: Wallet* to destroy your gear, and *Aim: Weapon* is particularly dangerous since it permanently removes your weapon from battle. If her HP drops too low, she may use *Doom Archer*, dealing damage equal to her lost HP and also draining MP. To avoid this, either defeat her quickly or disable her before she can act.
+The Sniper can also be troublesome with her precision attacks. She uses *Aim: Armor*, *Aim: Weapon*, and *Aim: Wallet* to destroy your gear, and *Aim: Weapon* is particularly dangerous since it permanently removes your weapon from battle. If her HP drops too low, she may use *Doom Archer*, dealing damage equal to her lost HP and also draining MP. To avoid this, either defeat her quickly or disable her before she can act.
 
-Several **magic users** make up the rest of the Viera clan. The **Elementalist** uses a variety of Spirit Magic attacks that combine elemental damage with status effects. *Shining Air* deals Wind damage and causes Blind, *Evil Gaze* deals Dark damage and Confuses, *Heavy Dust* uses Earth damage and Immobilizes, and *Sliprain* inflicts Water damage and Slows its target. Unless you have a Status law active, expect her to cause serious disruption.
+Several magic users make up the rest of the Viera clan. The Elementalist uses a variety of Spirit Magic attacks that combine elemental damage with status effects. *Shining Air* deals Wind damage and causes Blind, *Evil Gaze* deals Dark damage and Confuses, *Heavy Dust* uses Earth damage and Immobilizes, and *Sliprain* inflicts Water damage and Slows its target. Unless you have a Status law active, expect her to cause serious disruption.
 
-Behind her is a **Red Mage** capable of *Doublecast*, allowing her to cast two spells per turn. However, if you steal her Madu (Rapier), she’ll lose access to Doublecast entirely since she hasn’t mastered it yet. Even if she keeps it, her spells—*Fire*, *Thunder*, *Sleep*, and *Poison*—aren’t overly threatening. Take her down whenever convenient.
+Behind her is a Red Mage capable of *Doublecast*, allowing her to cast two spells per turn. However, if you steal her Madu (Rapier), she’ll lose access to Doublecast entirely since she hasn’t mastered it yet. Even if she keeps it, her spells—*Fire*, *Thunder*, *Sleep*, and *Poison*—aren’t overly threatening. Take her down whenever convenient.
 
-The **Summoner** can devastate clustered units. Her summons affect a large area—two tiles horizontally and vertically, plus one tile diagonally—so avoid grouping up. Her most dangerous summon is *Madeen*, which deals heavy Holy damage. Finally, the **White Mage** supports the group with *Curaga* for healing, *Esuna* to remove status effects, *Auto-Life* for revival, and *Shell* for protection.
+The Summoner can devastate clustered units. Her summons affect a large area—two tiles horizontally and vertically, plus one tile diagonally—so avoid grouping up. Her most dangerous summon is *Madeen*, which deals heavy Holy damage. Finally, the White Mage supports the group with *Curaga* for healing, *Esuna* to remove status effects, *Auto-Life* for revival, and *Shell* for protection.
 
-It’s up to you how to handle the battle, but a strong approach is to defeat the **Assassin** first to prevent instant KOs, then target the **White Mage** to eliminate the enemy’s healing and revival options. After that, focus on the casters and ranged units as needed. If you want to have some fun, lure the enemies toward the northwest cliff—knocking them off deals heavy damage and makes for an easy cleanup.
+It’s up to you how to handle the battle, but a strong approach is to defeat the Assassin first to prevent instant KOs, then target the White Mage to eliminate the enemy’s healing and revival options. After that, focus on the casters and ranged units as needed. If you want to have some fun, lure the enemies toward the northwest cliff—knocking them off deals heavy damage and makes for an easy cleanup.
 `,
     },
     {
@@ -662,23 +662,23 @@ It’s up to you how to handle the battle, but a strong approach is to defeat th
 
 Inside the palace waiting room, Marche starts to complain about how long they’ve been waiting. Montblanc suggests that something might be wrong, and before long, their suspicions prove correct. A group of palace guards bursts through the door—it seems they’ve learned who you really are. The informant, of course, is none other than Doned.
 
-This fight takes place in a very cramped arena, so positioning will be tricky for both sides. The lack of space makes **area-based magic attacks** extremely effective. A **Summoner** works wonders here—once the enemies group up, unleash *Madeen* or *Ifrit* to hit multiple targets at once. Just make sure you don’t crowd your own units, or you’ll pay for it.
+This fight takes place in a very cramped arena, so positioning will be tricky for both sides. The lack of space makes area-based magic attacks extremely effective. A Summoner works wonders here—once the enemies group up, unleash *Madeen* or *Ifrit* to hit multiple targets at once. Just make sure you don’t crowd your own units, or you’ll pay for it.
 
-Leading the charge is a **Bangaa Templar**, one of the toughest enemies on the field. He boasts high Weapon Attack and Defense, so disable him early if you can. Avoid physical attacks because of his *Bonecrusher* reaction, which counterattacks for 1.5× damage. His other skills include *Astra* (blocks the next status effect), *Warcry* (lowers nearby Speed), *Rasp* (MP damage), and *Haste*.
+Leading the charge is a Bangaa Templar, one of the toughest enemies on the field. He boasts high Weapon Attack and Defense, so disable him early if you can. Avoid physical attacks because of his *Bonecrusher* reaction, which counterattacks for 1.5× damage. His other skills include *Astra* (blocks the next status effect), *Warcry* (lowers nearby Speed), *Rasp* (MP damage), and *Haste*.
 
-The **two Gladiators** hit hard as well. Their *Spellblade* attacks (Fire Sword, Bolt Sword, and Ice Sword) mix physical and elemental damage, while *Rush*, *Beatdown*, and *Blitz* round out their offense. Don’t engage them directly—*Strikeback* will nullify your attack and counter immediately. With Weapon Attack values in the mid-300s, that’s not something you want to risk.
+The two Gladiators hit hard as well. Their *Spellblade* attacks (Fire Sword, Bolt Sword, and Ice Sword) mix physical and elemental damage, while *Rush*, *Beatdown*, and *Blitz* round out their offense. Don’t engage them directly—*Strikeback* will nullify your attack and counter immediately. With Weapon Attack values in the mid-300s, that’s not something you want to risk.
 
-The lone **Moogle Mog Knight** isn’t as dangerous but can still be a nuisance. He uses *Mog Attack*, *Mog Lance*, *Mog Rush*, *Mog Shield*, and *Mog Aid* to push, damage, and heal. Thankfully, he lacks Ultima Charge or a Reaction Ability, so he’s easier to handle.
+The lone Moogle Mog Knight isn’t as dangerous but can still be a nuisance. He uses *Mog Attack*, *Mog Lance*, *Mog Rush*, *Mog Shield*, and *Mog Aid* to push, damage, and heal. Thankfully, he lacks Ultima Charge or a Reaction Ability, so he’s easier to handle.
 
-The **Alchemist** is the only true caster here, and he’s the one to watch out for. *Death* can instantly KO a unit, but if he hasn’t mastered it, stealing his *Life Crosier* removes his access to it entirely. His other abilities include *Flare*, *Poison*, and *Toad*.
+The Alchemist is the only true caster here, and he’s the one to watch out for. *Death* can instantly KO a unit, but if he hasn’t mastered it, stealing his *Life Crosier* removes his access to it entirely. His other abilities include *Flare*, *Poison*, and *Toad*.
 
 Because the battlefield is small, use radius-based attacks and magic to your advantage. The Templar will likely cast *Haste* on allies early, so prioritize disabling or silencing him. The three Bangaa enemies pose the biggest threat due to their high Weapon Attack, so eliminate them first. Once they’re gone, the rest of the fight is straightforward.
 
-After defeating the guards, reinforcements arrive, and things seem hopeless—until **Babus** appears. Instead of attacking, he uses *Stop* on the guards, halting their advance. Confused, Marche asks why he’s helping, and Babus explains that he wants to understand what’s really happening with these two “worlds.”
+After defeating the guards, reinforcements arrive, and things seem hopeless—until Babus appears. Instead of attacking, he uses *Stop* on the guards, halting their advance. Confused, Marche asks why he’s helping, and Babus explains that he wants to understand what’s really happening with these two “worlds.”
 
-Babus teleports Marche to the prince’s throne room, where **Mewt** paces nervously. When Babus brings Marche forward, Mewt is furious. Marche tries to reason with him, but it’s too late—**Remedi** appears, consoles her son, and teleports him away, leaving Marche behind.
+Babus teleports Marche to the prince’s throne room, where Mewt paces nervously. When Babus brings Marche forward, Mewt is furious. Marche tries to reason with him, but it’s too late—Remedi appears, consoles her son, and teleports him away, leaving Marche behind.
 
-Llednar reappears soon after, summoned to eliminate Marche. Babus offers to help, but Marche tells him to find Mewt and the Queen instead. You’ll face Llednar alone, and his damage barrier is still active—making him invincible. The goal here isn’t to win, but to **survive five turns**.
+Llednar reappears soon after, summoned to eliminate Marche. Babus offers to help, but Marche tells him to find Mewt and the Queen instead. You’ll face Llednar alone, and his damage barrier is still active—making him invincible. The goal here isn’t to win, but to survive five turns.
 
 Llednar will likely act first. If your Speed is high—such as from leveling as a Thief or Ninja—you might get the opening turn. If not, hope he doesn’t use *Omega* immediately, as it will end the fight instantly. Keep your distance at all times, since *Omega* only works at close range.
 
@@ -701,13 +701,13 @@ If you survive the opening, move to the farthest possible spot to force Llednar 
         enemies: [`White Monk`],
         strategy: `Now that mythril hunting is underway, it’s no surprise that Doned decides to interfere again. Marche enters Tubola Cave, pretending to be searching for mythril, when a voice suddenly echoes through the cavern—“Stop! Thief!” Confused, Marche looks around as a group of enemies confronts him, accusing him of stealing their mythril. It quickly becomes clear that Doned has sold him out once more. With no escape route, Marche has no choice but to fight.
 
-When deploying your team, spread them out to cover both sides of the field—three units on each flank—since enemies will attack from both directions. The first to act is likely the **Moogle Juggler**, who wields one of the strongest knives in the game. You can easily neutralize him by stealing his weapon. Be cautious of *Dagger*, which damages and inflicts Disable, *Firebomb*, which causes Berserk and deals damage, and *Smile*, which grants an ally an immediate extra turn.
+When deploying your team, spread them out to cover both sides of the field—three units on each flank—since enemies will attack from both directions. The first to act is likely the Moogle Juggler, who wields one of the strongest knives in the game. You can easily neutralize him by stealing his weapon. Be cautious of *Dagger*, which damages and inflicts Disable, *Firebomb*, which causes Berserk and deals damage, and *Smile*, which grants an ally an immediate extra turn.
 
-The **Sage** is the biggest magical threat. His *Giga Flare* spell is one of the most powerful in the game—second only to Ultima Blow—and can devastate multiple units if they’re grouped together. Keep your formation loose to minimize damage. On the same side, the **Mog Knight** relies mostly on defensive and support skills like *Mog Guard* for protection, *Mog Shield* to nullify a status ailment, *Mog Peek* to reveal hidden items, *Mog Rush* for high damage at low accuracy, and *Mog Aid* for healing.
+The Sage is the biggest magical threat. His *Giga Flare* spell is one of the most powerful in the game—second only to Ultima Blow—and can devastate multiple units if they’re grouped together. Keep your formation loose to minimize damage. On the same side, the Mog Knight relies mostly on defensive and support skills like *Mog Guard* for protection, *Mog Shield* to nullify a status ailment, *Mog Peek* to reveal hidden items, *Mog Rush* for high damage at low accuracy, and *Mog Aid* for healing.
 
-To the west, a **Bangaa White Monk** leads the enemy charge. His *Earth Render* attack hits every unit in a straight line ahead, so avoid lining up your characters. He can also revive fallen allies with *Revive*. Supporting him is a **Moogle Animist**, whose *Tail Wag* can Charm targets and *Friend* produces random effects—some beneficial, some harmful. Rounding out the group is a **Blue Mage**, capable of several dangerous skills: *Twister* halves HP instantly, *Bad Breath* inflicts multiple status effects, *Roulette* randomly KOs a unit, and *White Wind* heals allies based on the user’s remaining HP.
+To the west, a Bangaa White Monk leads the enemy charge. His *Earth Render* attack hits every unit in a straight line ahead, so avoid lining up your characters. He can also revive fallen allies with *Revive*. Supporting him is a Moogle Animist, whose *Tail Wag* can Charm targets and *Friend* produces random effects—some beneficial, some harmful. Rounding out the group is a Blue Mage, capable of several dangerous skills: *Twister* halves HP instantly, *Bad Breath* inflicts multiple status effects, *Roulette* randomly KOs a unit, and *White Wind* heals allies based on the user’s remaining HP.
 
-Overall, this fight isn’t especially difficult, but the **Sage** and **Blue Mage** can cause trouble if ignored. To neutralize them, use Law Cards—ban *Color Magic* to cripple the Blue Mage, or ban *Skills* to prevent the Sage from using his Sagacity abilities. Once they’re disabled, the rest of the battle is straightforward. The real challenges, as Marche will soon learn, are still to come.
+Overall, this fight isn’t especially difficult, but the Sage and Blue Mage can cause trouble if ignored. To neutralize them, use Law Cards—ban *Color Magic* to cripple the Blue Mage, or ban *Skills* to prevent the Sage from using his Sagacity abilities. Once they’re disabled, the rest of the battle is straightforward. The real challenges, as Marche will soon learn, are still to come.
 `,
     },
     {
@@ -726,13 +726,13 @@ Overall, this fight isn’t especially difficult, but the **Sage** and **Blue Ma
         enemies: [`Coeurl`],
         strategy: `On the road to the Deti Plains, Marche encounters a group of monsters blocking the path. You should know the drill by now—bring five more units alongside Marche and prepare for a fight. Before reaching Judgemaster Cid, you’ll have to deal with this monster threat first. Since this is a story mission, expect the enemies to be stronger than those in standard encounters, but nothing unmanageable if you stay focused.
 
-The first enemy you’ll see is a **Coeurl**, standing ready near the front. Its main ability, *Blaster*, is dangerous because it can Petrify a unit from range. Keeping your distance doesn’t guarantee safety, so it’s best to eliminate the Coeurl early before it can act. Its regular attacks also hit hard, so removing it from the field will make moving forward much safer.
+The first enemy you’ll see is a Coeurl, standing ready near the front. Its main ability, *Blaster*, is dangerous because it can Petrify a unit from range. Keeping your distance doesn’t guarantee safety, so it’s best to eliminate the Coeurl early before it can act. Its regular attacks also hit hard, so removing it from the field will make moving forward much safer.
 
-As you progress toward the bottom area near the waterfall, you’ll likely run into a **Jawbreaker**. These creatures love to slow you down, and their *LV3 Def-less* and *LV5 Death* abilities can be deadly if your units’ levels match those numbers. *LV3 Def-less* lowers both Defense and Resistance, while *LV5 Death* instantly KOs all affected units. Both have perfect accuracy when the condition is met, so check your levels before entering.
+As you progress toward the bottom area near the waterfall, you’ll likely run into a Jawbreaker. These creatures love to slow you down, and their *LV3 Def-less* and *LV5 Death* abilities can be deadly if your units’ levels match those numbers. *LV3 Def-less* lowers both Defense and Resistance, while *LV5 Death* instantly KOs all affected units. Both have perfect accuracy when the condition is met, so check your levels before entering.
 
-Moving west and climbing the steps to the higher level, you’ll encounter a **Big Malboro**. Its infamous *Bad Breath* attack can inflict multiple status ailments at once, while *Soundwave* removes your buffs. Above that area, a **Lilith** waits. Her *Twister* ability hits for heavy damage, *Poison Frog* both poisons and transforms a unit, and *Kiss* can inflict Doom or Charm—so keep your distance and take her down quickly.
+Moving west and climbing the steps to the higher level, you’ll encounter a Big Malboro. Its infamous *Bad Breath* attack can inflict multiple status ailments at once, while *Soundwave* removes your buffs. Above that area, a Lilith waits. Her *Twister* ability hits for heavy damage, *Poison Frog* both poisons and transforms a unit, and *Kiss* can inflict Doom or Charm—so keep your distance and take her down quickly.
 
-It’s best to clear this mission in order, working from front to back. The monsters generally stay in their sections of the map, so advancing steadily will keep you from getting overwhelmed. Unless you have **Galmia Shoes**—which let you jump the cliff—you’ll have to take the winding path anyway. Finish the battle by defeating the **Thundrake**, who uses *Bolt Breath* and *Geomancy* for magic-based damage. By that point, if most of your team is still standing, it should go down easily and wrap up the fight.
+It’s best to clear this mission in order, working from front to back. The monsters generally stay in their sections of the map, so advancing steadily will keep you from getting overwhelmed. Unless you have Galmia Shoes—which let you jump the cliff—you’ll have to take the winding path anyway. Finish the battle by defeating the Thundrake, who uses *Bolt Breath* and *Geomancy* for magic-based damage. By that point, if most of your team is still standing, it should go down easily and wrap up the fight.
 `,
     },
     {
@@ -748,25 +748,25 @@ It’s best to clear this mission in order, working from front to back. The mons
         reward: [`28600 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Hard`,
         enemies: [`Summoner`],
-        strategy: `Our final stop before heading to Ambervale is **Siena Gorge**, where we need to collect amber for Judgemaster Cid so he can craft the next antilaw. As Marche enters the gorge, he spots a pink-haired girl standing proudly atop a high ridge—**Ritz**, with **Shara** by her side. With a hint of amusement, Ritz remarks that facing Marche in battle feels oddly fitting.
+        strategy: `Our final stop before heading to Ambervale is Siena Gorge, where we need to collect amber for Judgemaster Cid so he can craft the next antilaw. As Marche enters the gorge, he spots a pink-haired girl standing proudly atop a high ridge—Ritz, with Shara by her side. With a hint of amusement, Ritz remarks that facing Marche in battle feels oddly fitting.
 
 It’s a long-awaited confrontation. Ritz never wanted to return home, so this clash was inevitable. Marche realizes there’s no avoiding what’s about to happen: for this mission, the two are no longer allies. Bring five additional units and prepare for an emotional, challenging engagement.
 
-This is your first real fight against Ritz’s clan, which is composed entirely of **Viera**. Her team has a strong balance between physical and magical units, so it’s smart to mirror that setup. At the start, advance up the hill but stop short of the wooden bridge—if you move too far, you’ll risk clogging the path and losing maneuverability. Hold your ground and let Ritz’s team close the distance.
+This is your first real fight against Ritz’s clan, which is composed entirely of Viera. Her team has a strong balance between physical and magical units, so it’s smart to mirror that setup. At the start, advance up the hill but stop short of the wooden bridge—if you move too far, you’ll risk clogging the path and losing maneuverability. Hold your ground and let Ritz’s team close the distance.
 
-The **Assassin** will likely move first. With 200 Speed and Ninja Tabi boosting her movement by six tiles, she can strike fast and far. Don’t let her get behind you—her *Last Breath* attack causes instant KOs. *Aphonia* Silences magic users, *Rockseal* Petrifies, and *Oblivion* inflicts Addle, disabling skill use. Neutralize her early before she can start picking your units off.
+The Assassin will likely move first. With 200 Speed and Ninja Tabi boosting her movement by six tiles, she can strike fast and far. Don’t let her get behind you—her *Last Breath* attack causes instant KOs. *Aphonia* Silences magic users, *Rockseal* Petrifies, and *Oblivion* inflicts Addle, disabling skill use. Neutralize her early before she can start picking your units off.
 
-Next comes the **Fencer**, who isn’t too threatening. Her *Swallowtail* attack hits surrounding targets, *Piercethrough* stabs two units in a line, and *Nighthawk* provides a ranged strike. She’s manageable if you keep your defenses up.
+Next comes the Fencer, who isn’t too threatening. Her *Swallowtail* attack hits surrounding targets, *Piercethrough* stabs two units in a line, and *Nighthawk* provides a ranged strike. She’s manageable if you keep your defenses up.
 
-The **Summoner** is much more dangerous. Her *Madeen* summon inflicts massive Holy damage over a wide radius—two tiles in every direction plus one diagonally—so never bunch your units together. Spread out and take her down before she gets too many casts off.
+The Summoner is much more dangerous. Her *Madeen* summon inflicts massive Holy damage over a wide radius—two tiles in every direction plus one diagonally—so never bunch your units together. Spread out and take her down before she gets too many casts off.
 
-The **Elementalist** can also make things difficult with her status-inflicting elemental spells. *Fire Whip* damages and Disables, *Shining Air* deals Wind damage and causes Blind, and *Heavy Dust* delivers Earth damage and Immobilizes. *Elementalshift* is especially dangerous, as it alters elemental affinities and can leave your units weak to follow-up attacks.
+The Elementalist can also make things difficult with her status-inflicting elemental spells. *Fire Whip* damages and Disables, *Shining Air* deals Wind damage and causes Blind, and *Heavy Dust* delivers Earth damage and Immobilizes. *Elementalshift* is especially dangerous, as it alters elemental affinities and can leave your units weak to follow-up attacks.
 
-Ritz’s right-hand fighter is a **Sniper** with powerful ranged attacks. Her *Death Sickle* causes Doom, *Doom Archer* inflicts damage based on lost HP, and *Aim: Weapon* or *Aim: Armor* permanently destroy your gear. If possible, use a Law Card to ban missile attacks entirely—otherwise, focus her down early to protect your equipment.
+Ritz’s right-hand fighter is a Sniper with powerful ranged attacks. Her *Death Sickle* causes Doom, *Doom Archer* inflicts damage based on lost HP, and *Aim: Weapon* or *Aim: Armor* permanently destroy your gear. If possible, use a Law Card to ban missile attacks entirely—otherwise, focus her down early to protect your equipment.
 
-Finally, there’s **Ritz** herself, serving as a **Red Mage**. She won’t rely on physical attacks; instead, her *Doublecast* ability allows her to chain two spells per turn—*Fire*, *Thunder*, or *Blizzard*—with enhanced damage thanks to *Magic Pow+*. Watch for her “Sleep + Magic” combo, which can easily wipe out vulnerable units. Silencing her won’t help, as her *Ribbon* makes her immune to status ailments.
+Finally, there’s Ritz herself, serving as a Red Mage. She won’t rely on physical attacks; instead, her *Doublecast* ability allows her to chain two spells per turn—*Fire*, *Thunder*, or *Blizzard*—with enhanced damage thanks to *Magic Pow+*. Watch for her “Sleep + Magic” combo, which can easily wipe out vulnerable units. Silencing her won’t help, as her *Ribbon* makes her immune to status ailments.
 
-The goal here is simple: **defeat Ritz**. She starts near the front, so rushing her is a viable strategy. However, you might want to take the time to **Steal** some of the rare gear in this fight, including **Max’s Oathbow**, **SeventhHeaven**, and **Ritz’s Femme Fatale**—all excellent items worth acquiring.
+The goal here is simple: defeat Ritz. She starts near the front, so rushing her is a viable strategy. However, you might want to take the time to Steal some of the rare gear in this fight, including Max’s Oathbow, SeventhHeaven, and Ritz’s Femme Fatale—all excellent items worth acquiring.
 
 When Ritz finally falls, the gorge will fall silent. The path to Ambervale—and your next step toward ending this world—now lies open.
 `,
@@ -780,7 +780,6 @@ When Ritz finally falls, the gorge will fall silent. The path to Ambervale—and
         location: `Ambervale`,
         prerequisites: [
             `After placement of the Ambervale symbol`,
-            `Haven't Cleared Game`,
         ],
         reward: [`End of game`],
         difficulty: `Very Hard`,
@@ -865,7 +864,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `4800 Gil`,
         location: `Jagd Helje`,
         prerequisites: [
-            "Completed Den of Evil. Huntmoon (#064)",
+            "Completed Den of Evil (#064)",
+            "Huntmoon only"
         ],
         reward: [
             `45000 Gil`,
@@ -886,7 +886,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         location: `Jagd Alhi`,
         prerequisites: [
             "Completed Wanted! (#025)",
-            "Completed Exploration. Kingmoon (#065)",
+            "Completed Exploration (#065)",
+            "Kingmoon only"
         ],
         reward: [`22600 Gil`, `Onlyone`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
@@ -913,7 +914,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Koringwood`,
-        prerequisites: ["Examined The Hero Gaol"],
+        prerequisites: ["Obtained The Hero Gaol"],
         reward: [`0 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Bomb`, `Goblin`, `Icedrake`],
@@ -967,7 +968,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Eluut Sands`,
-        prerequisites: ["Completed Village Hunt (#037)", "Examined The Hero Gaol"],
+        prerequisites: ["Completed Village Hunt (#037)", "Obtained The Hero Gaol"],
         reward: [
             `0 Gil`,
             `Ayvuir Blue`,
@@ -1081,12 +1082,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `3000 Gil`,
         location: `Bervenia Palace`,
         prerequisites: [
-            "After completion of side-mission engagements with",
-            "and the",
-            "Blue Genius",
-            "Brown Rabbits",
-            "White Kupos",
-            "Yellow Powerz",
+            "Completed White Kupos [League]",
         ],
         reward: [
             `22600 Gil`,
@@ -1199,8 +1195,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `4600 Gil`,
             `Vesper`,
             `1x Random Item`,
-            `Req. Items: Ahriman Eye`,
-            `available_for: "25 Days`,
         ],
         difficulty: `Easy`,
         enemies: [`Floateye x2`, `Ahriman`],
@@ -1217,8 +1211,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Blue Rose`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Flower Vase`,
-            `available_for: "15 Days`,
         ],
         difficulty: `Medium`,
         enemies: [`Sprite`, `Antlion x2`, `Red Panther x2`],
@@ -1300,8 +1292,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `5000 Gil`,
         location: `Siena Gorge`,
         prerequisites: [
-            "Seen Ezel",
-            "with Ezel at Cadoan Card Keeper",
+            "Gossip with Ezel at Cadoan Card Keeper.",
         ],
         reward: [`34000 Gil`, `Amber`, `1x Random Item`, `Allmighty Card`],
         difficulty: `Slightly Hard`,
@@ -1368,7 +1359,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Engagement`,
         cost: `4000 Gil`,
         location: `Ozmonfield`,
-        prerequisites: ["Completed A Dragon (#066)", ","],
+        prerequisites: ["Completed A Dragon (#066)"],
         reward: [
             `36000 Gil`,
             `2x Random Items`,
@@ -1431,8 +1422,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `22600 Gil`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Helje Key`,
-            `Req. Skills: Combat/Lvl.25`,
         ],
         difficulty: `Slightly Hard`,
         enemies: [`Bishop`, `Time Mage`, `White Mage`, `Black Mage`],
@@ -1462,8 +1451,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `31600 Gil`,
             `2x Random Items`,
             `2x Random Cards`,
-            `Req. Items: Wyrmstone`,
-            `available_for: "25 Days`,
         ],
         difficulty: `Slightly Hard`,
         enemies: [`Icedrake`, `Dragoon x2`],
@@ -1477,14 +1464,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         location: `Deti Plains`,
         prerequisites: [
             "Completed Lucky Charm (#191)",
-            "Clear Game",
         ],
         reward: [
             `27000 Gil`,
             `Ally Finder2`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Rabbit Tail`,
         ],
         difficulty: `Medium`,
         enemies: [`Coeurl (Meow)`],
@@ -1591,10 +1576,10 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `1500 Gil`,
         location: `Cadoan`,
         prerequisites: [
-            "Completed and reading (#075)",
-            "and",
+            "Completed Free Cadoan! (#075)",
+            "Read Foreign Ship",
             "Read Crime Ring",
-            "rumor. Cadoan Pub only",
+            "Cadoan Pub only",
         ],
         reward: [`8200 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Easy`,
@@ -1728,7 +1713,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `22600 Gil`,
             `Secret Item (Reaper Cloak)`,
             `2x Random Cards`,
-            `Req. Items: Spiritstone`,
         ],
         difficulty: `Hard`,
         enemies: [`Defender x2`, `Mog Knight x2`],
@@ -1749,42 +1733,40 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     },
     {
         number: 83,
-        name: `ForeignFiend`,
+        name: `Foreign Fiend`,
         description: `A giant snake is attacking our traveling merchants! We can't make our rounds like this. Someone please stop that thing! ~ Davoi, Merchant`,
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Ulei River`,
         prerequisites: [
-            "Completed Free Muscadet! and (#082)",
+            "Completed Free Muscadet! (#082)",
             "Read Foreign Fiends",
-            "reading the",
-            "rumor",
         ],
         reward: [`18000 Gil`, `2x Random Item`, `2x Random Cards`],
         difficulty: `Medium`,
     },
     {
         number: 84,
-        name: `ForeignFiend`,
+        name: `Foreign Fiend`,
         description: `A bizarre turtle-like monster is attacking the town! Somebody stop it! ~ Crusoi Inn`,
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Baguba Port`,
         prerequisites: [
-            "Completed ForeignFiend (#083)",
+            "Completed Foreign Fiend (#083)",
         ],
         reward: [`20400 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Medium`,
     },
     {
         number: 85,
-        name: `ForeignFiend`,
+        name: `Foreign Fiend`,
         description: `A plant monster is attacking people, and the body count is rising! We need a weeder, quick! ~ Bokum, Townsperson`,
         type: `Engagement`,
         cost: `2500 Gil`,
         location: `Uladon Bog`,
         prerequisites: [
-            "Completed ForeignFiend (#084)",
+            "Completed Foreign Fiend (#084)",
         ],
         reward: [`22600 Gil`, `2x Random Items`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
@@ -1797,7 +1779,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `4000 Gil`,
         location: `Nubswood`,
         prerequisites: [
-            "Completed ForeignFiend (#085)",
+            "Completed Foreign Fiend (#085)",
         ],
         reward: [
             `34000 Gil`,
@@ -1817,7 +1799,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         location: `Bervenia Palace`,
         prerequisites: [
             "Freed all areas",
-            "Clear Game",
             "Read Gukko",
         ],
         reward: [`2400 Gil`, `Rukavi Soul`, `1x Random Item`, `2x Random Cards`],
@@ -1831,7 +1812,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Roda Volcano`,
-        prerequisites: ["Clear Game"],
         reward: [`22600 Gil`, `Ogma's Seal`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Slightly Hard`,
     },
@@ -1842,7 +1822,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Engagement`,
         cost: `3000 Gil`,
         location: `Materiwood`,
-        prerequisites: ["Completed The Worldwyrm (#088)", "Clear Game"],
+        prerequisites: ["Completed The Worldwyrm (#088)",],
         reward: [`18000 Gil`, `Esteroth`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Medium`,
         enemies: [`Thief`, `Time Mage`, `Black Mage`],
@@ -1854,7 +1834,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Engagement`,
         cost: `2000 Gil`,
         location: `Ozmonfield`,
-        prerequisites: ["Completed Moogle Bride (#089)", "Clear Game"],
+        prerequisites: ["Completed Moogle Bride (#089)"],
         reward: [`13600 Gil`, `Master Brave`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Medium`,
     },
@@ -1928,7 +1908,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         prerequisites: [
             "Completed Den of Evil (#064)",
             "Completed Thorny Dreams (#193)",
-            "Clear Game",
         ],
         reward: [
             `40600 Gil`,
@@ -1950,7 +1929,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         prerequisites: [
             "Completed Exploration (#065)",
             "Completed Missing Meow (#067)",
-            "Clear Game",
         ],
         reward: [`36000 Gil`, `Ninja Tabi`, `1x Random Item`, `2x Random Cards`],
         difficulty: `Hard`,
@@ -1965,7 +1943,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         location: `Jagd Dorsa`,
         prerequisites: [
             "Completed Beastly Gun (#284)",
-            "Clear Game",
         ],
         reward: [
             `22600 Gil`,
@@ -1973,7 +1950,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x`,
             `Random Cards`,
-            `Req. Items: Spiritstone/Bent Sword`,
         ],
         difficulty: `Medium`,
     },
@@ -1987,7 +1963,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         prerequisites: [
             "Completed Den of Evil (#064)",
             "Completed Carrot! (#095)",
-            "Clear Game",
         ],
         reward: [
             `27000 Gil`,
@@ -1995,7 +1970,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x`,
             `Random Cards`,
-            `Req. Items: Rusty Sword/Mysidia Alloy`,
         ],
         difficulty: `Medium`,
         enemies: [`Templar (Buckles)`, `As a Templar`],
@@ -2009,14 +1983,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         location: `Siena Gorge`,
         prerequisites: [
             "Completed Alchemist Boy (#192)",
-            "Clear Game",
         ],
         reward: [
             `31600 Gil`,
             `Secret Item (Masamune 100)`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Zodiac Ore/Blood Apple`,
         ],
         difficulty: `Hard`,
         enemies: [`A master Gladiator`],
@@ -2028,8 +2000,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Encounter`,
         cost: `1200 Gil`,
         prerequisites: [
-            "administrator at Cyril",
-            "Capture at least five monsters and talk to Monster Bank",
+            "Talk to Monster Bank administrator at Cyril",
+            "Capture at least five monsters",
             "Seen Monster Escape Cutscene",
         ],
         reward: [
@@ -2190,7 +2162,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `H-Help! A man named Weaver wants me dead. Yes, it was my fault his family died, but I've repented! ~ Celebrant, Gelzak Church`,
         type: `Encounter`,
         cost: `700 Gil`,
-        prerequisites: ["Completed Weaver (#287)", ","],
+        prerequisites: ["Completed Weaver (#287)"],
         reward: [
             `13600 Gil`,
             `2x Random Items`,
@@ -2387,8 +2359,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Elda's Cup`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Dragon Bone`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2468,8 +2438,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Dame's Blush`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Skull`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2514,9 +2482,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Adaman Alloy`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Adamantite/Adamantite`,
-            `Req. Skills: Smithing/Lvl.15`,
-            `Dispatch Time: 2 Battles`,
         ],
     },
     {
@@ -2530,9 +2495,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Mysidia Alloy`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Adamantite/Sivril`,
-            `Req. Skills: Smithing/Lvl.15`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -2546,9 +2508,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Crusite Alloy`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Zodiac Ore/Zodiac Ore`,
-            `Req. Skills: Smithing/Lvl.15`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2576,8 +2535,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Ahriman Wing`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Fairy Wing`,
-            `Dispatch Time: 10 Enemies`,
         ],
     },
     {
@@ -2591,8 +2548,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Fairy Wing`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Stolen Gil`,
-            `Dispatch Time: 2 Battles`,
         ],
     },
     {
@@ -2606,8 +2561,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Goldcap`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Ancient Bills`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -2623,8 +2576,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `10600 Gil`,
             `Life Water`,
             `1x Random Item`,
-            `Req. Items: Secret Books`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2654,8 +2605,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Justice Badge`,
             `2x Random Items`,
             `1x Random Card`,
-            `Req. Items: Neighbor Pin`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -2669,8 +2618,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Friend Pin`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Ahriman Wing`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2686,9 +2633,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `12400 Gil`,
             `Edaroya Tome`,
             `1x Random Item`,
-            `Req. Items: Tranquil Box`,
-            `Req. Skills: Track/Lvl.40`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2702,8 +2646,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1800 Gil`,
             `Homework`,
             `1x Random Item`,
-            `Req. Items: Ancient Medal`,
-            `Dispatch Time: 5 Days`,
         ],
     },
     {
@@ -2729,8 +2671,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `3600 Gil`,
             `Monster Guide`,
             `1x Random Item`,
-            `Req. Items: Mythril Pick`,
-            `Dispatch Time: 1 Battle`,
         ],
     },
     {
@@ -2744,8 +2684,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Secret Books`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Stilpool Scroll`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2758,8 +2696,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `10000 Gil`,
             `Rat Tail`,
             `1x Random Item`,
-            `Req. Items: Stilpool Scroll`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -2774,9 +2710,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Stradivari`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Tonberry Lamp`,
-            `Req. Skills: Craft/Lvl.10`,
-            `Dispatch Time: 30 Days`,
         ],
     },
     {
@@ -2790,9 +2723,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Clock Post`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Cat's Tears`,
-            `Req. Jobs: Gadgeteer`,
-            `Dispatch Time: 20 Days`,
         ],
     },
     {
@@ -2836,8 +2766,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Old Statue`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Animal Bone`,
-            `Dispatch Time: 20 Days`,
         ],
     },
     {
@@ -2865,8 +2793,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Broken Sword`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Bomb Shell`,
-            `Dispatch Time: 1 Battle`,
         ],
     },
     {
@@ -2880,8 +2806,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Broken Sword`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Runba's Tale`,
-            `Dispatch Time: 1 Battle`,
         ],
     },
     {
@@ -2895,8 +2819,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Bent Sword`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Runba's Tale`,
-            `Dispatch Time: 5 Days`,
         ],
     },
     {
@@ -2938,8 +2860,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Insignia`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Feather Badge/Delta Fang`,
-            `Dispatch Time: 15 Enemies`,
         ],
     },
     {
@@ -2967,9 +2887,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Ally Finder2`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Dame's Blush/Ally Finder`,
-            `Req. Skills: Smithing/Lvl.20`,
-            `Dispatch Time: 1 Battle`,
         ],
     },
     {
@@ -2982,8 +2899,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `10600 Gil`,
             `Tranquil Box`,
             `1x Random Item`,
-            `Req. Items: Old Statue`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -3026,8 +2941,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `5400 Gil`,
             `Stasis Rope`,
             `1x Random Item`,
-            `Req. Items: Black Thread`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -3054,8 +2967,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Caravan Musk`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Elda's Cup`,
-            `Dispatch Time: 20 Days`,
         ],
     },
     {
@@ -3083,8 +2994,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `4600 Gil`,
             `Tonberry Lamp`,
             `1x Random Item`,
-            `Req. Items: Bomb Shell`,
-            `Dispatch Time: 5 Days`,
         ],
     },
     {
@@ -3126,8 +3035,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Animal Bone`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Caravan Musk`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -3141,9 +3048,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Skull`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Life Water`,
-            `Req. Jobs: Time Mage`,
-            `Dispatch Time: 5 Enemies`,
         ],
     },
     {
@@ -3157,8 +3061,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Clock Gear`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Dictionary`,
-            `Dispatch Time: 5 Days`,
         ],
     },
     {
@@ -3232,8 +3134,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Magic Fruit`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Goldcap`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -3247,8 +3147,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Power Fruit`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Clock Gear/Clock Post`,
-            `Dispatch Time: 1 Battle`,
         ],
     },
     {
@@ -3276,8 +3174,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Ancient Bills`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Ancient Medal`,
-            `Dispatch Time: 5 Days`,
         ],
     },
     {
@@ -3286,15 +3182,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `Has your clan put in its order for adaman alloy? It sells out quick, so get your order in soon! How about our shop? ~ Elbo, Workshop Vargi`,
         type: `Dispatch`,
         cost: `2500 Gil`,
-        prerequisites: ["Completed Free Bervenia! (#087)", "Clear Game"],
+        prerequisites: ["Completed Free Bervenia! (#087)"],
         reward: [
             `0 Gil`,
             `Adaman Alloy`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Adamantite/Adamantite`,
-            `Req. Skills: Smithing/Lvl.35`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -3303,15 +3196,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `It was recently discovered that mysidia alloy is enchanted with ancient magic! Better buy some before the prices go up! ~ Deunon, Workshop Rol`,
         type: `Dispatch`,
         cost: `3000 Gil`,
-        prerequisites: ["Completed Adaman Order (#184)", "Clear Game"],
+        prerequisites: ["Completed Adaman Order (#184)"],
         reward: [
             `0 Gil`,
             `Mysidia Alloy`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Adamantite/Silvril`,
-            `Req. Skills: Smithing/Lvl.35`,
-            `Dispatch Time: 2 Battles`,
         ],
     },
     {
@@ -3320,15 +3210,11 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `If you made a shield and a sword from the strongest of all alloys -- crusite -- which would be stronger? Come and let's find out! ~ Sabak, Workshop Berk`,
         type: `Dispatch`,
         cost: `3000 Gil`,
-        prerequisites: ["Clear Game"],
         reward: [
             `0 Gil`,
             `Crusite Alloy`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Zodiac Ore/Zodiac Ore`,
-            `Req. Skills: Smithing/Lvl.35`,
-            `Dispatch Time: 10 Enemies`,
         ],
     },
     {
@@ -3337,7 +3223,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `Announcing: Casino Party. Test your luck at our one-night-only casino party! All welcome. ~ Matim, Steward`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: ["Clear Game"],
         reward: [
             `18000 Gil`,
             `Rat Tail`,
@@ -3352,7 +3237,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `I seek my childhood tutor, Yoel. I have a promise to keep to him. It means very much to me. ~ Count Anet`,
         type: `Dispatch`,
         cost: `1600 Gil`,
-        prerequisites: ["Completed Lucky Night (#187)", "Clear Game"],
+        prerequisites: ["Completed Lucky Night (#187)"],
         reward: [
             `11400 Gil`,
             `Rusty Sword`,
@@ -3367,7 +3252,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `I don't want to have to move, but it has started raining far too much around my house. Please find out why. ~ Ivan, Gold Sculptor`,
         type: `Dispatch`,
         cost: `1800 Gil`,
-        prerequisites: ["Completed Lucky Night (#187)", "Clear Game"],
+        prerequisites: ["Completed Lucky Night (#187)"],
         reward: [
             `13600 Gil`,
             `Broken Sword`,
@@ -3383,7 +3268,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `We are the Lightning Brothers, bound by blood-oath and iron law! Why don't you try joining us and see if you like it? ~ LBs, Emissaries of Justice`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: ["Completed Why Am I Wet? (#189)", "Clear Game"],
+        prerequisites: ["Completed Why Am I Wet? (#189)"],
         reward: [
             `18000 Gil`,
             `Bent Sword`,
@@ -3398,14 +3283,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `Someone please find me an item that will lose to no bad luck, and a charm or spell to ward off evil spells. I'm fighting! ~ Milea, Determined Lady`,
         type: `Dispatch`,
         cost: `1200 Gil`,
-        prerequisites: ["Completed Why Am I Wet? (#189)", "Clear Game"],
+        prerequisites: ["Completed Why Am I Wet? (#189)"],
         reward: [
             `9000 Gil`,
             `Rusty Spear`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Rat Tail`,
-            `Dispatch Time: 40 Days`,
         ],
     },
     {
@@ -3414,7 +3297,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `Please stop my brother, Hasmir before someone gets hurt. He thinks he's an alchemist but all he makes is smoke and explosions! ~ Gretzel, Townsgirl`,
         type: `Dispatch`,
         cost: `400 Gil`,
-        prerequisites: ["Completed Lucky Charm (#191)", "Clear Game"],
+        prerequisites: ["Completed Lucky Charm (#191)"],
         reward: [
             `4600 Gil`,
             `Insignia`,
@@ -3429,7 +3312,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `The bangaa girl "Eleono" ssleepss in the Thoussand-Thorn Wood. Looking for a clanner to find out why she ssleepss. ~ Vajiri, Bangaa`,
         type: `Dispatch`,
         cost: `2000 Gil`,
-        prerequisites: ["Completed Lucky Night (#187)", "Clear Game"],
+        prerequisites: ["Completed Lucky Night (#187)"],
         reward: [
             `16000 Gil`,
             `Blood Apple`,
@@ -3476,8 +3359,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         reward: [
             `0 Gil`,
             `Mind Ceffyl`,
-            `Req. Items: Fire Sigil/Wind Sigil`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -3492,8 +3373,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         reward: [
             `0 Gil`,
             `Body Ceffyl`,
-            `Req. Items: Earth Sigil/Water Sigil`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -3508,8 +3387,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         reward: [
             `0 Gil`,
             `Spiritstone`,
-            `Req. Items: Mind Ceffyl/Body Ceffyl`,
-            `Dispatch Time: 4 Battles`,
         ],
     },
     {
@@ -3523,9 +3400,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `3400 Gil`,
             `Magic Medal`,
             `1x Random Item`,
-            `Req. Items: White Thread`,
-            `Req. Jobs: White Mage`,
-            `Dispatch Time: 2 Battles`,
         ],
     },
     {
@@ -3610,8 +3484,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Dispatch`,
         cost: `600 Gil`,
         prerequisites: [
-            "Completed You Immortal. Huntmoon (#148)",
-            "Completed You",
+            "Huntmoon only",
+            "Completed You Immortal (#148)",
         ],
         reward: [
             `2800 Gil`,
@@ -3676,8 +3550,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `2400 Gil`,
             `Black Thread`,
             `1x Random Item`,
-            `Req. Items: Homework`,
-            `Dispatch Time: 1 Battle`,
         ],
     },
     {
@@ -3764,8 +3636,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Magic Cloth`,
             `1x Random Item`,
             `1x Random Card`,
-            `Req. Items: Magic Cotton`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -3889,8 +3759,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Cyril Ice`,
             `1x Random Item`,
             `1x Random Card`,
-            `Req. Items: Chocobo Egg`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -3933,8 +3801,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Choco Gratin`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Chocobo Egg/Gysahl Greens`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -3948,8 +3814,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Grownup Bread`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Choco Bread`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -3994,8 +3858,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Runba's Tale`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Stasis Rope`,
-            `Dispatch Time: 10 Enemies`,
         ],
     },
     {
@@ -4023,8 +3885,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Kiddy Bread`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Choco Bread`,
-            `Dispatch Time: 20 Days`,
         ],
     },
     {
@@ -4369,7 +4229,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `400 Gil`,
         prerequisites: [
             "Completed Exploration (#065)",
-            "Clear Game",
             "Jagd Ahli not Freed",
         ],
         reward: [
@@ -4387,7 +4246,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `400 Gil`,
         prerequisites: [
             "Completed Den Of Evil (#064)",
-            "Clear Game",
             "Jagd Helje not Freed",
         ],
         reward: [
@@ -4404,9 +4262,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Capture`,
         cost: `400 Gil`,
         prerequisites: [
-            "Clear Game",
             "Jagd Dorsa not Freed",
-            "Seen 24 05",
         ],
         reward: [
             `2400 Gil`,
@@ -4424,7 +4280,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         prerequisites: [
             "Completed Ozmonfield (#263)",
             "Ambervale not Freed",
-            "Clear Game",
         ],
         reward: [
             `2400 Gil`,
@@ -4440,8 +4295,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Capture`,
         cost: `400 Gil`,
         prerequisites: [
-            "Clear Game",
-            "Completed A Dragon",
+            "Completed A Dragon's Aid (#066)",
             "Ozmonfield not Freed",
         ],
         reward: [
@@ -4506,8 +4360,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Oblige`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Jerky`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -4524,9 +4376,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Rhomphaia`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Choco Gratin`,
-            `Req. Skills: Appraise/Lvl.18`,
-            `Dispatch Time: 20 Days`,
         ],
     },
     {
@@ -4541,9 +4390,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x`,
             `Random Cards`,
-            `Req. Items: Jerky`,
-            `Req. Jobs: Blue Mage`,
-            `Dispatch Time: 4 Battles`,
         ],
     },
     {
@@ -4557,8 +4403,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Tonberrian`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Rabbit Tail`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -4581,7 +4425,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `A tree grows on the duke's land, and every spring a woman comes and looks at its roots. Could you check if something's there? ~ Eukanne, Ducal Maid`,
         type: `Dispatch`,
         cost: `1000 Gil`,
-        prerequisites: ["Completed Jagd Hunt. Cadoan Pub only"],
+        prerequisites: ["Cadoan Pub only"],
         reward: [
             `7000 Gil`,
             `Charfire`,
@@ -4604,8 +4448,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Power Staff`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Magic Medal/Magic Medal`,
-            `Dispatch Time: 15 Days`,
         ],
     },
     {
@@ -4647,8 +4489,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Arbalest`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Kiddy Bread/Grownup Bread`,
-            `Dispatch Time: 5 Days`,
         ],
     },
     {
@@ -4676,8 +4516,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Secret Item (Fell Castanets)`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Danbukwood/Moonwood`,
-            `Dispatch Time: 10 Enemies`,
         ],
     },
     {
@@ -4691,8 +4529,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Magic Hands`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Malboro Wine`,
-            `Dispatch Time: 7 Days`,
         ],
     },
     {
@@ -4734,8 +4570,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Magic Robe`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Blood Shawl`,
-            `Dispatch Time: 3 Enemies`,
         ],
     },
     {
@@ -4749,8 +4583,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Fire Mitts`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Choco Gratin`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -4759,18 +4591,11 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `Want a gun as strong and fast as a wild beast? Just bring me two little items I need, and it's all yours, free. ~ Strives, Musketeer`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: [
-            "Clear Game",
-            "Completed C8",
-        ],
         reward: [
             `0 Gil`,
             `Calling Gun`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Insignia`,
-            `Ally Finder2`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -4779,15 +4604,13 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         description: `You can make amazingly strong swords with just a little adaman alloy. Too bad it's so hard to come by... ~ Gilgame, Young Blacksmith`,
         type: `Dispatch`,
         cost: `1400 Gil`,
-        prerequisites: ["Completed She"],
+        prerequisites: ["Completed She's Gone (#230)"],
         reward: [
             `10600 Gil`,
             `Secret Item (Adaman Blade)`,
             `1x Random Item`,
             `2x`,
             `Random Cards`,
-            `Req. Items: Adaman Alloy/Broken Sword`,
-            `Dispatch Time: 2 Battles`,
         ],
     },
     {
@@ -4805,8 +4628,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x`,
             `Random Cards`,
-            `Req. Items: Bent Sword/Rainbowite`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -4820,8 +4641,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Zankplus`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Crusite Alloy/Blood Apple`,
-            `Dispatch Time: 5 Enemies`,
         ],
     },
     {
@@ -4837,9 +4656,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `12600 Gil`,
             `Secret Item (Master Sword)`,
             `1x Random Item`,
-            `Req. Items: Thunderstone/Stormstone`,
-            `Req. Jobs: Soldier`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -4855,8 +4671,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `0 Gil`,
             `Lurebreaker`,
             `1x Random Item`,
-            `Req. Items: Broken Sword`,
-            `Dispatch Time: 20 Days`,
         ],
     },
     {
@@ -4871,8 +4685,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x Random`,
             `Cards`,
-            `Req. Items: Rusty Sword/Leestone`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -4882,8 +4694,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         type: `Dispatch`,
         cost: `4500 Gil`,
         prerequisites: [
-            "Completed Sorry Friend (#094)",
-            "Completed Sorry",
+            "Completed Sorry, Friend (#094)",
         ],
         reward: [
             `0 Gil`,
@@ -4891,8 +4702,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x Random`,
             `Cards`,
-            `Req. Items: Silk Bloom/Moon Bloom`,
-            `Dispatch Time: 4 Battles`,
         ],
     },
     {
@@ -4909,8 +4718,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Odin Lance`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Rusty Spear/Mysidia Alloy`,
-            `Dispatch Time: 4 Battles`,
         ],
     },
     {
@@ -4925,8 +4732,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x`,
             `Random Cards`,
-            `Req. Items: Stradivari/Black Thread`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -4943,8 +4748,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Bindsnipe`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Crusite Alloy/Gun Gear`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -4958,9 +4761,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Black Hat`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Black Thread/Magic Cloth`,
-            `Req. Jobs: Black Mage`,
-            `Dispatch Time: 3 Battles`,
         ],
     },
     {
@@ -4974,8 +4774,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `White Hat`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: White Thread/Magic Cloth`,
-            `Dispatch Time: 30 Days`,
         ],
     },
     {
@@ -4992,8 +4790,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Adaman Armor`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Adaman Alloy/Rat Tail`,
-            `Dispatch Time: 2 Battles`,
         ],
     },
     {
@@ -5010,8 +4806,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Materia Armor`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Materite/Materite`,
-            `Dispatch Time: 10 Enemies`,
         ],
     },
     {
@@ -5029,8 +4823,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `1x Random Item`,
             `2x`,
             `Random Cards`,
-            `Req. Items: Chocobo Skin/Magic Cotton`,
-            `Dispatch Time: 10 Days`,
         ],
     },
     {
@@ -5048,8 +4840,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
             `Galmia Set`,
             `1x Random Item`,
             `2x Random Cards`,
-            `Req. Items: Chocobo Skin/Magic Cotton`,
-            `Dispatch Time: 5 Days`,
         ],
     },
 ];
@@ -5635,11 +5425,76 @@ const Panel = ({ title, border, buttonColor, children, right, tone = "neutral" }
         purple: "bg-purple-50 dark:bg-purple-900/10",
     };
     const [open, setOpen] = useState(false);
-    return (_jsxs("div", { className: `rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`, children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2", children: [_jsx("h4", { className: "font-bold text-zinc-900 dark:text-zinc-100", children: title }), _jsxs("div", { className: "flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end", children: [right, _jsx("button", { className: `${buttonColor} text-white text-sm px-3 py-1 rounded`, onClick: () => setOpen((o) => !o), children: open ? "Hide" : "Show" })] })] }), open && (_jsxs(_Fragment, { children: [_jsx("div", { className: "mt-3", children: children }), _jsxs("div", { className: "flex items-center justify-end gap-2", children: [right, _jsx("span", { className: "flex items-center justify-end", children: _jsx("button", { className: `${buttonColor} text-white text-sm px-3 py-1 rounded`, onClick: () => setOpen((o) => !o), children: open ? "Hide" : "Show" }) })] })] }))] }));
+    return (_jsxs("div", { className: `rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`, children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2", children: [_jsx("h4", { className: "font-bold text-zinc-900 dark:text-zinc-100", children: title }), _jsxs("div", { className: "flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end", children: [right, _jsx("button", { className: `${buttonColor} text-white text-sm px-3 py-1 rounded`, onClick: () => setOpen((o) => !o), children: open ? "Hide" : "Show" })] })] }), open && (_jsxs(_Fragment, { children: [_jsx("div", { className: "mt-3", children: children }), _jsx("br", {}), _jsxs("div", { className: "flex items-center justify-end gap-2", children: [right, _jsx("span", { className: "flex items-center justify-end", children: _jsx("button", { className: `${buttonColor} text-white text-sm px-3 py-1 rounded`, onClick: () => setOpen((o) => !o), children: open ? "Hide" : "Show" }) })] })] }))] }));
 };
 const FFTAProgressionGuide = () => {
     const [expanded, setExpanded] = useState({});
     const [checked, setChecked] = useState({});
+    const [screenMode, setScreenMode] = useState("idle");
+    // Maintain your existing checked state...
+    // const [checked, setChecked] = useState<Record<string, boolean>>({ ... });
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    // Hidden file input for Load
+    const loadInputRef = useRef(null);
+    const buildSavePayload = () => {
+        const list = Object.keys(checked).filter((k) => !!checked[k]);
+        return { format: "ffta-progress-v1", slot: 1, checked: list };
+    };
+    const validateParsedSave = (parsed) => parsed &&
+        parsed.format === "ffta-progress-v1" &&
+        parsed.slot === 1 &&
+        Array.isArray(parsed.checked) &&
+        parsed.checked.every((x) => typeof x === "string");
+    const applyLoadedChecked = (keys) => {
+        const next = {};
+        for (const k of keys)
+            next[k] = true;
+        setChecked(next);
+    };
+    // --- SAVE: show overlay for 1s, then download file ---
+    const saveProgressToFile = async () => {
+        setScreenMode("saving");
+        await wait(2000);
+        const payload = buildSavePayload();
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "ffta_slot_1.json";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        setScreenMode("idle");
+    };
+    // --- LOAD: user picks file, then show overlay for 1s while applying ---
+    const triggerLoadPicker = () => {
+        loadInputRef.current?.click();
+    };
+    const handleLoadFile = (file) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+            setScreenMode("loading");
+            await wait(2000);
+            try {
+                const text = String(reader.result || "");
+                const parsed = JSON.parse(text);
+                if (!validateParsedSave(parsed)) {
+                    // Invalid format, just exit overlay
+                    setScreenMode("idle");
+                    return;
+                }
+                applyLoadedChecked(parsed.checked);
+            }
+            catch {
+                // Parse error—just exit overlay
+            }
+            finally {
+                setScreenMode("idle");
+            }
+        };
+        reader.readAsText(file);
+    };
     const toggle = (k) => setExpanded((p) => ({ ...p, [k]: !p[k] }));
     const setCheck = (k, v) => setChecked((p) => ({ ...p, [k]: v ?? !p[k] }));
     const blueTotal = BLUE_MAGIC_REF.length;
@@ -5706,7 +5561,7 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #002 → Before #003)",
             placements: ["Nubswood"],
-            sidequests: [25, 27, 68, 69, 70, 143, 194, 199, 200, 201, 240, 264]
+            sidequests: [25, 27, 68, 69, 70, 143, 194, 240, 199, 200, 201, 264]
         },
         {
             key: "003",
@@ -6107,7 +5962,12 @@ const FFTAProgressionGuide = () => {
     };
     const KV = ({ l, v }) => v ? _jsxs("div", { children: [_jsxs("b", { children: [l, ":"] }), " ", v] }) : null;
     const List = ({ l, a }) => a && a.length ? (_jsxs("div", { children: [_jsxs("div", { className: "font-semibold", children: [l, ":"] }), _jsx("ul", { className: "list-disc list-inside", children: a.map((s, i) => _jsx("li", { children: s }, i)) })] })) : null;
-    return (_jsxs("div", { className: "w-full max-w-6xl mx-auto p-4 bg-zinc-100 dark:bg-zinc-900 transition-colors", children: [_jsxs("div", { className: "bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-t-2xl ring-1 ring-zinc-950/10 dark:ring-white/10 shadow-sm", children: [_jsx("h1", { className: "text-3xl font-bold mb-1", children: "FFTA Story Progression Guide" }), _jsx("p", { className: "text-sm opacity-90", children: "Story \u2022 Between-Story Missions \u2022 Blue Magic \u2022 Captures \u2022 Missables \u2022 Map Placements \u2022 Recruits" })] }), _jsxs("div", { className: "mt-3 grid grid-cols-1 gap-3", children: [_jsx(Panel, { title: "Blue Magic Reference", border: "border-blue-600", buttonColor: "bg-blue-600", tone: "blue", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Blue Magic", done: blueDone, total: blueTotal, color: "blue" }) }), children: _jsx(RefList, { type: "blue", names: BLUE_MAGIC_REF.map((b) => b.name) }) }), _jsxs(Panel, { title: "Capturable Monsters Reference", border: "border-green-600", buttonColor: "bg-green-600", tone: "green", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Captures", done: capDone, total: capTotal, color: "green" }) }), children: [_jsx(CollapsibleTwoTables, { title: "Affection & Items Cheatsheet", defaultOpen: false, tone: "neutral" // gives sensible defaults
+    return (_jsxs("div", { className: "w-full max-w-6xl mx-auto p-4 bg-zinc-100 dark:bg-zinc-900 transition-colors", children: [_jsxs("div", { className: "bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-t-2xl ring-1 ring-zinc-950/10 dark:ring-white/10 shadow-sm", children: [_jsx("h1", { className: "text-3xl font-bold mb-1", children: "FFTA Story Progression Guide" }), _jsx("p", { className: "text-sm opacity-90", children: "Story \u2022 Between-Story Missions \u2022 Blue Magic \u2022 Captures \u2022 Missables \u2022 Map Placements \u2022 Recruits" })] }), _jsx("br", {}), _jsxs("div", { className: "mb-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2", children: [_jsx("div", { className: "text-sm text-zinc-600 dark:text-zinc-400", children: "Save or load your progress via a file." }), _jsxs("div", { className: "flex items-center gap-2", children: [_jsx("button", { onClick: saveProgressToFile, className: "px-3 py-1 rounded text-white bg-emerald-600 hover:bg-emerald-700 text-sm", children: "Save Progress" }), _jsx("button", { onClick: triggerLoadPicker, className: "px-3 py-1 rounded text-white bg-indigo-600 hover:bg-indigo-700 text-sm", children: "Load Progress" }), _jsx("input", { ref: loadInputRef, type: "file", accept: "application/json,.json", className: "hidden", onChange: (e) => {
+                                    const f = e.target.files?.[0];
+                                    if (f)
+                                        handleLoadFile(f);
+                                    e.currentTarget.value = "";
+                                } })] })] }), _jsxs("div", { className: "mt-3 grid grid-cols-1 gap-3", children: [_jsx(Panel, { title: "Blue Magic Reference", border: "border-blue-600", buttonColor: "bg-blue-600", tone: "blue", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Blue Magic", done: blueDone, total: blueTotal, color: "blue" }) }), children: _jsx(RefList, { type: "blue", names: BLUE_MAGIC_REF.map((b) => b.name) }) }), _jsxs(Panel, { title: "Capturable Monsters Reference", border: "border-green-600", buttonColor: "bg-green-600", tone: "green", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Captures", done: capDone, total: capTotal, color: "green" }) }), children: [_jsx(CollapsibleTwoTables, { title: "Affection & Items Cheatsheet", defaultOpen: false, tone: "neutral" // gives sensible defaults
                                 , border: "border-zinc-600" // same as Panel border
                                 , text: "text-zinc-200" // table text tone
                                 , headerBg: "bg-zinc-900/10" // header/thead background
@@ -6123,7 +5983,7 @@ const FFTAProgressionGuide = () => {
                                 ] }), _jsx(RefList, { type: "cap", names: CAPTURE_REF.map((c) => c.monster) })] }), _jsx(Panel, { title: "Mission Reference", border: "border-amber-600", buttonColor: "bg-amber-600", tone: "amber", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Missions", done: questDone, total: questTotal, color: "amber" }) }), children: _jsx(RefList, { type: "quest", names: MISSION_REF.map((q) => q.number) }) })] }), _jsx("div", { className: "mt-3", children: _jsx(Panel, { title: "Missables & Warnings (Global)", border: "border-red-600", buttonColor: "bg-red-600", tone: "red", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Missables", done: missDone, total: missTotal, color: "red" }) }), children: _jsx("ul", { className: "space-y-2 text-sm", children: GLOBAL_MISSABLES.map((m) => {
                             const id = keyify(`miss-global:${m.id}`);
                             return (_jsxs("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: [_jsx("input", { type: "checkbox", className: "mt-0.5 accent-red-600 dark:accent-red-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("span", { className: "text-zinc-800 dark:text-zinc-200", children: m.text })] }, m.id));
-                        }) }) }) }), _jsx("div", { className: "mt-4 space-y-2", children: blocks.map((b) => {
+                        }) }) }) }), screenMode !== "idle" && (_jsxs("div", { className: "fixed inset-0 z-50 flex items-center justify-center", children: [_jsx("div", { className: "absolute inset-0 bg-black/70 backdrop-blur-sm" }), _jsxs("div", { className: "relative mx-4 w-full max-w-md rounded-2xl shadow-lg ring-1 ring-white/10 bg-zinc-100 dark:bg-zinc-900", children: [_jsxs("div", { className: "px-5 py-4 border-b border-zinc-200/60 dark:border-white/10", children: [_jsx("h2", { className: "text-xl font-semibold text-zinc-900 dark:text-zinc-100", children: screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..." }), _jsx("p", { className: "mt-1 text-xs text-zinc-600 dark:text-zinc-400", children: "Please wait" })] }), _jsx("div", { className: "px-5 py-6", children: _jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 1" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: screenMode === "saving" ? "Writing save data..." : "Reading save data..." })] })] }), _jsx("div", { className: "h-5 w-5 animate-spin rounded-full border-2 border-zinc-400 border-t-transparent" })] }), _jsxs("div", { className: "opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 2" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: "Empty" })] })] }), _jsx("div", { className: "h-5 w-5 rounded-full border-2 border-transparent" })] }), _jsxs("div", { className: "opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 3" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: "Empty" })] })] }), _jsx("div", { className: "h-5 w-5 rounded-full border-2 border-transparent" })] })] }) }), _jsx("div", { className: "px-5 py-4 border-t border-zinc-200/60 dark:border-white/10 text-right", children: _jsx("span", { className: "text-xs text-zinc-500 dark:text-zinc-400", children: screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..." }) })] })] })), _jsx("div", { className: "mt-4 space-y-2", children: blocks.map((b) => {
                     const isOpen = !!expanded[b.key];
                     const blueNames = b.blue || [];
                     const capNames = b.caps || [];
@@ -6151,8 +6011,7 @@ const FFTAProgressionGuide = () => {
                                     }), b.placements && b.placements.length > 0 && (_jsx(MapPanel, { placements: b.placements })), blueNames.length > 0 && (_jsx(Panel, { title: "Blue Magic Now Available", border: "border-blue-600", buttonColor: "bg-blue-600", tone: "blue", right: _jsx(_Fragment, {}), children: _jsx(RefList, { type: "blue", names: blueNames }) })), capNames.length > 0 && (_jsx(Panel, { title: "Capturable Monsters Now Available", border: "border-green-600", buttonColor: "bg-green-600", tone: "green", right: _jsx(_Fragment, {}), children: _jsx(RefList, { type: "cap", names: capNames }) })), b.kind === "between" && side.length > 0 && (_jsx(Panel, { title: "Side Missions Now Available", border: "border-amber-600", buttonColor: "bg-amber-600", tone: "amber", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[180px]", children: _jsx(ProgressBar, { label: "Side", done: questDoneLocal, total: side.length, color: "purple" }) }), children: _jsx("ul", { className: "space-y-2 text-sm", children: side.map((num) => {
                                                 const id = keyify(`quest-global:${num}`);
                                                 const q = missionMap.get(num);
-                                                return (_jsxs("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: [_jsx("input", { type: "checkbox", className: "mt-0.5 accent-purple-600 dark:accent-purple-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("div", { className: "text-zinc-800 dark:text-zinc-200", children: q ? (_jsxs(_Fragment, { children: [_jsxs("div", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: ["#", String(q.number).padStart(3, "0"), " \u2014", " ", q.name] }), _jsxs("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: [_jsx("span", { className: "font-semibold", children: "Prerequisites:" }), " ", q.prerequisites &&
-                                                                                q.prerequisites.length ? (_jsx("ul", { className: "list-disc ml-5 mt-1", children: q.prerequisites.map((p, i) => (_jsx("li", { children: p }, i))) })) : ("None")] })] })) : (_jsxs("div", { className: "font-semibold", children: ["#", String(num).padStart(3, "0"), " \u2014 Unknown quest"] })) })] }, num));
+                                                return (_jsxs("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: [_jsx("input", { type: "checkbox", className: "mt-0.5 accent-purple-600 dark:accent-purple-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("div", { className: "text-zinc-800 dark:text-zinc-200", children: q ? (_jsxs(_Fragment, { children: [_jsxs("div", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: ["#", String(q.number).padStart(3, "0"), " \u2014", " ", q.name] }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: q.prerequisites && (_jsxs(_Fragment, { children: [_jsx("span", { className: "font-semibold", children: "Prerequisites:" }), " ", _jsx("ul", { className: "list-disc ml-5 mt-1", children: q.prerequisites.map((p, i) => (_jsx("li", { children: p }, i))) })] })) })] })) : (_jsxs("div", { className: "font-semibold", children: ["#", String(num).padStart(3, "0"), " \u2014 Unknown quest"] })) })] }, num));
                                             }) }) })), recs.length > 0 && (_jsx(Panel, { title: "Recruits / Unlocks", border: "border-purple-600", buttonColor: "bg-purple-600", right: _jsx(_Fragment, {}), children: _jsx("ul", { className: "space-y-2 text-sm", children: recs.map((line) => {
                                                 const id = keyify(`rec:${b.key}:${line}`);
                                                 return (_jsxs("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: [_jsx("input", { type: "checkbox", className: "mt-0.5 accent-purple-600 dark:accent-purple-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("span", { className: "text-zinc-800 dark:text-zinc-200", children: line })] }, id));
