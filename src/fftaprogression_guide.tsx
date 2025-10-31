@@ -5936,7 +5936,22 @@ const Panel: React.FC<{
           </button>
         </div>
       </div>
-      {open && <div className="mt-3">{children}</div>}
+      {open && (
+        <>
+          <div className="mt-3">{children}</div>
+          <div className="flex items-center justify-end gap-2">
+            {right}
+            <span className="flex items-center justify-end">
+              <button
+                className={`${buttonColor} text-white text-sm px-3 py-1 rounded`}
+                onClick={() => setOpen((o) => !o)}
+              >
+                {open ? "Hide" : "Show"}
+              </button>
+            </span>
+          </div>
+        </>
+      )}
     </div>
   );
 };
