@@ -258,11 +258,11 @@ type BlueRef = {
 type CapRef = {
   monster: string;
   family: string;
-  clans: string[];
+  clans?: string[];
   missions: string[];
-  areas: string[];
-  enjoys: { item: string; aff: number }[];
-  spits: { item: string; aff: number }[];
+  areas?: string[];
+  enjoys?: { item: string; aff: number }[];
+  spits?: { item: string; aff: number }[];
   notes: string;
 };
 
@@ -286,10 +286,10 @@ type QuestRef = {
   description: string;
   strategy?: string;
   type: "Capture" | "Dispatch" | "Encounter" | "Engagement";
-  cost: string;
+  cost?: string;
   location?: string;
   prerequisites?: string[];
-  reward: string[];
+  reward?: string[];
   available_for?: string;
   difficulty?:
     | "Very Easy"
@@ -310,9 +310,6 @@ const MISSION_REF: QuestRef[] = [
     name: `Snowball Fight`,
     description: ``,
     type: `Engagement`,
-    cost: null,
-    location: null,
-    reward: null,
     difficulty: `Very Easy`,
     enemies: [`Nurse`, `D.J. (Guiness)`, `PE Head (Colin)`, `PE Head (Lyle)`],
     strategy: `This opening fight functions more as a tutorial than a true battle.
@@ -331,9 +328,6 @@ The other boys see this as their cue to start teasing him again.
     name: `Bangaas`,
     description: ``,
     type: `Engagement`,
-    cost: null,
-    location: null,
-    reward: null,
     difficulty: `Very Easy`,
     enemies: [`White Monk`, `Warrior`],
     strategy: `Marche soon realizes that the term “Engage” simply means to enter a battle. The Moogle responds with a humorous confirmation before explaining that the armored figure nearby is a Judge, responsible for enforcing daily combat laws. Today’s law prohibits the use of items, and the Moogle advises Marche to always review the law before fighting. Before long, it’s your turn to act.
@@ -5480,7 +5474,6 @@ const CAPTURE_REF: CapRef[] = [
   {
     monster: "Goblin",
     family: "Goblinkind",
-    clans: null,
     missions: [
       "#055 White Flowers",
       "#049 A Lost Ring",
@@ -5489,7 +5482,6 @@ const CAPTURE_REF: CapRef[] = [
       "#032 Tower Ruins",
       "#001 Herb Picking",
     ],
-    areas: null,
     enjoys: [{ item: "Maiden Kiss", aff: 5 }],
     spits: [{ item: "Antidote", aff: 0 }],
     notes:
@@ -5500,7 +5492,6 @@ const CAPTURE_REF: CapRef[] = [
     family: "Goblinkind",
     clans: ["Clan Hounds", "Tricky Spirits"],
     missions: ["#100 Fiend Run", "#055 White Flowers", "#001 Herb Picking"],
-    areas: null,
     enjoys: [{ item: "Maiden Kiss", aff: 5 }],
     spits: [{ item: "Antidote", aff: 0 }],
     notes: "",
@@ -5510,7 +5501,6 @@ const CAPTURE_REF: CapRef[] = [
     family: "Flankind",
     clans: ["Roda Dragons", "Wild Monsters"],
     missions: ["#093 Flan Breakout!", "#059 Sketchy Thief"],
-    areas: null,
     enjoys: [{ item: "Antidote", aff: 5 }],
     spits: [{ item: "Eye Drops", aff: 0 }],
     notes: "",
@@ -5527,7 +5517,6 @@ const CAPTURE_REF: CapRef[] = [
       "#046 Prof in Trouble",
       "#007 Diamond Rain",
     ],
-    areas: null,
     enjoys: [{ item: "Antidote", aff: 5 }],
     spits: [{ item: "Eye Drops", aff: 0 }],
     notes: "",
@@ -5541,7 +5530,6 @@ const CAPTURE_REF: CapRef[] = [
       "#052 Friend Trouble",
       "#004 Desert Peril",
     ],
-    areas: null,
     enjoys: [{ item: "Antidote", aff: 5 }],
     spits: [{ item: "Eye Drops", aff: 0 }],
     notes: "",
@@ -5561,7 +5549,6 @@ const CAPTURE_REF: CapRef[] = [
       "#007 Diamond Rain",
     ],
     areas: ["Help Roda!"],
-    enjoys: null,
     spits: [{ item: "Holy Water", aff: 0 }],
     notes: "",
   },
@@ -5571,7 +5558,6 @@ const CAPTURE_REF: CapRef[] = [
     clans: ["Lost Monsters", "Wild Monsters"],
     missions: ["#109 Snow Fairy", "#065 Exploration"],
     areas: ["Help Roda!"],
-    enjoys: null,
     spits: [{ item: "Holy Water", aff: 0 }],
     notes: "",
   },
@@ -5591,9 +5577,7 @@ const CAPTURE_REF: CapRef[] = [
       "#011 Pale Company",
       "#007 Diamond Rain",
     ],
-    areas: null,
     enjoys: [{ item: "Cureall", aff: 10 }],
-    spits: null,
     notes: "",
   },
   {
@@ -5612,17 +5596,13 @@ const CAPTURE_REF: CapRef[] = [
     ],
     areas: ["Help Roda!"],
     enjoys: [{ item: "Cureall", aff: 10 }],
-    spits: null,
     notes: "",
   },
   {
     monster: "Thundrake",
     family: "Dragonkind",
-    clans: null,
     missions: ["#102 Wyrms Awaken", "#066 A Dragon's Aid", "#011 Pale Company"],
-    areas: null,
     enjoys: [{ item: "Cureall", aff: 10 }],
-    spits: null,
     notes: "Only found in missions-prioritize when available.",
   },
   {
@@ -5635,7 +5615,6 @@ const CAPTURE_REF: CapRef[] = [
       "#049 A Lost Ring",
       "#007 Diamond Rain",
     ],
-    areas: null,
     enjoys: [
       { item: "Cureall", aff: 10 },
       { item: "Echo Screen", aff: 5 },
@@ -5648,7 +5627,6 @@ const CAPTURE_REF: CapRef[] = [
     family: "Lamiakind",
     clans: ["Roaming Naiads"],
     missions: ["#049 A Lost Ring", "#022 To Ambervale"],
-    areas: null,
     enjoys: [
       { item: "Cureall", aff: 10 },
       { item: "Echo Screen", aff: 5 },
@@ -5697,7 +5675,6 @@ const CAPTURE_REF: CapRef[] = [
       "#034 Magewyrm",
       "#004 Desert Peril",
     ],
-    areas: null,
     enjoys: [{ item: "Holy Water", aff: 10 }],
     spits: [
       { item: "Antidote", aff: 0 },
@@ -5761,7 +5738,6 @@ const CAPTURE_REF: CapRef[] = [
     family: "Ahrimankind",
     clans: ["Aisen Ghosts", "Lost Monsters"],
     missions: ["#050 Staring Eyes", "#045 Frosty Mage", "#005 Twisted Flow"],
-    areas: null,
     enjoys: [{ item: "Eye Drops", aff: 5 }],
     spits: [{ item: "Soft", aff: 0 }],
     notes: "",
@@ -5777,7 +5753,6 @@ const CAPTURE_REF: CapRef[] = [
       "#050 Staring Eyes",
       "#005 Twisted Flow",
     ],
-    areas: null,
     enjoys: [{ item: "Holy Water", aff: 5 }],
     spits: [{ item: "Soft", aff: 0 }],
     notes: "",
@@ -5875,7 +5850,7 @@ const GLOBAL_MISSABLES: { id: string; text: string }[] = [
 ];
 
 const Tag: React.FC<{
-  color: "blue" | "green" | "purple" | "red";
+  color: "blue" | "green" | "purple" | "red" | "amber";
   children: React.ReactNode;
 }> = ({ color, children }) => {
   const map: Record<string, string> = {
@@ -5900,7 +5875,7 @@ const ProgressBar: React.FC<{
   done: number;
   total: number;
   label: string;
-  color: "blue" | "green" | "purple" | "red";
+  color: "blue" | "green" | "purple" | "red" | "amber";
 }> = ({ done, total, label, color }) => {
   const percent = pct(done, total);
   const palette: Record<string, string> = {
@@ -5908,6 +5883,7 @@ const ProgressBar: React.FC<{
     green: "bg-green-500",
     purple: "bg-purple-500",
     red: "bg-red-500",
+    amber: "bg-amber-500",
   };
   return (
     <div className="text-xs">
@@ -6066,8 +6042,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #002 → Before #003)",
       placements: ["Nubswood"],
-      blue: null,
-      caps: null,
       sidequests: [25, 27, 68, 69, 70, 143, 194, 199, 200, 201, 240, 264]
     },
 
@@ -6100,8 +6074,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #004 → Before #005)",
       placements: ["Ulei River"],
-      blue: null,
-      caps: null,
       sidequests: [49, 101, 112, 145, 152, 213, 289, 241],
     },
 
@@ -6118,7 +6090,6 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #005 → Before #006)",
       placements: ["Cadoan"],
       blue: ["Stare", "Roulette", "Drain Touch"],
-      caps: null,
       sidequests: [164, 172, 266],
     },
 
@@ -6128,8 +6099,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #006 → Before #007)",
       placements: ["Aisenfield"],
-      blue: null,
-      caps: null,
       sidequests: [62, 71, 74, 75, 106, 123, 207, 148, 150, 299, 175, 195, 205, 242, 267],
     },
 
@@ -6162,7 +6131,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #008 → Before #009)",
       placements: ["Koringwood"],
-      blue: null,
       caps: ["Firewyrm", "Bomb"],
       sidequests: [32, 33, 36, 48, 72, 73, 151, 125, 170, 244, 269],
     },
@@ -6179,8 +6147,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #009 → Before #010)",
       placements: ["Salikawood"],
-      blue: null,
-      caps: null,
       sidequests: [100, 140, 162, 166, 173, 211, 245, 270, 212, 300],
     },
 
@@ -6196,8 +6162,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #010 → Before #011)",
       placements: ["Nargai Cave"],
-      blue: null,
-      caps: null,
       sidequests: [114, 58, 124, 92, 154, 169, 206, 219, 246],
     },
 
@@ -6230,7 +6194,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #012 → Before #013)",
       placements: ["Dorsa Caravan"],
-      blue: null,
       caps: ["Antlion", "Toughskin"],
       sidequests: [52, 108, 77, 78, 79, 80, 81, 132, 156, 196, 197, 198, 204, 222, 248, 272],
     },
@@ -6247,8 +6210,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #013 → Before #014)",
       placements: ["Kudik Caves"],
-      blue: null,
-      caps: null,
       sidequests: [26, 61, 109, 131, 273, 157, 178, 216, 217, 218, 225, 249],
     },
 
@@ -6264,9 +6225,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #014 → Before #015)",
       placements: ["Jeraw Sands"],
-      blue: null,
-      caps: null,
-      sidequests: null,
     },
 
     {
@@ -6281,8 +6239,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #015 → Before #016)",
       placements: ["Muscadet"],
-      blue: null,
-      caps: null,
       sidequests: [28, 39, 82, 83, 84, 85, 86, 93, 126, 153, 158, 179, 220, 221, 228, 250, 251, 252, 274],
     },
 
@@ -6298,8 +6254,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #016 → Before #017)",
       placements: ["Materiwood"],
-      blue: null,
-      caps: null,
       sidequests: [51, 65, 30, 104, 105, 53, 121, 130, 149, 165, 129, 181, 223, 224, 253, 275, 298, 297],
     },
 
@@ -6315,8 +6269,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #017 → Before #018)",
       placements: ["Ozmonfield"],
-      blue: null,
-      caps: null,
       sidequests: [34, 35, 91, 102, 31, 66, 60, 144, 161, 171, 231, 254],
     },
 
@@ -6332,8 +6284,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #018 → Before #019)",
       placements: ["Deti Plains"],
-      blue: null,
-      caps: null,
       sidequests: [54, 107, 134, 147, 163, 177, 180, 182, 226, 227, 234, 255, 276, 127, 277, 128, 278],
     },
 
@@ -6349,8 +6299,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #019 → Before #020)",
       placements: ["Tubola Cave"],
-      blue: null,
-      caps: null,
       sidequests: [135, 136, 202, 229, 230, 285, 279, 280, 293],
     },
 
@@ -6366,8 +6314,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #020 → Before #021)",
       placements: ["Ahli Desert"],
-      blue: null,
-      caps: null,
       sidequests: [40, 41, 42, 57, 63, 103, 64, 29, 116, 117, 118, 119, 120, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 295, 296],
     },
 
@@ -6440,8 +6386,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #023 → Before #024)",
       placements: ["Siena Gorge"],
-      blue: null,
-      caps: null,
       sidequests: [56],
     },
 
@@ -6456,9 +6400,6 @@ const FFTAProgressionGuide: React.FC = () => {
       key: "post-024",
       kind: "between",
       title: "Post-Main Game (After #024)",
-      placements: null,
-      blue: null,
-      caps: null,
       sidequests: [87, 184, 185, 88, 89, 90, 186, 187, 188, 189, 190, 191, 67, 96, 192, 99, 193, 95, 98, 259, 260, 261, 263, 262, 284, 97],
     },
   ];
