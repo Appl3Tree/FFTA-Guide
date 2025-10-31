@@ -7000,10 +7000,10 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       right={
                         <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
-                            label="Side"
+                            label="Blue"
                             done={blueDoneLocal}
                             total={blueNames.length}
-                            color="purple"
+                            color="blue"
                           />
                         </div>
                       }
@@ -7021,10 +7021,10 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       right={
                         <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
-                            label="Side"
+                            label="Cap"
                             done={capDoneLocal}
                             total={capNames.length}
-                            color="purple"
+                            color="green"
                           />
                         </div>
                       }
@@ -7045,7 +7045,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                             label="Side"
                             done={questDoneLocal}
                             total={quest.length}
-                            color="purple"
+                            color="amber"
                           />
                         </div>
                       }
@@ -7054,14 +7054,17 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         {quest.map((num) => {
                           const id = keyify(`quest-global:${num}`);
                           const q = missionMap.get(num);
+                          const isChecked = !!checked[id];
                           return (
                             <li
                               key={num}
                               className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+                              onClick={() => setCheck(id)}
                             >
+                              <label className="flex items-start gap-2">
                               <input
                                 type="checkbox"
-                                className="mt-0.5 accent-purple-600 dark:accent-purple-400"
+                                className="mt-0.5 accent-amber-600 dark:accent-amber-400"
                                 checked={!!checked[id]}
                                 onChange={() => setCheck(id)}
                               />
@@ -7073,7 +7076,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                       {q.name}
                                     </div>
                                     <div className="text-xs text-zinc-600 dark:text-zinc-400">
-                                      {q.prerequisites && (
+                                      {!isChecked && q.prerequisites && (
                                         <>
                                       <span className="font-semibold">
                                         Prerequisites:
@@ -7094,6 +7097,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                   </div>
                                 )}
                               </div>
+                              </label>
                             </li>
                           );
                         })}
