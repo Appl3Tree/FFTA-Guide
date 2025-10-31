@@ -6770,7 +6770,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
         >
           <CollapsibleTwoTables
             title="Affection & Items Cheatsheet"
-            defaultOpen
+            defaultOpen={false}
             tone="neutral"                      // gives sensible defaults
             border="border-zinc-600"         // same as Panel border
             text="text-zinc-200"             // table text tone
@@ -6986,7 +6986,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
                   {blueNames.length > 0 && (
                     <Panel
-                      title="Blue Magic Available"
+                      title="Blue Magic Now Available"
                       border="border-blue-600"
                       buttonColor="bg-blue-600"
                       tone="blue"
@@ -6998,7 +6998,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
                   {capNames.length > 0 && (
                     <Panel
-                      title="Capturable Monsters"
+                      title="Capturable Monsters Now Available"
                       border="border-green-600"
                       buttonColor="bg-green-600"
                       tone="green"

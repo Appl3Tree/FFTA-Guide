@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# Final Fantasy Tactics Advance Guide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive, fan-made reference for **Final Fantasy Tactics Advance (FFTA)** — designed to help completionists, collectors, and anyone trying to keep track of *missables*, *recruitment events*, and *quest progress*.  
 
-Currently, two official plugins are available:
+🕹️ **Live Site:** [appl3tree.github.io/FFTA-Guide](https://appl3tree.github.io/FFTA-Guide/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🌟 About the Project
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project started as a personal “handbook” while replaying *Final Fantasy Tactics Advance*. The game has a lot of easy-to-miss details, obscure mechanics, and limited-time opportunities — and flipping between multiple tabs, wikis, and forum threads was getting messy.
 
-## Expanding the ESLint configuration
+So I built a single, organized guide that combines information from multiple sources (community guides, the FFTA wiki, and archived forum posts) into one place.  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+It’s built with **React**, and it also happens to be my **first real web development project** — I learned the basics as I went, using AI assistance and lots of trial and error. The result is a simple, functional site that lets you browse, track progress, and dig into FFTA’s hidden details without spoilers unless you choose to expand sections.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🧭 Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- ✅ Organized compilation of game information from multiple trusted sources  
+- 📘 Collapsible panels to reduce spoilers (story quest details are hidden by default)  
+- 🗺️ Dedicated sections for:
+  - Missables
+  - Blue Magic
+  - Capturable Monsters
+  - Quest progression
+- 📊 Progress tracking with visual indicators
+- 💬 Notes and strategy snippets for main story quests
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧱 Built With
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React** (first-time use!)
+- **GitHub Pages** for hosting
+- Basic **JavaScript**, **HTML**, and **CSS**
+
+---
+
+## 🚧 Work in Progress
+
+This is still an evolving project. Planned improvements include:
+
+- Better mobile layout (especially for progress bar & toggle buttons)
+- Improved readability in the *Missables* section
+- Integrating recruit/missable notes directly into quest entries
+- Cleaning up text parsing and formatting issues in the large quest list
+
+---
+
+## 💡 Feedback
+
+I’d love any feedback — whether it’s about layout, accuracy, or feature ideas.  
+This is a fan project made purely for fun and learning, with no monetization or social links attached.
+
+If you notice something missing or incorrect, feel free to **open an issue** or **submit a pull request**!
+
+---
+
+## ⚠️ Spoiler Notice
+
+The guide includes:
+- Character names
+- Quest details
+- Some light strategy notes
+
+All spoiler-prone panels are **collapsed by default**, so you can browse safely unless you choose to expand them.
+
+---
+
+## 🎮 Acknowledgments
+
+This project wouldn’t exist without:
+- The **FFTA community** for preserving so much detailed info over the years  
+- Various **guides, wikis, and forum threads** that inspired and informed this compilation  
+- The patience and creativity of the **Final Fantasy Tactics Advance** fandom  
+
+---
+
+## 📖 License
+
+This is a **fan-made project**.  
+All content related to *Final Fantasy Tactics Advance* is © Square Enix.  
+This guide is intended for **educational and personal use only**.
