@@ -5887,7 +5887,7 @@ const ProgressBar: React.FC<{
   };
   return (
     <div className="text-xs">
-      <div className="flex justify-between">
+      <div className="flex flex-wrap items-end justify-between gap-1">
         <span className="text-zinc-700 dark:text-zinc-300">{label}</span>
         <span className="text-zinc-600 dark:text-zinc-400">
           {done}/{total} ({percent}%)
@@ -5924,9 +5924,9 @@ const Panel: React.FC<{
     <div
       className={`rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <h4 className="font-bold text-zinc-900 dark:text-zinc-100">{title}</h4>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           {right}
           <button
             className={`${buttonColor} text-white text-sm px-3 py-1 rounded`}
@@ -6754,7 +6754,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           buttonColor="bg-blue-600"
           tone="blue"
           right={
-            <div className="min-w-[200px]">
+            <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
                 label="Blue Magic"
                 done={blueDone}
@@ -6773,7 +6773,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           buttonColor="bg-green-600"
           tone="green"
           right={
-            <div className="min-w-[200px]">
+            <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
                 label="Captures"
                 done={capDone}
@@ -6815,7 +6815,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           buttonColor="bg-amber-600"
           tone="amber"
           right={
-            <div className="min-w-[200px]">
+            <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
                 label="Missions"
                 done={questDone}
@@ -6836,7 +6836,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           buttonColor="bg-red-600"
           tone="red"
           right={
-            <div className="min-w-[200px]">
+            <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
                 label="Missables"
                 done={missDone}
@@ -7030,7 +7030,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       buttonColor="bg-amber-600"
                       tone="amber"
                       right={
-                        <div className="min-w-[180px]">
+                        <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
                             label="Side"
                             done={questDoneLocal}
