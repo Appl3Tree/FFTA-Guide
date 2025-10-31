@@ -6487,61 +6487,66 @@ const FFTAProgressionGuide: React.FC = () => {
                       MP {b.mp}
                     </span>
                   </div>
-                  {b.desc && (
-                    <div className="text-sm text-zinc-800 dark:text-zinc-200">
-                      {b.desc}
-                    </div>
+                  {/* Hide everything below when checked */}
+                  {!isChecked && (
+                    <>
+                      {b.desc && (
+                        <div className="text-sm text-zinc-800 dark:text-zinc-200">
+                          {b.desc}
+                        </div>
+                      )}
+                      <div className="text-xs mt-1 text-zinc-700 dark:text-zinc-300">
+                        <div>
+                          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+                            From:
+                          </span>{" "}
+                          {b.from.join(", ")}
+                        </div>
+                        {b.sources.length > 0 && (
+                          <div className="mt-1 space-y-1">
+                            {b.sources.filter((s) => s.type === "Clan").length > 0 && (
+                              <div>
+                                <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+                                  Clans:
+                                </span>{" "}
+                                {b.sources
+                                  .filter((s) => s.type === "Clan")
+                                  .map((s) => s.name)
+                                  .join(", ")}
+                              </div>
+                            )}
+                            {b.sources.filter((s) => s.type === "Mission").length > 0 && (
+                              <div>
+                                <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+                                  Missions:
+                                </span>{" "}
+                                {b.sources
+                                  .filter((s) => s.type === "Mission")
+                                  .map((s) => s.name)
+                                  .join(", ")}
+                              </div>
+                            )}
+                            {b.sources.filter((s) => s.type === "Turf").length > 0 && (
+                              <div>
+                                <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+                                  Turf Defense:
+                                </span>{" "}
+                                {b.sources
+                                  .filter((s) => s.type === "Turf")
+                                  .map((s) => s.name)
+                                  .join(", ")}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        {b.notes && (
+                          <div className="mt-1 italic text-zinc-700 dark:text-zinc-300">
+                            {b.notes}
+                          </div>
+                        )}
+                      </div>
+                    </>
                   )}
-                  <div className="text-xs mt-1 text-zinc-700 dark:text-zinc-300">
-                    <div>
-                      <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-                        From:
-                      </span>{" "}
-                      {b.from.join(", ")}
-                    </div>
-                    {b.sources.length > 0 && (
-                      <div className="mt-1 space-y-1">
-                        {b.sources.filter((s) => s.type === "Clan").length > 0 && (
-                          <div>
-                            <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-                              Clans:
-                            </span>{" "}
-                            {b.sources
-                              .filter((s) => s.type === "Clan")
-                              .map((s) => s.name)
-                              .join(", ")}
-                          </div>
-                        )}
-                        {b.sources.filter((s) => s.type === "Mission").length > 0 && (
-                          <div>
-                            <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-                              Missions:
-                            </span>{" "}
-                            {b.sources
-                              .filter((s) => s.type === "Mission")
-                              .map((s) => s.name)
-                              .join(", ")}
-                          </div>
-                        )}
-                        {b.sources.filter((s) => s.type === "Turf").length > 0 && (
-                          <div>
-                            <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-                              Turf Defense:
-                            </span>{" "}
-                            {b.sources
-                              .filter((s) => s.type === "Turf")
-                              .map((s) => s.name)
-                              .join(", ")}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                    {b.notes && (
-                      <div className="mt-1 italic text-zinc-700 dark:text-zinc-300">
-                        {b.notes}
-                      </div>
-                    )}
-                  </div>
                 </div>
               </label>
             </li>
@@ -6573,66 +6578,71 @@ const FFTAProgressionGuide: React.FC = () => {
                       ({c.family})
                     </span>
                   </div>
-                  <div className="text-xs mt-1 space-y-1 text-zinc-900 dark:text-zinc-100">
-                    {c.clans && (
-                      <div>
-                        <span className="font-semibold">Random Battles:</span>{" "}
-                        <ul className="list-disc list-inside ml-4">
-                          {c.clans.map((m, i) => <li key={i}>{m}</li>)}
-                        </ul>
+                  {/* Hide everything below when checked */}
+                  {!isChecked && (
+                    <>
+                      <div className="text-xs mt-1 space-y-1 text-zinc-900 dark:text-zinc-100">
+                        {c.clans && (
+                          <div>
+                            <span className="font-semibold">Random Battles:</span>{" "}
+                            <ul className="list-disc list-inside ml-4">
+                              {c.clans.map((m, i) => <li key={i}>{m}</li>)}
+                            </ul>
+                          </div>
+                        )}
+                        {c.missions && (
+                          <div>
+                            <span className="font-semibold">Missions:</span>{" "}
+                            <ul className="list-disc list-inside ml-4">
+                              {c.missions.map((m, i) => <li key={i}>{m}</li>)}
+                            </ul>
+                          </div>
+                        )}
+                        {c.areas && (
+                          <div>
+                            <span className="font-semibold">Turf Defense:</span>{" "}
+                            <ul className="list-disc list-inside ml-4">
+                              {c.areas.map((m, i) => <li key={i}>{m}</li>)}
+                            </ul>
+                          </div>
+                        )}
+                        {c.enjoys && (
+                          <>
+                            <div className="font-semibold">Enjoys:</div>
+                            <ul className="list-disc list-inside ml-4">
+                              {c.enjoys.map((e, i) => (
+                                <li key={i}>
+                                  {e.item}{" "}
+                                  <span className="text-xs text-gray-400">
+                                    (Affection gained: {e.aff})
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                        {c.spits && (
+                          <>
+                            <div className="font-semibold">Spits back:</div>
+                            <ul className="list-disc list-inside ml-4">
+                              {c.spits.map((e, i) => (
+                                <li key={i}>
+                                  {e.item}{" "}
+                                  <span className="text-xs text-gray-400">
+                                    (Affection gained: {e.aff})
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
                       </div>
-                    )}
-                    {c.missions && (
-                      <div>
-                        <span className="font-semibold">Missions:</span>{" "}
-                        <ul className="list-disc list-inside ml-4">
-                          {c.missions.map((m, i) => <li key={i}>{m}</li>)}
-                        </ul>
-                      </div>
-                    )}
-                    {c.areas && (
-                      <div>
-                        <span className="font-semibold">Turf Defense:</span>{" "}
-                        <ul className="list-disc list-inside ml-4">
-                          {c.areas.map((m, i) => <li key={i}>{m}</li>)}
-                        </ul>
-                      </div>
-                    )}
-                    {c.enjoys && (
-                      <>
-                        <div className="font-semibold">Enjoys:</div>
-                        <ul className="list-disc list-inside ml-4">
-                          {c.enjoys.map((e, i) => (
-                            <li key={i}>
-                              {e.item}{" "}
-                              <span className="text-xs text-gray-400">
-                                (Affection gained: {e.aff})
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-                    {c.spits && (
-                      <>
-                        <div className="font-semibold">Spits back:</div>
-                        <ul className="list-disc list-inside ml-4">
-                          {c.spits.map((e, i) => (
-                            <li key={i}>
-                              {e.item}{" "}
-                              <span className="text-xs text-gray-400">
-                                (Affection gained: {e.aff})
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-                  </div>
-                  {c.notes && (
-                    <div className="text-xs mt-1 italic text-zinc-700 dark:text-zinc-300">
-                      {c.notes}
-                    </div>
+                      {c.notes && (
+                        <div className="text-xs mt-1 italic text-zinc-700 dark:text-zinc-300">
+                          {c.notes}
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               </label>
@@ -6662,18 +6672,12 @@ const FFTAProgressionGuide: React.FC = () => {
                 />
                 <div>
                   <div className={`font-semibold ${tagColor}`}>
-                    #{String(q.number).padStart(3, "0")} — {q.name}
+                    #{String(q.number).padStart(3, "0")} — {q.name}{" "}<span className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">({q.location})</span>
                   </div>
 
                   {/* Hide everything below when checked */}
                   {!isChecked && (
                     <>
-                      {q.location && (
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-                          ({q.location})
-                        </div>
-                      )}
-
                       {q.description && (
                         <div className="text-sm text-zinc-800 dark:text-zinc-200 mt-1">
                           {q.description}
