@@ -7001,8 +7001,8 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
                             label="Side"
-                            done={questDoneLocal}
-                            total={quest.length}
+                            done={blueDoneLocal}
+                            total={blueNames.length}
                             color="purple"
                           />
                         </div>
@@ -7022,8 +7022,8 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
                             label="Side"
-                            done={questDoneLocal}
-                            total={quest.length}
+                            done={capDoneLocal}
+                            total={capNames.length}
                             color="purple"
                           />
                         </div>
