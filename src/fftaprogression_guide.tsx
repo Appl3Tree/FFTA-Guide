@@ -6868,7 +6868,6 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           const isOpen = !!expanded[b.key];
           const blueNames = b.blue || [];
           const capNames = b.caps || [];
-          const side = b.sidequests || [];
           const recs = b.recruits || [];
           const miss = b.missables || [];
           const quest = b.sidequests || [];
@@ -6941,9 +6940,9 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         Captures {capDoneLocal}/{capNames.length}
                       </Tag>
                     )}
-                    {b.kind === "between" && side.length > 0 && (
+                    {b.kind === "between" && quest.length > 0 && (
                       <Tag color="amber">
-                        Side {questDoneLocal}/{side.length}
+                        Side {questDoneLocal}/{quest.length}
                       </Tag>
                     )}
                   </div>
@@ -6957,7 +6956,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
               {isOpen && (
                 <div className="p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800">
-                  {b.kind === "story" && side.map((num) => {
+                  {b.kind === "story" && quest.map((num) => {
                           const id = keyify(`quest-global:${num}`);
                           const q = missionMap.get(num);
                           return (
@@ -6998,7 +6997,16 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       border="border-blue-600"
                       buttonColor="bg-blue-600"
                       tone="blue"
-                      right={<></>}
+                      right={
+                        <div className="w-full sm:w-auto sm:min-w-[180px]">
+                          <ProgressBar
+                            label="Side"
+                            done={questDoneLocal}
+                            total={quest.length}
+                            color="purple"
+                          />
+                        </div>
+                      }
                     >
                       <RefList type="blue" names={blueNames} />
                     </Panel>
@@ -7010,13 +7018,22 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       border="border-green-600"
                       buttonColor="bg-green-600"
                       tone="green"
-                      right={<></>}
+                      right={
+                        <div className="w-full sm:w-auto sm:min-w-[180px]">
+                          <ProgressBar
+                            label="Side"
+                            done={questDoneLocal}
+                            total={quest.length}
+                            color="purple"
+                          />
+                        </div>
+                      }
                     >
                       <RefList type="cap" names={capNames} />
                     </Panel>
                   )}
 
-                  {b.kind === "between" && side.length > 0 && (
+                  {b.kind === "between" && quest.length > 0 && (
                     <Panel
                       title="Side Missions Now Available"
                       border="border-amber-600"
@@ -7027,14 +7044,14 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                           <ProgressBar
                             label="Side"
                             done={questDoneLocal}
-                            total={side.length}
+                            total={quest.length}
                             color="purple"
                           />
                         </div>
                       }
                     >
                       <ul className="space-y-2 text-sm">
-                        {side.map((num) => {
+                        {quest.map((num) => {
                           const id = keyify(`quest-global:${num}`);
                           const q = missionMap.get(num);
                           return (
