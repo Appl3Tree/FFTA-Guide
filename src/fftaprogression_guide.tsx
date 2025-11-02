@@ -1231,7 +1231,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `3600 Gil`,
       `Sprinkler`,
       `1x Random Item`,
-      `available_for: "10 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Bomb x4`],
@@ -1262,7 +1261,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `Secret Item (1x Random`,
       `Card)`,
-      `available_for: "15 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Defender`, `Illusionist`],
@@ -1281,7 +1279,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `Secret Item (1x`,
       `Random Card)`,
-      `available_for: "15 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`White Mage`, `Black Mage`],
@@ -1300,7 +1297,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `Secret Item (1x`,
       `Random Card)`,
-      `available_for: "15 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Archer`, `Gladiator`, `White Mage`],
@@ -1320,7 +1316,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Peytral`,
       `1x Random Item`,
       `1x Random Card`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Summoner`],
@@ -1360,7 +1355,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     prerequisites: [
       "Completed Snow in Lutia (#044)",
     ],
-    reward: [`4000 Gil`, `Gedegg Soup`, `available_for: "25 Days`],
     difficulty: `Slightly Hard`,
     enemies: [`Ice Flan x2`, `Zombie x2 (Colin`],
   },
@@ -1376,7 +1370,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Gedegg Soup`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Bomb x3`, `Firewyrm x2`],
@@ -1395,7 +1388,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2x`,
       `Random Cards`,
       `Req. Skills: Tracking/Lvl.7`,
-      `available_for: "15 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Sprite x2`, `Zombie x2`],
@@ -1407,9 +1399,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `600 Gil`,
     location: `Ulei River`,
-    prerequisites: [
-    ],
-    reward: [`5200 Gil`, `2x Random Items`, `available_for: "15 Days`],
     difficulty: `Medium`,
     enemies: [`Goblin`, `Sprite`, `Lamia x2`],
   },
@@ -1458,7 +1447,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `9000 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Cream`, `Coeurl`, `Red Panther x3`, `a Cream`, `and a Coeurl`],
@@ -1478,7 +1466,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Tiger Hide`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Gunner`, `Archer`, `Thief x2`, `Hunter x2`],
@@ -1495,7 +1482,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Trichord`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Sprite`, `Red Panther`],
@@ -1511,7 +1497,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1600 Gil`,
       `White Flowers`,
       `1x Random Item`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Antlion x3`, `Goblin`, `Red Cap`],
@@ -1543,7 +1528,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `1x`,
       `Random Card`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Templar x2`, `Defender x2`],
@@ -1562,7 +1546,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `7000 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Lamia`, `Odd Statue x2`],
@@ -1579,7 +1562,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Sketchbook`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Archer`, `Thief x2`],
@@ -1596,7 +1578,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `36000 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `available_for: "10 Days`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Summoner`, `Alchemist`],
@@ -1619,8 +1600,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `900 Gil`,
     location: `Cadoan`,
-    prerequisites: [
-    ],
     reward: [`4600 Gil`, `Secret Item (The Hero Gaol)`, `1x Random Item`],
     difficulty: `Medium`,
     enemies: [`Lamia x3`],
@@ -1639,7 +1618,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `18000 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Bomb`, `Ahriman`, `Odd Statue x2`],
@@ -1778,7 +1756,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `6000 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Hard`,
     enemies: [`Black Mage`, `Time Mage (Steraiz)`],
@@ -2151,7 +2128,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random`,
       `Cards`,
-      `available_for: "20 Days`,
     ],
     difficulty: `Medium`,
   },
@@ -2248,7 +2224,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `8800 Gil`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "20 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Coeurl`, `Ahriman`, `Red Cap`],
@@ -2259,7 +2234,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `Bandit clans are stealing work and attacking without warning! They're giving us clans a bad name. Help us round them up. ~ Clan Center`,
     type: `Encounter`,
     cost: `600 Gil`,
-    reward: [`4600 Gil`, `2x Random Item`, `available_for: "25 Days`],
     difficulty: `Medium`,
     enemies: [`Thief`, `Archer`, `Black Mage`, `White Mage`],
   },
@@ -2273,7 +2247,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `22600 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `available_for: "35 Days`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Icedrake`, `Firewyrm x2`, `Thundrake x2`],
@@ -2301,7 +2274,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `9000 Gil`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Soldier`, `Thief x2`, `White Monk`],
@@ -2321,7 +2293,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x`,
       `Random Cards`,
-      `available_for: "40 Days`,
     ],
     difficulty: `Slightly Hard`,
     enemies: ["Hunter", "Beastmaster", "Malboro x2", "Mystery Box x2"],
@@ -2340,7 +2311,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `6000 Gil`,
       `2x Random Item`,
       `1x Random Card`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Fighter`, `Time Mage`, `Thief (Thomson)`],
@@ -2356,7 +2326,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `4600 Gil`,
       `Beastspear`,
       `1x Random Card`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Bomb`, `Antlion`],
@@ -2376,7 +2345,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x`,
       `Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Archer x2`, `Gunner x2`, `Hunter x2`],
@@ -2391,7 +2359,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `9000 Gil`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "20 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Sprite`, `Ice Flan`],
@@ -2407,7 +2374,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `13600 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Medium`,
     enemies: [`Archer`, `Gladiator`, `Black Mage`, `Fighter x2 (Weaver)`],
@@ -2422,7 +2388,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `11400 Gil`,
       `1x Random Item`,
       `2x Random Cards`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Easy`,
     enemies: [`Gunner`, `Archer`, `Soldier`],
@@ -2437,7 +2402,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `4200 Gil`,
       `2x Random Items`,
       `Req. Skills: Negotiate/Lvl.4`,
-      `available_for: "25 Days`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Thief`, `Archer`, `White Mage`, `Black Mage`, `Soldier (Mintz)`],
@@ -2881,8 +2845,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `My whole class's "Ancient Studies" homework was stolen! If he had some ancient object, we could do it again... Help! ~ Babins, 4th Grade Swords`,
     type: `Dispatch`,
     cost: `200 Gil`,
-    prerequisites: [
-    ],
     reward: [
       `1800 Gil`,
       `Homework`,
@@ -2945,8 +2907,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `Looking for someone to model for a statue to be put in the Royal Library's new wing. Youth, beauty, and physique a plus. ~ Cesare, Artist`,
     type: `Dispatch`,
     cost: `600 Gil`,
-    prerequisites: [
-    ],
     reward: [
       `4600 Gil`,
       `Stradivari`,
@@ -5590,63 +5550,669 @@ const MAP_PLACEMENTS: Record<
   Helj: { number: 26, title: "Helj" },
 };
 
-const GLOBAL_MISSABLES: { id: string; text: string }[] = [
-  {
-    id: "miss-eldas-cup",
-    text: "Dispatch: Caravan Guard (#168) — Do NOT complete until Eldena joins. Completing spends Elda’s Cup.",
-  },
-  {
-    id: "miss-hero-gaol",
-    text: "Use mission item “The Hero Gaol” (from #062 Oasis Frogs) on missions to recruit Lini.",
-  },
-  {
-    id: "miss-snake-shield",
-    text: "Use mission item “Snake Shield” (from #165 Hundred-Eye) on missions to recruit Cheney.",
-  },
-  {
-    id: "miss-missing-prof",
-    text: "Tubola Caves: Missing Professor (#063) — SAVE before mission. Quin may ask to join; if not, reload. Not repeatable.",
-  },
-  {
-    id: "miss-wyrmstone",
-    text: "Delia Dunes: A Dragon's Aid (#066) — Do NOT complete until Pallanza joins. Completing spends Wyrmstone.",
-  },
-  {
-    id: "miss-clan-league",
-    text: "Mission #043E Clan League — repeatable source for recruiting Littlevilli (random after completion).",
-  },
-  {
-    id: "miss-ezel",
-    text: "Koringwood: Reconciliation → then Bored — Ezel offers to join. Avoid completing simultaneously with Left Behind / A Maiden’s Cry.",
-  },
-  {
-    id: "miss-ritz",
-    text: "Lutia Pass: Mortal Snow — Ritz offers to join. Avoid completing at same time as Left Behind / A Maiden’s Cry.",
-  },
-  {
-    id: "miss-babus",
-    text: "Dispatch: Left Behind → With Babus → Doned Here — Babus offers to join. Avoid finishing with A Maiden’s Cry; accept “With Babus” before moving.",
-  },
-  {
-    id: "miss-shara",
-    text: "Dispatch: A Maiden’s Cry (both versions) — Shara offers to join. Do NOT complete at the same time as Left Behind.",
-  },
-  {
-    id: "miss-cid",
-    text: "After all 300 missions → “Cleanup Time” → Cid offers to join.",
-  },
-  {
-    id: "miss-blue-goblins",
-    text: "Blue Goblins eventually disappear — learn Goblin Punch & capture early (#001, #032, #037, #044, #049, #055).",
-  },
-  {
-    id: "miss-thundrakes",
-    text: "Thundrakes disappear — learn Dragon Force and capture during #011 / #066 / #102 (and more).",
-  },
-  {
-    id: "miss-free-bervenia",
-    text: "⚠️ #087 Free Bervenia bug — if failed, it may not reappear.",
-  },
+
+// === Global Missables helpers (injected) ===
+type GlobalMissable = {
+    id: number;
+    type: string;
+    missable: string[];
+    warning?: string;
+    mission?: number[];
+    note: string;
+};
+
+const getMissablesForMission = (num: number): GlobalMissable[] =>
+    GLOBAL_MISSABLES.filter((m) => Array.isArray(m.mission) && m.mission.includes(num));
+
+const missableKey = (m: GlobalMissable) => keyify(`miss-global:${m.id}`);
+
+
+
+
+
+
+
+
+function MissableCard({
+    m,
+    checked,
+    setCheck,
+}: {
+    m: GlobalMissable;
+    checked: Record<string, boolean>;
+    setCheck: (id: string) => void;
+}) {
+    const id = missableKey(m);
+    const manualChecked = !!checked[id];
+    const autoCap = m.type === "Monster Bank" && Array.isArray(m.missable) && m.missable.some((nm) => !!checked[keyify(`cap:${nm}`)]);
+    const autoBlue = m.type === "Blue Magic" && Array.isArray(m.missable) && m.missable.some((nm) => !!checked[keyify(`blue:${nm}`)]);
+    const autoChecked = !!(autoCap || autoBlue);
+    const isChecked = manualChecked || autoChecked;
+
+    // Card-level click: prevent label default + stop bubbling, toggle only this missable
+    const onCardClick = (e: React.SyntheticEvent) => {
+        // prevent the label's default toggle if we're still inside any label
+        if (typeof e.preventDefault === "function") e.preventDefault();
+        e.stopPropagation();
+        setCheck(id);
+    };
+
+    // Block parent handlers on mousedown/pointerdown as well (prevents label toggles)
+    const block = (e: React.SyntheticEvent) => {
+        if (typeof e.preventDefault === "function") e.preventDefault();
+        e.stopPropagation();
+    };
+
+    // Checkbox: allow default (so it visually toggles), stop bubbling, and persist state
+    const cbClick = (e: React.SyntheticEvent) => {
+        e.stopPropagation();
+    };
+    const cbChange = () => {
+        setCheck(id);
+    };
+
+    return (
+        <li
+            key={`gm-${m.id}`}
+            className="flex w-full items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10 cursor-pointer"
+            onClick={onCardClick}
+            onMouseDown={block}
+            onPointerDown={block}
+        >
+            <input
+                type="checkbox"
+                className="mt-0.5 accent-red-600 dark:accent-red-400"
+                checked={isChecked}
+                onChange={cbChange}
+                onClick={cbClick}
+            />
+            <div className="flex-1 min-w-0 text-sm text-zinc-800 dark:text-zinc-200">
+                <div className="font-semibold text-red-700 dark:text-red-300">
+                    Missable: {Array.isArray(m.missable) ? m.missable.join(", ") : "Unknown"}
+                </div>
+                {!isChecked && (
+                    <>
+                        <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
+                            <span className="font-semibold">Type:</span> {m.type}
+                        </div>
+                        {m.warning && (
+                            <div className="text-xs italic text-red-700 dark:text-red-300 mt-1">
+                                {m.warning}
+                            </div>
+                        )}
+                        {m.note && (
+                            <div className="text-xs text-zinc-700 dark:text-zinc-300 mt-1">
+                                {m.note}
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
+        </li>
+    );
+}
+
+const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?: string; mission?: number[]; note: string }[] = [
+ {
+  id: 1,
+  type: "Recruiting-Related Missions",
+  missable: ["Eldena"],
+  warning: "Do NOT complete Caravan Guard (#168) or discard Elda's Cup before recruiting Eldena.",
+  note: "If you complete this mission before recruiting Eldena, you will lose Elda's Cup and miss the opportunity to recruit Eldena.",
+  mission: [168]
+ },
+ {
+  id: 2,
+  type: "Recruiting-Related Missions",
+  missable: ["Lini"],
+  warning: "Do NOT discard the Hero Gaol before recruiting Lini.",
+  note: "If you discard the Hero Gaol before recruiting Lini, you will miss the opportunity to recruit Lini.",
+ },
+ {
+  id: 3,
+  type: "Recruiting-Related Missions",
+  missable: ["Pallanza"],
+  warning: "Do NOT complete A Dragon's Aid (#066) or discard the Wyrmstone before recruiting Pallanza.",
+  note: "If you complete this mission before recruiting Pallanza, you will lose the Wyrmstone and miss the opportunity to recruit Pallanza.",
+  mission: [66]
+ },
+ {
+  id: 4,
+  type: "Recruiting-Related Missions",
+  missable: ["Quin"],
+  warning: "Save before starting Tubola Caves (#256).",
+  note: "If Quin doesn't offer to join, reset because this is the only chance to recruit Quin.",
+  mission: [256]
+ },
+ {
+  id: 5,
+  type: "Recruiting-Related Missions",
+  missable: ["Cheney"],
+  warning: "Do NOT discard the Snake Shield before recruiting Cheney.",
+  note: "If you discard the Snake Shield before recruiting Cheney, you will miss the opportunity to recruit Cheney."
+ },
+ {
+  id: 6,
+  type: "Recruiting-Related Missions",
+  missable: ["Littlevilli"],
+  warning: "Save before starting the Clan League (#043) mission.",
+  note: "Not \"technically\" missable as the mission repeats. Just to save your time, reset if Littlevilli doesn't request to join.",
+  mission: [43],
+ },
+ {
+  id: 7,
+  type: "Recruiting-Related Missions",
+  missable: ["Ezel"],
+  warning: "Do NOT complete \"Reconciliation\" alongside \"Left Behind\" or \"A Maiden's Cry\".",
+  note: "Possible bug can cause issues.",
+ },
+ {
+  id: 8,
+  type: "Recruiting-Related Missions",
+  missable: ["Ritz"],
+  warning: "Do NOT complete \"Reconciliation\" alongside \"Left Behind\" or \"A Maiden's Cry\".",
+  note: "Possible bug can cause issues."
+ },
+ {
+  id: 9,
+  type: "Recruiting-Related Missions",
+  missable: ["Babus"],
+  warning: "Do NOT complete \"Left Behind\" alongside \"A Maiden's Cry\" or \"Reconciliation\" and do NOT move on map before signing up for \"With Babus\".",
+  note: "Possible bug can cause issues."
+ },
+ {
+  id: 10,
+  type: "Recruiting-Related Missions",
+  missable: ["Shara"],
+  warning: "Do NOT complete \"A Maiden's Cry\" alongside \"Left Behind\" \"Reconciliation\" and do NOT move on map before signing up for \"With Babus\".",
+  note: "Possible bug can cause issues."
+ },
+ {
+  id: 11,
+  type: "Recruiting-Related Missions",
+  missable: ["Cid"],
+  warning: "Do NOT miss anything anything that can cause you to miss one of the 300 numbered quests.",
+  note: "You must complete all 300 numbered missions to recruit Cid."
+ },
+ {
+  id: 12,
+  type: "Monster Bank",
+  missable: ["Goblin"],
+  warning: "The blue Goblins disappear later in the game.",
+  note: "Capture ASAP. Available in A Lost Ring (#049), Snow in Lutia (#044), White Flowers (#055), Village Hunt (#037), and Tower Ruins (#032).",
+  mission: [49,44,55,37,32]
+ },
+ {
+  id: 13,
+  type: "Blue Magic",
+  missable: ["Goblin Punch"],
+  warning: "The blue Goblins disappear later in the game.",
+  note: "Learn ASAP. Available in A Lost Ring (#049), Snow in Lutia (#044), White Flowers (#055), Village Hunt (#037), and Tower Ruins (#032).",
+  mission: [49,44,55,37,32]
+ },
+ {
+  id: 14,
+  type: "Monster Bank",
+  missable: ["Thundrake"],
+  warning: "Thundrakes disappear later in the game.",
+  note: "Capture ASAP. Can capture in Pale Company (#011), Wyrm's Awaken (#102), A Dragon's Aid (#066), Ruby Red (#031), and To Amberavle (#022).",
+  mission: [11,102,66,31,22]
+ },
+ {
+  id: 15,
+  type: "Blue Magic",
+  missable: ["Dragon Force"],
+  warning: "Thundrakes disappear later in the game.",
+  note: "Learn ASAP. Can learn in Wind Sigil (#079), Magewrym (#034), The Worldwyrm (#088) in Pale Company (#011), Wyrm's Awaken (#102), A Dragon's Aid (#066), Ruby Red (#031), and To Amberavle (#022).",
+  mission: [79,34,88,11,102,66,31,22]
+ },
+ {
+  id: 16,
+  type: "Important Steals",
+  missable: ["Steal Weapon ability"],
+  warning: "Target: Thief",
+  note: "Can be obtained in Diaghilev Godeye (#027).",
+  mission: [27]
+ },
+ {
+  id: 17,
+  type: "Important Steals",
+  missable: ["Chill Rod [Hidden]"],
+  warning: "Target: Nu Mou Black Mage",
+  note: "Can be obtained in Frosty Mage (#045).",
+  mission: [45]
+ },
+ {
+  id: 18,
+  type: "Important Steals",
+  missable: ["Madu"],
+  warning: "Target: Red Mage",
+  note: "Can be obtained in Nubswood Base (#071).",
+  mission: [71]
+ },
+ {
+  id: 19,
+  type: "Important Steals",
+  missable: ["Cinqueda [Hidden]"],
+  warning: "Target: Thief (Zorlin Shape)",
+  note: "Can be obtained in Magic Wood (#009).",
+  mission: [9]
+ },
+ {
+  id: 20,
+  type: "Important Steals",
+  missable: ["Lotus Mace", "Mirage Vest", "Aegis Shield (Rare)"],
+  warning: "Target: Babus",
+  note: "Can be obatained in Emerald Keep (#010).",
+  mission: [10]
+ },
+ {
+  id: 21,
+  type: "Important Steals",
+  missable: ["Mandragora", "Cactus Stick (Rare) [Hidden]"],
+  warning: "Target: Alchemist",
+  note: "Can be obtained in Emerald Keep (#010).",
+  mission: [10]
+ },
+ {
+  id: 22,
+  type: "Important Steals",
+  missable: ["Stopshot Ability"],
+  warning: "Target: Gunner",
+  note: "Can be obtained in Emerald Keep (#010).",
+  mission: [10]
+ },
+ {
+  id: 23,
+  type: "Important Steals",
+  missable: ["Steal Weapon Ability"],
+  warning: "Target: Moogle Thief",
+  note: "Can be obtained in Fire Sigil (#076).",
+  mission: [76]
+ },
+ {
+  id: 24,
+  type: "Important Steals",
+  missable: ["Tulwar (Very Rare) [Hidden]", "Mirage Vest"],
+  warning: "Target: Blue Mage",
+  note: "Can be obtained in Jagd Hunt (#012).",
+  mission: [12]
+ },
+ {
+  id: 25,
+  type: "Important Steals",
+  missable: ["Genji Armlets (Rare)", "Dark Gear", "Petalchaser"],
+  warning: "Target: Ninja",
+  note: "Can be obtained in Jagd Hunt (#012).",
+  mission: [12]
+ },
+ {
+  id: 26,
+  type: "Important Steals",
+  missable: ["Gupti Aga [Hidden]"],
+  warning: "Target: Red Mage",
+  note: "Can be obtained in The Bounty (#013).",
+  mission: [13]
+ },
+ {
+  id: 27,
+  type: "Important Steals",
+  missable: ["Vigilante"],
+  warning: "Target: Paladin",
+  note: "Can be obtained in The Bounty (#013).",
+  mission: [13]
+ },
+ {
+  id: 28,
+  type: "Important Steals",
+  missable: ["Sword Breaker"],
+  warning: "Target: Moogle Thief",
+  note: "Can be obtained in Wanted! Gabbama Brothers (#026).",
+  mission: [26]
+ },
+ {
+  id: 29,
+  type: "Important Steals",
+  missable: ["Longbarrel"],
+  warning: "Target: Gunner",
+  note: "Can be obtained in Hit Again (#061).",
+  mission: [61]
+},
+{
+  id: 30,
+  type: "Important Steals",
+  missable: ["Zeus Mace [Hidden]"],
+  warning: "Target: Alchemist",
+  note: "Can be obtained in Golden Clock (#014).",
+  mission: [14]
+ },
+ {
+  id: 31,
+  type: "Important Steals",
+  missable: ["Genji Armor"],
+  warning: "Target: Templar",
+  note: "Can be obtained in Scouring Time (#015).",
+  mission: [15]
+ },
+ {
+  id: 32,
+  type: "Important Steals",
+  missable: ["Lordly Robe", "Lotus Mace"],
+  warning: "Target: Babus",
+  note: "Can be obtained in Scouring Time (Exodus) (#015). Solo battle - equip Steal on Marche.",
+  mission: [15]
+ },
+ {
+  id: 33,
+  type: "Important Steals",
+  missable: ["Master Bow", "Cachusha", "Dark Gear"],
+  warning: "Target: Assassin Celia",
+  note: "Can be obtained in Free Muscadet! (#082).",
+  mission: [82]
+ },
+ {
+  id: 34,
+  type: "Important Steals",
+  missable: ["Masamune", "Genji Shield", "Dark Gear", "Genji Armlets"],
+  warning: "Target: Assassin Redy",
+  note: "Can be obtained in Free Muscadet! (#082).",
+  mission: [82]
+ },
+ {
+  id: 35,
+  type: "Important Steals",
+  missable: ["Steal Weapon Ability"],
+  warning: "Target: Moogle Thief",
+  note: "Can be obtained in The Big Find (#016).",
+  mission: [16]
+ },
+ {
+  id: 36,
+  type: "Important Steals",
+  missable: ["Adaman Blade (Rare) [Hidden]"],
+  warning: "Target: Fighter",
+  note: "Can be obtained in The Big Find (#016).",
+  mission: [16]
+ },
+ {
+  id: 37,
+  type: "Important Steals",
+  missable: ["Genji Armlets"],
+  warning: "Target: Moogle Thief",
+  note: "Can be obtained in the Stolen Scoop (#104).",
+  mission: [104]
+ },
+ {
+  id: 38,
+  type: "Important Steals",
+  missable: ["Aegis Shield (Rare)"],
+  warning: "Target: Soldier",
+  note: "Can be obtained in the Stolen Scoop (#104).",
+  mission: [104]
+ },
+ {
+  id: 39,
+  type: "Important Steals",
+  missable: ["Master Bow"],
+  warning: "Target: Hunter",
+  note: "Can be obtained in the Smuggler Bust (#105).",
+  mission: [105]
+ },
+ {
+  id: 40,
+  type: "Important Steals",
+  missable: ["Outsider", "Calling Gun (Very Rare) [Hidden]"],
+  warning: "Target: Gunner",
+  note: "Can be obtained in Flesh & Bones (#053).",
+  mission: [53]
+ },
+ {
+  id: 41,
+  type: "Important Steals",
+  missable: ["Cachusha"],
+  warning: "Target: Archer",
+  note: "Can be obtained in Flesh & Bones (#053).",
+  mission: [53]
+ },
+ {
+  id: 42,
+  type: "Important Steals",
+  missable: ["Mirror Mail"],
+  warning: "Target: Soldier",
+  note: "Can be obtained in Desert Patrol (#017).",
+  mission: [17]
+ },
+ {
+  id: 43,
+  type: "Important Steals",
+  missable: ["Venus Blade"],
+  warning: "Target: Gladiator",
+  note: "Can be obtained in Desert Patrol (#017).",
+  mission: [17]
+ },
+ {
+  id: 44,
+  type: "Important Steals",
+  missable: ["Spring Staff", "Cheer Staff [Hidden]"],
+  warning: "Target: Bishop",
+  note: "Can be obtained in Desert Patrol (#017).",
+  mission: [17]
+ },
+ {
+  id: 45,
+  type: "Important Steals",
+  missable: ["Arch Sword [Hidden]"],
+  warning: "Target: Defender",
+  note: "Can be obtained in Desert Patrol (#017).",
+  mission: [17]
+ },
+ {
+  id: 46,
+  type: "Important Steals",
+  missable: ["Genji Shield (Rare)", "Genji Armor (Rare)"],
+  warning: "Target: Dragoon",
+  note: "Can be obtained in A Dragon's Aid (#066).",
+  mission: [66]
+ },
+ {
+  id: 47,
+  type: "Important Steals",
+  missable: ["Save the Queen", "Maximillian", "Bangaa Helm"],
+  warning: "Target: Llednar",
+  note: "Can be obtained in Quiet Sands (#018). Solo battle - equip Steal on Marche.",
+  mission: [18]
+ },
+ {
+  id: 48,
+  type: "Important Steals",
+  missable: ["Genji Shield (Rare)"],
+  warning: "Target: Assassin",
+  note: "Can be obtained in Showdown! (#060).",
+  mission: [60]
+ },
+ {
+  id: 49,
+  type: "Important Steals",
+  missable: ["Aegis Shield (Rare)", "Save the Queen [Hidden]"],
+  warning: "Target: Paladin",
+  note: "Can be obtained in Showdown! (#060).",
+  mission: [60]
+ },
+ {
+  id: 50,
+  type: "Important Steals",
+  missable: ["Masamune", "Genji Armlets"],
+  warning: "Target: Assassin",
+  note: "Can be obtained in Materite Now! (#019).",
+  mission: [19]
+ },
+ {
+  id: 51,
+  type: "Important Steals",
+  missable: ["Ribbon (Very Rare)"],
+  warning: "Target: Elementalist",
+  note: "Can be obtained in Materite Now! (#019).",
+  mission: [19]
+ },
+ {
+  id: 52,
+  type: "Important Steals",
+  missable: ["Nike Bow", "Bone Plate"],
+  warning: "Target: Sniper",
+  note: "Can be obtained in Materite Now! (#019).",
+  mission: [19]
+ },
+ {
+  id: 53,
+  type: "Important Steals",
+  missable: ["Mirage Vest", "Full-Life Ability"],
+  warning: "Target: White Mage",
+  note: "Can be obtained in Materite Now! (#019).",
+  mission: [19]
+ },
+ {
+  id: 54,
+  type: "Important Steals",
+  missable: ["Cheer Staff"],
+  warning: "Target: Summoner",
+  note: "Can be obtained in Materite Now! (#019).",
+  mission: [19]
+ },
+ {
+  id: 55,
+  type: "Important Steals",
+  missable: ["Madu", "Brint Set"],
+  warning: "Target: Red Mage",
+  note: "Can be obtained in Materite Now! (#019).",
+  mission: [19]
+ },
+ {
+  id: 56,
+  type: "Important Steals",
+  missable: ["Materia Blade [Hidden]"],
+  warning: "Target: Mog Knight",
+  note: "Can be obtained in Present Day (#020).",
+  mission: [20]
+ },
+ {
+  id: 57,
+  type: "Important Steals",
+  missable: ["Life Crosier", "Scorpion Tail [Hidden]"],
+  warning: "Target: Alchemist",
+  note: "Can be obtained in Present Day (#020).",
+  mission: [20]
+ },
+ {
+  id: 58,
+  type: "Important Steals",
+  missable: ["Save the Queen", "Maiximillian", "Bangaa Helm"],
+  warning: "Target: Llednar",
+  note: "Can be obtained in Present Day (Llednar Variant) (#020). Solo battle - equip Steal on Marche.",
+  mission: [20]
+ },
+ {
+  id: 59,
+  type: "Important Steals",
+  missable: ["Mirage Vest"],
+  warning: "Target: Blue Mage",
+  note: "Can be obtained in Hidden Vein (#021).",
+  mission: [21]
+ },
+ {
+  id: 60,
+  type: "Important Steals",
+  missable: ["Orichalcum", "Bone Plate"],
+  warning: "Target: Juggler",
+  note: "Can be obtained in Hidden Vein (#021).",
+  mission: [21]
+ },
+ {
+  id: 61,
+  type: "Important Steals",
+  missable: ["Scorpion Tail"],
+  warning: "Target: Sage",
+  note: "Can be obtained in Hidden Vein (#021).",
+  mission: [21]
+ },
+ {
+  id: 62,
+  type: "Important Steals",
+  missable: ["Femme Fatale (Very Rare)", "Brint Set", "Ribbon"],
+  warning: "Target: Ritz",
+  note: "Can be obtained in Over the Hill (#023).",
+  mission: [23]
+ },
+ {
+  id: 63,
+  type: "Important Steals",
+  missable: ["Seventh Heaven", "Galmia Set", "Ribbon"],
+  warning: "Target: Shara",
+  note: "Can be obtained in Over the Hill (#023).",
+  mission: [23]
+ },
+ {
+  id: 64,
+  type: "Important Steals",
+  missable: ["Max's Oathbow"],
+  warning: "Target: Assassin",
+  note: "Can be obtained in Over the Hill (#023).",
+  mission: [23]
+ },
+ {
+  id: 65,
+  type: "Important Steals",
+  missable: ["Nirvana Staff", "Silver Coat"],
+  warning: "Target: Summoner",
+  note: "Can be obtained in Over the Hill (#023).",
+  mission: [23]
+ },
+ {
+  id: 66,
+  type: "Important Steals",
+  missable: ["Madu"],
+  warning: "Target: Fencer",
+  note: "Can be obtained in Over the Hill (#023).",
+  mission: [23]
+ },
+ {
+  id: 67,
+  type: "Important Steals",
+  missable: ["Madu"],
+  warning: "Target: Elementalist",
+  note: "Can be obtained in Over the Hill (#023).",
+  mission: [23]
+ },
+ {
+  id: 68,
+  type: "Miscellaneous",
+  missable: ["Iceprism Sword (Rare)"],
+  warning: "Can be missed according to decision made.",
+  note: "Negotiate and give Ice Cream",
+  mission: [109]
+ },
+ {
+  id: 69,
+  type: "Miscellaneous",
+  missable: ["Bracers", "Hades Bows", "Angel Rings"],
+  note: "Repeatable - excellent for farming Angel Rings (Rare).",
+  mission: [72]
+ },
+ {
+  id: 70,
+  type: "Miscellaneous",
+  missable: ["R4 Anti-Law"],
+  warning: "Failure results in R3 Anti-Law.",
+  note: "Successfully negotiate to receive the R4 Anti-Law.",
+  mission: [106]
+ },
+ {
+  id: 71,
+  type: "Miscellaneous",
+  missable: ["Free Bervenia (#087)"],
+  warning: "If failed, may not reappear.",
+  note: "SAVE before attempting.",
+  mission: [87]
+ },
 ];
 
 const Tag: React.FC<{
@@ -5885,7 +6451,7 @@ const FFTAProgressionGuide: React.FC = () => {
   const questKey = (num: number) => keyify(`quest-global:${num}`);
   const questDone = useMemo(
     () =>
-      MISSION_REF.reduce(
+      MISSION_REF.slice(2).reduce(
         (n, q) => n + (checked[questKey(q.number)] ? 1 : 0),
         0
       ),
@@ -5958,7 +6524,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #003 → Before #004)",
       placements: ["Eluut Sands"],
       blue: ["Acid", "Poison Claw", "Hastebreak"],
-      caps: ["Cream", "Red Panther", "Antlion", "Coeurl", "Jelly"],
+      caps: ["Cream", "Red Panther", "Antlion", "Coeurl"],
       sidequests: [37, 55, 113, 50, 167, 210, 139, 265],
     },
 
@@ -5989,7 +6555,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #005 → Before #006)",
       placements: ["Cadoan"],
-      blue: ["Stare", "Roulette", "Drain Touch"],
+      blue: ["Stare", "Drain Touch"],
       sidequests: [164, 172, 266],
     },
 
@@ -5999,7 +6565,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #006 → Before #007)",
       placements: ["Aisenfield"],
-      sidequests: [62, 71, 74, 75, 106, 123, 207, 148, 150, 299, 175, 195, 205, 242, 267],
+      sidequests: [62, 71, 75, 106, 123, 207, 148, 150, 299, 175, 205, 242, 267],
     },
 
     {
@@ -6015,8 +6581,8 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #007 → Before #008)",
       placements: ["Roda Volcano"],
       blue: ["Blowup", "Night", "Mighty Guard"],
-      caps: ["Bomb", "Icedrake", "Lamia"],
-      sidequests: [47, 76, 122, 286, 155, 168, 208, 209, 268, 243],
+      caps: ["Bomb", "Icedrake", "Firewyrm", "Lamia", "Jelly"],
+      sidequests: [47, 73, 74, 195, 76, 122, 286, 155, 168, 208, 209, 268, 243],
     },
 
     {
@@ -6031,8 +6597,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #008 → Before #009)",
       placements: ["Koringwood"],
-      caps: ["Firewyrm", "Bomb"],
-      sidequests: [32, 33, 36, 48, 72, 73, 151, 125, 170, 244, 269],
+      sidequests: [32, 33, 36, 48, 72, 151, 125, 170, 244, 269],
     },
 
     {
@@ -6214,6 +6779,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #020 → Before #021)",
       placements: ["Ahli Desert"],
+      blue: ["Roulette"],
       sidequests: [40, 41, 42, 57, 63, 103, 64, 29, 116, 117, 118, 119, 120, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 295, 296],
     },
 
@@ -6373,14 +6939,14 @@ const FFTAProgressionGuide: React.FC = () => {
               key={`blue-${n}`}
               className="whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
             >
-              <label className="flex items-start gap-2">
+              <div className="flex items-start gap-2">
                 <input
                   type="checkbox"
                   className="mt-1 accent-blue-600 dark:accent-blue-400"
                   checked={isChecked}
                   onChange={() => setCheck(id)}
                 />
-                <div>
+                <div onClick={() => setCheck(id)} className="flex-1 cursor-pointer select-none">
                   <div className={`font-semibold ${tagColor}`}>
                     {b.name}{" "}
                     <span className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -6448,7 +7014,7 @@ const FFTAProgressionGuide: React.FC = () => {
                     </>
                   )}
                 </div>
-              </label>
+              </div>
             </li>
           );
         }
@@ -6464,14 +7030,14 @@ const FFTAProgressionGuide: React.FC = () => {
               key={`cap-${n}`}
               className="whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
             >
-              <label className="flex items-start gap-2">
+              <div className="flex items-start gap-2">
                 <input
                   type="checkbox"
                   className="mt-1 accent-green-600 dark:accent-green-400"
                   checked={isChecked}
                   onChange={() => setCheck(id)}
                 />
-                <div>
+                <div onClick={() => setCheck(id)} className="flex-1 cursor-pointer select-none">
                   <div className={`font-semibold ${tagColor}`}>
                     {c.monster}{" "}
                     <span className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -6545,7 +7111,7 @@ const FFTAProgressionGuide: React.FC = () => {
                     </>
                   )}
                 </div>
-              </label>
+              </div>
             </li>
           );
         }
@@ -6572,12 +7138,39 @@ const FFTAProgressionGuide: React.FC = () => {
                 />
                 <div>
                   <div className={`font-semibold ${tagColor}`}>
-                    #{String(q.number).padStart(3, "0")} — {q.name}{" "}<span className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">({q.location})</span>
+                    #{String(q.number).padStart(3, "0")} — {q.name}
                   </div>
+                  {/* ---- Global Missables tied to this mission (injected) ---- */}
+                  {(() => {
+                      const related = getMissablesForMission(n);
+                      if (!related.length) return null;
+                      return (
+                          <div className="mt-3">
+                              <Panel
+                                  title="Missables (Global)"
+                                  border="border-red-600"
+                                  buttonColor="bg-red-600"
+                                  right={<></>}
+                              >
+                                  <ul className="space-y-2 w-full text-sm">
+                                    {GLOBAL_MISSABLES.map((m) => (
+                                      <MissableCard
+                                        key={`gm-global-${m.id}`}
+                                        m={m}
+                                        checked={checked}
+                                        setCheck={setCheck}
+                                      />
+                                    ))}
+                                  </ul>
+                              </Panel>
+                          </div>
+                      );
+                  })()}
 
                   {/* Hide everything below when checked */}
                   {!isChecked && (
                     <>
+                    <span className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">{q.location}</span>
                       {q.description && (
                         <div className="text-sm text-zinc-800 dark:text-zinc-200 mt-1">
                           {q.description}
@@ -6764,26 +7357,15 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
             </div>
           }
         >
-          <ul className="space-y-2 text-sm">
-            {GLOBAL_MISSABLES.map((m) => {
-              const id = keyify(`miss-global:${m.id}`);
-              return (
-                <li
-                  key={m.id}
-                  className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
-                >
-                  <input
-                    type="checkbox"
-                    className="mt-0.5 accent-red-600 dark:accent-red-400"
-                    checked={!!checked[id]}
-                    onChange={() => setCheck(id)}
-                  />
-                  <span className="text-zinc-800 dark:text-zinc-200">
-                    {m.text}
-                  </span>
-                </li>
-              );
-            })}
+          <ul className="space-y-2 w-full text-sm">
+            {GLOBAL_MISSABLES.map((m) => (
+              <MissableCard
+                key={`gm-global-${m.id}`}
+                m={m}
+                checked={checked}
+                setCheck={setCheck}
+              />
+            ))}
           </ul>
         </Panel>
       </div>
@@ -6959,12 +7541,13 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                   {b.kind === "story" && quest.map((num) => {
                           const id = keyify(`quest-global:${num}`);
                           const q = missionMap.get(num);
+                          const isChecked = !!checked[id];
                           return (
                             <li
                               key={num}
                               className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
                             >
-                              <div className="text-zinc-800 dark:text-zinc-200">
+                              <label htmlFor={`side-${num}`} className="w-full text-zinc-800 dark:text-zinc-200 w-full cursor-pointer select-none">
                                 {q ? (
                                   <>
                                     <div className="italic">
@@ -6977,13 +7560,33 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                         "None"
                                       )}
                                     </div>
+
+                                    {/* Related global missables for this mission (injected) */}
+                                    {q && !isChecked && (() => {
+                                        const related = getMissablesForMission(num);
+                                        if (!related.length) return null;
+                                        return (
+                                            <div className="mt-2">
+                                                <ul className="space-y-2 w-full">
+                                                    {related.map((m) => (
+                                                        <MissableCard
+                                                            key={`gm-side-${num}-${m.id}`}
+                                                            m={m}
+                                                            checked={checked}
+                                                            setCheck={setCheck}
+                                                        />
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        );
+                                    })()}
                                   </>
                                 ) : (
                                   <div className="font-semibold">
                                     No strategy available. 
                                   </div>
                                 )}
-                              </div>
+                              </label>
                             </li>
                           );
                         })}
@@ -7059,16 +7662,15 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                             <li
                               key={num}
                               className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
-                              onClick={() => setCheck(id)}
                             >
-                              <label className="flex items-start gap-2">
+                              <label className="flex w-full items-start gap-2">
                               <input
-                                type="checkbox"
-                                className="mt-0.5 accent-amber-600 dark:accent-amber-400"
+                                id={`side-${num}`}
+                                type="checkbox" className="mt-0.5 accent-amber-600 dark:accent-amber-400"
                                 checked={!!checked[id]}
                                 onChange={() => setCheck(id)}
                               />
-                              <div className="text-zinc-800 dark:text-zinc-200">
+                              <label htmlFor={`side-${num}`} className="w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none">
                                 {q ? (
                                   <>
                                     <div className="font-semibold text-zinc-900 dark:text-zinc-100">
@@ -7089,6 +7691,26 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                         </>
                                       )}
                                     </div>
+
+                                    {/* Related global missables for this mission (injected) */}
+                                    {q && !isChecked && (() => {
+                                        const related = getMissablesForMission(num);
+                                        if (!related.length) return null;
+                                        return (
+                                            <div className="mt-2">
+                                                <ul className="space-y-2 w-full">
+                                                    {related.map((m) => (
+                                                        <MissableCard
+                                                            key={`gm-side-${num}-${m.id}`}
+                                                            m={m}
+                                                            checked={checked}
+                                                            setCheck={setCheck}
+                                                        />
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        );
+                                    })()}
                                   </>
                                 ) : (
                                   <div className="font-semibold">
@@ -7096,8 +7718,8 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                     quest
                                   </div>
                                 )}
-                              </div>
                               </label>
+                            </label>
                             </li>
                           );
                         })}
