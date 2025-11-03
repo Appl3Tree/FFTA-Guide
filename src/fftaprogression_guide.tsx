@@ -5566,12 +5566,21 @@ const getMissablesForMission = (num: number): GlobalMissable[] =>
 
 const missableKey = (m: GlobalMissable) => keyify(`miss-global:${m.id}`);
 
+// Treat a global missable as "auto-checked" if linked Blue/Capture entries are checked
+const isMissableAutoChecked = (m: GlobalMissable, checked: Record<string, boolean>) => {
+    const names = Array.isArray(m.missable) ? m.missable : [];
+    if (m.type === "Monster Bank") {
+        return names.some((nm) => !!checked[keyify(`cap:${nm}`)]);
+    }
+    if (m.type === "Blue Magic") {
+        return names.some((nm) => !!checked[keyify(`blue:${nm}`)]);
+    }
+    return false;
+};
 
-
-
-
-
-
+const isMissableChecked = (m: GlobalMissable, checked: Record<string, boolean>) => {
+    return !!checked[missableKey(m)] || isMissableAutoChecked(m, checked);
+};
 
 function MissableCard({
     m,
@@ -5588,13 +5597,29 @@ function MissableCard({
     const autoBlue = m.type === "Blue Magic" && Array.isArray(m.missable) && m.missable.some((nm) => !!checked[keyify(`blue:${nm}`)]);
     const autoChecked = !!(autoCap || autoBlue);
     const isChecked = manualChecked || autoChecked;
+    const linkNames = Array.isArray(m.missable) ? m.missable : [];
+    const ensureChecked   = (key: string) => { if (!checked[key]) setCheck(key); };
+    const ensureUnchecked = (key: string) => { if (checked[key])  setCheck(key); };
+    const syncLinkedOnManualCheck = (nextManual: boolean) => {
+      if (m.type === "Monster Bank") {
+        linkNames.forEach((nm) =>
+          nextManual ? ensureChecked(keyify(`cap:${nm}`)) : ensureUnchecked(keyify(`cap:${nm}`))
+        );
+      } else if (m.type === "Blue Magic") {
+        linkNames.forEach((nm) =>
+          nextManual ? ensureChecked(keyify(`blue:${nm}`)) : ensureUnchecked(keyify(`blue:${nm}`))
+        );
+      }
+    };
+
 
     // Card-level click: prevent label default + stop bubbling, toggle only this missable
     const onCardClick = (e: React.SyntheticEvent) => {
-        // prevent the label's default toggle if we're still inside any label
         if (typeof e.preventDefault === "function") e.preventDefault();
         e.stopPropagation();
+        const nextManual = !manualChecked;
         setCheck(id);
+        syncLinkedOnManualCheck(nextManual);
     };
 
     // Block parent handlers on mousedown/pointerdown as well (prevents label toggles)
@@ -5608,7 +5633,9 @@ function MissableCard({
         e.stopPropagation();
     };
     const cbChange = () => {
+        const nextManual = !manualChecked;
         setCheck(id);
+        syncLinkedOnManualCheck(nextManual);
     };
 
     return (
@@ -6305,18 +6332,6 @@ const Panel: React.FC<{
       {open && (
         <>
           <div className="mt-3">{children}</div>
-          <br></br>
-          <div className="flex items-center justify-end gap-2">
-            {right}
-            <span className="flex items-center justify-end">
-              <button
-                className={`${buttonColor} text-white text-sm px-3 py-1 rounded`}
-                onClick={() => setOpen((o) => !o)}
-              >
-                {open ? "Hide" : "Show"}
-              </button>
-            </span>
-          </div>
         </>
       )}
     </div>
@@ -6435,13 +6450,14 @@ const FFTAProgressionGuide: React.FC = () => {
   );
   const missTotal = GLOBAL_MISSABLES.length;
   const missDone = useMemo(
-    () =>
-      GLOBAL_MISSABLES.reduce(
-        (n, m) => n + (checked[keyify(`miss-global:${m.id}`)] ? 1 : 0),
-        0
-      ),
-    [checked]
+      () =>
+          GLOBAL_MISSABLES.reduce(
+              (n, m) => n + (isMissableChecked(m, checked) ? 1 : 0),
+              0
+          ),
+      [checked]
   );
+
   const missionMap = useMemo(() => {
     const m = new Map<number, QuestRef>();
     for (const q of MISSION_REF) m.set(q.number, q);

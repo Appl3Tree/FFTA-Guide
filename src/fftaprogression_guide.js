@@ -5302,6 +5302,20 @@ const MAP_PLACEMENTS = {
 };
 const getMissablesForMission = (num) => GLOBAL_MISSABLES.filter((m) => Array.isArray(m.mission) && m.mission.includes(num));
 const missableKey = (m) => keyify(`miss-global:${m.id}`);
+// Treat a global missable as "auto-checked" if linked Blue/Capture entries are checked
+const isMissableAutoChecked = (m, checked) => {
+    const names = Array.isArray(m.missable) ? m.missable : [];
+    if (m.type === "Monster Bank") {
+        return names.some((nm) => !!checked[keyify(`cap:${nm}`)]);
+    }
+    if (m.type === "Blue Magic") {
+        return names.some((nm) => !!checked[keyify(`blue:${nm}`)]);
+    }
+    return false;
+};
+const isMissableChecked = (m, checked) => {
+    return !!checked[missableKey(m)] || isMissableAutoChecked(m, checked);
+};
 function MissableCard({ m, checked, setCheck, }) {
     const id = missableKey(m);
     const manualChecked = !!checked[id];
@@ -5309,13 +5323,27 @@ function MissableCard({ m, checked, setCheck, }) {
     const autoBlue = m.type === "Blue Magic" && Array.isArray(m.missable) && m.missable.some((nm) => !!checked[keyify(`blue:${nm}`)]);
     const autoChecked = !!(autoCap || autoBlue);
     const isChecked = manualChecked || autoChecked;
+    const linkNames = Array.isArray(m.missable) ? m.missable : [];
+    const ensureChecked = (key) => { if (!checked[key])
+        setCheck(key); };
+    const ensureUnchecked = (key) => { if (checked[key])
+        setCheck(key); };
+    const syncLinkedOnManualCheck = (nextManual) => {
+        if (m.type === "Monster Bank") {
+            linkNames.forEach((nm) => nextManual ? ensureChecked(keyify(`cap:${nm}`)) : ensureUnchecked(keyify(`cap:${nm}`)));
+        }
+        else if (m.type === "Blue Magic") {
+            linkNames.forEach((nm) => nextManual ? ensureChecked(keyify(`blue:${nm}`)) : ensureUnchecked(keyify(`blue:${nm}`)));
+        }
+    };
     // Card-level click: prevent label default + stop bubbling, toggle only this missable
     const onCardClick = (e) => {
-        // prevent the label's default toggle if we're still inside any label
         if (typeof e.preventDefault === "function")
             e.preventDefault();
         e.stopPropagation();
+        const nextManual = !manualChecked;
         setCheck(id);
+        syncLinkedOnManualCheck(nextManual);
     };
     // Block parent handlers on mousedown/pointerdown as well (prevents label toggles)
     const block = (e) => {
@@ -5328,7 +5356,9 @@ function MissableCard({ m, checked, setCheck, }) {
         e.stopPropagation();
     };
     const cbChange = () => {
+        const nextManual = !manualChecked;
         setCheck(id);
+        syncLinkedOnManualCheck(nextManual);
     };
     return (_jsxs("li", { className: "flex w-full items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10 cursor-pointer", onClick: onCardClick, onMouseDown: block, onPointerDown: block, children: [_jsx("input", { type: "checkbox", className: "mt-0.5 accent-red-600 dark:accent-red-400", checked: isChecked, onChange: cbChange, onClick: cbClick }), _jsxs("div", { className: "flex-1 min-w-0 text-sm text-zinc-800 dark:text-zinc-200", children: [_jsxs("div", { className: "font-semibold text-red-700 dark:text-red-300", children: ["Missable: ", Array.isArray(m.missable) ? m.missable.join(", ") : "Unknown"] }), !isChecked && (_jsxs(_Fragment, { children: [_jsxs("div", { className: "text-xs text-zinc-600 dark:text-zinc-400 mt-0.5", children: [_jsx("span", { className: "font-semibold", children: "Type:" }), " ", m.type] }), m.warning && (_jsx("div", { className: "text-xs italic text-red-700 dark:text-red-300 mt-1", children: m.warning })), m.note && (_jsx("div", { className: "text-xs text-zinc-700 dark:text-zinc-300 mt-1", children: m.note }))] }))] })] }, `gm-${m.id}`));
 }
@@ -5925,7 +5955,7 @@ const Panel = ({ title, border, buttonColor, children, right, tone = "neutral" }
         purple: "bg-purple-50 dark:bg-purple-900/10",
     };
     const [open, setOpen] = useState(false);
-    return (_jsxs("div", { className: `rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`, children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2", children: [_jsx("h4", { className: "font-bold text-zinc-900 dark:text-zinc-100", children: title }), _jsxs("div", { className: "flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end", children: [right, _jsx("button", { className: `${buttonColor} text-white text-sm px-3 py-1 rounded`, onClick: () => setOpen((o) => !o), children: open ? "Hide" : "Show" })] })] }), open && (_jsxs(_Fragment, { children: [_jsx("div", { className: "mt-3", children: children }), _jsx("br", {}), _jsxs("div", { className: "flex items-center justify-end gap-2", children: [right, _jsx("span", { className: "flex items-center justify-end", children: _jsx("button", { className: `${buttonColor} text-white text-sm px-3 py-1 rounded`, onClick: () => setOpen((o) => !o), children: open ? "Hide" : "Show" }) })] })] }))] }));
+    return (_jsxs("div", { className: `rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`, children: [_jsxs("div", { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2", children: [_jsx("h4", { className: "font-bold text-zinc-900 dark:text-zinc-100", children: title }), _jsxs("div", { className: "flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end", children: [right, _jsx("button", { className: `${buttonColor} text-white text-sm px-3 py-1 rounded`, onClick: () => setOpen((o) => !o), children: open ? "Hide" : "Show" })] })] }), open && (_jsx(_Fragment, { children: _jsx("div", { className: "mt-3", children: children }) }))] }));
 };
 const FFTAProgressionGuide = () => {
     const [expanded, setExpanded] = useState({});
@@ -6002,7 +6032,7 @@ const FFTAProgressionGuide = () => {
     const capTotal = CAPTURE_REF.length;
     const capDone = useMemo(() => CAPTURE_REF.reduce((n, c) => n + (checked[keyify(`cap:${c.monster}`)] ? 1 : 0), 0), [checked]);
     const missTotal = GLOBAL_MISSABLES.length;
-    const missDone = useMemo(() => GLOBAL_MISSABLES.reduce((n, m) => n + (checked[keyify(`miss-global:${m.id}`)] ? 1 : 0), 0), [checked]);
+    const missDone = useMemo(() => GLOBAL_MISSABLES.reduce((n, m) => n + (isMissableChecked(m, checked) ? 1 : 0), 0), [checked]);
     const missionMap = useMemo(() => {
         const m = new Map();
         for (const q of MISSION_REF)
