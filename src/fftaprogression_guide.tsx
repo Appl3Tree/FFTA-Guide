@@ -276,7 +276,7 @@ type Block = {
   blue?: string[];
   caps?: string[];
   recruits?: string[];
-  missables?: string[];
+  missables?: number[];
   sidequests?: number[];
 };
 
@@ -5694,6 +5694,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   missable: ["Lini"],
   warning: "Do NOT discard the Hero Gaol before recruiting Lini.",
   note: "If you discard the Hero Gaol before recruiting Lini, you will miss the opportunity to recruit Lini.",
+  mission: []
  },
  {
   id: 3,
@@ -6298,12 +6299,13 @@ const ProgressBar: React.FC<{
 
 const Panel: React.FC<{
   title: string;
+  subtitle?: string;
   border: string;
   buttonColor: string;
   children: React.ReactNode;
   right?: React.ReactNode;
   tone?: "neutral" | "blue" | "green" | "red" | "amber" | "purple";
-}> = ({ title, border, buttonColor, children, right, tone = "neutral" }) => {
+}> = ({ title, subtitle, border, buttonColor, children, right, tone = "neutral" }) => {
   const bgMap: Record<string, string> = {
     neutral: "bg-white dark:bg-zinc-800",
     blue: "bg-blue-50 dark:bg-blue-900/10",
@@ -6318,7 +6320,14 @@ const Panel: React.FC<{
       className={`rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`}
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <h4 className="font-bold text-zinc-900 dark:text-zinc-100">{title}</h4>
+        <h4 className="font-bold text-zinc-900 dark:text-zinc-100">{title}
+            {subtitle && (
+            <>
+              <br></br>
+              <span className="text-xs text-zinc-500 dark:text-zinc-500">{subtitle}</span>
+            </>
+            )}
+        </h4>
         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           {right}
           <button
@@ -6582,6 +6591,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #006 → Before #007)",
       placements: ["Aisenfield"],
       sidequests: [62, 71, 75, 106, 123, 207, 148, 150, 299, 175, 205, 242, 267],
+      missables: [1,2]
     },
 
     {
@@ -6721,6 +6731,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #015 → Before #016)",
       placements: ["Muscadet"],
       sidequests: [28, 39, 82, 83, 84, 85, 86, 93, 126, 153, 158, 179, 220, 221, 228, 250, 251, 252, 274],
+      missables: [5]
     },
 
     {
@@ -6869,6 +6880,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #023 → Before #024)",
       placements: ["Siena Gorge"],
       sidequests: [56],
+      missables: [7]
     },
 
     {
@@ -6883,6 +6895,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Post-Main Game (After #024)",
       sidequests: [87, 184, 185, 88, 89, 90, 186, 187, 188, 189, 190, 191, 67, 96, 192, 99, 193, 95, 98, 259, 260, 261, 263, 262, 284, 97],
+      missables: [8,9,10,11]
     },
   ];
 
@@ -7277,6 +7290,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
       <div className="mt-3 grid grid-cols-1 gap-3">
         <Panel
           title="Blue Magic Reference"
+          subtitle='When starting a battle, it is helpful to check the status of monsters and restart if it does not know the respective Blue Magic.'
           border="border-blue-600"
           buttonColor="bg-blue-600"
           tone="blue"
@@ -7296,6 +7310,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
         <Panel
           title="Capturable Monsters Reference"
+          subtitle='You cannot capture a monster if it is asleep, charmed, or the last enemy on the field. Plan accordingly!'
           border="border-green-600"
           buttonColor="bg-green-600"
           tone="green"
@@ -7338,6 +7353,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
         <Panel
           title="Mission Reference"
+          subtitle='If a quest does not appear, you may need to accept quests to "empty" your available quest slots.'
           border="border-amber-600"
           buttonColor="bg-amber-600"
           tone="amber"
@@ -7358,7 +7374,8 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
       <div className="mt-3">
         <Panel
-          title="Missables & Warnings (Global)"
+          title="Missables & Warnings"
+          subtitle='Take a moment to review the missables and warnings before proceeding to avoid later heartache!'
           border="border-red-600"
           buttonColor="bg-red-600"
           tone="red"
@@ -7743,67 +7760,36 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     </Panel>
                   )}
 
-                  {recs.length > 0 && (
-                    <Panel
-                      title="Recruits / Unlocks"
-                      border="border-purple-600"
-                      buttonColor="bg-purple-600"
-                      right={<></>}
-                    >
-                      <ul className="space-y-2 text-sm">
-                        {recs.map((line) => {
-                          const id = keyify(`rec:${b.key}:${line}`);
-                          return (
-                            <li
-                              key={id}
-                              className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
-                            >
-                              <input
-                                type="checkbox"
-                                className="mt-0.5 accent-purple-600 dark:accent-purple-400"
-                                checked={!!checked[id]}
-                                onChange={() => setCheck(id)}
-                              />
-                              <span className="text-zinc-800 dark:text-zinc-200">
-                                {line}
-                              </span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </Panel>
-                  )}
 
-                  {miss.length > 0 && (
-                    <Panel
-                      title="Missables (Local)"
-                      border="border-red-600"
-                      buttonColor="bg-red-600"
-                      right={<></>}
-                    >
-                      <ul className="space-y-2 text-sm">
-                        {miss.map((line) => {
-                          const id = keyify(`miss:${b.key}:${line}`);
-                          return (
-                            <li
-                              key={id}
-                              className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
-                            >
-                              <input
-                                type="checkbox"
-                                className="mt-0.5 accent-red-600 dark:accent-red-400"
-                                checked={!!checked[id]}
-                                onChange={() => setCheck(id)}
-                              />
-                              <span className="text-zinc-800 dark:text-zinc-200">
-                                {line}
-                              </span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </Panel>
-                  )}
+                  {/* --- Missables (Local) --- */}
+                  {(Array.isArray(b.missables) && b.missables.length > 0) && (() => {
+                      // Look up the GlobalMissable objects for the IDs listed on this block
+                      const localMiss = b.missables
+                          .map((id) => GLOBAL_MISSABLES.find((m) => m.id === id))
+                          .filter((m): m is GlobalMissable => !!m);
+
+                      if (localMiss.length === 0) return null;
+
+                      return (
+                          <Panel
+                              title="Missables (Local)"
+                              border="border-red-600"
+                              buttonColor="bg-red-600"
+                              right={<></>}
+                          >
+                              <ul className="space-y-2 w-full text-sm">
+                                  {localMiss.map((m) => (
+                                      <MissableCard
+                                          key={`gm-local-${m.id}`}
+                                          m={m}
+                                          checked={checked}
+                                          setCheck={setCheck}
+                                      />
+                                  ))}
+                              </ul>
+                          </Panel>
+                      );
+                  })()}
                 </div>
               )}
             </div>
