@@ -7299,7 +7299,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
       <div className="mt-3 grid grid-cols-1 gap-3">
         <Panel
           title="Blue Magic Reference"
-          subtitle='When starting a battle, it is helpful to check the status of monsters and restart if it does not know the respective Blue Magic.'
+          subtitle='When starting a battle, it is helpful to check the status of monsters and restart if it does not know the respective Blue Magic. Blue Magic can also be learned from enemy Blue Mages.'
           border="border-blue-600"
           buttonColor="bg-blue-600"
           tone="blue"
