@@ -7495,10 +7495,6 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
             (n, c) => n + (checked[keyify(`cap:${c}`)] ? 1 : 0),
             0
           );
-          const recsDoneLocal = recs.reduce(
-            (n, r) => n + (checked[keyify(`recruit:${r}`)] ? 1 : 0),
-            0
-          );
           const missDoneLocal = miss.reduce(
             (n, m) => n + (checked[keyify(`miss-global:${m}`)] ? 1 : 0),
             0
@@ -7558,6 +7554,11 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     {b.kind === "between" && quest.length > 0 && (
                       <Tag color="amber">
                         Side {questDoneLocal}/{quest.length}
+                      </Tag>
+                    )}
+                    {miss.length > 0 && (
+                      <Tag color="red">
+                        Missables {missDoneLocal}/{miss.length}
                       </Tag>
                     )}
                   </div>
@@ -7772,10 +7773,21 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
                       return (
                           <Panel
-                              title="Missables (Local)"
+                              title="Missables Now Available"
                               border="border-red-600"
                               buttonColor="bg-red-600"
-                              right={<></>}
+                              tone="red"
+                              right={
+                                <div className="w-full sm:w-auto sm:min-w-[180px]">
+                                  <ProgressBar
+                                    label="Side"
+                                    done={missDoneLocal}
+                                    total={miss.length}
+                                    color="red"
+                                  />
+                                </div>
+                              }
+
                           >
                               <ul className="space-y-2 w-full text-sm">
                                   {localMiss.map((m) => (
