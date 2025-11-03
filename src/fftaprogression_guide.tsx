@@ -7562,7 +7562,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     )}
                     {b.kind === "between" && quest.length > 0 && (
                       <Tag color="amber">
-                        Side {questDoneLocal}/{quest.length}
+                        Sidequests {questDoneLocal}/{quest.length}
                       </Tag>
                     )}
                     {miss.length > 0 && (
@@ -7646,7 +7646,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       right={
                         <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
-                            label="Blue"
+                            label="Blue Magic"
                             done={blueDoneLocal}
                             total={blueNames.length}
                             color="blue"
@@ -7667,7 +7667,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       right={
                         <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
-                            label="Cap"
+                            label="Captures"
                             done={capDoneLocal}
                             total={capNames.length}
                             color="green"
@@ -7688,7 +7688,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       right={
                         <div className="w-full sm:w-auto sm:min-w-[180px]">
                           <ProgressBar
-                            label="Side"
+                            label="Sidequests"
                             done={questDoneLocal}
                             total={quest.length}
                             color="amber"
@@ -7789,7 +7789,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                               right={
                                 <div className="w-full sm:w-auto sm:min-w-[180px]">
                                   <ProgressBar
-                                    label="Side"
+                                    label="Missables"
                                     done={missDoneLocal}
                                     total={miss.length}
                                     color="red"
