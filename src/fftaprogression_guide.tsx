@@ -7547,7 +7547,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         {b.placements
                           .map((l) => MAP_PLACEMENTS[l]?.number)
                           .filter(Boolean)
-                          .join(", ")}
+                          .join(", #")}
                       </Tag>
                     )}
                     {blueNames.length > 0 && (
