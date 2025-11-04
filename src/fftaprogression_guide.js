@@ -1555,7 +1555,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `1500 Gil`,
         location: `Cadoan`,
         prerequisites: [
-            "Completed Free Cadoan! (#075)",
             "Read Foreign Ship",
             "Read Crime Ring",
             "Cadoan Pub only",
@@ -1572,6 +1571,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
         cost: `600 Gil`,
         location: `Cyril`,
         prerequisites: [
+            "Completed Cadoan Watch (#074)",
             "Read The Redwings",
         ],
         reward: [`2400 Gil`, `Secret Item (Red Robe)`, `2x Random Cards`],
@@ -5329,15 +5329,16 @@ const MAP_PLACEMENTS = {
     "Kudik Caves": { number: 24, title: "Kudik Caves" },
     "Jeraw Sands": { number: 2, title: "Jeraw Sands" },
     Muscadet: { number: 21, title: "Muscadet" },
-    Materiwood: { number: 20, title: "Materiwood" },
-    Ozmonfield: { number: 23, title: "Ozmonfield" },
-    "Deti Plains": { number: 19, title: "Deti Plains" },
-    "Tubola Cave": { number: 20, title: "Tubola Cave" },
+    Uladon: { number: 1, title: "Uladon" },
+    "Gotor Sands": { number: 12, title: "Gotor Sands" },
     "Ahli Desert": { number: 3, title: "Ahli Desert" },
     "Delia Dunes": { number: 17, title: "Delia Dunes" },
-    "Gotor Sands": { number: 12, title: "Gotor Sands" },
-    "Siena Gorge": { number: 25, title: "Siena Gorge" },
+    Ozmonfield: { number: 23, title: "Ozmonfield" },
+    Materiwood: { number: 20, title: "Materiwood" },
+    "Tubola Cave": { number: 19, title: "Tubola Cave" },
     Helj: { number: 26, title: "Helj" },
+    "Deti Plains": { number: 11, title: "Deti Plains" },
+    "Siena Gorge": { number: 25, title: "Siena Gorge" },
 };
 const getMissablesForMission = (num) => GLOBAL_MISSABLES.filter((m) => Array.isArray(m.mission) && m.mission.includes(num));
 const missableKey = (m) => keyify(`miss-global:${m.id}`);
@@ -6194,7 +6195,7 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #006 → Before #007)",
             placements: ["Aisenfield"],
-            sidequests: [62, 71, 75, 106, 123, 207, 148, 150, 299, 175, 205, 242, 267],
+            sidequests: [62, 71, 106, 123, 207, 148, 150, 299, 175, 205, 242, 267],
             missables: [1, 2]
         },
         {
@@ -6211,8 +6212,9 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #007 → Before #008)",
             placements: ["Roda Volcano"],
-            caps: ["Firewyrm"],
-            sidequests: [47, 73, 74, 195, 76, 122, 286, 155, 168, 208, 209, 268, 243],
+            blue: ["Night", "Bad Breath"],
+            caps: ["Firewyrm", "Malboro", "Big Malboro"],
+            sidequests: [47, 73, 74, 75, 195, 76, 122, 286, 155, 168, 208, 209, 268, 243],
         },
         {
             key: "008",
@@ -6226,8 +6228,7 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #008 → Before #009)",
             placements: ["Koringwood"],
-            blue: ["Bad Breath"],
-            caps: ["Jelly", "Malboro"],
+            caps: ["Jelly"],
             sidequests: [32, 33, 36, 48, 72, 151, 125, 170, 244, 269],
         },
         {
@@ -6242,7 +6243,6 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #009 → Before #010)",
             placements: ["Salikawood"],
-            caps: ["Big Malboro"],
             sidequests: [100, 140, 162, 166, 173, 211, 245, 270, 212, 300],
         },
         {
@@ -6404,7 +6404,7 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #020 → Before #021)",
             placements: ["Ahli Desert"],
-            blue: ["Roulette", "Night", "Twister"],
+            blue: ["Roulette", "Twister"],
             sidequests: [40, 41, 42, 57, 63, 103, 64, 29, 116, 117, 118, 119, 120, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 295, 296],
         },
         {
@@ -6540,7 +6540,7 @@ const FFTAProgressionGuide = () => {
                                     if (f)
                                         handleLoadFile(f);
                                     e.currentTarget.value = "";
-                                } })] })] }), _jsxs("div", { className: "mt-3 grid grid-cols-1 gap-3", children: [_jsx(Panel, { title: "Blue Magic Reference", subtitle: 'When starting a battle, it is helpful to check the status of monsters and restart if it does not know the respective Blue Magic.', border: "border-blue-600", buttonColor: "bg-blue-600", tone: "blue", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Blue Magic", done: blueDone, total: blueTotal, color: "blue" }) }), children: _jsx(RefList, { type: "blue", names: BLUE_MAGIC_REF.map((b) => b.name) }) }), _jsxs(Panel, { title: "Capturable Monsters Reference", subtitle: 'You cannot capture a monster if it is asleep, charmed, or the last enemy on the field. Plan accordingly!', border: "border-green-600", buttonColor: "bg-green-600", tone: "green", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Captures", done: capDone, total: capTotal, color: "green" }) }), children: [_jsx(CollapsibleTwoTables, { title: "Affection & Items Cheatsheet", defaultOpen: false, tone: "neutral" // gives sensible defaults
+                                } })] })] }), _jsxs("div", { className: "mt-3 grid grid-cols-1 gap-3", children: [_jsx(Panel, { title: "Blue Magic Reference", subtitle: 'When starting a battle, it is helpful to check the status of monsters and restart if it does not know the respective Blue Magic. Blue Magic can also be learned from enemy Blue Mages.', border: "border-blue-600", buttonColor: "bg-blue-600", tone: "blue", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Blue Magic", done: blueDone, total: blueTotal, color: "blue" }) }), children: _jsx(RefList, { type: "blue", names: BLUE_MAGIC_REF.map((b) => b.name) }) }), _jsxs(Panel, { title: "Capturable Monsters Reference", subtitle: 'You cannot capture a monster if it is asleep, charmed, or the last enemy on the field. Plan accordingly!', border: "border-green-600", buttonColor: "bg-green-600", tone: "green", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Captures", done: capDone, total: capTotal, color: "green" }) }), children: [_jsx(CollapsibleTwoTables, { title: "Affection & Items Cheatsheet", defaultOpen: false, tone: "neutral" // gives sensible defaults
                                 , border: "border-zinc-600" // same as Panel border
                                 , text: "text-zinc-200" // table text tone
                                 , headerBg: "bg-zinc-900/10" // header/thead background
