@@ -7176,33 +7176,6 @@ const FFTAProgressionGuide: React.FC = () => {
                   <div className={`font-semibold ${tagColor}`}>
                     #{String(q.number).padStart(3, "0")} — {q.name}
                   </div>
-                  {/* ---- Global Missables tied to this mission (injected) ---- */}
-                  {(() => {
-                      const related = getMissablesForMission(n);
-                      if (!related.length) return null;
-                      return (
-                          <div className="mt-3">
-                              <Panel
-                                  title="Missables (Global)"
-                                  border="border-red-600"
-                                  buttonColor="bg-red-600"
-                                  right={<></>}
-                              >
-                                  <ul className="space-y-2 w-full text-sm">
-                                    {GLOBAL_MISSABLES.map((m) => (
-                                      <MissableCard
-                                        key={`gm-global-${m.id}`}
-                                        m={m}
-                                        checked={checked}
-                                        setCheck={setCheck}
-                                      />
-                                    ))}
-                                  </ul>
-                              </Panel>
-                          </div>
-                      );
-                  })()}
-
                   {/* Hide everything below when checked */}
                   {!isChecked && (
                     <>
@@ -7222,6 +7195,25 @@ const FFTAProgressionGuide: React.FC = () => {
                         <List l="Rewards" a={q.reward} />
                         <List l="Enemies" a={q.enemies} />
                       </div>
+                      <br></br>
+                  {/* ---- Global Missables tied to this mission (injected) ----*/}
+                  {!isChecked && (() => {
+                      const related = getMissablesForMission(n);
+                      if (!related.length) return null;
+                      return (
+                        <ul className="space-y-2 w-full text-sm">
+                            {related.map((m) => (
+                                <MissableCard
+                                    key={`gm-quest-${n}-${m.id}`}
+                                    m={m}
+                                    checked={checked}
+                                    setCheck={setCheck}
+                                />
+                            ))}
+                        </ul>
+                      );
+                  })()}
+
                     </>
                   )}
                 </div>
