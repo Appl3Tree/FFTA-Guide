@@ -7516,7 +7516,6 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           const isOpen = !!expanded[b.key];
           const blueNames = b.blue || [];
           const capNames = b.caps || [];
-          const recs = b.recruits || [];
           const miss = b.missables || [];
           const quest = b.sidequests || [];
 
@@ -7659,10 +7658,11 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                     </label>
 
                                     {/* Pretty completion toggle */}
+                                    {num >= 1 && (
                                     <div className="shrink-0 pt-1">
                                         <button
                                             type="button"
-                                            onClick={() => setCheck(id)}
+                                            onClick={() => { setCheck(id)}}
                                             aria-pressed={isChecked}
                                             className={[
                                                 "inline-flex select-none items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
@@ -7686,6 +7686,8 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                             <span>{isChecked ? "Completed" : "Complete"}</span>
                                         </button>
                                     </div>
+
+                                    )}
                                 </div>
                             </li>
                         );

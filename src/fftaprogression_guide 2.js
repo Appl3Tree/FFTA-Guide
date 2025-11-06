@@ -38,18 +38,6 @@ function CollapsibleTwoTables({ title, defaultOpen = false, open: controlledOpen
     const dividerCls = divider ?? d.divider;
     return (_jsxs("div", { className: `rounded-xl border ${borderCls} ${className}`, children: [_jsxs("button", { type: "button", "aria-expanded": open, "aria-controls": contentId, onClick: toggle, className: `flex w-full items-center justify-between px-4 py-2 font-semibold text-center ${textCls} ${headerBgCls} ${headerClassName}`, children: [_jsx("span", { children: title }), _jsx("svg", { className: `h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`, viewBox: "0 0 20 20", fill: "currentColor", children: _jsx("path", { fillRule: "evenodd", d: "M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z", clipRule: "evenodd" }) })] }), open && (_jsx("div", { id: contentId, className: `p-4 ${bodyClassName}`, children: _jsxs("div", { className: "grid grid-cols-1 gap-4 md:grid-cols-2", children: [_jsx(TableSection, { title: leftTitle, rows: leftRows, columns: leftColumns, borderCls: borderCls, textCls: textCls, rowBgCls: rowBgCls, headerBgCls: headerBgCls, dividerCls: dividerCls }), _jsx(TableSection, { title: rightTitle, rows: rightRows, columns: rightColumns, borderCls: borderCls, textCls: textCls, rowBgCls: rowBgCls, headerBgCls: headerBgCls, dividerCls: dividerCls })] }) }))] }));
 }
-function CompletePill({ checked, onChange, label = "Mark complete", }) {
-    return (_jsxs("button", { type: "button", onClick: onChange, "aria-pressed": checked, className: [
-            "inline-flex select-none items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
-            "transition-all ring-1 ring-inset focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
-            checked
-                ? "bg-green-600/20 ring-green-500/50 text-green-100 hover:bg-green-600/30"
-                : "bg-zinc-900/30 ring-white/15 text-zinc-200 hover:bg-zinc-800/50",
-        ].join(" "), title: checked ? "Completed" : "Mark complete", children: [_jsx("span", { className: [
-                    "inline-flex h-4 w-4 items-center justify-center rounded-full",
-                    checked ? "bg-green-500/80" : "bg-zinc-600/70",
-                ].join(" "), children: _jsx("svg", { viewBox: "0 0 20 20", className: "h-3 w-3 fill-white", children: _jsx("path", { d: "M16.7 5.3a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0L3.3 10a1 1 0 1 1 1.4-1.4l3.1 3.1 6.9-6.9a1 1 0 0 1 1.4 0z" }) }) }), _jsx("span", { children: checked ? "Completed" : label })] }));
-}
 function TableSection({ title, rows, columns, borderCls, textCls, rowBgCls, headerBgCls, dividerCls, }) {
     return (_jsxs("section", { className: `overflow-x-auto rounded-lg border ${borderCls}`, children: [_jsx("header", { className: `px-3 py-2 text-sm font-semibold text-center ${textCls} ${headerBgCls}`, children: title }), _jsxs("table", { className: "min-w-full table-fixed", children: [_jsx("thead", { className: `${headerBgCls}`, children: _jsx("tr", { children: columns.map((c) => (_jsx("th", { className: `px-3 py-2 text-left text-sm font-semibold ${textCls} ${c.className ?? ""}`, scope: "col", children: c.header }, String(c.key)))) }) }), _jsx("tbody", { className: `bg-transparent ${dividerCls}`, children: rows.length === 0 ? (_jsx("tr", { children: _jsx("td", { className: `px-3 py-3 text-sm ${textCls}/70`, colSpan: columns.length, children: "No entries." }) })) : (rows.map((row, rowIdx) => (_jsx("tr", { className: `${textCls}`, children: columns.map((c) => (_jsx("td", { className: `px-3 py-2 align-top whitespace-normal break-words min-w-0 ${rowBgCls}`, children: c.cell ? c.cell(row[c.key], row, rowIdx) : String(row[c.key] ?? "") }, String(c.key)))) }, row.id ?? rowIdx)))) })] })] }));
 }
@@ -6224,7 +6212,7 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #007 → Before #008)",
             placements: ["Roda Volcano"],
-            blue: ["Night", "Bad Breath", "Guard-Off"],
+            blue: ["Night", "Bad Breath"],
             caps: ["Firewyrm", "Malboro", "Big Malboro"],
             sidequests: [47, 73, 74, 75, 195, 76, 122, 286, 155, 168, 208, 209, 268, 243],
         },
@@ -6269,7 +6257,6 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #010 → Before #011)",
             placements: ["Nargai Cave"],
-            blue: ["White Wind", "Angel Whisper"],
             sidequests: [114, 58, 124, 92, 154, 169, 206, 219, 246],
         },
         {
@@ -6286,34 +6273,36 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #011 → Before #012)",
             placements: ["Baguba Port", "Jagd Dorsa"],
+            blue: ["Guard-Off"],
             sidequests: [111, 133, 160, 176, 214, 215, 247, 271, 287, 110],
         },
         {
             key: "012",
             kind: "story",
             title: "Jagd Hunt (#012)",
-            subtitle: "Jagd Dorsa",
+            subtitle: "Baguba Port",
+            blue: ["White Wind"],
             sidequests: [12],
         },
         {
             key: "post-012",
             kind: "between",
             title: "Between-Story Missions (After #012 → Before #013)",
-            placements: ["Kudik Peaks"],
+            placements: ["Dorsa Caravan"],
             sidequests: [52, 108, 77, 78, 79, 80, 81, 132, 156, 196, 197, 198, 204, 222, 248, 272],
         },
         {
             key: "013",
             kind: "story",
             title: "The Bounty (#013)",
-            subtitle: "Kudik Peaks",
+            subtitle: "Dorsa Caravan",
             sidequests: [13],
         },
         {
             key: "post-013",
             kind: "between",
             title: "Between-Story Missions (After #013 → Before #014)",
-            placements: ["Jeraw Sands"],
+            placements: ["Kudik Caves"],
             caps: ["Grenade"],
             sidequests: [26, 61, 109, 131, 273, 157, 178, 216, 217, 218, 225, 249],
         },
@@ -6321,27 +6310,27 @@ const FFTAProgressionGuide = () => {
             key: "014",
             kind: "story",
             title: "Golden Clock (#014)",
-            subtitle: "Jeraw Sands",
+            subtitle: "Kudik Caves",
             sidequests: [14],
         },
         {
             key: "post-014",
             kind: "between",
             title: "Between-Story Missions (After #014 → Before #015)",
-            placements: ["Muscadet"],
+            placements: ["Jeraw Sands"],
         },
         {
             key: "015",
             kind: "story",
             title: "Scouring Time (#015)",
-            subtitle: "Muscadet",
+            subtitle: "Jeraw Sands",
             sidequests: [15],
         },
         {
             key: "post-015",
             kind: "between",
             title: "Between-Story Missions (After #015 → Before #016)",
-            placements: ["Uladon Bog"],
+            placements: ["Muscadet"],
             sidequests: [28, 39, 82, 83, 84, 85, 86, 93, 126, 153, 158, 179, 220, 221, 228, 250, 251, 252, 274],
             missables: [5]
         },
@@ -6349,14 +6338,14 @@ const FFTAProgressionGuide = () => {
             key: "016",
             kind: "story",
             title: "The Big Find (#016)",
-            subtitle: "Uladon Bog",
+            subtitle: "Muscadet",
             sidequests: [16],
         },
         {
             key: "post-016",
             kind: "between",
             title: "Between-Story Missions (After #016 → Before #017)",
-            placements: ["Gotor Sands", "Jagd Ahli"],
+            placements: ["Materiwood", "Jagd Ahli"],
             blue: ["LV? S-Flare"],
             sidequests: [51, 65, 30, 104, 105, 53, 121, 130, 149, 165, 129, 181, 223, 224, 253, 275, 298, 297],
         },
@@ -6364,41 +6353,43 @@ const FFTAProgressionGuide = () => {
             key: "017",
             kind: "story",
             title: "Desert Patrol (#017)",
-            subtitle: "Gotor Sands",
+            subtitle: "Materiwood",
             sidequests: [17],
         },
         {
             key: "post-017",
             kind: "between",
             title: "Between-Story Missions (After #017 → Before #018)",
-            placements: ["Delia Dunes", "Ozmonfield"],
+            placements: ["Ozmonfield"],
             sidequests: [34, 35, 91, 102, 31, 66, 60, 144, 161, 171, 231, 254],
         },
         {
             key: "018",
             kind: "story",
             title: "Quiet Sands (#018)",
-            subtitle: "Delia Dunes",
+            subtitle: "Ozmonfield",
+            blue: ["Angel Whisper"],
             sidequests: [18],
         },
         {
             key: "post-018",
             kind: "between",
             title: "Between-Story Missions (After #018 → Before #019)",
-            placements: ["Materiwood"],
+            placements: ["Deti Plains"],
             sidequests: [54, 107, 134, 147, 163, 177, 180, 182, 226, 227, 234, 255, 276, 127, 277, 128, 278],
         },
         {
             key: "019",
             kind: "story",
             title: "Materite Now! (#019)",
-            subtitle: "Materiwood",
+            subtitle: "Deti Plains",
             sidequests: [19],
         },
         {
             key: "post-019",
             kind: "between",
             title: "Between-Story Missions (After #019 → Before #020)",
+            placements: ["Tubola Cave"],
             sidequests: [135, 136, 202, 229, 230, 285, 279, 280, 293],
         },
         {
@@ -6412,7 +6403,7 @@ const FFTAProgressionGuide = () => {
             key: "post-020",
             kind: "between",
             title: "Between-Story Missions (After #020 → Before #021)",
-            placements: ["Tubola Cave", "Jagd Helje"],
+            placements: ["Ahli Desert", "Jagd Helje"],
             blue: ["Roulette", "Twister"],
             sidequests: [40, 41, 42, 57, 63, 103, 64, 29, 116, 117, 118, 119, 120, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 295, 296],
         },
@@ -6420,28 +6411,31 @@ const FFTAProgressionGuide = () => {
             key: "021",
             kind: "story",
             title: "Hidden Vein (#021)",
-            subtitle: "Tubola Cave",
+            subtitle: "Tubola Caves",
             sidequests: [21],
         },
         {
             key: "post-021",
             kind: "between",
             title: "Between-Story Missions (After #021 → Before #022)",
-            placements: ["Deti Plains"],
+            placements: ["Delia Dunes"],
+            blue: [
+                "White Wind",
+            ],
             sidequests: [94, 291, 294, 159],
         },
         {
             key: "022",
             kind: "story",
             title: "To Ambervale (#022)",
-            subtitle: "Deti Plains",
+            subtitle: "Delia Dunes",
             sidequests: [22],
         },
         {
             key: "post-022",
             kind: "between",
             title: "Between-Story Missions (After #022 → Before #023)",
-            placements: ["Siena Gorge"],
+            placements: ["Gotor Sands"],
             sidequests: [43, 59, 141, 142, 292, 146, 174, 237, 238, 239, 257, 258, 283, 290],
         },
         {
@@ -6455,6 +6449,7 @@ const FFTAProgressionGuide = () => {
             key: "post-023",
             kind: "between",
             title: "Between-Story Missions (After #023 → Before #024)",
+            placements: ["Siena Gorge"],
             sidequests: [56],
             missables: [7]
         },
@@ -6528,12 +6523,12 @@ const FFTAProgressionGuide = () => {
                         return null; // skip isekai and tutorial
                     const id = questKey(n);
                     const isChecked = !!checked[id];
-                    return (_jsx("li", { className: "whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("label", { className: "flex items-start gap-2", children: [_jsx("input", { type: "checkbox", className: "mt-1 accent-purple-600 dark:accent-purple-400", checked: isChecked, onChange: () => setCheck(id) }), _jsxs("div", { children: [_jsxs("div", { className: `font-semibold ${tagColor}`, children: ["#", String(q.number).padStart(3, "0"), " \u2014 ", q.name] }), !isChecked && (_jsxs(_Fragment, { children: [_jsx("span", { className: "text-xs text-zinc-500 dark:text-zinc-400 mt-1", children: q.location }), q.description && (_jsx("div", { className: "text-sm text-zinc-800 dark:text-zinc-200 mt-1", children: q.description })), _jsxs("div", { className: "text-xs mt-1 space-y-1 text-zinc-900 dark:text-zinc-100", children: [_jsx(KV, { l: "Type", v: q.type }), _jsx(KV, { l: "Difficulty", v: q.difficulty }), _jsx(KV, { l: "Cost", v: q.cost }), _jsx(KV, { l: "Location", v: q.location }), _jsx(List, { l: "Prerequisites", a: q.prerequisites }), _jsx(List, { l: "Rewards", a: q.reward }), _jsx(List, { l: "Enemies", a: q.enemies })] }), _jsx("br", {}), !isChecked && (() => {
-                                                    const related = getMissablesForMission(n);
-                                                    if (!related.length)
-                                                        return null;
-                                                    return (_jsx("ul", { className: "space-y-2 w-full text-sm", children: related.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-quest-${n}-${m.id}`))) }));
-                                                })()] }))] })] }) }, `mission-${n}`));
+                    return (_jsx("li", { className: "whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("label", { className: "flex items-start gap-2", children: [_jsx("input", { type: "checkbox", className: "mt-1 accent-purple-600 dark:accent-purple-400", checked: isChecked, onChange: () => setCheck(id) }), _jsxs("div", { children: [_jsxs("div", { className: `font-semibold ${tagColor}`, children: ["#", String(q.number).padStart(3, "0"), " \u2014 ", q.name] }), (() => {
+                                            const related = getMissablesForMission(n);
+                                            if (!related.length)
+                                                return null;
+                                            return (_jsx("div", { className: "mt-3", children: _jsx(Panel, { title: "Missables (Global)", border: "border-red-600", buttonColor: "bg-red-600", right: _jsx(_Fragment, {}), children: _jsx("ul", { className: "space-y-2 w-full text-sm", children: GLOBAL_MISSABLES.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-global-${m.id}`))) }) }) }));
+                                        })(), !isChecked && (_jsxs(_Fragment, { children: [_jsx("span", { className: "text-xs text-zinc-500 dark:text-zinc-400 mt-1", children: q.location }), q.description && (_jsx("div", { className: "text-sm text-zinc-800 dark:text-zinc-200 mt-1", children: q.description })), _jsxs("div", { className: "text-xs mt-1 space-y-1 text-zinc-900 dark:text-zinc-100", children: [_jsx(KV, { l: "Type", v: q.type }), _jsx(KV, { l: "Difficulty", v: q.difficulty }), _jsx(KV, { l: "Cost", v: q.cost }), _jsx(KV, { l: "Location", v: q.location }), _jsx(List, { l: "Prerequisites", a: q.prerequisites }), _jsx(List, { l: "Rewards", a: q.reward }), _jsx(List, { l: "Enemies", a: q.enemies })] })] }))] })] }) }, `mission-${n}`));
                 }
                 return null;
             }) }));
@@ -6558,10 +6553,11 @@ const FFTAProgressionGuide = () => {
                                     { key: "item", header: "Item" },
                                     { key: "affection", header: "Affection", className: "w-28" },
                                     { key: "max", header: "Max", className: "w-20" },
-                                ] }), _jsx(RefList, { type: "cap", names: CAPTURE_REF.map((c) => c.monster) })] }), _jsx(Panel, { title: "Mission Reference", subtitle: 'If a quest does not appear, you may need to accept unwanted quests and promptly quit them to "empty" your available quest slots.', border: "border-amber-600", buttonColor: "bg-amber-600", tone: "amber", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Missions", done: questDone, total: questTotal, color: "amber" }) }), children: _jsx(RefList, { type: "quest", names: MISSION_REF.map((q) => q.number) }) })] }), _jsx("div", { className: "mt-3", children: _jsx(Panel, { title: "Missables & Warnings", subtitle: 'Take a moment to review the missables and warnings before proceeding to avoid later heartache!', border: "border-red-600", buttonColor: "bg-red-600", tone: "red", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Missables", done: missDone, total: missTotal, color: "red" }) }), children: _jsx("ul", { className: "space-y-2 w-full text-sm", children: GLOBAL_MISSABLES.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-global-${m.id}`))) }) }) }), screenMode !== "idle" && (_jsxs("div", { className: "fixed inset-0 z-50 flex items-center justify-center", children: [_jsx("div", { className: "absolute inset-0 bg-black/70 backdrop-blur-sm" }), _jsxs("div", { className: "relative mx-4 w-full max-w-md rounded-2xl shadow-lg ring-1 ring-white/10 bg-zinc-100 dark:bg-zinc-900", children: [_jsxs("div", { className: "px-5 py-4 border-b border-zinc-200/60 dark:border-white/10", children: [_jsx("h2", { className: "text-xl font-semibold text-zinc-900 dark:text-zinc-100", children: screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..." }), _jsx("p", { className: "mt-1 text-xs text-zinc-600 dark:text-zinc-400", children: "Please wait" })] }), _jsx("div", { className: "px-5 py-6", children: _jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 1" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: screenMode === "saving" ? "Writing save data..." : "Reading save data..." })] })] }), _jsx("div", { className: "h-5 w-5 animate-spin rounded-full border-2 border-zinc-400 border-t-transparent" })] }), _jsxs("div", { className: "opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 2" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: "Empty" })] })] }), _jsx("div", { className: "h-5 w-5 rounded-full border-2 border-transparent" })] }), _jsxs("div", { className: "opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 3" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: "Empty" })] })] }), _jsx("div", { className: "h-5 w-5 rounded-full border-2 border-transparent" })] })] }) }), _jsx("div", { className: "px-5 py-4 border-t border-zinc-200/60 dark:border-white/10 text-right", children: _jsx("span", { className: "text-xs text-zinc-500 dark:text-zinc-400", children: screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..." }) })] })] })), _jsx("div", { className: "mt-4 space-y-2", children: blocks.map((b) => {
+                                ] }), _jsx(RefList, { type: "cap", names: CAPTURE_REF.map((c) => c.monster) })] }), _jsx(Panel, { title: "Mission Reference", subtitle: 'If a quest does not appear, you may need to accept quests to "empty" your available quest slots.', border: "border-amber-600", buttonColor: "bg-amber-600", tone: "amber", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Missions", done: questDone, total: questTotal, color: "amber" }) }), children: _jsx(RefList, { type: "quest", names: MISSION_REF.map((q) => q.number) }) })] }), _jsx("div", { className: "mt-3", children: _jsx(Panel, { title: "Missables & Warnings", subtitle: 'Take a moment to review the missables and warnings before proceeding to avoid later heartache!', border: "border-red-600", buttonColor: "bg-red-600", tone: "red", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[200px]", children: _jsx(ProgressBar, { label: "Missables", done: missDone, total: missTotal, color: "red" }) }), children: _jsx("ul", { className: "space-y-2 w-full text-sm", children: GLOBAL_MISSABLES.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-global-${m.id}`))) }) }) }), screenMode !== "idle" && (_jsxs("div", { className: "fixed inset-0 z-50 flex items-center justify-center", children: [_jsx("div", { className: "absolute inset-0 bg-black/70 backdrop-blur-sm" }), _jsxs("div", { className: "relative mx-4 w-full max-w-md rounded-2xl shadow-lg ring-1 ring-white/10 bg-zinc-100 dark:bg-zinc-900", children: [_jsxs("div", { className: "px-5 py-4 border-b border-zinc-200/60 dark:border-white/10", children: [_jsx("h2", { className: "text-xl font-semibold text-zinc-900 dark:text-zinc-100", children: screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..." }), _jsx("p", { className: "mt-1 text-xs text-zinc-600 dark:text-zinc-400", children: "Please wait" })] }), _jsx("div", { className: "px-5 py-6", children: _jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 1" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: screenMode === "saving" ? "Writing save data..." : "Reading save data..." })] })] }), _jsx("div", { className: "h-5 w-5 animate-spin rounded-full border-2 border-zinc-400 border-t-transparent" })] }), _jsxs("div", { className: "opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 2" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: "Empty" })] })] }), _jsx("div", { className: "h-5 w-5 rounded-full border-2 border-transparent" })] }), _jsxs("div", { className: "opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("div", { className: "h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" }), _jsxs("div", { children: [_jsx("div", { className: "text-sm font-medium text-zinc-900 dark:text-zinc-100", children: "Slot 3" }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: "Empty" })] })] }), _jsx("div", { className: "h-5 w-5 rounded-full border-2 border-transparent" })] })] }) }), _jsx("div", { className: "px-5 py-4 border-t border-zinc-200/60 dark:border-white/10 text-right", children: _jsx("span", { className: "text-xs text-zinc-500 dark:text-zinc-400", children: screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..." }) })] })] })), _jsx("div", { className: "mt-4 space-y-2", children: blocks.map((b) => {
                     const isOpen = !!expanded[b.key];
                     const blueNames = b.blue || [];
                     const capNames = b.caps || [];
+                    const recs = b.recruits || [];
                     const miss = b.missables || [];
                     const quest = b.sidequests || [];
                     const blueDoneLocal = blueNames.reduce((n, b) => n + (checked[keyify(`blue:${b}`)] ? 1 : 0), 0);
@@ -6575,36 +6571,29 @@ const FFTAProgressionGuide = () => {
                                     : "hover:bg-zinc-50 dark:hover:bg-zinc-800/70"}`, onClick: () => toggle(b.key), children: [_jsx("div", { className: "space-y-1", children: _jsxs("div", { className: "flex items-center gap-2 flex-wrap", children: [_jsx("span", { className: "font-bold text-lg text-zinc-900 dark:text-zinc-100", children: b.title }), b.subtitle && (_jsxs("span", { className: "text-sm text-zinc-600 dark:text-zinc-400", children: ["(", b.subtitle, ")"] })), b.placements && b.placements.length > 0 && (_jsxs(Tag, { color: "purple", children: [_jsx(MapPin, { className: "w-3 h-3" }), "Place #", b.placements
                                                             .map((l) => MAP_PLACEMENTS[l]?.number)
                                                             .filter(Boolean)
-                                                            .join(", #")] })), blueNames.length > 0 && (_jsxs(Tag, { color: "blue", children: ["Blue Magic ", blueDoneLocal, "/", blueNames.length] })), capNames.length > 0 && (_jsxs(Tag, { color: "green", children: ["Captures ", capDoneLocal, "/", capNames.length] })), b.kind === "between" && quest.length > 0 && (_jsxs(Tag, { color: "amber", children: ["Sidequests ", questDoneLocal, "/", quest.length] })), miss.length > 0 && (_jsxs(Tag, { color: "red", children: ["Missables ", missDoneLocal, "/", miss.length] }))] }) }), isOpen ? (_jsx(ChevronUp, { className: "text-zinc-500" })) : (_jsx(ChevronDown, { className: "text-zinc-500" }))] }), isOpen && (_jsxs("div", { className: "p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800", children: [b.kind === "story" && quest.map((num) => {
+                                                            .join(", ")] })), blueNames.length > 0 && (_jsxs(Tag, { color: "blue", children: ["Blue Magic ", blueDoneLocal, "/", blueNames.length] })), capNames.length > 0 && (_jsxs(Tag, { color: "green", children: ["Captures ", capDoneLocal, "/", capNames.length] })), b.kind === "between" && quest.length > 0 && (_jsxs(Tag, { color: "amber", children: ["Sidequests ", questDoneLocal, "/", quest.length] })), miss.length > 0 && (_jsxs(Tag, { color: "red", children: ["Missables ", missDoneLocal, "/", miss.length] }))] }) }), isOpen ? (_jsx(ChevronUp, { className: "text-zinc-500" })) : (_jsx(ChevronDown, { className: "text-zinc-500" }))] }), isOpen && (_jsxs("div", { className: "p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800", children: [b.kind === "story" && quest.map((num) => {
                                         const id = keyify(`quest-global:${num}`);
                                         const q = missionMap.get(num);
                                         const isChecked = !!checked[id];
-                                        return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("div", { className: "flex w-full items-start justify-between gap-3", children: [_jsx("label", { htmlFor: `side-${num}`, className: "flex-1 text-zinc-800 dark:text-zinc-200 cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsx("div", { className: "italic", children: q.strategy && q.strategy.length ? (_jsx("pre", { className: "whitespace-pre-wrap text-zinc-800 dark:text-zinc-200", children: q.strategy })) : ("None") }), q && !isChecked && (() => {
-                                                                    const related = getMissablesForMission(num);
-                                                                    if (!related.length)
-                                                                        return null;
-                                                                    return (_jsx("div", { className: "mt-2", children: _jsx("ul", { className: "space-y-2 w-full", children: related.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-side-${num}-${m.id}`))) }) }));
-                                                                })()] })) : (_jsx("div", { className: "font-semibold", children: "No strategy available." })) }), num >= 1 && (_jsx("div", { className: "shrink-0 pt-1", children: _jsxs("button", { type: "button", onClick: () => { setCheck(id); }, "aria-pressed": isChecked, className: [
-                                                                "inline-flex select-none items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
-                                                                "transition-all ring-1 ring-inset focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
-                                                                isChecked
-                                                                    ? "bg-green-600/20 ring-green-500/50 text-green-100 hover:bg-green-600/30"
-                                                                    : "bg-zinc-900/30 ring-white/15 text-zinc-200 hover:bg-zinc-800/50",
-                                                            ].join(" "), title: isChecked ? "Completed" : "Mark complete", children: [_jsx("span", { className: [
-                                                                        "inline-flex h-4 w-4 items-center justify-center rounded-full",
-                                                                        isChecked ? "bg-green-500/80" : "bg-zinc-600/70",
-                                                                    ].join(" "), children: _jsx("svg", { viewBox: "0 0 20 20", className: "h-3 w-3 fill-white", children: _jsx("path", { d: "M16.7 5.3a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0L3.3 10a1 1 0 1 1 1.4-1.4l3.1 3.1 6.9-6.9a1 1 0 0 1 1.4 0z" }) }) }), _jsx("span", { children: isChecked ? "Completed" : "Complete" })] }) }))] }) }, num));
+                                        return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsx("label", { htmlFor: `side-${num}`, className: "w-full text-zinc-800 dark:text-zinc-200 w-full cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsx("div", { className: "italic", children: q.strategy &&
+                                                                q.strategy.length ? (_jsx("pre", { className: "whitespace-pre-wrap text-zinc-800 dark:text-zinc-200", children: q.strategy })) : ("None") }), q && !isChecked && (() => {
+                                                            const related = getMissablesForMission(num);
+                                                            if (!related.length)
+                                                                return null;
+                                                            return (_jsx("div", { className: "mt-2", children: _jsx("ul", { className: "space-y-2 w-full", children: related.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-side-${num}-${m.id}`))) }) }));
+                                                        })()] })) : (_jsx("div", { className: "font-semibold", children: "No strategy available." })) }) }, num));
                                     }), b.placements && b.placements.length > 0 && (_jsx(MapPanel, { placements: b.placements })), blueNames.length > 0 && (_jsx(Panel, { title: "Blue Magic Now Available", border: "border-blue-600", buttonColor: "bg-blue-600", tone: "blue", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[180px]", children: _jsx(ProgressBar, { label: "Blue Magic", done: blueDoneLocal, total: blueNames.length, color: "blue" }) }), children: _jsx(RefList, { type: "blue", names: blueNames }) })), capNames.length > 0 && (_jsx(Panel, { title: "Capturable Monsters Now Available", border: "border-green-600", buttonColor: "bg-green-600", tone: "green", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[180px]", children: _jsx(ProgressBar, { label: "Captures", done: capDoneLocal, total: capNames.length, color: "green" }) }), children: _jsx(RefList, { type: "cap", names: capNames }) })), b.kind === "between" && quest.length > 0 && (_jsx(Panel, { title: "Side Missions Now Available", border: "border-amber-600", buttonColor: "bg-amber-600", tone: "amber", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[180px]", children: _jsx(ProgressBar, { label: "Sidequests", done: questDoneLocal, total: quest.length, color: "amber" }) }), children: _jsx("ul", { className: "space-y-2 text-sm", children: quest.map((num) => {
                                                 const id = keyify(`quest-global:${num}`);
                                                 const q = missionMap.get(num);
                                                 const isChecked = !!checked[id];
-                                                return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("label", { className: "flex w-full items-start gap-2", children: [_jsx("input", { id: `side-${num}`, type: "checkbox", className: "mt-0.5 accent-amber-600 dark:accent-amber-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("label", { htmlFor: `side-${num}`, className: "w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsxs("div", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: ["#", String(q.number).padStart(3, "0"), " \u2014 ", q.name] }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: !isChecked && q.prerequisites && (_jsxs(_Fragment, { children: [_jsx("span", { className: "font-semibold", children: "Prerequisites:" }), " ", _jsx("ul", { className: "list-disc ml-5 mt-1", children: q.prerequisites.map((p, i) => (_jsx("li", { children: p }, i))) })] })) }), q && !isChecked && (() => {
+                                                return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("label", { className: "flex w-full items-start gap-2", children: [_jsx("input", { id: `side-${num}`, type: "checkbox", className: "mt-0.5 accent-amber-600 dark:accent-amber-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("label", { htmlFor: `side-${num}`, className: "w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsxs("div", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: ["#", String(q.number).padStart(3, "0"), " \u2014", " ", q.name] }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: !isChecked && q.prerequisites && (_jsxs(_Fragment, { children: [_jsx("span", { className: "font-semibold", children: "Prerequisites:" }), " ", _jsx("ul", { className: "list-disc ml-5 mt-1", children: q.prerequisites.map((p, i) => (_jsx("li", { children: p }, i))) })] })) }), q && !isChecked && (() => {
                                                                             const related = getMissablesForMission(num);
                                                                             if (!related.length)
                                                                                 return null;
                                                                             return (_jsx("div", { className: "mt-2", children: _jsx("ul", { className: "space-y-2 w-full", children: related.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-side-${num}-${m.id}`))) }) }));
                                                                         })()] })) : (_jsxs("div", { className: "font-semibold", children: ["#", String(num).padStart(3, "0"), " \u2014 Unknown quest"] })) })] }) }, num));
                                             }) }) })), (Array.isArray(b.missables) && b.missables.length > 0) && (() => {
+                                        // Look up the GlobalMissable objects for the IDs listed on this block
                                         const localMiss = b.missables
                                             .map((id) => GLOBAL_MISSABLES.find((m) => m.id === id))
                                             .filter((m) => !!m);

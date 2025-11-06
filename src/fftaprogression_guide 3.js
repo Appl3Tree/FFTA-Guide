@@ -38,18 +38,6 @@ function CollapsibleTwoTables({ title, defaultOpen = false, open: controlledOpen
     const dividerCls = divider ?? d.divider;
     return (_jsxs("div", { className: `rounded-xl border ${borderCls} ${className}`, children: [_jsxs("button", { type: "button", "aria-expanded": open, "aria-controls": contentId, onClick: toggle, className: `flex w-full items-center justify-between px-4 py-2 font-semibold text-center ${textCls} ${headerBgCls} ${headerClassName}`, children: [_jsx("span", { children: title }), _jsx("svg", { className: `h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`, viewBox: "0 0 20 20", fill: "currentColor", children: _jsx("path", { fillRule: "evenodd", d: "M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z", clipRule: "evenodd" }) })] }), open && (_jsx("div", { id: contentId, className: `p-4 ${bodyClassName}`, children: _jsxs("div", { className: "grid grid-cols-1 gap-4 md:grid-cols-2", children: [_jsx(TableSection, { title: leftTitle, rows: leftRows, columns: leftColumns, borderCls: borderCls, textCls: textCls, rowBgCls: rowBgCls, headerBgCls: headerBgCls, dividerCls: dividerCls }), _jsx(TableSection, { title: rightTitle, rows: rightRows, columns: rightColumns, borderCls: borderCls, textCls: textCls, rowBgCls: rowBgCls, headerBgCls: headerBgCls, dividerCls: dividerCls })] }) }))] }));
 }
-function CompletePill({ checked, onChange, label = "Mark complete", }) {
-    return (_jsxs("button", { type: "button", onClick: onChange, "aria-pressed": checked, className: [
-            "inline-flex select-none items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
-            "transition-all ring-1 ring-inset focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
-            checked
-                ? "bg-green-600/20 ring-green-500/50 text-green-100 hover:bg-green-600/30"
-                : "bg-zinc-900/30 ring-white/15 text-zinc-200 hover:bg-zinc-800/50",
-        ].join(" "), title: checked ? "Completed" : "Mark complete", children: [_jsx("span", { className: [
-                    "inline-flex h-4 w-4 items-center justify-center rounded-full",
-                    checked ? "bg-green-500/80" : "bg-zinc-600/70",
-                ].join(" "), children: _jsx("svg", { viewBox: "0 0 20 20", className: "h-3 w-3 fill-white", children: _jsx("path", { d: "M16.7 5.3a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0L3.3 10a1 1 0 1 1 1.4-1.4l3.1 3.1 6.9-6.9a1 1 0 0 1 1.4 0z" }) }) }), _jsx("span", { children: checked ? "Completed" : label })] }));
-}
 function TableSection({ title, rows, columns, borderCls, textCls, rowBgCls, headerBgCls, dividerCls, }) {
     return (_jsxs("section", { className: `overflow-x-auto rounded-lg border ${borderCls}`, children: [_jsx("header", { className: `px-3 py-2 text-sm font-semibold text-center ${textCls} ${headerBgCls}`, children: title }), _jsxs("table", { className: "min-w-full table-fixed", children: [_jsx("thead", { className: `${headerBgCls}`, children: _jsx("tr", { children: columns.map((c) => (_jsx("th", { className: `px-3 py-2 text-left text-sm font-semibold ${textCls} ${c.className ?? ""}`, scope: "col", children: c.header }, String(c.key)))) }) }), _jsx("tbody", { className: `bg-transparent ${dividerCls}`, children: rows.length === 0 ? (_jsx("tr", { children: _jsx("td", { className: `px-3 py-3 text-sm ${textCls}/70`, colSpan: columns.length, children: "No entries." }) })) : (rows.map((row, rowIdx) => (_jsx("tr", { className: `${textCls}`, children: columns.map((c) => (_jsx("td", { className: `px-3 py-2 align-top whitespace-normal break-words min-w-0 ${rowBgCls}`, children: c.cell ? c.cell(row[c.key], row, rowIdx) : String(row[c.key] ?? "") }, String(c.key)))) }, row.id ?? rowIdx)))) })] })] }));
 }
@@ -6224,7 +6212,7 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #007 → Before #008)",
             placements: ["Roda Volcano"],
-            blue: ["Night", "Bad Breath", "Guard-Off"],
+            blue: ["Night", "Bad Breath"],
             caps: ["Firewyrm", "Malboro", "Big Malboro"],
             sidequests: [47, 73, 74, 75, 195, 76, 122, 286, 155, 168, 208, 209, 268, 243],
         },
@@ -6286,6 +6274,7 @@ const FFTAProgressionGuide = () => {
             kind: "between",
             title: "Between-Story Missions (After #011 → Before #012)",
             placements: ["Baguba Port", "Jagd Dorsa"],
+            blue: ["Guard-Off"],
             sidequests: [111, 133, 160, 176, 214, 215, 247, 271, 287, 110],
         },
         {
@@ -6562,6 +6551,7 @@ const FFTAProgressionGuide = () => {
                     const isOpen = !!expanded[b.key];
                     const blueNames = b.blue || [];
                     const capNames = b.caps || [];
+                    const recs = b.recruits || [];
                     const miss = b.missables || [];
                     const quest = b.sidequests || [];
                     const blueDoneLocal = blueNames.reduce((n, b) => n + (checked[keyify(`blue:${b}`)] ? 1 : 0), 0);
@@ -6579,32 +6569,25 @@ const FFTAProgressionGuide = () => {
                                         const id = keyify(`quest-global:${num}`);
                                         const q = missionMap.get(num);
                                         const isChecked = !!checked[id];
-                                        return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("div", { className: "flex w-full items-start justify-between gap-3", children: [_jsx("label", { htmlFor: `side-${num}`, className: "flex-1 text-zinc-800 dark:text-zinc-200 cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsx("div", { className: "italic", children: q.strategy && q.strategy.length ? (_jsx("pre", { className: "whitespace-pre-wrap text-zinc-800 dark:text-zinc-200", children: q.strategy })) : ("None") }), q && !isChecked && (() => {
-                                                                    const related = getMissablesForMission(num);
-                                                                    if (!related.length)
-                                                                        return null;
-                                                                    return (_jsx("div", { className: "mt-2", children: _jsx("ul", { className: "space-y-2 w-full", children: related.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-side-${num}-${m.id}`))) }) }));
-                                                                })()] })) : (_jsx("div", { className: "font-semibold", children: "No strategy available." })) }), num >= 1 && (_jsx("div", { className: "shrink-0 pt-1", children: _jsxs("button", { type: "button", onClick: () => { setCheck(id); }, "aria-pressed": isChecked, className: [
-                                                                "inline-flex select-none items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
-                                                                "transition-all ring-1 ring-inset focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
-                                                                isChecked
-                                                                    ? "bg-green-600/20 ring-green-500/50 text-green-100 hover:bg-green-600/30"
-                                                                    : "bg-zinc-900/30 ring-white/15 text-zinc-200 hover:bg-zinc-800/50",
-                                                            ].join(" "), title: isChecked ? "Completed" : "Mark complete", children: [_jsx("span", { className: [
-                                                                        "inline-flex h-4 w-4 items-center justify-center rounded-full",
-                                                                        isChecked ? "bg-green-500/80" : "bg-zinc-600/70",
-                                                                    ].join(" "), children: _jsx("svg", { viewBox: "0 0 20 20", className: "h-3 w-3 fill-white", children: _jsx("path", { d: "M16.7 5.3a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0L3.3 10a1 1 0 1 1 1.4-1.4l3.1 3.1 6.9-6.9a1 1 0 0 1 1.4 0z" }) }) }), _jsx("span", { children: isChecked ? "Completed" : "Complete" })] }) }))] }) }, num));
+                                        return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsx("label", { htmlFor: `side-${num}`, className: "w-full text-zinc-800 dark:text-zinc-200 w-full cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsx("div", { className: "italic", children: q.strategy &&
+                                                                q.strategy.length ? (_jsx("pre", { className: "whitespace-pre-wrap text-zinc-800 dark:text-zinc-200", children: q.strategy })) : ("None") }), q && !isChecked && (() => {
+                                                            const related = getMissablesForMission(num);
+                                                            if (!related.length)
+                                                                return null;
+                                                            return (_jsx("div", { className: "mt-2", children: _jsx("ul", { className: "space-y-2 w-full", children: related.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-side-${num}-${m.id}`))) }) }));
+                                                        })()] })) : (_jsx("div", { className: "font-semibold", children: "No strategy available." })) }) }, num));
                                     }), b.placements && b.placements.length > 0 && (_jsx(MapPanel, { placements: b.placements })), blueNames.length > 0 && (_jsx(Panel, { title: "Blue Magic Now Available", border: "border-blue-600", buttonColor: "bg-blue-600", tone: "blue", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[180px]", children: _jsx(ProgressBar, { label: "Blue Magic", done: blueDoneLocal, total: blueNames.length, color: "blue" }) }), children: _jsx(RefList, { type: "blue", names: blueNames }) })), capNames.length > 0 && (_jsx(Panel, { title: "Capturable Monsters Now Available", border: "border-green-600", buttonColor: "bg-green-600", tone: "green", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[180px]", children: _jsx(ProgressBar, { label: "Captures", done: capDoneLocal, total: capNames.length, color: "green" }) }), children: _jsx(RefList, { type: "cap", names: capNames }) })), b.kind === "between" && quest.length > 0 && (_jsx(Panel, { title: "Side Missions Now Available", border: "border-amber-600", buttonColor: "bg-amber-600", tone: "amber", right: _jsx("div", { className: "w-full sm:w-auto sm:min-w-[180px]", children: _jsx(ProgressBar, { label: "Sidequests", done: questDoneLocal, total: quest.length, color: "amber" }) }), children: _jsx("ul", { className: "space-y-2 text-sm", children: quest.map((num) => {
                                                 const id = keyify(`quest-global:${num}`);
                                                 const q = missionMap.get(num);
                                                 const isChecked = !!checked[id];
-                                                return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("label", { className: "flex w-full items-start gap-2", children: [_jsx("input", { id: `side-${num}`, type: "checkbox", className: "mt-0.5 accent-amber-600 dark:accent-amber-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("label", { htmlFor: `side-${num}`, className: "w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsxs("div", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: ["#", String(q.number).padStart(3, "0"), " \u2014 ", q.name] }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: !isChecked && q.prerequisites && (_jsxs(_Fragment, { children: [_jsx("span", { className: "font-semibold", children: "Prerequisites:" }), " ", _jsx("ul", { className: "list-disc ml-5 mt-1", children: q.prerequisites.map((p, i) => (_jsx("li", { children: p }, i))) })] })) }), q && !isChecked && (() => {
+                                                return (_jsx("li", { className: "flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10", children: _jsxs("label", { className: "flex w-full items-start gap-2", children: [_jsx("input", { id: `side-${num}`, type: "checkbox", className: "mt-0.5 accent-amber-600 dark:accent-amber-400", checked: !!checked[id], onChange: () => setCheck(id) }), _jsx("label", { htmlFor: `side-${num}`, className: "w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none", children: q ? (_jsxs(_Fragment, { children: [_jsxs("div", { className: "font-semibold text-zinc-900 dark:text-zinc-100", children: ["#", String(q.number).padStart(3, "0"), " \u2014", " ", q.name] }), _jsx("div", { className: "text-xs text-zinc-600 dark:text-zinc-400", children: !isChecked && q.prerequisites && (_jsxs(_Fragment, { children: [_jsx("span", { className: "font-semibold", children: "Prerequisites:" }), " ", _jsx("ul", { className: "list-disc ml-5 mt-1", children: q.prerequisites.map((p, i) => (_jsx("li", { children: p }, i))) })] })) }), q && !isChecked && (() => {
                                                                             const related = getMissablesForMission(num);
                                                                             if (!related.length)
                                                                                 return null;
                                                                             return (_jsx("div", { className: "mt-2", children: _jsx("ul", { className: "space-y-2 w-full", children: related.map((m) => (_jsx(MissableCard, { m: m, checked: checked, setCheck: setCheck }, `gm-side-${num}-${m.id}`))) }) }));
                                                                         })()] })) : (_jsxs("div", { className: "font-semibold", children: ["#", String(num).padStart(3, "0"), " \u2014 Unknown quest"] })) })] }) }, num));
                                             }) }) })), (Array.isArray(b.missables) && b.missables.length > 0) && (() => {
+                                        // Look up the GlobalMissable objects for the IDs listed on this block
                                         const localMiss = b.missables
                                             .map((id) => GLOBAL_MISSABLES.find((m) => m.id === id))
                                             .filter((m) => !!m);
