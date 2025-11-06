@@ -7407,7 +7407,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
         <Panel
           title="Mission Reference"
-          subtitle='If a quest does not appear, you may need to accept unwanted quests and promptly quit them to "empty" your available quest slots.'
+          subtitle='If a quest does not appear, you may need to accept unwanted quests and promptly quit them to "empty" your available quest slots (max of 16 shown at a time).'
           border="border-amber-600"
           buttonColor="bg-amber-600"
           tone="amber"
