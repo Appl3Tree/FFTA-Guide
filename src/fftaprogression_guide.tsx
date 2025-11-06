@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useId, useRef } from "react";
+import React, { useMemo, useState, useId, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
 import mapGif from "./assets/ffta-map.gif";
 
@@ -6448,10 +6448,28 @@ const Panel: React.FC<{
 
 const FFTAProgressionGuide: React.FC = () => {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const [checked, setChecked] = useState<Record<string, boolean>>({});
+  // 🔐 LOCAL STORAGE PERSISTENCE
+  const STORAGE_KEY = "fftaProgress";
+  const [checked, setChecked] = useState<Record<string, boolean>>(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  // Auto-save on change
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+    } catch {
+      // ignore quota/availability errors
+    }
+  }, [checked]);
 
   // --- Save/Load overlay UI state ---
-  type ScreenMode = "idle" | "saving" | "loading";
+  type ScreenMode = "idle" | "saving" | "loading" | "deletingConfirm" | "deleting";
   const [screenMode, setScreenMode] = useState<ScreenMode>("idle");
 
   // Maintain your existing checked state...
@@ -6533,6 +6551,24 @@ const FFTAProgressionGuide: React.FC = () => {
       reader.readAsText(file);
   };
 
+  // --- CLEAR: ask for confirmation (overlay), then delete Slot 1 ---
+  const requestClearProgress = () => {
+      setScreenMode("deletingConfirm");
+  };
+
+  const confirmClearProgress = async () => {
+      setScreenMode("deleting");
+      await wait(2000); // match save/load timing
+      setChecked({});   // effect will sync to localStorage
+      try {
+          localStorage.removeItem(STORAGE_KEY); // immediate tidy
+      } catch {
+          // ignore
+      }
+      setScreenMode("idle");
+  };
+
+  const cancelClearProgress = () => setScreenMode("idle");
 
   const toggle = (k: string) => setExpanded((p) => ({ ...p, [k]: !p[k] }));
   const setCheck = (k: string, v?: boolean) =>
@@ -7337,6 +7373,14 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                   e.currentTarget.value = "";
               }}
           />
+          <button
+            className="px-3 py-1 text-sm rounded bg-rose-600 text-white hover:bg-rose-500"
+            type="button"
+            onClick={requestClearProgress}
+            title="Clear Slot 1 progress from this browser"
+          >
+            Clear Progress
+          </button>
       </div>
       </div>
 
@@ -7466,66 +7510,118 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           <div className="relative mx-4 w-full max-w-md rounded-2xl shadow-lg ring-1 ring-white/10 bg-zinc-100 dark:bg-zinc-900">
               <div className="px-5 py-4 border-b border-zinc-200/60 dark:border-white/10">
                   <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-                      {screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..."}
+                      {screenMode === "saving" ? "Saving to Slot 1..." : screenMode === "loading" ? "Loading from Slot 1..." : "Deleting from Slot 1..."}
                   </h2>
                   <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
                       Please wait
                   </p>
               </div>
 
-              <div className="px-5 py-6">
-                  {/* Faux save slots UI to give that game feel */}
-                  <div className="space-y-2">
-                      <div className="flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800">
-                          <div className="flex items-center gap-3">
-                              <div className="h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" />
-                              <div>
-                                  <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                                      Slot 1
-                                  </div>
-                                  <div className="text-xs text-zinc-600 dark:text-zinc-400">
-                                      {screenMode === "saving" ? "Writing save data..." : "Reading save data..."}
-                                  </div>
-                              </div>
-                          </div>
-                          {/* Simple spinner */}
-                          <div className="h-5 w-5 animate-spin rounded-full border-2 border-zinc-400 border-t-transparent" />
+              {/* BODY — keep slots EXACTLY the same; add a positioned confirm card over Slot 2 */}
+              <div className="relative px-5 py-6">
+                {/* Faux save slots UI to give that game feel */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" />
+                      <div>
+                        <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                          Slot 1
+                        </div>
+                        <div className="text-xs text-zinc-600 dark:text-zinc-400">
+                          {screenMode === "saving" ? "Writing save data..." : screenMode === "loading" ? "Reading save data..." : "Deleting save data..."}
+                        </div>
                       </div>
-                      <div className="opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800">
-                          <div className="flex items-center gap-3">
-                              <div className="h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" />
-                              <div>
-                                  <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                                      Slot 2
-                                  </div>
-                                  <div className="text-xs text-zinc-600 dark:text-zinc-400">
-                                      Empty
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="h-5 w-5 rounded-full border-2 border-transparent" />
-                      </div>
-                      <div className="opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800">
-                          <div className="flex items-center gap-3">
-                              <div className="h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" />
-                              <div>
-                                  <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                                      Slot 3
-                                  </div>
-                                  <div className="text-xs text-zinc-600 dark:text-zinc-400">
-                                      Empty
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="h-5 w-5 rounded-full border-2 border-transparent" />
-                      </div>
+                    </div>
+                    {/* Simple spinner */}
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-zinc-400 border-t-transparent" />
                   </div>
+
+                  {/* Slot 2 */}
+                  <div className="opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" />
+                      <div>
+                        <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                          Slot 2
+                        </div>
+                        <div className="text-xs text-zinc-600 dark:text-zinc-400">
+                          Empty
+                        </div>
+                      </div>
+                    </div>
+                    <div className="h-5 w-5 rounded-full border-2 border-transparent" />
+                  </div>
+
+                  {/* Slot 3 */}
+                  <div className="opacity-50 flex items-center justify-between rounded-xl p-3 ring-1 ring-zinc-300 dark:ring-white/10 bg-white dark:bg-zinc-800">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg ring-1 ring-zinc-300 dark:ring-white/10" />
+                      <div>
+                        <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                          Slot 3
+                        </div>
+                        <div className="text-xs text-zinc-600 dark:text-zinc-400">
+                          Empty
+                        </div>
+                      </div>
+                    </div>
+                    <div className="h-5 w-5 rounded-full border-2 border-transparent" />
+                  </div>
+                </div>
+
+                {/* POP-UP CONFIRMATION — overlays in front of Slot 2 without changing slots */}
+                {screenMode === "deletingConfirm" && (
+                  <div
+                    className="
+                      absolute right-6 top-1/2 -translate-y-1/2 z-10
+                      w-[18rem] max-w-[80vw]
+                      rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10
+                      bg-white dark:bg-zinc-900 shadow-lg
+                    "
+                    role="dialog"
+                    aria-modal="true"
+                  >
+                    <div className="px-4 py-3 border-b border-zinc-200/60 dark:border-white/10">
+                      <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                        Confirm Delete
+                      </div>
+                      <div className="text-xs text-zinc-500 dark:text-zinc-400">Slot 1</div>
+                    </div>
+                    <div className="px-4 py-4">
+                      <p className="text-sm text-zinc-800 dark:text-zinc-200">
+                        Are you sure you want to <span className="font-semibold">delete all progress</span> in
+                        <span className="font-semibold"> Slot 1</span>?
+                      </p>
+                      <div className="mt-4 flex items-center justify-end gap-2">
+                        <button
+                          type="button"
+                          className="px-3 py-1 text-sm rounded bg-zinc-700 text-white hover:bg-zinc-600"
+                          onClick={cancelClearProgress}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          className="px-3 py-1 text-sm rounded bg-rose-600 text-white hover:bg-rose-500"
+                          onClick={confirmClearProgress}
+                        >
+                          Yes, delete Slot 1
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
+              {/* FOOTER — strings exactly as you specified */}
               <div className="px-5 py-4 border-t border-zinc-200/60 dark:border-white/10 text-right">
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400">
-                      {screenMode === "saving" ? "Saving to Slot 1..." : "Loading from Slot 1..."}
-                  </span>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                  {screenMode === "saving" && "Saving to Slot 1..."}
+                  {screenMode === "loading" && "Loading from Slot 1..."}
+                  {screenMode === "deletingConfirm" && "Delete Save from Slot 1..?"}
+                  {screenMode === "deleting" && "Deleting Save from Slot 1..."}
+                </span>
               </div>
           </div>
       </div>
