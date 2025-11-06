@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useId, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
 import mapGif from "./assets/ffta-map.gif";
+import { Tracing } from "trace_events";
 
 const keyify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
@@ -6404,7 +6405,9 @@ const Panel: React.FC<{
   children: React.ReactNode;
   right?: React.ReactNode;
   tone?: "neutral" | "blue" | "green" | "red" | "amber" | "purple";
-}> = ({ title, subtitle, border, buttonColor, children, right, tone = "neutral" }) => {
+  // NEW: persist this panel's open/closed state under a key
+  persistKey?: string;
+}> = ({ title, subtitle, border, buttonColor, children, right, tone = "neutral", persistKey }) => {
   const bgMap: Record<string, string> = {
     neutral: "bg-white dark:bg-zinc-800",
     blue: "bg-blue-50 dark:bg-blue-900/10",
@@ -6413,25 +6416,61 @@ const Panel: React.FC<{
     amber: "bg-amber-50 dark:bg-amber-900/10",
     purple: "bg-purple-50 dark:bg-purple-900/10",
   };
-  const [open, setOpen] = useState(false);
+
+  // localStorage key for per-panel visibility map
+  const VIEW_KEY = "fftaProgress.view";
+
+  const readView = (): Record<string, boolean> => {
+    try {
+      const raw = localStorage.getItem(VIEW_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  };
+  const writeView = (obj: Record<string, boolean>) => {
+    try {
+      localStorage.setItem(VIEW_KEY, JSON.stringify(obj));
+    } catch {}
+  };
+
+  const [open, setOpen] = React.useState<boolean>(() => {
+    if (!persistKey) return false;
+    const map = readView();
+    return !!map[persistKey];
+  });
+
+  const handleToggle = () => {
+    setOpen((o) => {
+      const next = !o;
+      if (persistKey) {
+        const map = readView();
+        map[persistKey] = next;
+        writeView(map);
+      }
+      return next;
+    });
+  };
+
   return (
     <div
       className={`rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`}
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <h4 className="font-bold text-zinc-900 dark:text-zinc-100">{title}
-            {subtitle && (
+        <h4 className="font-bold text-zinc-900 dark:text-zinc-100">
+          {title}
+          {subtitle && (
             <>
-              <br></br>
+              <br />
               <span className="text-xs text-zinc-500 dark:text-zinc-500">{subtitle}</span>
             </>
-            )}
+          )}
         </h4>
         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           {right}
           <button
             className={`${buttonColor} text-white text-sm px-3 py-1 rounded`}
-            onClick={() => setOpen((o) => !o)}
+            onClick={handleToggle}
           >
             {open ? "Hide" : "Show"}
           </button>
@@ -6447,26 +6486,44 @@ const Panel: React.FC<{
 };
 
 const FFTAProgressionGuide: React.FC = () => {
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   // 🔐 LOCAL STORAGE PERSISTENCE
-  const STORAGE_KEY = "fftaProgress";
-  const [checked, setChecked] = useState<Record<string, boolean>>(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : {};
-    } catch {
-      return {};
-    }
+  const STORAGE_KEY_CHECKED = "fftaProgress.checked";
+  const STORAGE_KEY_EXPANDED = "fftaProgress.expanded";
+  const STORAGE_KEY_VIEW = "fftaProgress.view";
+
+  // expanded panels (blocks)
+  const [expanded, setExpanded] = useState<Record<string, boolean>>(() => {
+      try {
+          const raw = localStorage.getItem(STORAGE_KEY_EXPANDED);
+          return raw ? JSON.parse(raw) : {};
+      } catch {
+          return {};
+      }
   });
 
-  // Auto-save on change
+  // progress checkmarks
+  const [checked, setChecked] = useState<Record<string, boolean>>(() => {
+      try {
+          const raw = localStorage.getItem(STORAGE_KEY_CHECKED);
+          return raw ? JSON.parse(raw) : {};
+      } catch {
+          return {};
+      }
+  });
+
+  // persist both to localStorage
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
-    } catch {
-      // ignore quota/availability errors
-    }
+      try {
+          localStorage.setItem(STORAGE_KEY_CHECKED, JSON.stringify(checked));
+      } catch {}
   }, [checked]);
+
+  useEffect(() => {
+      try {
+          localStorage.setItem(STORAGE_KEY_EXPANDED, JSON.stringify(expanded));
+      } catch {}
+  }, [expanded]);
+
 
   // --- Save/Load overlay UI state ---
   type ScreenMode = "idle" | "saving" | "loading" | "deletingConfirm" | "deleting";
@@ -6481,27 +6538,82 @@ const FFTAProgressionGuide: React.FC = () => {
   const loadInputRef = useRef<HTMLInputElement | null>(null);
 
   type SaveFileV1 = {
-      format: "ffta-progress-v1";
-      slot: 1;
-      checked: string[];
+    format: "ffta-progress-v1";
+    slot: 1;
+    checked: string[];
   };
 
-  const buildSavePayload = (): SaveFileV1 => {
-      const list = Object.keys(checked).filter((k) => !!checked[k]);
-      return { format: "ffta-progress-v1", slot: 1, checked: list };
+  type SaveFileV2 = {
+    format: "ffta-progress-v2";
+    slot: 1;
+    checked: string[];
+    expanded: string[]; // keys of open panels/blocks
   };
 
-  const validateParsedSave = (parsed: any): parsed is SaveFileV1 =>
-      parsed &&
-      parsed.format === "ffta-progress-v1" &&
-      parsed.slot === 1 &&
-      Array.isArray(parsed.checked) &&
-      parsed.checked.every((x: any) => typeof x === "string");
+  const buildSavePayload = (): SaveFileV2 => {
+    const checkedKeys  = Object.keys(checked).filter((k) => !!checked[k]);
+    const expandedKeys = Object.keys(expanded).filter((k) => !!expanded[k]);
 
-  const applyLoadedChecked = (keys: string[]) => {
-      const next: Record<string, boolean> = {};
-      for (const k of keys) next[k] = true;
-      setChecked(next);
+    // ALSO persist panel open states (the ones we stored in localStorage)
+    let panelKeys: string[] = [];
+    try {
+      const raw = localStorage.getItem("fftaProgress.view");
+      const viewMap = raw ? JSON.parse(raw) as Record<string, boolean> : {};
+      panelKeys = Object.keys(viewMap).filter((k) => !!viewMap[k]); // only open panels
+    } catch {}
+
+    return {
+      format: "ffta-progress-v2",
+      slot: 1,
+      checked: checkedKeys,
+      expanded: [...expandedKeys, ...panelKeys],   // merged
+    };
+  };
+
+  const isV1 = (x: any): x is SaveFileV1 =>
+    x &&
+    x.format === "ffta-progress-v1" &&
+    x.slot === 1 &&
+    Array.isArray(x.checked) &&
+    x.checked.every((s: any) => typeof s === "string");
+
+  const isV2 = (x: any): x is SaveFileV2 =>
+    x &&
+    x.format === "ffta-progress-v2" &&
+    x.slot === 1 &&
+    Array.isArray(x.checked) &&
+    x.checked.every((s: any) => typeof s === "string") &&
+    Array.isArray(x.expanded) &&
+    x.expanded.every((s: any) => typeof s === "string");
+
+  const applyLoadedSave = (parsed: SaveFileV1 | SaveFileV2) => {
+    // checked
+    const nextChecked: Record<string, boolean> = {};
+    for (const k of parsed.checked) nextChecked[k] = true;
+    setChecked(nextChecked);
+
+    // expanded (only v2 includes it)
+    if (isV2(parsed)) {
+      const nextExpanded: Record<string, boolean> = {};
+      const viewMap: Record<string, boolean> = {};
+
+      for (const k of parsed.expanded) {
+        if (k.startsWith("panel:")) {
+          // these belong to per-Panel visibility
+          viewMap[k] = true;
+        } else {
+          // these are your block open states
+          nextExpanded[k] = true;
+        }
+      }
+
+      setExpanded(nextExpanded);
+
+      // write panel visibility so <Panel persistKey=...> picks it up immediately
+      try {
+        localStorage.setItem("fftaProgress.view", JSON.stringify(viewMap));
+      } catch {}
+    }
   };
 
   // --- SAVE: show overlay for 1s, then download file ---
@@ -6528,27 +6640,22 @@ const FFTAProgressionGuide: React.FC = () => {
       loadInputRef.current?.click();
   };
 
-  const handleLoadFile = (file: File) => {
-      const reader = new FileReader();
-      reader.onload = async () => {
-          setScreenMode("loading");
-          await wait(2000);
-          try {
-              const text = String(reader.result || "");
-              const parsed = JSON.parse(text);
-              if (!validateParsedSave(parsed)) {
-                  // Invalid format, just exit overlay
-                  setScreenMode("idle");
-                  return;
-              }
-              applyLoadedChecked(parsed.checked);
-          } catch {
-              // Parse error—just exit overlay
-          } finally {
-              setScreenMode("idle");
-          }
-      };
-      reader.readAsText(file);
+  const handleFilePicked: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setScreenMode("loading");
+    try {
+      const text = await f.text();
+      const parsed = JSON.parse(text);
+      if (!(isV2(parsed) || isV1(parsed))) throw new Error("Invalid save format");
+      applyLoadedSave(parsed); // state effects will sync to localStorage
+    } catch (err) {
+      console.error(err);
+      alert("Failed to load save file.");
+    } finally {
+      setScreenMode("idle");
+      e.currentTarget.value = "";
+    }
   };
 
   // --- CLEAR: ask for confirmation (overlay), then delete Slot 1 ---
@@ -6557,15 +6664,15 @@ const FFTAProgressionGuide: React.FC = () => {
   };
 
   const confirmClearProgress = async () => {
-      setScreenMode("deleting");
-      await wait(2000); // match save/load timing
-      setChecked({});   // effect will sync to localStorage
-      try {
-          localStorage.removeItem(STORAGE_KEY); // immediate tidy
-      } catch {
-          // ignore
-      }
-      setScreenMode("idle");
+    setScreenMode("deleting");
+    await wait(2000);
+    setChecked({});
+    setExpanded({});
+    try {
+      localStorage.removeItem(STORAGE_KEY_CHECKED);
+      localStorage.removeItem(STORAGE_KEY_EXPANDED);
+    } catch {}
+    setScreenMode("idle");
   };
 
   const cancelClearProgress = () => setScreenMode("idle");
@@ -6793,7 +6900,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #010 → Before #011)",
       placements: ["Nargai Cave"],
       blue: ["White Wind", "Angel Whisper", "Twister"],
-      sidequests: [114, 58, 124, 92, 154, 169, 206, 219, 246],
+      sidequests: [114, 58, 124, 92, 154, 169, 176, 206, 219, 246],
     },
     {
       key: "011",
@@ -6809,7 +6916,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #011 → Before #012)",
       placements: ["Baguba Port", "Jagd Dorsa"],
-      sidequests: [111, 133, 160, 176, 214, 215, 247, 271, 287, 110],
+      sidequests: [111, 133, 160, 214, 215, 247, 271, 287, 110],
     },
     {
       key: "012",
@@ -7367,11 +7474,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
               type="file"
               accept="application/json,.json"
               className="hidden"
-              onChange={(e) => {
-                  const f = e.target.files?.[0];
-                  if (f) handleLoadFile(f);
-                  e.currentTarget.value = "";
-              }}
+              onChange={handleFilePicked}
           />
           <button
             className="px-3 py-1 text-sm rounded bg-rose-600 text-white hover:bg-rose-500"
@@ -7820,6 +7923,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                             border="border-blue-600"
                             buttonColor="bg-blue-600"
                             tone="blue"
+                            persistKey={`panel:${b.key}:blueNow`}
                             right={
                                 <div className="w-full sm:w-auto sm:min-w-[180px]">
                                     <ProgressBar
@@ -7841,6 +7945,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                             border="border-green-600"
                             buttonColor="bg-green-600"
                             tone="green"
+                            persistKey={`panel:${b.key}:capNow`}
                             right={
                                 <div className="w-full sm:w-auto sm:min-w-[180px]">
                                     <ProgressBar
@@ -7862,6 +7967,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                             border="border-amber-600"
                             buttonColor="bg-amber-600"
                             tone="amber"
+                            persistKey={`panel:${b.key}:sideNow`}
                             right={
                                 <div className="w-full sm:w-auto sm:min-w-[180px]">
                                     <ProgressBar
@@ -7994,6 +8100,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                 border="border-red-600"
                                 buttonColor="bg-red-600"
                                 tone="red"
+                                persistKey={`panel:${b.key}:missNow`}
                                 right={
                                     <div className="w-full sm:w-auto sm:min-w-[180px]">
                                         <ProgressBar
