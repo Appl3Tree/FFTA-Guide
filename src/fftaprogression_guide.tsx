@@ -339,6 +339,8 @@ type QuestRef = {
     | "Very Hard";
   req_items?: string[];
   req_job?: string;
+  req_skill?: string;
+  forbidden_job?: string;
   dispatch_time?: string;
   enemies?: string[];
 };
@@ -1096,6 +1098,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `1800il`,
     location: `Jeraw Sands`,
+    prerequisites: ["Bardmoon only"],
     reward: [`13600 Gil`, `2x Random Item`, `2x Random Cards`],
     difficulty: `Slightly Hard`,
     enemies: [`Thief`, `Time Mage`, `White Monk`],
@@ -1141,8 +1144,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `45000 Gil`,
       `Secret Item (Zanmato)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Gunner`],
@@ -1243,8 +1245,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `0 Gil`,
       `Ayvuir Blue`,
       `1x Random Item`,
-      `Req. Skills: Combat/Lvl.10`,
     ],
+    req_skill: "Combat - Lvl. 10",
     difficulty: `Slightly Hard`,
     enemies: [`Gunner`, `Time Mage`, `Black Mage`, `Mog Knight x2`],
   },
@@ -1266,6 +1268,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `600 Gil`,
     location: `Cyril`,
+    prerequisites: ["Cyril Pub only"],
     reward: [
       `3600 Gil`,
       `Sprinkler`,
@@ -1311,7 +1314,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `800 Gil`,
     location: `Bervenia Palace`,
-    prerequisites: ["Madmoon only"],
+    prerequisites: ["Sagemoon only"],
     reward: [
       `7000 Gil`,
       `Sapere Aude`,
@@ -1424,10 +1427,9 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `7800 Gil`,
       `Secret Item (Topaz Armring)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
-      `Req. Skills: Tracking/Lvl.7`,
+      `2x Random Cards`,
     ],
+    req_skill: "Tracking - Lvl. 7",
     difficulty: `Easy`,
     enemies: [`Sprite x2`, `Zombie x2`],
   },
@@ -1458,6 +1460,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     ],
     difficulty: `Easy`,
     enemies: [`Floateye x2`, `Ahriman`],
+    req_items: [`Ahriman Eye [Not removed] (Watching You #113)`]
   },
   {
     number: 51,
@@ -1466,6 +1469,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `1800 Gil`,
     location: `Gotor Sands`,
+    prerequisites: ["Huntmoon only"],
     reward: [
       `0 Gil`,
       `Blue Rose`,
@@ -1474,6 +1478,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     ],
     difficulty: `Medium`,
     enemies: [`Sprite`, `Antlion x2`, `Red Panther x2`],
+    req_items: [`Flower Vase (Wanted! #25)`]
   },
   {
     number: 52,
@@ -1516,6 +1521,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `3000 Gil`,
     location: `Materiwood`,
+    prerequisites: ["Muscadet Pub only"],
     reward: [
       `16000 Gil`,
       `Trichord`,
@@ -1549,6 +1555,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     location: `Siena Gorge`,
     prerequisites: [
       "Gossip with Ezel at Cadoan Card Keeper.",
+      "Cadoan Pub only",
     ],
     reward: [`34000 Gil`, `Amber`, `1x Random Item`, `Allmighty Card`],
     difficulty: `Slightly Hard`,
@@ -1561,12 +1568,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `800 Gil`,
     location: `Sprohm`,
+    prerequisites: ["Kingmoon only", "Sprohm Pub only"],
     reward: [
       `7000 Gil`,
       `Secret Item (Helje Key)`,
       `1x Random Item`,
-      `1x`,
-      `Random Card`,
+      `1x Random Card`,
     ],
     difficulty: `Medium`,
     enemies: [`Templar x2`, `Defender x2`],
@@ -1639,6 +1646,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `900 Gil`,
     location: `Cadoan`,
+    prerequisites: ["Cadoan Pub only"],
     reward: [`4600 Gil`, `Secret Item (The Hero Gaol)`, `1x Random Item`],
     difficulty: `Medium`,
     enemies: [`Lamia x3`],
@@ -1675,6 +1683,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Bishop`, `Time Mage`, `White Mage`, `Black Mage`],
+    req_skill: "Combat - Lvl. 25",
+    req_items: [`Helje Key (Prison Break #57)`]
   },
   {
     number: 65,
@@ -1704,6 +1714,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Icedrake`, `Dragoon x2`],
+    req_items: [`Wyrmstone [Not removed] (Ruby Red #031)`]
   },
   {
     number: 67,
@@ -1724,6 +1735,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     ],
     difficulty: `Medium`,
     enemies: [`Coeurl (Meow)`],
+    req_items: [`Rabbit Tail (One More Tail #236)`]
   },
   {
     number: 68,
@@ -1745,6 +1757,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     location: `Sprohm`,
     prerequisites: [
       "Read Thief Exposed",
+      "Cyril Pub only",
     ],
     reward: [`2400 Gil`, `2x Random Items`],
     difficulty: `Medium`,
@@ -1771,7 +1784,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `1000 Gil`,
     location: `Nubswood`,
-    prerequisites: ["Read Borzoi's Plan"],
+    prerequisites: ["Read Borzoi's Plan", "Sprohm Pub only"],
     reward: [`7000 Gil`, `2x Random Items`, `2x Random Cards`],
     difficulty: `Hard`,
     enemies: [
@@ -1779,6 +1792,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Black Mage (Golitaire)`,
       `a Black Mage`,
     ],
+    req_items: [`Spiritstone [Not removed] (The Spiritstone #198)`]
   },
   {
     number: 72,
@@ -1813,8 +1827,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `7200 Gil`,
       `Secret Item (Shijin Shield)`,
       `2x Random Cards`,
-      `Req. Skills: Combat/Lvl. 12`,
     ],
+    req_skill: "Combat - Lvl. 12",
     difficulty: `Hard`,
     enemies: [`White Monk`, `White Mage`, `Fighter (Gukko)`],
   },
@@ -1844,6 +1858,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     prerequisites: [
       "Completed Cadoan Watch (#074)",
       "Read The Redwings",
+      "Cadoan Pub only",
     ],
     reward: [`2400 Gil`, `Secret Item (Red Robe)`, `2x Random Cards`],
     difficulty: `Medium`,
@@ -1878,13 +1893,13 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     location: `Baguba Port`,
     prerequisites: [
       "Read The Spiritstone",
+      "Baguba Port Pub only",
     ],
     reward: [
       `2400 Gil`,
       `Secret Item (Delta Fang)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Medium`,
     enemies: [`Naga x3`],
@@ -1903,8 +1918,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `18000 Gil`,
       `Water Sigil`,
       `Secret Item (Random Item)`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Mog Knight x3`, `Ice Flan (Kraken)`, `Flan`],
@@ -1923,8 +1937,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `18000 Gil`,
       `Wind Sigil`,
       `Secret Item (Random Item)`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Mog Knight x3`],
@@ -1943,8 +1956,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `18000 Gil`,
       `Earth Sigil`,
       `Secret Item (Random Item)`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Hard`,
     enemies: [`Mog Knight x3`],
@@ -1976,6 +1988,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     location: `Muscadet`,
     prerequisites: [
       "Read Weird Minstrel",
+      "Muscadet Pub only",
     ],
     reward: [`2400 Gil`, `Secret Item (Hanya Helm)`, `2x Random Cards`],
     difficulty: `Slightly Hard`,
@@ -2049,8 +2062,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     location: `Bervenia Palace`,
     prerequisites: [
       "Freed all areas",
-      
       "Read Gukko",
+      "Cyril Pub only",
     ],
     reward: [`2400 Gil`, `Rukavi Soul`, `1x Random Item`, `2x Random Cards`],
     difficulty: `Hard`,
@@ -2117,8 +2130,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `8200 Gil`,
       `Secret Item (Last Letter)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Medium`,
   },
@@ -2144,8 +2156,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `13600 Gil`,
       `Secret Item (Bangaa Helm)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Easy`,
   },
@@ -2169,6 +2180,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Cards`,
     ],
     difficulty: `Medium`,
+    req_items: [`Rusty Spear (The Match #158, Lucky Charm #191)`]
   },
   {
     number: 96,
@@ -2201,10 +2213,10 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `22600 Gil`,
       `Secret Item (Ebon Blade)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Medium`,
+    req_items: [`Spiritstone (The Spiritstone #198)`, `Bent Sword (Coo's Break #157, Run With Us #190)`]
   },
   {
     number: 98,
@@ -2222,11 +2234,11 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `27000 Gil`,
       `Secret Item (Excalibur2)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Medium`,
     enemies: [`Templar (Buckles)`, `As a Templar`],
+    req_items: [`Rusty Sword (Tutor Search #188)`, `Mysidia Alloy (Mysidia Alloy #132, Magic Mysidia #185)`]
   },
   {
     number: 99,
@@ -2247,6 +2259,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     ],
     difficulty: `Hard`,
     enemies: [`A master Gladiator`],
+    req_items: [`Zodiac Ore (Dig Dig Dig #203)`, `Blood Apple (Scarface #179, Thorny Dreams #193)`]
   },
   {
     number: 100,
@@ -2258,6 +2271,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       "Talk to Monster Bank administrator at Cyril",
       "Capture at least five monsters",
       "Seen Monster Escape Cutscene",
+      "Cyril Pub only",
     ],
     reward: [
       `8800 Gil`,
@@ -2330,8 +2344,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `13600 Gil`,
       `Secret Item (Chocobo Skin)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Slightly Hard`,
     enemies: ["Hunter", "Beastmaster", "Malboro x2", "Mystery Box x2"],
@@ -2345,6 +2358,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     prerequisites: [
       "Gossip with Ezel at Cadoan Card Keeper",
       "Seen Antilaw Resistance Cutscene",
+      "Cadoan Pub only",
     ],
     reward: [
       `6000 Gil`,
@@ -2382,8 +2396,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `11400 Gil`,
       `Secret Item (Tiger Hide)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
     difficulty: `Slightly Hard`,
     enemies: [`Archer x2`, `Gunner x2`, `Hunter x2`],
@@ -2440,8 +2453,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     reward: [
       `4200 Gil`,
       `2x Random Items`,
-      `Req. Skills: Negotiate/Lvl.4`,
     ],
+    req_skill: "Negotiate - Lvl. 4",
     difficulty: `Slightly Hard`,
     enemies: [`Thief`, `Archer`, `White Mage`, `Black Mage`, `Soldier (Mintz)`],
   },
@@ -2455,7 +2468,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2800 Gil`,
       `Ahriman Eye`,
       `1x Random Item`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -2468,7 +2480,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `6400 Gil`,
       `Ancient Coins`,
       `1x Random Item`,
-      `Dispatch Time: 20 Days`,
     ],
   },
   {
@@ -2480,9 +2491,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     reward: [
       `1800 Gil`,
       `1x Random Item`,
-      `Req. Jobs: Soldier`,
-      `Dispatch Time: 3 Days`,
     ],
+    req_job: "Soldier (Humans only)",
   },
   {
     number: 116,
@@ -2496,7 +2506,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Fire Sigil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -2511,7 +2520,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Water Sigil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -2526,8 +2534,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Wind Sigil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 2 Battles`,
     ],
+    req_job: "Moogle Knight (Moogles only)",
   },
   {
     number: 119,
@@ -2541,7 +2549,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Earth Sigil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 1 Battle`,
     ],
   },
   {
@@ -2550,15 +2557,15 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `Mages! Want to compete in the Cadoan Mage Tourney? The tourney will be split by class in a fight to see who's the strongest! ~ Mage Tourney Committee`,
     type: `Dispatch`,
     cost: `1000 Gil`,
+    prerequisites: ["Sagemoon only"],
     reward: [
       `10600 Gil`,
       `Magic Trophy`,
       `1x Random Item`,
       `Secret Item`,
       `(1x Random Card)`,
-      `Req. Jobs: Black Mage`,
-      `Dispatch Time: 1 Battle`,
     ],
+    req_job: "Black Mage (Humans, Nu Mous, or Moogles only)",
   },
   {
     number: 121,
@@ -2566,15 +2573,15 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `The Sprohm Battle Tourney is accepting contestants. Fight for glory and honor! We've also prepared the usual monetary award... ~ Battle Tourney Committee`,
     type: `Dispatch`,
     cost: `600 Gil`,
+    prerequisites: ["Madmoon only"],
     reward: [
       `4200 Gil`,
       `Fight Trophy`,
       `1x Random Item`,
       `Secret Item`,
       `(1x Random Card)`,
-      `Req. Jobs: Fighter`,
-      `Dispatch Time: 1 Battle`,
     ],
+    req_job: "Fighter (Humans only)",
   },
   {
     number: 122,
@@ -2587,9 +2594,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Sport Trophy`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Req. Jobs: Juggler`,
-      `Dispatch Time: 1 Battle`,
     ],
+    req_job: "Juggler (Moogles only)",
   },
   {
     number: 123,
@@ -2603,6 +2609,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Dragon Bone (Frozen Spring #172)`]
   },
   {
     number: 124,
@@ -2615,7 +2622,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Coast Medal`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -2633,7 +2639,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Guard Medal`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 1 Battle`,
     ],
   },
   {
@@ -2647,7 +2652,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Rainbowite`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -2664,7 +2668,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Cat's Tears`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -2682,6 +2685,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Skull (On The Waves #174)`]
   },
   {
     number: 129,
@@ -2697,7 +2701,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Thunderstone`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 15 Enemies`,
     ],
   },
   {
@@ -2711,7 +2714,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Stormstone`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -2726,6 +2728,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Adamantite (Metal Hunt #207)`, `Adamantite (Metal Hunt #207)`],
+    req_skill: "Smithing - Lvl. 15",
   },
   {
     number: 132,
@@ -2739,6 +2743,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Adamantite (Metal Hunt #207)`, `Silvril (Mythril Rush #103, Seeking Silver #204)`],
+    req_skill: "Smithing - Lvl. 15",
   },
   {
     number: 133,
@@ -2752,6 +2758,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Zodiac Ore (Dig Dig Dig #203)`, `Zodiac Ore (Dig Dig Dig #203)`],
+    req_skill: "Smithing - Lvl. 15",
   },
   {
     number: 134,
@@ -2764,7 +2772,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Blood Shawl`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Enemies`,
     ],
   },
   {
@@ -2779,6 +2786,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Fairy Wing (For The Lady #136)`]
   },
   {
     number: 136,
@@ -2792,6 +2800,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Stolen Gil (Dry Spell #182)`]
   },
   {
     number: 137,
@@ -2805,6 +2814,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Ancient Bills (Swap Meet #183)`]
   },
   {
     number: 138,
@@ -2820,6 +2830,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Life Water`,
       `1x Random Item`,
     ],
+    req_items: [`Secret Books (Secret Books #146)`]
   },
   {
     number: 139,
@@ -2834,7 +2845,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2800 Gil`,
       `Ancient Text`,
       `1x Random Item`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -2849,6 +2859,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2x Random Items`,
       `1x Random Card`,
     ],
+    req_items: [`Neighbor Pin (Neighbor! #154)`]
   },
   {
     number: 141,
@@ -2862,6 +2873,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Ahriman Wing (Faithful Fairy #135)`]
   },
   {
     number: 142,
@@ -2877,6 +2889,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Edaroya Tome`,
       `1x Random Item`,
     ],
+    req_items: [`Tranquil Box (Stage Fright #163)`],
+    req_skill: "Tracking - Lvl. 40",
   },
   {
     number: 143,
@@ -2889,6 +2903,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Homework`,
       `1x Random Item`,
     ],
+    req_items: [`Ancient Medal (The Skypole #201, Ruins Survey #202)`]
   },
   {
     number: 144,
@@ -2900,7 +2915,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `9000 Gil`,
       `Dictionary`,
       `1x Random Item`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -2914,6 +2928,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Monster Guide`,
       `1x Random Item`,
     ],
+    req_items: [`Mythril Pick (Mad Alchemist #167)`]
   },
   {
     number: 146,
@@ -2927,6 +2942,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Stilpool Scroll (T.L.C. #171)`]
   },
   {
     number: 147,
@@ -2952,6 +2968,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Tonberry Lamp (Cheap Laughs #170)`],
+    req_skill: "Crafting - Lvl. 10"
   },
   {
     number: 149,
@@ -2965,6 +2983,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Cat's Tears (Broken Tunes #127)`],
+    req_job: "Gadgeteer (Moogles only)",
   },
   {
     number: 150,
@@ -2977,7 +2997,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Fountain Pen`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -3008,6 +3027,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Animal Bone (No Scents #173)`]
   },
   {
     number: 154,
@@ -3020,7 +3040,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Neighbor Pin`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -3035,6 +3054,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Bomb Shell (Help Dad #218, Rubber or Real #219)`]
   },
   {
     number: 156,
@@ -3048,6 +3068,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Runba's Tale (Novel Ascent #232, Shiver #233)`]
   },
   {
     number: 157,
@@ -3061,6 +3082,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Runba's Tale (Novel Ascent #232, Shiver #233)`]
   },
   {
     number: 158,
@@ -3073,8 +3095,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Rusty Spear`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 2 Battles`,
     ],
+    forbidden_job: "Soldier",
   },
   {
     number: 159,
@@ -3087,7 +3109,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Feather Badge`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 3 Battles`,
     ],
   },
   {
@@ -3102,6 +3123,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Feather Badge (The Deep Sea #159)`, `Delta Fang (Free Baguba! #77)`]
   },
   {
     number: 161,
@@ -3114,7 +3136,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Ally Finder`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 20 Days`,
     ],
   },
   {
@@ -3129,6 +3150,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Dame's Blush (Falcon Flown #128)`, `Ally Finder (Lost In Mist #161)`],
+    req_skill: "Smithing - Lvl. 20",
   },
   {
     number: 163,
@@ -3141,6 +3164,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Tranquil Box`,
       `1x Random Item`,
     ],
+    req_items: [`Old Statue (To Meden #153)`]
   },
   {
     number: 164,
@@ -3152,7 +3176,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `3600 Gil`,
       `Loaded Dice`,
       `1x Random Item`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -3169,8 +3192,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Snake Shield`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Battles`,
     ],
+    forbidden_job: "Bishop",
   },
   {
     number: 166,
@@ -3183,6 +3206,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Stasis Rope`,
       `1x Random Item`,
     ],
+    req_items: [`Black Thread (Math Is Hard #208, The Witness #209, Life Or Death #210)`]
   },
   {
     number: 167,
@@ -3194,7 +3218,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `3400 Gil`,
       `Mythril Pick`,
       `1x Random Item`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3209,6 +3232,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Elda's Cup (Hungry Ghost #123)`]
   },
   {
     number: 169,
@@ -3221,9 +3245,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Love Potion`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Req. Jobs: Alchemist`,
-      `Dispatch Time: 15 Days`,
     ],
+    req_job: "Alchemist (Nu Mous only)",
   },
   {
     number: 170,
@@ -3236,6 +3259,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Tonberry Lamp`,
       `1x Random Item`,
     ],
+    req_items: [`Bomb Shell (Help Dad #218, Rubber or Real #219)`]
   },
   {
     number: 171,
@@ -3247,10 +3271,10 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `7600 Gil`,
       `Stilpool Scroll`,
       `1x Random Item`,
-      `Req. Skills: Magic/Lvl.25`,
-      `Req. Jobs: White Mage`,
-      `Dispatch Time: 2 Battles`,
     ],
+    req_skill: "Magic - Lvl. 25",
+    req_job: "White Mage (Humans, Nu Mous, or Vieras only)",
+    forbidden_job: "White Monk",
   },
   {
     number: 172,
@@ -3262,7 +3286,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `3400 Gil`,
       `Dragon Bone`,
       `1x Random Item`,
-      `Dispatch Time: 20 Days`,
     ],
   },
   {
@@ -3277,6 +3300,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Caravan Musk (Caravan Guard #168)`]
   },
   {
     number: 174,
@@ -3290,6 +3314,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Life Water (Shady Deals #138)`],
+    req_job: "Time Mage (Nu Mous and Moogles only)",
   },
   {
     number: 175,
@@ -3303,6 +3329,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Dictionary (The Bell Tolls #144)`]
   },
   {
     number: 176,
@@ -3318,9 +3345,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Gun Gear`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Req. Jobs: Gunner`,
-      `Dispatch Time: 10 Enemies`,
     ],
+    req_job: "Gunner (Moogles only)",
   },
   {
     number: 177,
@@ -3333,7 +3359,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Silk Bloom`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 15 Enemies`,
     ],
   },
   {
@@ -3347,7 +3372,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Moon Bloom`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Enemies`,
     ],
   },
   {
@@ -3361,8 +3385,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Blood Apple`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 3 Battles`,
     ],
+    forbidden_job: "White Mage",
   },
   {
     number: 180,
@@ -3376,6 +3400,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Goldcap (Seven Nights #137)`]
   },
   {
     number: 181,
@@ -3389,6 +3414,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Clock Gear (Spirited Boy #175)`, `Clock Post (Clocktower #149)`],
+    forbidden_job: "Assassin",
   },
   {
     number: 182,
@@ -3401,7 +3428,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Stolen Gil`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 20 Days`,
     ],
   },
   {
@@ -3416,6 +3442,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Ancient Medal (The Skypole #201, Ruins Survey #202)`]
   },
   {
     number: 184,
@@ -3430,6 +3457,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Adamantite (Metal Hunt #207)`, `Adamantite (Metal Hunt #207)`],
+    req_skill: "Smithing - Lvl. 35",
   },
   {
     number: 185,
@@ -3444,6 +3473,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Adamantite (Metal Hunt #207)`, `Silvril (Mythril Rush #103, Seeking Silver #204)`],
+    req_skill: "Smithing - Lvl. 35",
   },
   {
     number: 186,
@@ -3457,6 +3488,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Zodiac Ore (Dig Dig Dig #203)`, `Zodiac Ore (Dig Dig Dig #203)`],
+    req_skill: "Smithing - Lvl. 35",
   },
   {
     number: 187,
@@ -3469,7 +3502,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Rat Tail`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -3484,7 +3516,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Rusty Sword`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 15 Enemies`,
     ],
   },
   {
@@ -3499,9 +3530,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Broken Sword`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Req. Jobs: Red Mage`,
-      `Dispatch Time: 15 Enemies`,
     ],
+    req_job: "Red Mage (Vieras only)",
   },
   {
     number: 190,
@@ -3515,7 +3545,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Bent Sword`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 40 Days`,
     ],
   },
   {
@@ -3531,6 +3560,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Rat Tail (Words Of Love #147, Lucky Night #187)`]
   },
   {
     number: 192,
@@ -3544,7 +3574,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Insignia`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -3558,7 +3587,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `16000 Gil`,
       `Blood Apple`,
       `1x Random Item`,
-      `Dispatch Time: 20 Days`,
     ],
   },
   {
@@ -3569,6 +3597,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     cost: `600 Gil`,
     prerequisites: [
       "Read Thief Exposed!",
+      "Cyril Pub only"
     ],
     reward: [`2400 Gil`, `2x Random Items`, `Dispatch Time: 3 Days`],
   },
@@ -3580,12 +3609,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     cost: `600 Gil`,
     prerequisites: [
       "Read Borzoi's End",
+      "Cyril Pub only"
     ],
     reward: [
       `4200 Gil`,
       `2x Random Items`,
       `2x Random Cards`,
-      `Dispatch Time: 1 Battle`,
     ],
   },
   {
@@ -3601,6 +3630,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `0 Gil`,
       `Mind Ceffyl`,
     ],
+    req_items: [`Fire Sigil (Fire Sigil #76, Gulug Ghost #116)`, `Wind Sigil (Wind Sigil #79, Mirage Tower #118)`]
   },
   {
     number: 197,
@@ -3615,6 +3645,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `0 Gil`,
       `Body Ceffyl`,
     ],
+    req_items: [`Earth Sigil (Earth Sigil #80, A Barren Land #119)`, `Water Sigil (Water Sigil #78, Water City #117)`]
   },
   {
     number: 198,
@@ -3629,6 +3660,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `0 Gil`,
       `Spiritstone`,
     ],
+    req_items: [`Mind Ceffyl (Mind Ceffyl #196)`, `Body Ceffyl (Body Ceffyl #197)`]
   },
   {
     number: 199,
@@ -3642,6 +3674,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Magic Medal`,
       `1x Random Item`,
     ],
+    req_items: [`White Thread (Karlos's Day #211, To Father #212, Oh Milese #213)`],
+    req_job: "White Mage (Humans, Nu Mous, or Vieras only)",
   },
   {
     number: 200,
@@ -3654,7 +3688,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `100 Gil`,
       `Chocobo Egg`,
       `1x Random Item`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -3667,7 +3700,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `Ancient Medal`,
       `1x Random Item`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3676,12 +3708,12 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `Looking for people to join in a survey of the Istar Ruins to be held again this year. See ancient history first hand! ~ Rekka, Relics Board`,
     type: `Dispatch`,
     cost: `1000 Gil`,
+    prerequisites: ["Sagemoon only"],
     reward: [
       `10800 Gil`,
       `Ancient Medal`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3696,7 +3728,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Zodiac Ore`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 1 Battle`,
     ],
   },
   {
@@ -3705,6 +3736,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `Before the Bell Mines became known for mythril, they were silver mines. Help me look for leftover silver near the west wall. ~ Hoholum, Gayl Stoneworks`,
     type: `Dispatch`,
     cost: `400 Gil`,
+    prerequisites: ["Kingmoon only"],
     reward: [`3400 Gil`, `Silvril`, `1x Random Item`, `Dispatch Time: 15 Days`],
   },
   {
@@ -3733,7 +3765,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Leestone`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3750,7 +3781,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Adamantite`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -3764,8 +3794,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Black Thread`,
       `2x Random Items`,
       `1x Random Card`,
-      `Dispatch Time: 10 Days`,
     ],
+    forbidden_job: "Animist",
   },
   {
     number: 209,
@@ -3777,9 +3807,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `4600 Gil`,
       `Black Thread`,
       `Lost Gun`,
-      `Req. Jobs: Defender`,
-      `Dispatch Time: 5 Enemies`,
     ],
+    req_job: "Defender (Bangaas only)",
   },
   {
     number: 210,
@@ -3792,6 +3821,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Black Thread`,
       `1x Random Item`,
     ],
+    req_items: [`Homework (The Last Day #143)`]
   },
   {
     number: 211,
@@ -3804,7 +3834,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `White Thread`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -3820,7 +3849,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `11400 Gil`,
       `White Thread`,
       `1x Random Item`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3833,7 +3861,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2800 Gil`,
       `White Thread`,
       `1x Random Item`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -3842,11 +3869,11 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `We're looking for a few good skinners to help skin chocobo. It's not much of a living, but someone's got to do it! ~ Navarro, Chocobo Ranch`,
     type: `Dispatch`,
     cost: `600 Gil`,
+    prerequisites: ["Bardmoon only"],
     reward: [
       `3600 Gil`,
       `Chocobo Skin`,
       `1x Random Card`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3860,7 +3887,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Magic Cloth`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -3878,6 +3904,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `1x Random Card`,
     ],
+    req_items: [`Magic Cotton (Cotton Guard #217)`]
   },
   {
     number: 217,
@@ -3885,11 +3912,11 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `It's the season when the typhoons come blowing from the south again. I need to find a way to protect my cotton crop! ~ Kerney, Townsperson`,
     type: `Dispatch`,
     cost: `950 Gil`,
+    prerequisites: ["Huntmoon only"],
     reward: [
       `7000 Gil`,
       `Magic Cotton`,
       `1x Random Card`,
-      `Dispatch Time: 1 Battle`,
     ],
   },
   {
@@ -3903,7 +3930,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Bomb Shell`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3917,8 +3943,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Bomb Shell`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Days`,
     ],
+    req_items: [`Monster Guide (Goblin Town #145)`]
   },
   {
     number: 220,
@@ -3932,7 +3958,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Panther Hide`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -3955,7 +3980,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `3600 Gil`,
       `Gysahl Greens`,
       `1x Random Card`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -3969,8 +3993,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Magic Medal`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Days`,
     ],
+    forbidden_job: "Gunner",
   },
   {
     number: 224,
@@ -3983,7 +4007,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Chocobo Egg`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -4001,6 +4024,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `1x Random Card`,
     ],
+    req_items: [`Chocobo Egg (Chocobo Help! #200, Better Living #224)`],
+    forbidden_job: "Hunter",
   },
   {
     number: 226,
@@ -4014,7 +4039,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Choco Bread`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -4028,7 +4052,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Choco Gratin`,
       `1x Random Item`,
       `2x Random Card`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -4043,6 +4066,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Chocobo Egg (Chocobo Help! #200, Better Living #224)`, `Gysahl Greens (New Fields #222)`]
   },
   {
     number: 229,
@@ -4056,6 +4080,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Choco Bread (Chocobo Work #226)`]
   },
   {
     number: 230,
@@ -4071,7 +4096,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Malboro Wine`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -4080,13 +4104,14 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `Come make magic sheepskin vellum with me! I'll show you the pen is mightier than the sword. Bring some magic cotton with you! ~ Chikk, Paper Maker`,
     type: `Dispatch`,
     cost: `600 Gil`,
+    prerequisites: ["Sagemoon only"],
     reward: [
       `4600 Gil`,
       `Magic Vellum`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 1 Battle`,
     ],
+    req_items: [`Magic Cotton (Cotton Guard #217)`]
   },
   {
     number: 232,
@@ -4100,6 +4125,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Stasis Rope (Runaway Boy #166)`]
   },
   {
     number: 233,
@@ -4112,7 +4138,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Runba's Tale`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 20 Days`,
     ],
   },
   {
@@ -4127,6 +4152,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Choco Bread (Chocobo Work #226)`]
   },
   {
     number: 235,
@@ -4139,8 +4165,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `12400 Gil`,
       `Encyclopedia`,
       `1x Random Card`,
-      `Dispatch Time: 10 Days`,
     ],
+    forbidden_job: "Juggler",
   },
   {
     number: 236,
@@ -4154,7 +4180,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Rabbit Tail`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -4168,7 +4193,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `4600 Gil`,
       `Danbukwood`,
       `1x Random Item`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -4182,7 +4206,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `4600 Gil`,
       `Moonwood`,
       `1x Random Item`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -4195,7 +4218,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `6000 Gil`,
       `Telaq Flower`,
       `1x Random Item`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -4233,7 +4255,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 3 Enemies`,
     ],
   },
   {
@@ -4247,7 +4268,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 3 Enemies`,
     ],
   },
   {
@@ -4261,7 +4281,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 3 Enemies`,
     ],
   },
   {
@@ -4275,7 +4294,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 3 Enemies`,
     ],
   },
   {
@@ -4289,7 +4307,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 3 Enemies`,
     ],
   },
   {
@@ -4303,7 +4320,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 5 Enemies`,
     ],
   },
   {
@@ -4317,7 +4333,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 5 Enemies`,
     ],
   },
   {
@@ -4331,7 +4346,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 5 Enemies`,
     ],
   },
   {
@@ -4347,7 +4361,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 5 Enemies`,
     ],
   },
   {
@@ -4361,7 +4374,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 5 Enemies`,
     ],
   },
   {
@@ -4375,7 +4387,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 7 Enemies`,
     ],
   },
   {
@@ -4389,7 +4400,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 7 Enemies`,
     ],
   },
   {
@@ -4403,7 +4413,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 7 Enemies`,
     ],
   },
   {
@@ -4417,7 +4426,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 7 Enemies`,
     ],
   },
   {
@@ -4431,7 +4439,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 7 Enemies`,
     ],
   },
   {
@@ -4445,7 +4452,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 10 Enemies`,
     ],
   },
   {
@@ -4459,7 +4465,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 10 Enemies`,
     ],
   },
   {
@@ -4477,7 +4482,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 15 Enemies`,
     ],
   },
   {
@@ -4495,7 +4499,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 15 Enemies`,
     ],
   },
   {
@@ -4511,7 +4514,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 15 Enemies`,
     ],
   },
   {
@@ -4529,7 +4531,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 7 Enemies`,
     ],
   },
   {
@@ -4546,7 +4547,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `1x Random Item`,
       `1x Random Card`,
-      `Dispatch Time: 7 Enemies`,
     ],
   },
   {
@@ -4555,13 +4555,13 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `Announcing the biggest even of the year: the Cyril Swordsmanship Competition! Test your strength and skill! ~ Cyril Event Committee`,
     type: `Dispatch`,
     cost: `300 Gil`,
+    prerequisites: ["Madmoon only"],
     reward: [
       `1800 Gil`,
       `Secret Item (Victor Sword)`,
       `1x Random Item`,
-      `Req. Jobs: Fencer`,
-      `Dispatch Time: 1 Battle`,
     ],
+    req_job: "Fencer (Vieras only)",
   },
   {
     number: 265,
@@ -4576,9 +4576,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2400 Gil`,
       `Onion Sword`,
       `1x Random Item`,
-      `Req. Skills: Combat/Lvl.5`,
-      `Dispatch Time: 10 Days`,
     ],
+    req_skill: "Combat - Lvl. 5",
   },
   {
     number: 266,
@@ -4590,7 +4589,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `3400 Gil`,
       `Soulsaber`,
       `1x Random Item`,
-      `Dispatch Time: 5 Days`,
     ],
   },
   {
@@ -4605,6 +4603,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Jerky (Jerky Days #221)`]
   },
   {
     number: 268,
@@ -4621,6 +4620,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Choco Gratin (Party Night #227, Mama's Taste #228)`],
+    req_skill: "Appraisal - Lvl. 18",
   },
   {
     number: 269,
@@ -4632,9 +4633,10 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `6000 Gil`,
       `Secret Item (Beastsword)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
+    req_items: [`Jerky (Jerky Days #221)`],
+    req_job: "Blue Mage (Humans only)",
   },
   {
     number: 270,
@@ -4648,6 +4650,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Rabbit Tail (One More Tail #236)`]
   },
   {
     number: 271,
@@ -4660,7 +4663,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Aerial Hole`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 15 Days`,
     ],
   },
   {
@@ -4675,7 +4677,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Charfire`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -4693,6 +4694,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Magic Medal (Girl In Love #199, Strange Fires #223)`, `Magic Medal (Girl In Love #199, Strange Fires #223)`]
   },
   {
     number: 274,
@@ -4705,7 +4707,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Crescent Bow`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -4719,7 +4720,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Marduk Bow`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Days`,
     ],
   },
   {
@@ -4734,6 +4734,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Grownup Bread (The Well Maze #229)`, `Kiddy Bread (Bread Woes #234)`]
   },
   {
     number: 277,
@@ -4746,7 +4747,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Bangaa Spike`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 2 Battles`,
     ],
   },
   {
@@ -4761,6 +4761,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Moonwood (Foma Jungle #238)`, `Danbukwood (Relax Time! #237)`]
   },
   {
     number: 279,
@@ -4774,6 +4775,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Malboro Wine (She's Gone #230)`]
   },
   {
     number: 280,
@@ -4786,7 +4788,6 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Reverie Shield`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 10 Enemies`,
     ],
   },
   {
@@ -4800,8 +4801,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Parade Helm`,
       `1x Random Item`,
       `2x Random Cards`,
-      `Dispatch Time: 20 Days`,
     ],
+    forbidden_job: "Juggler",
   },
   {
     number: 282,
@@ -4815,6 +4816,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Blood Shawl (Faceless Dolls #134)`]
   },
   {
     number: 283,
@@ -4828,6 +4830,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Choco Gratin (Party Night #227, Mama's Taste #228)`]
   },
   {
     number: 284,
@@ -4841,6 +4844,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Insignia (A Worthy Eye #160, Alchemist Boy #192)`, `Ally Finder2 (Missing Meow #67, Darn Kids #162)`],
+    req_job: "Gunner (Moogles only)",
   },
   {
     number: 285,
@@ -4853,9 +4858,10 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `10600 Gil`,
       `Secret Item (Adaman Blade)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
+    req_items: [`Adaman Alloy (Adaman Alloy #131, Adaman Order #184)`, `Broken Sword (Honor Lost #155, Inspiration #156, Why Am I Wet? #189)`],
+    req_job: "Gladiator (Bangaa only)",
   },
   {
     number: 286,
@@ -4870,9 +4876,9 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `9000 Gil`,
       `Secret Item (Nagrarok)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
+    req_items: [`Bent Sword (Coo's Break #157, Run With Us #190)`, `Rainbowite (Wine Delivery #126)`]
   },
   {
     number: 287,
@@ -4886,6 +4892,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Crusite Alloy (Crusite Alloy #133, Conundrum #186)`, `Blood Apple (Scarface #179, Thorny Dreams #193)`],
+    forbidden_job: "Templar",
   },
   {
     number: 288,
@@ -4901,6 +4909,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Secret Item (Master Sword)`,
       `1x Random Item`,
     ],
+    req_items: [`Thunderstone (Danger Pass #129)`, `Stormstone (Mist Stars #130)`],
+    req_job: "Soldier (Humans only)",
   },
   {
     number: 289,
@@ -4916,6 +4926,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Lurebreaker`,
       `1x Random Item`,
     ],
+    req_items: [`Broken Sword (Honor Lost #155, Inspiration #156, Why Am I Wet? #189)`]
   },
   {
     number: 290,
@@ -4930,6 +4941,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2x Random`,
       `Cards`,
     ],
+    req_items: [`Rusty Sword (Tutor Search #188)`, `Leestone (The Wormhole #206)`]
   },
   {
     number: 291,
@@ -4947,6 +4959,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2x Random`,
       `Cards`,
     ],
+    req_items: [`Silk Bloom (The Blue Bolt #177)`, `Moon Bloom (Sweet Talk #178)`]
   },
   {
     number: 292,
@@ -4963,6 +4976,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Rusty Spear (The Match #158, Lucky Charm #191)`, `Mysidia Alloy (Mysidia Alloy #132, Magic Mysidia #185)`]
   },
   {
     number: 293,
@@ -4974,9 +4988,9 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `0 Gil`,
       `Secret Item (Dark Fiddle)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
+    req_items: [`Stradivari (You, Immortal #148)`, `Black Thread (Math Is Hard #208, The Witness #209, Life Or Death #210)`]
   },
   {
     number: 294,
@@ -4993,6 +5007,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Crusite Alloy (Crusite Alloy #133, Conundrum #186)`, `Gun Gear (Powder Worries #176)`]
   },
   {
     number: 295,
@@ -5006,6 +5021,8 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Black Thread (Math Is Hard #208, The Witness #209, Life Or Death #210)`, `Magic Cloth (Wild River #215, Magic Cloth #216)`],
+    req_job: "Black Mage (Humans, Nu Mous, and Moogles only)",
   },
   {
     number: 296,
@@ -5019,6 +5036,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`White Thread (Karlos's Day #211, To Father #212, Oh Milese #213)`, `Magic Cloth (Wild River #215, Magic Cloth #216)`]
   },
   {
     number: 297,
@@ -5035,6 +5053,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Adaman Alloy (Adaman Alloy #131, Adaman Order #184)`, `Rat Tail (Words Of Love #147, Lucky Night #187)`]
   },
   {
     number: 298,
@@ -5051,6 +5070,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Materite (Materite #205)`, `Materite (Materite #205)`]
   },
   {
     number: 299,
@@ -5065,9 +5085,9 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `4600 Gil`,
       `Secret Item (Brint Set)`,
       `1x Random Item`,
-      `2x`,
-      `Random Cards`,
+      `2x Random Cards`,
     ],
+    req_items: [`Chocobo Skin (Smuggle Bust #105, Skinning Time #214)`, `Magic Cotton (Cotton Guard #217)`]
   },
   {
     number: 300,
@@ -5085,6 +5105,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
+    req_items: [`Chocobo Skin (Smuggle Bust #105, Skinning Time #214)`, `Magic Cotton (Cotton Guard #217)`]
   },
 ];
 
@@ -6735,7 +6756,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #010 → Before #011)",
       placements: ["Nargai Cave"],
-      blue: ["White Wind", "Angel Whisper"],
+      blue: ["White Wind", "Angel Whisper", "Twister"],
       sidequests: [114, 58, 124, 92, 154, 169, 206, 219, 246],
     },
     {
@@ -6879,7 +6900,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #020 → Before #021)",
       placements: ["Tubola Cave", "Jagd Helje"],
-      blue: ["Roulette","Twister"],
+      blue: ["Roulette",],
       sidequests: [40, 41, 42, 57, 63, 103, 64, 29, 116, 117, 118, 119, 120, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 295, 296],
     },
     {
@@ -7791,6 +7812,39 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                                         </span>{" "}
                                                                         <ul className="list-disc ml-5 mt-1">
                                                                             {q.prerequisites.map((p, i) => (
+                                                                                <li key={i}>{p}</li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    </>
+                                                                )}
+                                                                {!isChecked && q.req_job && (
+                                                                    <>
+                                                                    <div>
+                                                                        <span className="font-semibold">Required Job:</span>{" "}{<span>{q.req_job}</span>}
+                                                                    </div>
+                                                                    </>
+                                                                )}
+                                                                {!isChecked && q.forbidden_job && (
+                                                                    <>
+                                                                    <div>
+                                                                        <span className="font-semibold">Forbidden Job:</span>{" "}{<span>{q.forbidden_job}</span>}
+                                                                    </div>
+                                                                    </>
+                                                                )}
+                                                                {!isChecked && q.req_skill && (
+                                                                    <>
+                                                                    <div>
+                                                                        <span className="font-semibold">Required skill:</span>{" "}{<span>{q.req_skill}</span>}
+                                                                    </div>
+                                                                    </>
+                                                                )}
+                                                                {!isChecked && q.req_items && (
+                                                                    <>
+                                                                        <span className="font-semibold">
+                                                                            Required Items:
+                                                                        </span>{" "}
+                                                                        <ul className="list-disc ml-5 mt-1">
+                                                                            {q.req_items.map((p, i) => (
                                                                                 <li key={i}>{p}</li>
                                                                             ))}
                                                                         </ul>
