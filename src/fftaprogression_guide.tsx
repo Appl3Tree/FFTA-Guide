@@ -143,6 +143,45 @@ function CollapsibleTwoTables<L extends Row, R extends Row>({
   );
 }
 
+function CompletePill({
+    checked,
+    onChange,
+    label = "Mark complete",
+}: {
+    checked: boolean;
+    onChange: () => void;
+    label?: string;
+}) {
+    return (
+        <button
+            type="button"
+            onClick={onChange}
+            aria-pressed={checked}
+            className={[
+                "inline-flex select-none items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
+                "transition-all ring-1 ring-inset focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
+                checked
+                    ? "bg-green-600/20 ring-green-500/50 text-green-100 hover:bg-green-600/30"
+                    : "bg-zinc-900/30 ring-white/15 text-zinc-200 hover:bg-zinc-800/50",
+            ].join(" ")}
+            title={checked ? "Completed" : "Mark complete"}
+        >
+            <span
+                className={[
+                    "inline-flex h-4 w-4 items-center justify-center rounded-full",
+                    checked ? "bg-green-500/80" : "bg-zinc-600/70",
+                ].join(" ")}
+            >
+                <svg viewBox="0 0 20 20" className="h-3 w-3 fill-white">
+                    <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0L3.3 10a1 1 0 1 1 1.4-1.4l3.1 3.1 6.9-6.9a1 1 0 0 1 1.4 0z" />
+                </svg>
+            </span>
+            <span>{checked ? "Completed" : label}</span>
+        </button>
+    );
+}
+
+
 function TableSection<T extends Row>({
   title,
   rows,
@@ -6651,7 +6690,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #007 → Before #008)",
       placements: ["Roda Volcano"],
-      blue: ["Night", "Bad Breath"],
+      blue: ["Night", "Bad Breath", "Guard-Off"],
       caps: ["Firewyrm", "Malboro", "Big Malboro"],
       sidequests: [47, 73, 74, 75, 195, 76, 122, 286, 155, 168, 208, 209, 268, 243],
     },
@@ -6696,6 +6735,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #010 → Before #011)",
       placements: ["Nargai Cave"],
+      blue: ["White Wind", "Angel Whisper"],
       sidequests: [114, 58, 124, 92, 154, 169, 206, 219, 246],
     },
     {
@@ -6712,7 +6752,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #011 → Before #012)",
       placements: ["Baguba Port", "Jagd Dorsa"],
-      blue: ["Guard-Off"],
       sidequests: [111, 133, 160, 176, 214, 215, 247, 271, 287, 110],
     },
     {
@@ -6720,7 +6759,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "story",
       title: "Jagd Hunt (#012)",
       subtitle: "Jagd Dorsa",
-      blue: ["White Wind"],
       sidequests: [12],
     },
     {
@@ -6807,7 +6845,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "story",
       title: "Quiet Sands (#018)",
       subtitle: "Delia Dunes",
-      blue: ["Angel Whisper"],
       sidequests: [18],
     },
     {
@@ -6857,9 +6894,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #021 → Before #022)",
       placements: ["Deti Plains"],
-      blue: [
-        "White Wind",
-      ],
       sidequests: [94, 291, 294, 159],
     },
     {
@@ -7571,238 +7605,269 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
               {isOpen && (
                 <div className="p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800">
-                  {b.kind === "story" && quest.map((num) => {
-                          const id = keyify(`quest-global:${num}`);
-                          const q = missionMap.get(num);
-                          const isChecked = !!checked[id];
-                          return (
+                    {b.kind === "story" && quest.map((num) => {
+                        const id = keyify(`quest-global:${num}`);
+                        const q = missionMap.get(num);
+                        const isChecked = !!checked[id];
+                        return (
                             <li
-                              key={num}
-                              className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+                                key={num}
+                                className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
                             >
-                              <label htmlFor={`side-${num}`} className="w-full text-zinc-800 dark:text-zinc-200 w-full cursor-pointer select-none">
-                                {q ? (
-                                  <>
-                                    <div className="italic">
-                                      {q.strategy &&
-                                      q.strategy.length ? (
-                                        <pre className="whitespace-pre-wrap text-zinc-800 dark:text-zinc-200">
-                                          {q.strategy}
-                                        </pre>
-                                      ) : (
-                                        "None"
-                                      )}
-                                    </div>
+                                <div className="flex w-full items-start justify-between gap-3">
+                                    <label
+                                        htmlFor={`side-${num}`}
+                                        className="flex-1 text-zinc-800 dark:text-zinc-200 cursor-pointer select-none"
+                                    >
+                                        {q ? (
+                                            <>
+                                                <div className="italic">
+                                                    {q.strategy && q.strategy.length ? (
+                                                        <pre className="whitespace-pre-wrap text-zinc-800 dark:text-zinc-200">
+                                                            {q.strategy}
+                                                        </pre>
+                                                    ) : (
+                                                        "None"
+                                                    )}
+                                                </div>
 
-                                    {/* Related global missables for this mission (injected) */}
-                                    {q && !isChecked && (() => {
-                                        const related = getMissablesForMission(num);
-                                        if (!related.length) return null;
-                                        return (
-                                            <div className="mt-2">
-                                                <ul className="space-y-2 w-full">
-                                                    {related.map((m) => (
-                                                        <MissableCard
-                                                            key={`gm-side-${num}-${m.id}`}
-                                                            m={m}
-                                                            checked={checked}
-                                                            setCheck={setCheck}
-                                                        />
-                                                    ))}
-                                                </ul>
+                                                {/* Related global missables for this mission (injected) */}
+                                                {q && !isChecked && (() => {
+                                                    const related = getMissablesForMission(num);
+                                                    if (!related.length) return null;
+                                                    return (
+                                                        <div className="mt-2">
+                                                            <ul className="space-y-2 w-full">
+                                                                {related.map((m) => (
+                                                                    <MissableCard
+                                                                        key={`gm-side-${num}-${m.id}`}
+                                                                        m={m}
+                                                                        checked={checked}
+                                                                        setCheck={setCheck}
+                                                                    />
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    );
+                                                })()}
+                                            </>
+                                        ) : (
+                                            <div className="font-semibold">
+                                                No strategy available.
                                             </div>
-                                        );
-                                    })()}
-                                  </>
-                                ) : (
-                                  <div className="font-semibold">
-                                    No strategy available. 
-                                  </div>
-                                )}
-                              </label>
-                            </li>
-                          );
-                        })}
-                  {b.placements && b.placements.length > 0 && (
-                    <MapPanel placements={b.placements} />
-                  )}
+                                        )}
+                                    </label>
 
-                  {blueNames.length > 0 && (
-                    <Panel
-                      title="Blue Magic Now Available"
-                      border="border-blue-600"
-                      buttonColor="bg-blue-600"
-                      tone="blue"
-                      right={
-                        <div className="w-full sm:w-auto sm:min-w-[180px]">
-                          <ProgressBar
-                            label="Blue Magic"
-                            done={blueDoneLocal}
-                            total={blueNames.length}
-                            color="blue"
-                          />
-                        </div>
-                      }
-                    >
-                      <RefList type="blue" names={blueNames} />
-                    </Panel>
-                  )}
-
-                  {capNames.length > 0 && (
-                    <Panel
-                      title="Capturable Monsters Now Available"
-                      border="border-green-600"
-                      buttonColor="bg-green-600"
-                      tone="green"
-                      right={
-                        <div className="w-full sm:w-auto sm:min-w-[180px]">
-                          <ProgressBar
-                            label="Captures"
-                            done={capDoneLocal}
-                            total={capNames.length}
-                            color="green"
-                          />
-                        </div>
-                      }
-                    >
-                      <RefList type="cap" names={capNames} />
-                    </Panel>
-                  )}
-
-                  {b.kind === "between" && quest.length > 0 && (
-                    <Panel
-                      title="Side Missions Now Available"
-                      border="border-amber-600"
-                      buttonColor="bg-amber-600"
-                      tone="amber"
-                      right={
-                        <div className="w-full sm:w-auto sm:min-w-[180px]">
-                          <ProgressBar
-                            label="Sidequests"
-                            done={questDoneLocal}
-                            total={quest.length}
-                            color="amber"
-                          />
-                        </div>
-                      }
-                    >
-                      <ul className="space-y-2 text-sm">
-                        {quest.map((num) => {
-                          const id = keyify(`quest-global:${num}`);
-                          const q = missionMap.get(num);
-                          const isChecked = !!checked[id];
-                          return (
-                            <li
-                              key={num}
-                              className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
-                            >
-                              <label className="flex w-full items-start gap-2">
-                              <input
-                                id={`side-${num}`}
-                                type="checkbox" className="mt-0.5 accent-amber-600 dark:accent-amber-400"
-                                checked={!!checked[id]}
-                                onChange={() => setCheck(id)}
-                              />
-                              <label htmlFor={`side-${num}`} className="w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none">
-                                {q ? (
-                                  <>
-                                    <div className="font-semibold text-zinc-900 dark:text-zinc-100">
-                                      #{String(q.number).padStart(3, "0")} —{" "}
-                                      {q.name}
+                                    {/* Pretty completion toggle */}
+                                    <div className="shrink-0 pt-1">
+                                        <button
+                                            type="button"
+                                            onClick={() => setCheck(id)}
+                                            aria-pressed={isChecked}
+                                            className={[
+                                                "inline-flex select-none items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold",
+                                                "transition-all ring-1 ring-inset focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
+                                                isChecked
+                                                    ? "bg-green-600/20 ring-green-500/50 text-green-100 hover:bg-green-600/30"
+                                                    : "bg-zinc-900/30 ring-white/15 text-zinc-200 hover:bg-zinc-800/50",
+                                            ].join(" ")}
+                                            title={isChecked ? "Completed" : "Mark complete"}
+                                        >
+                                            <span
+                                                className={[
+                                                    "inline-flex h-4 w-4 items-center justify-center rounded-full",
+                                                    isChecked ? "bg-green-500/80" : "bg-zinc-600/70",
+                                                ].join(" ")}
+                                            >
+                                                <svg viewBox="0 0 20 20" className="h-3 w-3 fill-white">
+                                                    <path d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.6 7.6a1 1 0 0 1-1.4 0L3.3 10a1 1 0 1 1 1.4-1.4l3.1 3.1 6.9-6.9a1 1 0 0 1 1.4 0z" />
+                                                </svg>
+                                            </span>
+                                            <span>{isChecked ? "Completed" : "Complete"}</span>
+                                        </button>
                                     </div>
-                                    <div className="text-xs text-zinc-600 dark:text-zinc-400">
-                                      {!isChecked && q.prerequisites && (
-                                        <>
-                                      <span className="font-semibold">
-                                        Prerequisites:
-                                      </span>{" "}
-                                        <ul className="list-disc ml-5 mt-1">
-                                          {q.prerequisites.map((p, i) => (
-                                            <li key={i}>{p}</li>
-                                          ))}
-                                        </ul>
-                                        </>
-                                      )}
-                                    </div>
-
-                                    {/* Related global missables for this mission (injected) */}
-                                    {q && !isChecked && (() => {
-                                        const related = getMissablesForMission(num);
-                                        if (!related.length) return null;
-                                        return (
-                                            <div className="mt-2">
-                                                <ul className="space-y-2 w-full">
-                                                    {related.map((m) => (
-                                                        <MissableCard
-                                                            key={`gm-side-${num}-${m.id}`}
-                                                            m={m}
-                                                            checked={checked}
-                                                            setCheck={setCheck}
-                                                        />
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        );
-                                    })()}
-                                  </>
-                                ) : (
-                                  <div className="font-semibold">
-                                    #{String(num).padStart(3, "0")} — Unknown
-                                    quest
-                                  </div>
-                                )}
-                              </label>
-                            </label>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </Panel>
-                  )}
-
-
-                  {/* --- Missables (Local) --- */}
-                  {(Array.isArray(b.missables) && b.missables.length > 0) && (() => {
-                      // Look up the GlobalMissable objects for the IDs listed on this block
-                      const localMiss = b.missables
-                          .map((id) => GLOBAL_MISSABLES.find((m) => m.id === id))
-                          .filter((m): m is GlobalMissable => !!m);
-
-                      if (localMiss.length === 0) return null;
-
-                      return (
-                          <Panel
-                              title="Missables Now Available"
-                              border="border-red-600"
-                              buttonColor="bg-red-600"
-                              tone="red"
-                              right={
-                                <div className="w-full sm:w-auto sm:min-w-[180px]">
-                                  <ProgressBar
-                                    label="Missables"
-                                    done={missDoneLocal}
-                                    total={miss.length}
-                                    color="red"
-                                  />
                                 </div>
-                              }
+                            </li>
+                        );
+                    })}
 
-                          >
-                              <ul className="space-y-2 w-full text-sm">
-                                  {localMiss.map((m) => (
-                                      <MissableCard
-                                          key={`gm-local-${m.id}`}
-                                          m={m}
-                                          checked={checked}
-                                          setCheck={setCheck}
-                                      />
-                                  ))}
-                              </ul>
-                          </Panel>
-                      );
-                  })()}
+                    {b.placements && b.placements.length > 0 && (
+                        <MapPanel placements={b.placements} />
+                    )}
+
+                    {blueNames.length > 0 && (
+                        <Panel
+                            title="Blue Magic Now Available"
+                            border="border-blue-600"
+                            buttonColor="bg-blue-600"
+                            tone="blue"
+                            right={
+                                <div className="w-full sm:w-auto sm:min-w-[180px]">
+                                    <ProgressBar
+                                        label="Blue Magic"
+                                        done={blueDoneLocal}
+                                        total={blueNames.length}
+                                        color="blue"
+                                    />
+                                </div>
+                            }
+                        >
+                            <RefList type="blue" names={blueNames} />
+                        </Panel>
+                    )}
+
+                    {capNames.length > 0 && (
+                        <Panel
+                            title="Capturable Monsters Now Available"
+                            border="border-green-600"
+                            buttonColor="bg-green-600"
+                            tone="green"
+                            right={
+                                <div className="w-full sm:w-auto sm:min-w-[180px]">
+                                    <ProgressBar
+                                        label="Captures"
+                                        done={capDoneLocal}
+                                        total={capNames.length}
+                                        color="green"
+                                    />
+                                </div>
+                            }
+                        >
+                            <RefList type="cap" names={capNames} />
+                        </Panel>
+                    )}
+
+                    {b.kind === "between" && quest.length > 0 && (
+                        <Panel
+                            title="Side Missions Now Available"
+                            border="border-amber-600"
+                            buttonColor="bg-amber-600"
+                            tone="amber"
+                            right={
+                                <div className="w-full sm:w-auto sm:min-w-[180px]">
+                                    <ProgressBar
+                                        label="Sidequests"
+                                        done={questDoneLocal}
+                                        total={quest.length}
+                                        color="amber"
+                                    />
+                                </div>
+                            }
+                        >
+                            <ul className="space-y-2 text-sm">
+                                {quest.map((num) => {
+                                    const id = keyify(`quest-global:${num}`);
+                                    const q = missionMap.get(num);
+                                    const isChecked = !!checked[id];
+                                    return (
+                                        <li
+                                            key={num}
+                                            className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+                                        >
+                                            <label className="flex w-full items-start gap-2">
+                                                <input
+                                                    id={`side-${num}`}
+                                                    type="checkbox"
+                                                    className="mt-0.5 accent-amber-600 dark:accent-amber-400"
+                                                    checked={!!checked[id]}
+                                                    onChange={() => setCheck(id)}
+                                                />
+                                                <label
+                                                    htmlFor={`side-${num}`}
+                                                    className="w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none"
+                                                >
+                                                    {q ? (
+                                                        <>
+                                                            <div className="font-semibold text-zinc-900 dark:text-zinc-100">
+                                                                #{String(q.number).padStart(3, "0")} — {q.name}
+                                                            </div>
+                                                            <div className="text-xs text-zinc-600 dark:text-zinc-400">
+                                                                {!isChecked && q.prerequisites && (
+                                                                    <>
+                                                                        <span className="font-semibold">
+                                                                            Prerequisites:
+                                                                        </span>{" "}
+                                                                        <ul className="list-disc ml-5 mt-1">
+                                                                            {q.prerequisites.map((p, i) => (
+                                                                                <li key={i}>{p}</li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    </>
+                                                                )}
+                                                            </div>
+
+                                                            {q && !isChecked && (() => {
+                                                                const related = getMissablesForMission(num);
+                                                                if (!related.length) return null;
+                                                                return (
+                                                                    <div className="mt-2">
+                                                                        <ul className="space-y-2 w-full">
+                                                                            {related.map((m) => (
+                                                                                <MissableCard
+                                                                                    key={`gm-side-${num}-${m.id}`}
+                                                                                    m={m}
+                                                                                    checked={checked}
+                                                                                    setCheck={setCheck}
+                                                                                />
+                                                                            ))}
+                                                                        </ul>
+                                                                    </div>
+                                                                );
+                                                            })()}
+                                                        </>
+                                                    ) : (
+                                                        <div className="font-semibold">
+                                                            #{String(num).padStart(3, "0")} — Unknown quest
+                                                        </div>
+                                                    )}
+                                                </label>
+                                            </label>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </Panel>
+                    )}
+
+                    {(Array.isArray(b.missables) && b.missables.length > 0) && (() => {
+                        const localMiss = b.missables
+                            .map((id) => GLOBAL_MISSABLES.find((m) => m.id === id))
+                            .filter((m): m is GlobalMissable => !!m);
+
+                        if (localMiss.length === 0) return null;
+
+                        return (
+                            <Panel
+                                title="Missables Now Available"
+                                border="border-red-600"
+                                buttonColor="bg-red-600"
+                                tone="red"
+                                right={
+                                    <div className="w-full sm:w-auto sm:min-w-[180px]">
+                                        <ProgressBar
+                                            label="Missables"
+                                            done={missDoneLocal}
+                                            total={miss.length}
+                                            color="red"
+                                        />
+                                    </div>
+                                }
+                            >
+                                <ul className="space-y-2 w-full text-sm">
+                                    {localMiss.map((m) => (
+                                        <MissableCard
+                                            key={`gm-local-${m.id}`}
+                                            m={m}
+                                            checked={checked}
+                                            setCheck={setCheck}
+                                        />
+                                    ))}
+                                </ul>
+                            </Panel>
+                        );
+                    })()}
                 </div>
-              )}
+            )}
             </div>
           );
         })}
