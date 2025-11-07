@@ -1620,7 +1620,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Engagement`,
     cost: `4000 Gil`,
     location: `Ozmonfield`,
-    prerequisites: ["Completed A Dragon (#066)"],
+    prerequisites: ["Completed A Dragon's Aid (#066)"],
     reward: [
       `36000 Gil`,
       `2x Random Items`,
@@ -2422,7 +2422,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     description: `H-Help! A man named Weaver wants me dead. Yes, it was my fault his family died, but I've repented! ~ Celebrant, Gelzak Church`,
     type: `Encounter`,
     cost: `700 Gil`,
-    prerequisites: ["Completed Weaver (#287)"],
+    prerequisites: ["Completed Weaver's War (#287)"],
     reward: [
       `13600 Gil`,
       `2x Random Items`,
