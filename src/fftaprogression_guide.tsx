@@ -5898,7 +5898,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   type: "Blue Magic",
   missable: ["Dragon Force"],
   warning: "Thundrakes disappear later in the game.",
-  note: "Learn ASAP. Can learn in Wind Sigil (#079), Magewrym (#034), The Worldwyrm (#088) in Pale Company (#011), Wyrm's Awaken (#102), A Dragon's Aid (#066), Ruby Red (#031), and To Amberavle (#022).",
+  note: "Learn ASAP. Can learn in Wind Sigil (#079), Magewrym (#034), The Worldwyrm (#088), Wyrm's Awaken (#102), A Dragon's Aid (#066), Ruby Red (#031), and To Amberavle (#022).",
   mission: [79,34,88,102,66,31,22]
  },
  {
@@ -6922,7 +6922,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #011 → Before #012)",
       placements: ["Baguba Port", "Jagd Dorsa"],
-      blue: ["Dragon Force"],
       sidequests: [111, 133, 160, 214, 215, 247, 271, 287, 110],
     },
     {
@@ -6937,6 +6936,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #012 → Before #013)",
       placements: ["Kudik Peaks"],
+      blue: ["Dragon Force"],
       sidequests: [52, 108, 77, 78, 79, 80, 81, 132, 156, 196, 197, 198, 204, 222, 248, 272],
     },
     {
