@@ -5892,7 +5892,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   missable: ["Dragon Force"],
   warning: "Thundrakes disappear later in the game.",
   note: "Learn ASAP. Can learn in Wind Sigil (#079), Magewrym (#034), The Worldwyrm (#088) in Pale Company (#011), Wyrm's Awaken (#102), A Dragon's Aid (#066), Ruby Red (#031), and To Amberavle (#022).",
-  mission: [79,34,88,11,102,66,31,22]
+  mission: [79,34,88,102,66,31,22]
  },
  {
   id: 16,
@@ -6907,7 +6907,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "story",
       title: "Pale Company (#011)",
       subtitle: "Nargai Cave",
-      blue: ["Dragon Force"],
       caps: ["Thundrake"],
       sidequests: [11],
     },
@@ -6916,6 +6915,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #011 → Before #012)",
       placements: ["Baguba Port", "Jagd Dorsa"],
+      blue: ["Dragon Force"],
       sidequests: [111, 133, 160, 214, 215, 247, 271, 287, 110],
     },
     {
