@@ -6991,7 +6991,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #015 → Before #016)",
       placements: ["Uladon Bog"],
-      sidequests: [28, 39, 82, 83, 84, 85, 86, 93, 126, 153, 158, 179, 220, 221, 228, 250, 251, 252, 274],
+      sidequests: [28, 39, 82, 83, 84, 85, 86, 93, 126, 153, 158, 179, 220, 221, 228, 297, 250, 251, 252, 274],
       missables: [5]
     },
     {
@@ -7007,7 +7007,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #016 → Before #017)",
       placements: ["Gotor Sands","Jagd Ahli"],
       blue: ["LV? S-Flare"],
-      sidequests: [51, 65, 30, 104, 105, 53, 121, 130, 149, 165, 129, 181, 223, 224, 253, 275, 298, 297],
+      sidequests: [51, 65, 30, 104, 105, 53, 121, 130, 149, 165, 129, 181, 223, 224, 253, 275, 298,],
     },
     {
       key: "017",
