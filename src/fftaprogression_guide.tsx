@@ -6323,7 +6323,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   type: "Miscellaneous",
   missable: ["Iceprism Sword (Rare)"],
   warning: "Can be missed according to decision made.",
-  note: "Negotiate and give Ice Cream",
+  note: "Negotiate and give Ice Cream (Cyril Ice from (Malboro Hunt #225))",
   mission: [109]
  },
  {
