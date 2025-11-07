@@ -43,7 +43,6 @@ type CollapsibleTwoTablesProps<L extends Row, R extends Row> = {
   divider?: string;         // e.g. "divide-white/10"
 };
 
-
 const toneDefaults = {
   neutral: {
     border: "border-zinc-200 dark:border-zinc-700/50",
@@ -182,7 +181,6 @@ function CompletePill({
     );
 }
 
-
 function TableSection<T extends Row>({
   title,
   rows,
@@ -207,21 +205,33 @@ function TableSection<T extends Row>({
       <header className={`px-3 py-2 text-sm font-semibold text-center ${textCls} ${headerBgCls}`}>
         {title}
       </header>
-      <table className="min-w-full table-fixed">
+
+      {/* CHANGED: switch to border-separate + per-cell borders for clean gridlines */}
+      <table className="w-full text-sm border-separate border-spacing-0 table-fixed">
         <thead className={`${headerBgCls}`}>
           <tr>
-            {columns.map((c) => (
+            {columns.map((c, colIdx) => (
               <th
                 key={String(c.key)}
-                className={`px-3 py-2 text-left text-sm font-semibold ${textCls} ${c.className ?? ""}`}
                 scope="col"
+                className={[
+                  "px-3 py-2 text-left text-sm font-semibold",
+                  textCls,
+                  // gridlines under header + between header cells
+                  "border-b border-zinc-300/60 dark:border-zinc-700/60",
+                  "border-r border-zinc-200/50 dark:border-zinc-700/40",
+                  "last:border-r-0",
+                  c.className ?? "",
+                ].join(" ")}
               >
                 {c.header}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className={`bg-transparent ${dividerCls}`}>
+
+        {/* CHANGED: remove old divider usage here; per-cell borders create the grid */}
+        <tbody className={`bg-transparent`}>
           {rows.length === 0 ? (
             <tr>
               <td className={`px-3 py-3 text-sm ${textCls}/70`} colSpan={columns.length}>
@@ -231,14 +241,40 @@ function TableSection<T extends Row>({
           ) : (
             rows.map((row, rowIdx) => (
               <tr key={(row as any).id ?? rowIdx} className={`${textCls}`}>
-                {columns.map((c) => (
-                  <td
-                    key={String(c.key)}
-                    className={`px-3 py-2 align-top whitespace-normal break-words min-w-0 ${rowBgCls}`}
-                  >
-                    {c.cell ? c.cell(row[c.key], row, rowIdx) : String(row[c.key] ?? "")}
-                  </td>
-                ))}
+                {columns.map((c, colIdx) => {
+                  const raw = row[c.key] as unknown;
+
+                  // NEW: if this is the SECOND column and value is string[], render a bulleted list
+                  const defaultContent =
+                    colIdx === 1 && Array.isArray(raw) && raw.every((x) => typeof x === "string") ? (
+                      <ul className="list-disc pl-5 space-y-1">
+                        {(raw as string[]).map((s, i) => (
+                          <li key={i}>{s}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      (raw as React.ReactNode) ?? ""
+                    );
+
+                  const content = c.cell ? c.cell(row[c.key], row, rowIdx) : defaultContent;
+
+                  return (
+                    <td
+                      key={String(c.key)}
+                      className={[
+                        "px-3 py-2 align-top whitespace-normal break-words min-w-0",
+                        rowBgCls,
+                        // gridlines between rows/columns
+                        "border-b border-zinc-200/50 dark:border-zinc-700/40",
+                        "border-r border-zinc-200/50 dark:border-zinc-700/40",
+                        "last:border-r-0",
+                        c.className ?? "",
+                      ].join(" ")}
+                    >
+                      {content}
+                    </td>
+                  );
+                })}
               </tr>
             ))
           )}
@@ -247,31 +283,6 @@ function TableSection<T extends Row>({
     </section>
   );
 }
-
-// Affection data
-const leftRows = [
-  { id: 1, affection: "0-29", response: "Grrurr... (What are you looking at?)" },
-  { id: 2, affection: "30-79", response: "(Gimmie food.)" },
-  { id: 3, affection: "80-99", response: "(Thanks for dropping by.)" },
-  { id: 4, affection: "100", response: "(I love you, Marche. No, really, I love you!)" },
-];
-
-const rightRows = [
-  { id: 1, item: "Potion", affection: "1", max: "29" },
-  { id: 2, item: "Hi-Potion", affection: "2", max: "29" },
-  { id: 3, item: "X-Potion", affection: "2", max: "79" },
-  { id: 4, item: "Ether", affection: "4", max: "100" },
-  { id: 5, item: "Elixir", affection: "10", max: "100" },
-  { id: 6, item: "Antidote", affection: "2", max: "79" },
-  { id: 7, item: "Eye Drops", affection: "2", max: "79" },
-  { id: 8, item: "Echo Screen", affection: "2", max: "79" },
-  { id: 9, item: "Maiden Kiss", affection: "3", max: "79" },
-  { id: 10, item: "Soft", affection: "3", max: "79" },
-  { id: 11, item: "Holy Water", affection: "4", max: "79" },
-  { id: 12, item: "Bandage", affection: "1", max: "79" },
-  { id: 13, item: "Cureall", affection: "5", max: "100" },
-  { id: 14, item: "Phoenix Down", affection: "10", max: "79" },
-];
 
 const leftColumns = [
   { key: "affection", header: "Affection" },
@@ -6323,7 +6334,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   type: "Miscellaneous",
   missable: ["Iceprism Sword (Rare)"],
   warning: "Can be missed according to decision made.",
-  note: "Negotiate and give Ice Cream (Cyril Ice from (Malboro Hunt #225))",
+  note: "Successfully negotiate in Snow Fairy (#109)and give Ice Cream (Cyril Ice from (Malboro Hunt #225))",
   mission: [109]
  },
  {
@@ -6338,7 +6349,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   type: "Miscellaneous",
   missable: ["R4 Anti-Law"],
   warning: "Failure results in R3 Anti-Law.",
-  note: "Successfully negotiate to receive the R4 Anti-Law.",
+  note: "Successfully negotiate in Resistance (#106) to receive the R4 Anti-Law.",
   mission: [106]
  },
  {
@@ -7446,6 +7457,69 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
     </div>
   ) : null;
 
+
+  // Affection data
+  const leftRows = [
+    { id: 1, affection: "0-29", response: "Grrurr... (What are you looking at?)" },
+    { id: 2, affection: "30-79", response: "(Gimmie food.)" },
+    { id: 3, affection: "80-99", response: "(Thanks for dropping by.)" },
+    { id: 4, affection: "100", response: "(I love you, Marche. No, really, I love you!)" },
+  ];
+
+  const rightRows = [
+    { id: 1, item: "Potion", affection: "1", max: "29" },
+    { id: 2, item: "Hi-Potion", affection: "2", max: "29" },
+    { id: 3, item: "X-Potion", affection: "2", max: "79" },
+    { id: 4, item: "Ether", affection: "4", max: "100" },
+    { id: 5, item: "Elixir", affection: "10", max: "100" },
+    { id: 6, item: "Antidote", affection: "2", max: "79" },
+    { id: 7, item: "Eye Drops", affection: "2", max: "79" },
+    { id: 8, item: "Echo Screen", affection: "2", max: "79" },
+    { id: 9, item: "Maiden Kiss", affection: "3", max: "79" },
+    { id: 10, item: "Soft", affection: "3", max: "79" },
+    { id: 11, item: "Holy Water", affection: "4", max: "79" },
+    { id: 12, item: "Bandage", affection: "1", max: "79" },
+    { id: 13, item: "Cureall", affection: "5", max: "100" },
+    { id: 14, item: "Phoenix Down", affection: "10", max: "79" },
+  ];
+
+  const questItemLeftRows = [
+    { item: "Adamantite", quest: ["Metal Hunt #207"] },
+    { item: "Ancient Medal", quest: ["The Skypole #201", "Ruins Survey #202"] },
+    { item: "Badge", quest: ["[League] White Kupos"] },
+    { item: "Body Ceffyl", quest: ["Body Ceffyl #197"] },
+    { item: "Choco Bread", quest: ["Chocobo Work #226"] },
+    { item: "Chocobo Egg", quest: ["Chocobo Help! #200", "Better Living #224"] },
+    { item: "Chocobo Skin", quest: ["Smuggle Bust #105", "Skinning Time #214"] },
+    { item: "Cyril Ice", quest: ["Malboro Hunt #225"] },
+    { item: "Danbukwood", quest: ["Relax Time! #237"] },
+    { item: "Earth Sigil", quest: ["Earth Sigil #80", "A Barren Land #119"] },
+    { item: "Encyclopedia", quest: ["Book Mess #235"] },
+    { item: "Fight Trophy", quest: ["Sprohm Meet #121"] },
+    { item: "Fire Sigil", quest: ["Fire Sigil #76", "Gulug Ghost #116"] },
+    { item: "Gysahl Greens", quest: ["New Fields #222"] },
+    { item: "Helje Key", quest: ["Prison Break #57"] },
+    { item: "Jerky", quest: ["Jerky Days #221"] },
+    { item: "Leestone", quest: ["The Wormhole #206"] },
+  ];
+
+  const questItemRightRows = [
+    { item: "Magic Cloth", quest: ["Wild River #215", "Magic Cloth #216"] },
+    { item: "Magic Cotton", quest: ["Cotton Guard #217"] },
+    { item: "Magic Trophy", quest: ["Cadoan Meet #120"] },
+    { item: "Magic Vellum", quest: ["Magic Vellum #231"] },
+    { item: "Materite", quest: ["Materite #205"] },
+    { item: "Mind Ceffyl", quest: ["Mind Ceffyl #196"] },
+    { item: "Moonwood", quest: ["Foma Jungle #238"] },
+    { item: "Panther Hide", quest: ["Into The Woods #220"] },
+    { item: "Rabbit Tail", quest: ["One More Tail #236"] },
+    { item: "Silvril", quest: ["Mythril Rush #103", "Seeking Silver #204"] },
+    { item: "Spiritstone", quest: ["The Spiritstone #198"] },
+    { item: "Telaq Flower", quest: ["For A Flower #239"] },
+    { item: "Water Sigil", quest: ["Water Sigil #78", "Water City #117"] },
+    { item: "Wind Sigil", quest: ["Wind Sigil #79", "Mirage Tower #118"] },
+    { item: "Zodiac Ore", quest: ["Dig Dig Dig #203"] },
+  ];
   
   return (
     <div className="w-full max-w-6xl mx-auto p-4 bg-zinc-100 dark:bg-zinc-900 transition-colors">
@@ -7577,6 +7651,28 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
             </div>
           }
         >
+          <CollapsibleTwoTables
+            title="Repeatable Quest Items (Safe to discard/use)"
+            defaultOpen={false}
+            tone="neutral"                      // gives sensible defaults
+            border="border-zinc-600"         // same as Panel border
+            text="text-zinc-200"             // table text tone
+            headerBg="bg-zinc-900/10"        // header/thead background
+            rowBg="bg-zinc-950/10"           // every cell/row background
+            divider="divide-white/10"         // thin inner dividers
+            leftTitle=""
+            leftRows={questItemLeftRows}
+            leftColumns={[
+              { key: "item", header: "Mission Item", className: "w-28" },
+              { key: "quest", header: "Mission(s) obtained from" },
+            ]}
+            rightTitle=""
+            rightRows={questItemRightRows}
+            rightColumns={[
+              { key: "item", header: "Mission Item", className: "w-28" },
+              { key: "quest", header: "Mission(s) obtained from" },
+            ]}
+          />
           <RefList type="quest" names={MISSION_REF.map((q) => q.number)} />
         </Panel>
       </div>
