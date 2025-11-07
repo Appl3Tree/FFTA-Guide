@@ -5926,8 +5926,8 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   type: "Important Steals",
   missable: ["Chill Rod [Hidden]"],
   warning: "Target: Nu Mou Black Mage",
-  note: "Can be obtained in Frosty Mage (#045).",
-  mission: [45]
+  note: "Can be obtained in Frosty Mage (#045) [Hidden] or Hit Again! (#061) [Not Hidden].",
+  mission: [45, 61]
  },
  {
   id: 18,
