@@ -1977,6 +1977,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `Secret Item (Reaper Cloak)`,
       `2x Random Cards`,
     ],
+    req_items: ['Spiritstone (The Spiritstone #198)'],
     difficulty: `Hard`,
     enemies: [`Defender x2`, `Mog Knight x2`],
   },
@@ -6922,7 +6923,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #011 → Before #012)",
       placements: ["Baguba Port", "Jagd Dorsa"],
-      sidequests: [111, 133, 160, 214, 215, 247, 271, 287, 110],
+      sidequests: [111, 133, 214, 215, 247, 271, 287, 110],
     },
     {
       key: "012",
@@ -6937,7 +6938,8 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #012 → Before #013)",
       placements: ["Kudik Peaks"],
       blue: ["Dragon Force"],
-      sidequests: [52, 108, 77, 78, 79, 80, 81, 132, 156, 196, 197, 198, 204, 222, 248, 272],
+      caps: ["Grenade"],
+      sidequests: [52, 108, 77, 160, 78, 79, 80, 81, 132, 156, 196, 197, 198, 204, 222, 248, 272],
     },
     {
       key: "013",
@@ -6951,7 +6953,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #013 → Before #014)",
       placements: ["Jeraw Sands"],
-      caps: ["Grenade"],
       sidequests: [26, 61, 109, 131, 273, 157, 178, 216, 217, 218, 225, 249],
     },
     {
