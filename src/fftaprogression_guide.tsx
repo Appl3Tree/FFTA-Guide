@@ -5195,7 +5195,6 @@ const BLUE_MAGIC_REF: BlueRef[] = [
     desc: "Buff: +W.Atk & +M.Atk.",
     from: ["Thundrake"],
     sources: [
-      { type: "Mission", name: "Pale Company (#011)" },
       { type: "Mission", name: "Wyrms Awaken (#102)" },
       { type: "Mission", name: "A Dragon's Aid (#066)" },
     ],
