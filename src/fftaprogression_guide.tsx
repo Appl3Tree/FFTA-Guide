@@ -7022,7 +7022,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #017 → Before #018)",
       placements: ["Delia Dunes", "Ozmonfield"],
-      sidequests: [34, 35, 91, 102, 31, 66, 60, 144, 161, 171, 231, 254],
+      sidequests: [34, 35, 91, 102, 31, 66, 144, 161, 171, 231, 254],
     },
     {
       key: "018",
@@ -7036,7 +7036,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #018 → Before #019)",
       placements: ["Materiwood"],
-      sidequests: [54, 107, 134, 147, 163, 177, 180, 182, 226, 227, 234, 255, 276, 127, 277, 128, 278],
+      sidequests: [54, 60, 107, 134, 147, 163, 177, 180, 182, 226, 227, 234, 255, 276, 127, 277, 128, 278],
     },
     {
       key: "019",
