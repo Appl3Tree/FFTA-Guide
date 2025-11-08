@@ -3961,7 +3961,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
   },
   {
     number: 220,
-    name: `Into The Woods`,
+    name: `Into The Wood`,
     description: `A pack of panthers has appeared in a wood far to the south. Somebody clear them out before they hurt someone! ~ Iguas, Townsperson`,
     type: `Dispatch`,
     cost: `600 Gil`,
@@ -6991,7 +6991,8 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #015 → Before #016)",
       placements: ["Uladon Bog"],
-      sidequests: [28, 39, 82, 83, 84, 85, 86, 93, 126, 153, 158, 179, 220, 221, 228, 297, 250, 251, 252, 274],
+      sidequests: [28, 39, 82, 83, 84, 85, 86, 93, 121, 126, 129, 153, 158, 165, 179, 220, 221, 228, 297, 250, 251, 252, 274],
+      blue: ["LV? S-Flare"],
       missables: [5]
     },
     {
@@ -7007,7 +7008,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #016 → Before #017)",
       placements: ["Gotor Sands","Jagd Ahli"],
       blue: ["LV? S-Flare"],
-      sidequests: [51, 65, 30, 104, 105, 53, 121, 130, 149, 165, 129, 181, 223, 224, 253, 275, 298,],
+      sidequests: [51, 65, 30, 104, 105, 53, 130, 149, 181, 223, 224, 253, 275, 298,],
     },
     {
       key: "017",
