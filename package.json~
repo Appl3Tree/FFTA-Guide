@@ -9,9 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "postbuild": "shx cp dist/index.html dist/404.html",
+    "postbuild": "cp dist/index.html dist/404.html || copy dist\\index.html dist\\404.html",
     "deploy": "gh-pages -d dist",
-    "postdeploy": "shx rm *.js src/*.js"
+    "postdeploy": "rm *.js src/*.js || rm '*.js','src\\*.js'"
   },
   "dependencies": {
     "lucide-react": "^0.548.0",
