@@ -5827,9 +5827,9 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   id: 4,
   type: "Recruiting-Related Missions",
   missable: ["Quin"],
-  warning: "Save before starting Tubola Caves (#256).",
+  warning: "Save before starting Missing Professor (#63).",
   note: "If Quin doesn't offer to join, reset because this is the only chance to recruit Quin.",
-  mission: [256]
+  mission: [63]
  },
  {
   id: 5,
@@ -6166,7 +6166,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   type: "Important Steals",
   missable: ["Save the Queen", "Maximillian", "Bangaa Helm"],
   warning: "Target: Llednar",
-  note: "Can be obtained in Quiet Sands (#018). Very short battle, quickly steal what you can/need.",
+  note: "Can be obtained in Quiet Sands (#018). Very short battle (two rounds), quickly steal what you can/need.",
   mission: [18]
  },
  {
@@ -6254,7 +6254,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
   type: "Important Steals",
   missable: ["Save the Queen", "Maximillian", "Bangaa Helm"],
   warning: "Target: Llednar",
-  note: "Can be obtained in Present Day (Llednar Variant) (#020). Solo battle - equip Steal on Marche.",
+  note: "Can be obtained in Present Day (Llednar Variant) (#020). Very short solo battle (five rounds) - equip Steal on Marche.",
   mission: [20]
  },
  {
