@@ -6252,7 +6252,7 @@ const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?
  {
   id: 58,
   type: "Important Steals",
-  missable: ["Save the Queen", "Maiximillian", "Bangaa Helm"],
+  missable: ["Save the Queen", "Maximillian", "Bangaa Helm"],
   warning: "Target: Llednar",
   note: "Can be obtained in Present Day (Llednar Variant) (#020). Solo battle - equip Steal on Marche.",
   mission: [20]
@@ -7036,6 +7036,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #018 → Before #019)",
       placements: ["Materiwood"],
+      blue: ["Roulette",],
       sidequests: [54, 60, 107, 120, 134, 147, 163, 177, 180, 182, 226, 227, 234, 255, 276, 127, 277, 128, 278, 295,],
     },
     {
@@ -7049,7 +7050,7 @@ const FFTAProgressionGuide: React.FC = () => {
       key: "post-019",
       kind: "between",
       title: "Between-Story Missions (After #019 → Before #020)",
-      sidequests: [135, 136, 202, 229, 230, 285, 279, 280, 293],
+      sidequests: [57, 135, 136, 159, 202, 229, 230, 285, 279, 280, 293],
     },
     {
       key: "020",
@@ -7063,8 +7064,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #020 → Before #021)",
       placements: ["Tubola Cave", "Jagd Helje"],
-      blue: ["Roulette",],
-      sidequests: [40, 41, 42, 57, 63, 103, 64, 29, 116, 117, 118, 119, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 296],
+      sidequests: [40, 41, 42, 63, 103, 64, 29, 116, 117, 118, 119, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 296],
     },
     {
       key: "021",
@@ -7078,7 +7078,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #021 → Before #022)",
       placements: ["Deti Plains"],
-      sidequests: [94, 291, 294, 159],
+      sidequests: [94, 291, 294, ],
     },
     {
       key: "022",
