@@ -7064,7 +7064,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #020 → Before #021)",
       placements: ["Tubola Cave", "Jagd Helje"],
-      sidequests: [40, 41, 42, 63, 103, 64, 29, 116, 117, 118, 119, 137, 183, 203, 232, 288, 233, 235, 236, 256, 281, 138, 282, 296],
+      sidequests: [40, 41, 42, 63, 103, 64, 29, 116, 117, 118, 119, 137, 183, 203, 232, 288, 233, 236, 256, 281, 138, 282, 296],
     },
     {
       key: "021",
@@ -7078,7 +7078,6 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #021 → Before #022)",
       placements: ["Deti Plains"],
-      sidequests: [94, 291, 294, ],
     },
     {
       key: "022",
@@ -7092,7 +7091,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "between",
       title: "Between-Story Missions (After #022 → Before #023)",
       placements: ["Siena Gorge"],
-      sidequests: [43, 59, 141, 142, 292, 146, 174, 237, 238, 239, 257, 258, 283, 290],
+      sidequests: [43, 59, 94, 291, 294, 141, 142, 292, 146, 174, 235, 237, 238, 239, 257, 258, 283, 290,],
     },
     {
       key: "023",
