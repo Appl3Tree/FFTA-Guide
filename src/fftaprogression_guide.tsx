@@ -6849,7 +6849,7 @@ const FFTAProgressionGuide: React.FC = () => {
       kind: "story", 
       title: "Antilaws (#006)", 
       subtitle: "Cadoan", 
-      sidequests: [6] 
+      sidequests: [6],
     },
     {
       key: "post-006",
@@ -6857,7 +6857,7 @@ const FFTAProgressionGuide: React.FC = () => {
       title: "Between-Story Missions (After #006 → Before #007)",
       placements: ["Aisenfield"],
       sidequests: [62, 71, 106, 123, 207, 148, 150, 299, 175, 205, 242, 267],
-      missables: [1,2]
+      missables: [2]
     },
     {
       key: "007",
