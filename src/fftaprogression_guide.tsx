@@ -7680,7 +7680,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
       <div className="mt-3">
         <Panel
           title="Missables & Warnings"
-          subtitle='Take a moment to review the missables and warnings before proceeding to avoid later heartache! There are some items that can only be obtained via treasure hunting -- the order I have provided for map location placement ensures you get them all!'
+          subtitle='Take a moment to review the missables and warnings before proceeding to avoid later heartache. There are some items that can only be obtained via treasure hunting - the order I have provided for map location placement ensures you get them all!'
           border="border-red-600"
           buttonColor="bg-red-600"
           tone="red"
