@@ -5185,16 +5185,6 @@ const BLUE_MAGIC_REF: BlueRef[] = [
     ],
   },
   {
-    name: "Mighty Guard",
-    mp: 8,
-    desc: "Buff: +W.Def & +M.Res for battle.",
-    from: ["Icedrake"],
-    sources: [
-      { type: "Clan", name: "Wild Monsters" },
-      { type: "Mission", name: "Pale Company (#011)" },
-    ],
-  },
-  {
     name: "Guard-Off",
     mp: 10,
     desc: "Debuff: -W.Def & -M.Res for battle.",
