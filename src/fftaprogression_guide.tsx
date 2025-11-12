@@ -5639,34 +5639,34 @@ const CAPTURE_REF: CapRef[] = [
 
 const MAP_PLACEMENTS: Record<
   string,
-  { number: number; title: string; reward?: string | null }
+  { number: number; title: string; reward?: string[] | null }
 > = {
   Sprohm: { number: 14, title: "Sprohm" },
-  "Lutia Pass": { number: 8, title: "Lutia Pass" },
-  Nubswood: { number: 9, title: "Nubswood" },
-  "Eluut Sands": { number: 6, title: "Eluut Sands" },
+  "Lutia Pass": { number: 19, title: "Lutia Pass", reward: ['Red Boots',] },
+  Nubswood: { number: 12, title: "Nubswood" },
+  "Eluut Sands": { number: 4, title: "Eluut Sands" },
   "Ulei River": { number: 5, title: "Ulei River" },
-  Cadoan: { number: 15, title: "Cadoan" },
+  Cadoan: { number: 24, title: "Cadoan", reward: ['Rubber Suit',] },
   Aisenfield: { number: 18, title: "Aisenfield" },
-  "Roda Volcano": { number: 4, title: "Roda Volcano" },
-  Koringwood: { number: 10, title: "Koringwood" },
-  Salikawood: { number: 22, title: "Salikawood" },
-  "Nargai Cave": { number: 13, title: "Nargai Cave" },
-  "Baguba Port": { number: 16, title: "Baguba Port" },
-  "Jagd Dorsa": { number: 7, title: "Jagd Dorsa" },
-  "Kudik Peaks": { number: 24, title: "Kudik Peaks" },
-  "Jeraw Sands": { number: 2, title: "Jeraw Sands" },
+  "Roda Volcano": { number: 13, title: "Roda Volcano" },
+  Koringwood: { number: 17, title: "Koringwood", reward: ['Materia Blade',] },
+  Salikawood: { number: 16, title: "Salikawood" },
+  "Nargai Cave": { number: 22, title: "Nargai Cave", reward: ['Telaq Flower',] },
+  "Baguba Port": { number: 25, title: "Baguba Port", reward: ['Ribbon',] },
+  "Jagd Dorsa": { number: 1, title: "Jagd Dorsa" },
+  "Kudik Peaks": { number: 15, title: "Kudik Peaks", reward: ['Tiara',] },
+  "Jeraw Sands": { number: 8, title: "Jeraw Sands", reward: ['Ruby Earring',] },
   Muscadet: { number: 21, title: "Muscadet" },
-  "Uladon Bog": {number: 1, title: "Uladon Bog"},
-  "Gotor Sands": { number: 12, title: "Gotor Sands" },
-  "Jagd Ahli": { number: 3, title: "Jagd Ahli" },
-  "Delia Dunes": { number: 17, title: "Delia Dunes" },
-  Ozmonfield: { number: 23, title: "Ozmonfield" },
-  Materiwood: { number: 20, title: "Materiwood" },
-  "Tubola Cave": { number: 19, title: "Tubola Cave" },
+  "Uladon Bog": {number: 3, title: "Uladon Bog"},
+  "Gotor Sands": { number: 2, title: "Gotor Sands", reward: ['Galmia Shoes',] },
+  "Jagd Ahli": { number: 7, title: "Jagd Ahli", reward: ['Genji Armlets',] },
+  "Delia Dunes": { number: 6, title: "Delia Dunes", reward: ['Mindu Gem',] },
+  Ozmonfield: { number: 23, title: "Ozmonfield", reward: ['Gastra Bow', 'Zeus Mace',] },
+  Materiwood: { number: 9, title: "Materiwood" },
+  "Tubola Cave": { number: 20, title: "Tubola Cave" },
   "Jagd Helje": { number: 26, title: "Jagd Helje" },
   "Deti Plains": { number: 11, title: "Deti Plains" },
-  "Siena Gorge": { number: 25, title: "Siena Gorge" },
+  "Siena Gorge": { number: 10, title: "Siena Gorge", reward: ['Sage Robe',] },
 };
 
 
@@ -7147,7 +7147,7 @@ const FFTAProgressionGuide: React.FC = () => {
                   <div className="flex-1">
                     <span className="font-semibold text-zinc-900 dark:text-zinc-100">
                       {m.title}
-                    </span>
+                    </span>{" "}<span className="text-sm text-zinc-600 dark:text-zinc-400">({m.reward.join(", ")})</span>
                   </div>
                 </div>
               );
