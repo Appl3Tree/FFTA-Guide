@@ -2326,7 +2326,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     prerequisites: [
       "Completed Missing Prof (#063)",
     ],
-    reward: [`7000 Gil`, `Secret Item (Silvril)`, `1x Random Card`],
+    reward: [`7000 Gil`, `Secret Item (Mythril)`, `1x Random Card`],
     difficulty: `Medium`,
     enemies: [`Illusionist`],
   },
@@ -2756,7 +2756,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
-    req_items: [`Adamantite (Metal Hunt #207)`, `Silvril (Mythril Rush #103, Seeking Silver #204)`],
+    req_items: [`Adamantite (Metal Hunt #207)`, `Mythril (Mythril Rush #103, Seeking Silver #204)`],
     req_skill: "Smithing - Lvl. 15",
   },
   {
@@ -3486,7 +3486,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `1x Random Item`,
       `2x Random Cards`,
     ],
-    req_items: [`Adamantite (Metal Hunt #207)`, `Silvril (Mythril Rush #103, Seeking Silver #204)`],
+    req_items: [`Adamantite (Metal Hunt #207)`, `Mythril (Mythril Rush #103, Seeking Silver #204)`],
     req_skill: "Smithing - Lvl. 35",
   },
   {
@@ -3750,7 +3750,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
     type: `Dispatch`,
     cost: `400 Gil`,
     prerequisites: ["Kingmoon only"],
-    reward: [`3400 Gil`, `Silvril`, `1x Random Item`, `Dispatch Time: 15 Days`],
+    reward: [`3400 Gil`, `Mythril`, `1x Random Item`, `Dispatch Time: 15 Days`],
   },
   {
     number: 205,
