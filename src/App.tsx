@@ -1,4 +1,5 @@
 import FFTAProgressionGuide from "./fftaprogression_guide";
+import { Github, Coffee } from "lucide-react";
 
 export default function App() {
     return (
@@ -13,8 +14,26 @@ export default function App() {
                     <FFTAProgressionGuide />
                 </div>
             </main>
-            <footer className="text-zinc-600 dark:text-zinc-400 text-xs mt-12">
-                Built with React, Tailwind, and lucide-react
+            <footer className="text-zinc-600 dark:text-zinc-400 text-xs mt-12 flex items-center gap-3">
+                <span>Built with React, Tailwind, and lucide-react</span>
+                <a
+                    href="https://github.com/appl3tree/FFTA-Guide/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="GitHub Repository"
+                    className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
+                    <Github size={16} />
+                </a>
+                <a
+                    href="https://ko-fi.com/appl3tree"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Support on Ko-fi"
+                    className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
+                    <Coffee size={16} />
+                </a>
             </footer>
         </div>
     );
