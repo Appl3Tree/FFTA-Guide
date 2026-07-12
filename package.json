@@ -5,15 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "typecheck": "tsc -b",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "postbuild": "shx cp dist/index.html dist/404.html",
-    "deploy": "gh-pages -d dist",
-    "postdeploy": "shx rm *.js src/*.js"
+    "postbuild": "shx cp dist/index.html dist/404.html"
   },
   "dependencies": {
+    "firebase": "^12.16.0",
     "lucide-react": "^0.548.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -31,7 +30,6 @@
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
-    "gh-pages": "^6.3.0",
     "globals": "^16.4.0",
     "postcss": "^8.5.6",
     "shx": "^0.4.0",

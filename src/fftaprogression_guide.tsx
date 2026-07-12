@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useId, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
 import mapGif from "./assets/ffta-map.gif";
-import { Tracing } from "trace_events";
+import { AuthSyncControl, type ProgressKeyLabel } from "./AuthSyncControl";
+import { useProgress } from "./progress";
 
 const keyify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
@@ -6494,11 +6495,55 @@ const Panel: React.FC<{
   );
 };
 
+const titleCase = (value: string) =>
+  value
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+
+const formatProgressKey = (key: string): ProgressKeyLabel => {
+  const blue = BLUE_MAGIC_REF.find((entry) => keyify(`blue:${entry.name}`) === key);
+  if (blue) {
+    return { category: "Blue Magic", item: blue.name };
+  }
+
+  const capture = CAPTURE_REF.find((entry) => keyify(`cap:${entry.monster}`) === key);
+  if (capture) {
+    return { category: "Capture", item: capture.monster };
+  }
+
+  const missable = GLOBAL_MISSABLES.find((entry) => missableKey(entry) === key);
+  if (missable) {
+    return {
+      category: "Missable",
+      item: missable.type,
+      subItem: missable.missable.join(", "),
+    };
+  }
+
+  const missionMatch = key.match(/^quest-global-(-?\d+)$/);
+  if (missionMatch) {
+    const number = Number(missionMatch[1]);
+    const mission = MISSION_REF.find((entry) => entry.number === number);
+    if (mission) {
+      return {
+        category: "Mission",
+        item: `#${String(mission.number).padStart(3, "0")} ${mission.name}`,
+      };
+    }
+  }
+
+  const [category = "Progress", ...rest] = key.split("-");
+  return {
+    category: titleCase(category),
+    item: titleCase(rest.join(" ") || key),
+  };
+};
+
 const FFTAProgressionGuide: React.FC = () => {
-  // 🔐 LOCAL STORAGE PERSISTENCE
-  const STORAGE_KEY_CHECKED = "fftaProgress.checked";
   const STORAGE_KEY_EXPANDED = "fftaProgress.expanded";
-  const STORAGE_KEY_VIEW = "fftaProgress.view";
+  const { checked, setCheck, replaceChecked } = useProgress();
 
   // expanded panels (blocks)
   const [expanded, setExpanded] = useState<Record<string, boolean>>(() => {
@@ -6509,23 +6554,6 @@ const FFTAProgressionGuide: React.FC = () => {
           return {};
       }
   });
-
-  // progress checkmarks
-  const [checked, setChecked] = useState<Record<string, boolean>>(() => {
-      try {
-          const raw = localStorage.getItem(STORAGE_KEY_CHECKED);
-          return raw ? JSON.parse(raw) : {};
-      } catch {
-          return {};
-      }
-  });
-
-  // persist both to localStorage
-  useEffect(() => {
-      try {
-          localStorage.setItem(STORAGE_KEY_CHECKED, JSON.stringify(checked));
-      } catch {}
-  }, [checked]);
 
   useEffect(() => {
       try {
@@ -6599,7 +6627,7 @@ const FFTAProgressionGuide: React.FC = () => {
     // checked
     const nextChecked: Record<string, boolean> = {};
     for (const k of parsed.checked) nextChecked[k] = true;
-    setChecked(nextChecked);
+    replaceChecked(nextChecked);
 
     // expanded (only v2 includes it)
     if (isV2(parsed)) {
@@ -6658,8 +6686,7 @@ const FFTAProgressionGuide: React.FC = () => {
       const parsed = JSON.parse(text);
       if (!(isV2(parsed) || isV1(parsed))) throw new Error("Invalid save format");
       applyLoadedSave(parsed); // state effects will sync to localStorage
-    } catch (err) {
-      console.error(err);
+    } catch {
       alert("Failed to load save file.");
     } finally {
       setScreenMode("idle");
@@ -6675,10 +6702,9 @@ const FFTAProgressionGuide: React.FC = () => {
   const confirmClearProgress = async () => {
     setScreenMode("deleting");
     await wait(2000);
-    setChecked({});
+    replaceChecked({});
     setExpanded({});
     try {
-      localStorage.removeItem(STORAGE_KEY_CHECKED);
       localStorage.removeItem(STORAGE_KEY_EXPANDED);
     } catch {}
     setScreenMode("idle");
@@ -6687,8 +6713,6 @@ const FFTAProgressionGuide: React.FC = () => {
   const cancelClearProgress = () => setScreenMode("idle");
 
   const toggle = (k: string) => setExpanded((p) => ({ ...p, [k]: !p[k] }));
-  const setCheck = (k: string, v?: boolean) =>
-    setChecked((p) => ({ ...p, [k]: v ?? !p[k] }));
 
   const blueTotal = BLUE_MAGIC_REF.length;
   const blueDone = useMemo(
@@ -7514,13 +7538,18 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
   return (
     <div className="w-full max-w-6xl mx-auto p-4 bg-zinc-100 dark:bg-zinc-900 transition-colors">
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-t-2xl ring-1 ring-zinc-950/10 dark:ring-white/10 shadow-sm">
-        <h1 className="text-3xl font-bold mb-1">
-          FFTA Story Progression Guide
-        </h1>
-        <p className="text-sm opacity-90">
-          Story • Between-Story Missions • Blue Magic • Captures • Missables • Map
-          Placements • Recruits
-        </p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0">
+            <h1 className="text-3xl font-bold mb-1">
+              FFTA Story Progression Guide
+            </h1>
+            <p className="text-sm opacity-90">
+              Story • Between-Story Missions • Blue Magic • Captures • Missables • Map
+              Placements • Recruits
+            </p>
+          </div>
+          <AuthSyncControl formatProgressKey={formatProgressKey} />
+        </div>
       </div>
 
       <br></br>

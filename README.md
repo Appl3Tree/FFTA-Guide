@@ -26,6 +26,7 @@ It’s built with **React**, and it also happens to be my **first real web devel
   - Capturable Monsters
   - Quest progression
 - 📊 Progress tracking with visual indicators
+- 🔐 Optional Firebase sign-in with cloud progress sync
 - 💬 Notes and strategy snippets for main story quests
 
 ---
@@ -33,8 +34,37 @@ It’s built with **React**, and it also happens to be my **first real web devel
 ## 🧱 Built With
 
 - **React** (first-time use!)
-- **GitHub Pages** for hosting
+- **Firebase Auth + Firestore** for optional signed-in sync
+- **GitHub Pages** for hosting through GitHub Actions
 - Basic **JavaScript**, **HTML**, and **CSS**
+
+---
+
+## 🔐 Firebase Progress Sync
+
+Unsigned-in progress is stored locally in the browser. If Firebase Vite env vars are present, users can sign in with Email/Password or Google and sync checked progress to:
+
+`users/{uid}/guides/ffta`
+
+Create a local `.env.local` from `.env.example` for development. Do not commit `.env.local` or real Firebase values. Firebase web config is public after build; security must come from Firebase Auth, Firestore security rules, authorized domains, API key restrictions, and optionally App Check.
+
+Publish the rules in [firestore.rules](./firestore.rules) to Firebase before enabling production sync. Also restrict the Firebase API key in Google Cloud Console by HTTP referrer for the deployed GitHub Pages site and local dev domains, verify Firebase Auth authorized domains, and consider enabling Firebase App Check for Firestore to reduce scripted abuse.
+
+## 🚀 Deployment
+
+This repo deploys to GitHub Pages through `.github/workflows/deploy.yml`.
+
+Required repository secrets:
+
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
+- `VITE_FIREBASE_MEASUREMENT_ID`
+
+`VITE_GUIDE_SLUG` is set to `ffta` in the workflow.
 
 ---
 

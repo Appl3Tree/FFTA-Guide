@@ -6,10 +6,17 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
 
 node_modules
 dist
 dist-ssr
+.env
+.env.local
+.env.*.local
+.firebase/
 *.local
 
 # Editor directories and files
