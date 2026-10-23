@@ -6761,6 +6761,13 @@ const FFTAProgressionGuide: React.FC = () => {
         : type === "miss"
         ? "text-red-700 dark:text-red-300"
         : "text-zinc-700 dark:text-zinc-300";
+    const cardBorder = type === "blue"
+      ? TRACKER_PALETTE[TRACKER_COLOR.blueMagic].cardBorder
+      : type === "cap"
+        ? TRACKER_PALETTE[TRACKER_COLOR.captures].cardBorder
+        : type === "quest"
+          ? TRACKER_PALETTE[TRACKER_COLOR.missions].cardBorder
+          : "border-zinc-200 dark:border-zinc-700";
     return (
     <ul className="space-y-2">
       {names.map((n) => {
@@ -6773,7 +6780,7 @@ const FFTAProgressionGuide: React.FC = () => {
           return (
             <li
               key={`blue-${n}`}
-              className="whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+              className={`whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl border ${cardBorder}`}
             >
               <div className="flex items-start gap-2">
                 <input
@@ -6866,7 +6873,7 @@ const FFTAProgressionGuide: React.FC = () => {
           return (
             <li
               key={`cap-${n}`}
-              className="whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+              className={`whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl border ${cardBorder}`}
             >
               <div className="flex items-start gap-2">
                 <input
@@ -6967,7 +6974,7 @@ const FFTAProgressionGuide: React.FC = () => {
           return (
             <li
               key={`mission-${n}`}
-              className="whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+              className={`whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl border ${cardBorder}`}
             >
               <div className="flex items-start gap-2">
                 <input
