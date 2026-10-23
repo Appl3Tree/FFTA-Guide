@@ -16,7 +16,12 @@
 
 @layer components {
     .canvas-card {
-        @apply bg-white ring-1 ring-zinc-950/10 shadow-sm rounded-2xl p-6;
+        @apply bg-white ring-1 ring-zinc-950/10 shadow-sm rounded-2xl p-3;
+    }
+    @media (min-width: 640px) {
+        .canvas-card {
+            @apply p-6;
+        }
     }
     @media (prefers-color-scheme: dark) {
         .canvas-card {

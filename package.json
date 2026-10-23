@@ -8,6 +8,8 @@
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "test": "node --experimental-strip-types --test test/*.test.mjs",
+    "audit:acquisitions": "node --experimental-strip-types scripts/build-acquisition-audit.mjs",
     "preview": "vite preview",
     "postbuild": "shx cp dist/index.html dist/404.html"
   },
