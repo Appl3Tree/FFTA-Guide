@@ -6,11 +6,17 @@ import { useProgress } from "./progress";
 import {
   ACQUISITION_GOALS,
   GLOBAL_MISSABLES,
-  acquisitionProgressKey,
-  getAcquisitionGoalsByRecordIds,
-  getAcquisitionGoalsForMission,
+  acquisitionCheckedKey,
+  getAcquisitionGoalsForChapter,
+  getAcquisitionProgressCounts,
+  getAcquisitionGoalsForDirectMission,
+  getAcquisitionPreparationsForMission,
+  getAcquisitionSourceMissions,
+  getChronologicallyAvailableMissionNumbers,
   type AcquisitionGoal,
+  type AcquisitionGroup,
 } from "./acquisitions";
+import { buildProgressSave, parseProgressSave } from "./progressSave";
 
 const keyify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
@@ -5671,21 +5677,62 @@ const MAP_PLACEMENTS: Record<
 };
 
 
-const goalKey = (goal: AcquisitionGoal) => keyify(acquisitionProgressKey(goal));
+const goalKey = acquisitionCheckedKey;
 const isGoalObtained = (goal: AcquisitionGoal, checked: Record<string, boolean>) =>
   !!checked[goalKey(goal)];
 
 const goalGroupLabel: Record<AcquisitionGoal["group"], string> = {
-  permanent: "Permanent missable",
+  permanent: "Missable",
   recommended: "Recommended acquisition",
-  conditional: "Conditional source",
-  optional: "Repeatable opportunity",
+  conditional: "Conditional opportunity",
+  optional: "Optional / repeatable",
 };
 const goalPriorityLabel: Record<AcquisitionGoal["priority"], string> = {
-  essential: "Protect this opportunity",
-  "strongly-recommended": "Strongly recommended now",
-  recommended: "Recommended now",
+  essential: "Protect before the cutoff",
+  "strongly-recommended": "Strongly Recommended",
+  recommended: "Recommended",
   optional: "Optional",
+};
+const acquisitionGroupPresentation: Record<AcquisitionGroup, {
+  panelTitle: string;
+  chapterTitle: string;
+  color: "blue" | "red" | "amber" | "zinc";
+  border: string;
+  button: string;
+  tone: "blue" | "red" | "amber" | "neutral";
+}> = {
+  permanent: {
+    panelTitle: "Missables",
+    chapterTitle: "Missables Now Available",
+    color: "red",
+    border: "border-red-600",
+    button: "bg-red-600",
+    tone: "red",
+  },
+  recommended: {
+    panelTitle: "Recommended Acquisitions",
+    chapterTitle: "Recommended Acquisitions Now Available",
+    color: "blue",
+    border: "border-blue-600",
+    button: "bg-blue-600",
+    tone: "blue",
+  },
+  conditional: {
+    panelTitle: "Conditional & Unverified Acquisitions",
+    chapterTitle: "Conditional Opportunities Now Available",
+    color: "amber",
+    border: "border-amber-600",
+    button: "bg-amber-600",
+    tone: "amber",
+  },
+  optional: {
+    panelTitle: "Optional / Repeatable Opportunities",
+    chapterTitle: "Optional Opportunities Now Available",
+    color: "zinc",
+    border: "border-zinc-500",
+    button: "bg-zinc-600",
+    tone: "neutral",
+  },
 };
 
 function AcquisitionGoalCard({
@@ -5693,27 +5740,57 @@ function AcquisitionGoalCard({
   checked,
   setCheck,
   compact = false,
+  missionContext,
 }: {
   goal: AcquisitionGoal;
   checked: Record<string, boolean>;
   setCheck: (key: string, next?: boolean) => void;
   compact?: boolean;
+  missionContext?: number;
 }) {
   const inputId = useId();
   const done = isGoalObtained(goal, checked);
   const recordLabels = goal.sources.flatMap((source) => source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`));
   const allMissionLabels = [...new Set([...recordLabels, ...goal.extraMissionSources.flatMap((source) => source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`))])];
   const legacyComplete = goal.recordIds.filter((recordId) => !!checked[keyify(`miss-global:${recordId}`)]);
-  const categoryText = goal.missability === "unverified"
-    ? "Missability not verified"
-    : goal.missability === "recoverable"
-      ? "A recovery path is documented"
-      : "Permanent loss is documented";
-  const borderColor = goal.missability === "permanent"
+  const categoryText = goal.group === "permanent"
+    ? "Confirmed permanent missable"
+    : goal.group === "recommended"
+      ? goal.missability === "recoverable" ? "Later acquisition is documented" : "Later availability is unverified"
+      : goal.group === "conditional"
+        ? goal.missability === "recoverable" ? "Recovery path is documented; source is conditional" : "Permanent availability is unverified"
+        : goal.missability === "recoverable" ? "Repeatable path is documented" : "Optional source is unverified";
+  const groupTextColor = goal.group === "permanent"
+    ? "text-red-700 dark:text-red-300"
+    : goal.group === "recommended"
+      ? "text-blue-700 dark:text-blue-300"
+      : goal.group === "conditional"
+        ? "text-amber-800 dark:text-amber-300"
+        : "text-zinc-700 dark:text-zinc-300";
+  const borderColor = goal.group === "permanent"
     ? "border-red-300 dark:border-red-900/60"
-    : goal.missability === "unverified"
-      ? "border-amber-300 dark:border-amber-900/60"
-      : "border-zinc-200 dark:border-zinc-700";
+    : goal.group === "recommended"
+      ? "border-blue-300 dark:border-blue-900/60"
+      : goal.group === "conditional"
+        ? "border-amber-300 dark:border-amber-900/60"
+        : "border-zinc-200 dark:border-zinc-700";
+  const contextualSources = missionContext === undefined
+    ? []
+    : [...goal.sources, ...goal.extraMissionSources].filter((source) => source.missions.includes(missionContext));
+  const opportunityHere = [...new Set(contextualSources.map((source) =>
+    [
+      source.target && source.method === "Steal" ? `Steal from ${source.target}` : source.method,
+      source.rarity,
+      source.hidden ? "Hidden item" : undefined,
+    ].filter(Boolean).join(" · "),
+  ))].join("; ");
+  const checkboxAccent = goal.group === "permanent"
+    ? "accent-red-600 dark:accent-red-400"
+    : goal.group === "recommended"
+      ? "accent-blue-600 dark:accent-blue-400"
+      : goal.group === "conditional"
+        ? "accent-amber-600 dark:accent-amber-400"
+        : "accent-zinc-600 dark:accent-zinc-400";
 
   return (
     <li className={`min-w-0 rounded-xl border ${borderColor} bg-white dark:bg-zinc-800 p-2.5`}>
@@ -5721,29 +5798,34 @@ function AcquisitionGoalCard({
         <input
           id={inputId}
           type="checkbox"
-          className="mt-1 h-4 w-4 shrink-0 accent-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:accent-red-400 dark:focus-visible:outline-blue-300"
+          className={`mt-1 h-4 w-4 shrink-0 ${checkboxAccent} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-300`}
           checked={done}
           onChange={(event) => setCheck(goalKey(goal), event.currentTarget.checked)}
-          aria-label={`${goal.kind === "recruit" ? "Recruited" : goal.kind === "blue-magic" ? "Learned" : goal.kind === "capture" ? "Captured" : "Obtained"}: ${goal.item}`}
+          aria-label={`${goalGroupLabel[goal.group]}: ${goal.kind === "recruit" ? "Recruited" : goal.kind === "blue-magic" ? "Learned" : goal.kind === "capture" ? "Captured" : "Obtained"}: ${goal.item}`}
         />
         <div className="min-w-0 flex-1 text-sm text-zinc-800 dark:text-zinc-200">
           <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
             <label htmlFor={inputId} className="min-w-0 cursor-pointer font-semibold text-zinc-950 dark:text-zinc-100">
               {goal.item}
             </label>
-            <span className={goal.missability === "permanent" ? "font-semibold text-red-700 dark:text-red-300" : goal.missability === "unverified" ? "font-semibold text-amber-800 dark:text-amber-300" : "font-medium text-emerald-800 dark:text-emerald-300"}>
+            <span className={`font-semibold ${groupTextColor}`}>
               {goalGroupLabel[goal.group]}
             </span>
             {goal.group !== "permanent" && goal.priority !== "optional" && (
               <span className="text-xs text-zinc-600 dark:text-zinc-400">{goalPriorityLabel[goal.priority]}</span>
             )}
-            <span className={goal.missability === "permanent" ? "text-xs text-red-700 dark:text-red-300" : goal.missability === "unverified" ? "text-xs text-amber-800 dark:text-amber-300" : "text-xs text-emerald-800 dark:text-emerald-300"}>
+            <span className={`text-xs ${groupTextColor}`}>
               {categoryText}
             </span>
           </div>
           <p className="mt-0.5 text-xs leading-5 text-zinc-700 dark:text-zinc-300">
-            {compact ? goal.summary : <>{goal.summary}{allMissionLabels.length > 0 && <> <span className="font-medium">Available:</span> {allMissionLabels.join(", ")}.</>}</>}
+            {missionContext !== undefined && opportunityHere
+              ? <><span className="font-medium">Available here:</span> {opportunityHere}. {goal.summary}</>
+              : compact ? goal.summary : <>{goal.summary}{allMissionLabels.length > 0 && <> <span className="font-medium">Listed in:</span> {allMissionLabels.join(", ")}.</>}</>}
           </p>
+          {goal.rationale && (goal.group === "recommended" || goal.group === "conditional") && (
+            <p className="mt-1 text-xs leading-5 text-zinc-600 dark:text-zinc-400"><span className="font-medium">Why prioritize:</span> {goal.rationale}</p>
+          )}
           <details className="mt-1.5 text-xs leading-5 marker:text-zinc-500">
             <summary className="w-fit cursor-pointer rounded-sm font-medium text-blue-800 underline decoration-blue-300 underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:decoration-blue-700 dark:focus-visible:outline-blue-300">
               Acquisition details
@@ -5756,7 +5838,7 @@ function AcquisitionGoalCard({
                   <ul className="list-disc pl-5">
                     {goal.sources.map((source, index) => (
                       <li key={`${source.recordId}-${index}`}>
-                        {source.missions.length ? source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`).join(", ") : "Mission not numbered in the legacy record"}: {source.target ? `${source.target}; ` : ""}{source.method}. Availability: {source.availability}. {source.note}
+                        {source.missions.length ? source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`).join(", ") : "Mission not numbered in the legacy record"}: {source.target ? `${source.target}; ` : ""}{source.method}{source.rarity ? `; ${source.rarity}` : ""}{source.hidden ? "; hidden item" : ""}. Availability: {source.availability}. {source.note}
                       </li>
                     ))}
                   </ul>
@@ -5783,9 +5865,73 @@ function AcquisitionGoalCard({
   );
 }
 
+const MissionAcquisitionList: React.FC<{
+  missionNumber: number;
+  checked: Record<string, boolean>;
+  setCheck: (key: string, next?: boolean) => void;
+  chronologicallyAvailable?: boolean;
+}> = ({ missionNumber, checked, setCheck, chronologicallyAvailable = true }) => {
+  if (!chronologicallyAvailable) return null;
+  const goals = getAcquisitionGoalsForDirectMission(missionNumber);
+  const preparations = getAcquisitionPreparationsForMission(missionNumber);
+  if (goals.length === 0 && preparations.length === 0) return null;
+  const groupOrder: AcquisitionGroup[] = ["permanent", "recommended", "conditional", "optional"];
+  const groups = groupOrder.map((group) => ({
+    group,
+    goals: goals.filter((goal) => goal.group === group),
+  })).filter(({ goals: groupGoals }) => groupGoals.length > 0);
+  const titleFor = (group: AcquisitionGroup, groupGoals: AcquisitionGoal[]) =>
+    group === "permanent" ? "Missables"
+      : group === "recommended" ? groupGoals.every((goal) => goal.kind === "steal") ? "Recommended Steals" : "Recommended Acquisitions"
+        : group === "conditional" ? "Conditional Opportunities" : "Optional Opportunities";
+
+  return (
+    <div className="mt-2 space-y-2" role="group" aria-label={`Acquisition opportunities for mission #${String(missionNumber).padStart(3, "0")}`}>
+      {groups.map(({ group, goals: groupGoals }) => {
+        const presentation = acquisitionGroupPresentation[group];
+        const headingColor = group === "permanent"
+          ? "text-red-700 dark:text-red-300"
+          : group === "recommended"
+            ? "text-blue-700 dark:text-blue-300"
+            : group === "conditional"
+              ? "text-amber-800 dark:text-amber-300"
+              : "text-zinc-700 dark:text-zinc-300";
+        return (
+          <section key={group} className={`rounded-lg border-l-2 ${presentation.border} pl-2`}>
+            <h3 className={`mb-1 text-xs font-semibold ${headingColor}`}>{titleFor(group, groupGoals)}</h3>
+            <ul className="space-y-2">
+              {groupGoals.map((goal) => (
+                <AcquisitionGoalCard
+                  key={`mission-${missionNumber}-${goal.id}`}
+                  goal={goal}
+                  checked={checked}
+                  setCheck={setCheck}
+                  missionContext={missionNumber}
+                />
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+      {preparations.length > 0 && (
+        <section className="rounded-lg border-l-2 border-amber-500 pl-2">
+          <h3 className="mb-1 text-xs font-semibold text-amber-800 dark:text-amber-300">Recruitment preparation</h3>
+          <ul className="space-y-1 text-xs leading-5 text-zinc-700 dark:text-zinc-300">
+            {preparations.map(({ goal, source }) => (
+              <li key={`prep-${missionNumber}-${goal.id}-${source.recordId}`}>
+                <span className="font-semibold">{goal.item}:</span> {source.method}. {source.note} The later recruitment opportunity is tracked separately.
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  );
+};
+
 
 const Tag: React.FC<{
-  color: "blue" | "green" | "purple" | "red" | "amber";
+  color: "blue" | "green" | "purple" | "red" | "amber" | "zinc";
   children: React.ReactNode;
 }> = ({ color, children }) => {
   const map: Record<string, string> = {
@@ -5796,6 +5942,7 @@ const Tag: React.FC<{
       "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
     red: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
     amber: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+    zinc: "bg-zinc-100 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200",
   };
   return (
     <span
@@ -5810,7 +5957,7 @@ const ProgressBar: React.FC<{
   done: number;
   total: number;
   label: string;
-  color: "blue" | "green" | "purple" | "red" | "amber";
+  color: "blue" | "green" | "purple" | "red" | "amber" | "zinc";
 }> = ({ done, total, label, color }) => {
   const percent = pct(done, total);
   const max = Math.max(total, 1);
@@ -5820,6 +5967,7 @@ const ProgressBar: React.FC<{
     purple: "bg-purple-500",
     red: "bg-red-500",
     amber: "bg-amber-500",
+    zinc: "bg-zinc-500",
   };
   return (
     <div className="text-xs">
@@ -5848,6 +5996,7 @@ const ProgressBar: React.FC<{
 };
 
 const Panel: React.FC<{
+  id?: string;
   title: string;
   subtitle?: string;
   border: string;
@@ -5857,7 +6006,7 @@ const Panel: React.FC<{
   tone?: "neutral" | "blue" | "green" | "red" | "amber" | "purple";
   // NEW: persist this panel's open/closed state under a key
   persistKey?: string;
-}> = ({ title, subtitle, border, buttonColor, children, right, tone = "neutral", persistKey }) => {
+}> = ({ id, title, subtitle, border, buttonColor, children, right, tone = "neutral", persistKey }) => {
   const contentId = useId();
   const bgMap: Record<string, string> = {
     neutral: "bg-white dark:bg-zinc-800",
@@ -5905,18 +6054,19 @@ const Panel: React.FC<{
 
   return (
     <div
+      id={id}
       className={`rounded-2xl p-2 sm:p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`}
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <h4 className="font-bold text-zinc-900 dark:text-zinc-100">
+        <h2 className="font-bold text-zinc-900 dark:text-zinc-100">
           {title}
           {subtitle && (
             <>
               <br />
-              <span className="text-xs text-zinc-500 dark:text-zinc-500">{subtitle}</span>
+              <span className="text-xs text-zinc-600 dark:text-zinc-300">{subtitle}</span>
             </>
           )}
-        </h4>
+        </h2>
         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           {right}
           <button
@@ -5934,6 +6084,104 @@ const Panel: React.FC<{
         {open && <div className="mt-3">{children}</div>}
       </div>
     </div>
+  );
+};
+
+const ChapterAcquisitionRow: React.FC<{
+  goal: AcquisitionGoal;
+  missionNumbers: readonly number[];
+  checked: Record<string, boolean>;
+  setCheck: (key: string, next?: boolean) => void;
+}> = ({ goal, missionNumbers, checked, setCheck }) => {
+  const inputId = useId();
+  const presentation = acquisitionGroupPresentation[goal.group];
+  const missions = getAcquisitionSourceMissions(goal, missionNumbers);
+  const status = goal.group === "permanent"
+    ? "Confirmed permanent loss"
+    : goal.group === "recommended"
+      ? goal.missability === "recoverable" ? "Later path documented" : "Later path unverified"
+      : goal.group === "conditional"
+        ? "Availability or recovery uncertain"
+        : "Optional / repeatable";
+  const checkboxAccent = goal.group === "permanent"
+    ? "accent-red-600 dark:accent-red-400"
+    : goal.group === "recommended"
+      ? "accent-blue-600 dark:accent-blue-400"
+      : goal.group === "conditional"
+        ? "accent-amber-600 dark:accent-amber-400"
+        : "accent-zinc-600 dark:accent-zinc-400";
+
+  return (
+    <li className="rounded-xl border border-zinc-200 bg-white p-2.5 dark:border-zinc-700 dark:bg-zinc-800">
+      <div className="flex min-w-0 items-start gap-2.5">
+        <input
+          id={inputId}
+          type="checkbox"
+          className={`mt-1 h-4 w-4 shrink-0 ${checkboxAccent} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-300`}
+          checked={isGoalObtained(goal, checked)}
+          onChange={(event) => setCheck(goalKey(goal), event.currentTarget.checked)}
+          aria-label={`${goalGroupLabel[goal.group]}: Obtained ${goal.item} (chapter summary)`}
+        />
+        <div className="min-w-0 flex-1 text-sm">
+          <div className="flex flex-wrap items-center gap-2">
+            <label htmlFor={inputId} className="cursor-pointer font-semibold text-zinc-950 dark:text-zinc-100">{goal.item}</label>
+            <Tag color={presentation.color}>{goalPriorityLabel[goal.priority]}</Tag>
+            <span className={`text-xs ${goal.group === "permanent" ? "text-red-700 dark:text-red-300" : goal.group === "recommended" ? "text-blue-700 dark:text-blue-300" : goal.group === "conditional" ? "text-amber-800 dark:text-amber-300" : "text-zinc-600 dark:text-zinc-300"}`}>{status}</span>
+          </div>
+          <p className="mt-1 text-xs leading-5 text-zinc-700 dark:text-zinc-300">{goal.summary}</p>
+          {missions.length > 0 ? (
+            <div className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+              Available in this interval:{" "}
+              {missions.map((mission, index) => (
+                <React.Fragment key={mission}>
+                  {index > 0 && ", "}
+                  <a className="font-medium text-blue-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:focus-visible:outline-blue-300" href={`#chapter-mission-${mission}`}>
+                    #{String(mission).padStart(3, "0")}
+                  </a>
+                </React.Fragment>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+              Chapter-level timing note. <a className="font-medium text-blue-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:focus-visible:outline-blue-300" href={`#global-acquisitions-${goal.group}`}>Full details and references in {presentation.panelTitle}</a>.
+            </p>
+          )}
+        </div>
+      </div>
+    </li>
+  );
+};
+
+const ChapterAcquisitionPanel: React.FC<{
+  group: AcquisitionGroup;
+  goals: AcquisitionGoal[];
+  chapterKey: string;
+  missionNumbers: readonly number[];
+  checked: Record<string, boolean>;
+  setCheck: (key: string, next?: boolean) => void;
+}> = ({ group, goals, chapterKey, missionNumbers, checked, setCheck }) => {
+  if (goals.length === 0) return null;
+  const presentation = acquisitionGroupPresentation[group];
+  const subtitle = group === "permanent"
+    ? "Confirmed permanently missable goals first available in this progression interval."
+    : group === "recommended"
+      ? "These are not confirmed permanent missables. Later alternatives vary in reliability; the first listed opportunity may be substantially easier."
+      : group === "conditional"
+        ? "Caution: permanent availability or recovery has not been fully verified. These are not confirmed permanent missables."
+        : "Optional opportunities with a documented recovery or repeatable path.";
+  return (
+    <Panel
+      title={presentation.chapterTitle}
+      subtitle={subtitle}
+      border={presentation.border}
+      buttonColor={presentation.button}
+      tone={presentation.tone}
+      persistKey={`panel:${chapterKey}:acquisitions:${group}`}
+    >
+      <ul className="space-y-2" aria-label={presentation.chapterTitle}>
+        {goals.map((goal) => <ChapterAcquisitionRow key={goal.id} goal={goal} missionNumbers={missionNumbers} checked={checked} setCheck={setCheck} />)}
+      </ul>
+    </Panel>
   );
 };
 
@@ -5978,7 +6226,14 @@ const formatProgressKey = (key: string): ProgressKeyLabel => {
 
   const acquisition = ACQUISITION_GOALS.find((goal) => goalKey(goal) === key);
   if (acquisition) {
-    return { category: "Acquisition", item: acquisition.item, subItem: acquisition.summary };
+    const category = acquisition.group === "permanent"
+      ? "Missable"
+      : acquisition.group === "recommended"
+        ? "Recommended acquisition"
+        : acquisition.group === "conditional"
+          ? "Conditional acquisition"
+          : "Optional opportunity";
+    return { category, item: acquisition.item, subItem: `${goalPriorityLabel[acquisition.priority]}. ${acquisition.summary}` };
   }
 
   const [category = "Progress", ...rest] = key.split("-");
@@ -6021,81 +6276,27 @@ const FFTAProgressionGuide: React.FC = () => {
   // Hidden file input for Load
   const loadInputRef = useRef<HTMLInputElement | null>(null);
 
-  type SaveFileV1 = {
-    format: "ffta-progress-v1";
-    slot: 1;
-    checked: string[];
-  };
-
-  type SaveFileV2 = {
-    format: "ffta-progress-v2";
-    slot: 1;
-    checked: string[];
-    expanded: string[]; // keys of open panels/blocks
-  };
-
-  const buildSavePayload = (): SaveFileV2 => {
-    const checkedKeys  = Object.keys(checked).filter((k) => !!checked[k]);
-    const expandedKeys = Object.keys(expanded).filter((k) => !!expanded[k]);
-
-    // ALSO persist panel open states (the ones we stored in localStorage)
-    let panelKeys: string[] = [];
+  const buildSavePayload = () => {
+    let panelView: Record<string, boolean> = {};
     try {
       const raw = localStorage.getItem("fftaProgress.view");
-      const viewMap = raw ? JSON.parse(raw) as Record<string, boolean> : {};
-      panelKeys = Object.keys(viewMap).filter((k) => !!viewMap[k]); // only open panels
+      const parsed: unknown = raw ? JSON.parse(raw) : {};
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        panelView = parsed as Record<string, boolean>;
+      }
     } catch {}
-
-    return {
-      format: "ffta-progress-v2",
-      slot: 1,
-      checked: checkedKeys,
-      expanded: [...expandedKeys, ...panelKeys],   // merged
-    };
+    return buildProgressSave(checked, expanded, panelView);
   };
 
-  const isV1 = (x: any): x is SaveFileV1 =>
-    x &&
-    x.format === "ffta-progress-v1" &&
-    x.slot === 1 &&
-    Array.isArray(x.checked) &&
-    x.checked.every((s: any) => typeof s === "string");
+  const applyLoadedSave = (parsed: ReturnType<typeof parseProgressSave>) => {
+    replaceChecked(parsed.checked);
 
-  const isV2 = (x: any): x is SaveFileV2 =>
-    x &&
-    x.format === "ffta-progress-v2" &&
-    x.slot === 1 &&
-    Array.isArray(x.checked) &&
-    x.checked.every((s: any) => typeof s === "string") &&
-    Array.isArray(x.expanded) &&
-    x.expanded.every((s: any) => typeof s === "string");
-
-  const applyLoadedSave = (parsed: SaveFileV1 | SaveFileV2) => {
-    // checked
-    const nextChecked: Record<string, boolean> = {};
-    for (const k of parsed.checked) nextChecked[k] = true;
-    replaceChecked(nextChecked);
-
-    // expanded (only v2 includes it)
-    if (isV2(parsed)) {
-      const nextExpanded: Record<string, boolean> = {};
-      const viewMap: Record<string, boolean> = {};
-
-      for (const k of parsed.expanded) {
-        if (k.startsWith("panel:")) {
-          // these belong to per-Panel visibility
-          viewMap[k] = true;
-        } else {
-          // these are your block open states
-          nextExpanded[k] = true;
-        }
-      }
-
-      setExpanded(nextExpanded);
+    if (parsed.version === 2) {
+      setExpanded(parsed.expanded ?? {});
 
       // write panel visibility so <Panel persistKey=...> picks it up immediately
       try {
-        localStorage.setItem("fftaProgress.view", JSON.stringify(viewMap));
+        localStorage.setItem("fftaProgress.view", JSON.stringify(parsed.panelView ?? {}));
       } catch {}
     }
   };
@@ -6131,8 +6332,7 @@ const FFTAProgressionGuide: React.FC = () => {
     setScreenMode("loading");
     try {
       const text = await f.text();
-      const parsed = JSON.parse(text);
-      if (!(isV2(parsed) || isV1(parsed))) throw new Error("Invalid save format");
+      const parsed = parseProgressSave(text);
       applyLoadedSave(parsed); // state effects will sync to localStorage
     } catch {
       alert("Failed to load save file.");
@@ -6184,15 +6384,7 @@ const FFTAProgressionGuide: React.FC = () => {
   const recommendedGoals = ACQUISITION_GOALS.filter((goal) => goal.group === "recommended");
   const conditionalGoals = ACQUISITION_GOALS.filter((goal) => goal.group === "conditional");
   const optionalGoals = ACQUISITION_GOALS.filter((goal) => goal.group === "optional");
-  const missTotal = permanentGoals.length;
-  const missDone = useMemo(
-      () =>
-          permanentGoals.reduce(
-              (n, goal) => n + (isGoalObtained(goal, checked) ? 1 : 0),
-              0
-          ),
-      [checked, permanentGoals]
-  );
+  const acquisitionProgress = getAcquisitionProgressCounts(ACQUISITION_GOALS, checked);
 
   const missionMap = useMemo(() => {
     const m = new Map<number, QuestRef>();
@@ -6210,20 +6402,11 @@ const FFTAProgressionGuide: React.FC = () => {
     [checked]
   );
 
-  const renderAcquisitionGroup = (title: string, goals: AcquisitionGoal[], group: AcquisitionGoal["group"], emptyText: string) => {
-    const done = goals.reduce((count, goal) => count + (isGoalObtained(goal, checked) ? 1 : 0), 0);
-    return (
-      <section className="space-y-2" aria-labelledby={`acquisition-${group}-heading`}>
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-          <h5 id={`acquisition-${group}-heading`} className="font-semibold text-zinc-900 dark:text-zinc-100">{title} <span className="text-xs font-normal text-zinc-600 dark:text-zinc-400">({goals.length} distinct goals)</span></h5>
-          {goals.length > 0 && <div className="w-full sm:w-56"><ProgressBar label={title} done={done} total={goals.length} color={group === "permanent" ? "red" : group === "conditional" ? "amber" : "blue"} /></div>}
-        </div>
-        {goals.length === 0
-          ? <p className="rounded-lg bg-zinc-100 p-3 text-sm text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{emptyText}</p>
-          : <ul className="space-y-2">{goals.map((goal) => <AcquisitionGoalCard key={goal.id} goal={goal} checked={checked} setCheck={setCheck} />)}</ul>}
-      </section>
-    );
-  };
+  const renderAcquisitionCards = (goals: AcquisitionGoal[], label: string) => (
+    <ul className="space-y-2" aria-label={label}>
+      {goals.map((goal) => <AcquisitionGoalCard key={goal.id} goal={goal} checked={checked} setCheck={setCheck} />)}
+    </ul>
+  );
 
   const blocks: Block[] = [
     {
@@ -6604,6 +6787,23 @@ const FFTAProgressionGuide: React.FC = () => {
     },
   ];
 
+  const missionPrerequisitesByNumber = new Map(
+    MISSION_REF.map((mission) => [mission.number, mission.prerequisites ?? []] as const),
+  );
+  const chronologicallyAvailableMissionsByBlock = new Map<string, number[]>();
+  const previouslyAvailableMissions = new Set<number>();
+  for (const block of blocks) {
+    const storyMission = block.kind === "story" && /^\d+$/.test(block.key) ? [Number(block.key)] : [];
+    const chapterCandidates = [...new Set([...storyMission, ...(block.sidequests ?? [])].filter((mission) => mission > 0))];
+    const chronologicallyAvailableMissions = getChronologicallyAvailableMissionNumbers(
+      chapterCandidates,
+      [...previouslyAvailableMissions],
+      missionPrerequisitesByNumber,
+    );
+    chronologicallyAvailableMissionsByBlock.set(block.key, chronologicallyAvailableMissions);
+    chronologicallyAvailableMissions.forEach((mission) => previouslyAvailableMissions.add(mission));
+  }
+
   const MapPanel: React.FC<{ placements: string[] }> = ({ placements }) => {
     return (
       <Panel
@@ -6901,22 +7101,7 @@ const FFTAProgressionGuide: React.FC = () => {
                       </div>
                     </>
                   )}
-                  {(() => {
-                      const related = getAcquisitionGoalsForMission(n);
-                      if (!related.length) return null;
-                      return (
-                        <ul className="space-y-2 w-full text-sm">
-                            {related.map((goal) => (
-                                <AcquisitionGoalCard
-                                    key={`acq-quest-${n}-${goal.id}`}
-                                    goal={goal}
-                                    checked={checked}
-                                    setCheck={setCheck}
-                                />
-                            ))}
-                        </ul>
-                      );
-                  })()}
+                  <MissionAcquisitionList missionNumber={n} checked={checked} setCheck={setCheck} />
                 </div>
               </div>
             </li>
@@ -7174,31 +7359,96 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
         </Panel>
       </div>
 
-      <div className="mt-3">
+      <div className="mt-3 grid grid-cols-1 gap-3">
         <Panel
-          title="Missables & Important Opportunities"
-          subtitle={`${GLOBAL_MISSABLES.length} legacy records and ${GLOBAL_MISSABLES.reduce((sum, record) => sum + record.missable.length, 0)} item entries resolve to ${ACQUISITION_GOALS.length} distinct acquisition goals. A checked box means the goal was acquired; older encounter checks remain visible in each row's details.`}
+          id="global-acquisitions-permanent"
+          title="Missables"
+          subtitle="Confirmed goals that can be permanently lost if their listed opportunity or cutoff is missed."
           border="border-red-600"
           buttonColor="bg-red-600"
           tone="red"
+          persistKey="panel:global:acquisitions:permanent"
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
-                label="Permanent missables"
-                done={missDone}
-                total={missTotal}
+                label="Missables"
+                done={acquisitionProgress.completed.permanent}
+                total={permanentGoals.length}
                 color="red"
               />
             </div>
           }
         >
-          <div className="space-y-5">
-            {renderAcquisitionGroup("Permanent Missables", permanentGoals, "permanent", "No verified permanent-loss goals are currently listed.")}
-            {renderAcquisitionGroup("Recommended Steals & Acquisitions", recommendedGoals, "recommended", "No current acquisition recommendations.")}
-            {renderAcquisitionGroup("Conditional / Unverified Items", conditionalGoals, "conditional", "No unresolved or conditional items.")}
-            {renderAcquisitionGroup("Optional / Repeatable Opportunities", optionalGoals, "optional", "No item is labeled safely repeatable unless a repeatable acquisition path is documented.")}
-          </div>
+          {renderAcquisitionCards(permanentGoals, "Missables")}
         </Panel>
+
+        <Panel
+          id="global-acquisitions-recommended"
+          title="Recommended Acquisitions"
+          subtitle="These are not confirmed permanent missables. Later alternatives vary in reliability and are called out per item; the first listed opportunity may be substantially easier."
+          border="border-blue-600"
+          buttonColor="bg-blue-600"
+          tone="blue"
+          persistKey="panel:global:acquisitions:recommended"
+          right={
+            <div className="w-full sm:w-auto sm:min-w-[200px]">
+              <ProgressBar
+                label="Recommended Acquisitions"
+                done={acquisitionProgress.completed.recommended}
+                total={recommendedGoals.length}
+                color="blue"
+              />
+            </div>
+          }
+        >
+          {renderAcquisitionCards(recommendedGoals, "Recommended acquisitions")}
+        </Panel>
+
+        <Panel
+          id="global-acquisitions-conditional"
+          title="Conditional & Unverified Acquisitions"
+          subtitle="Caution: permanent availability or alternate methods have not been fully verified. These are not confirmed permanent missables."
+          border="border-amber-600"
+          buttonColor="bg-amber-600"
+          tone="amber"
+          persistKey="panel:global:acquisitions:conditional"
+          right={
+            <div className="w-full sm:w-auto sm:min-w-[200px]">
+              <ProgressBar
+                label="Conditional Acquisitions"
+                done={acquisitionProgress.completed.conditional}
+                total={conditionalGoals.length}
+                color="amber"
+              />
+            </div>
+          }
+        >
+          {renderAcquisitionCards(conditionalGoals, "Conditional and unverified acquisitions")}
+        </Panel>
+
+        {optionalGoals.length > 0 && (
+          <Panel
+            id="global-acquisitions-optional"
+            title="Optional / Repeatable Opportunities"
+            subtitle="Optional goal; a documented repeatable path is shown in its details."
+            border="border-zinc-500"
+            buttonColor="bg-zinc-600"
+            tone="neutral"
+            persistKey="panel:global:acquisitions:optional"
+            right={
+              <div className="w-full sm:w-auto sm:min-w-[200px]">
+                <ProgressBar
+                  label="Optional Opportunities"
+                  done={acquisitionProgress.completed.optional}
+                  total={optionalGoals.length}
+                  color="zinc"
+                />
+              </div>
+            }
+          >
+            {renderAcquisitionCards(optionalGoals, "Optional and repeatable opportunities")}
+          </Panel>
+        )}
       </div>
 
       {screenMode !== "idle" && (
@@ -7334,8 +7584,17 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           const blueNames = b.blue || [];
           const capNames = b.caps || [];
           const miss = b.missables || [];
-          const localMiss = getAcquisitionGoalsByRecordIds(miss);
           const quest = b.sidequests || [];
+          const chapterMissionNumbers = chronologicallyAvailableMissionsByBlock.get(b.key) ?? [];
+          const chapterMissionSet = new Set(chapterMissionNumbers);
+          const localAcquisitions = getAcquisitionGoalsForChapter(chapterMissionNumbers, miss);
+          const localAcquisitionsByGroup: Record<AcquisitionGroup, AcquisitionGoal[]> = {
+            permanent: localAcquisitions.filter((goal) => goal.group === "permanent"),
+            recommended: localAcquisitions.filter((goal) => goal.group === "recommended"),
+            conditional: localAcquisitions.filter((goal) => goal.group === "conditional"),
+            optional: localAcquisitions.filter((goal) => goal.group === "optional"),
+          };
+          const localAcquisitionProgress = getAcquisitionProgressCounts(localAcquisitions, checked);
 
           const blueDoneLocal = blueNames.reduce(
             (n, b) => n + (checked[keyify(`blue:${b}`)] ? 1 : 0),
@@ -7343,10 +7602,6 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           );
           const capDoneLocal = capNames.reduce(
             (n, c) => n + (checked[keyify(`cap:${c}`)] ? 1 : 0),
-            0
-          );
-          const missDoneLocal = localMiss.reduce(
-            (n, goal) => n + (isGoalObtained(goal, checked) ? 1 : 0),
             0
           );
           const questDoneLocal = quest.reduce(
@@ -7409,10 +7664,17 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         Sidequests {questDoneLocal}/{quest.length}
                       </Tag>
                     )}
-                    {localMiss.length > 0 && (
-                      <Tag color="red">
-                        Goals {missDoneLocal}/{localMiss.length}
-                      </Tag>
+                    {localAcquisitionsByGroup.permanent.length > 0 && (
+                      <Tag color="red">Missables {localAcquisitionProgress.completed.permanent}/{localAcquisitionsByGroup.permanent.length}</Tag>
+                    )}
+                    {localAcquisitionsByGroup.recommended.length > 0 && (
+                      <Tag color="blue">Recommended {localAcquisitionProgress.completed.recommended}/{localAcquisitionsByGroup.recommended.length}</Tag>
+                    )}
+                    {localAcquisitionsByGroup.conditional.length > 0 && (
+                      <Tag color="amber">Conditional {localAcquisitionProgress.completed.conditional}/{localAcquisitionsByGroup.conditional.length}</Tag>
+                    )}
+                    {localAcquisitionsByGroup.optional.length > 0 && (
+                      <Tag color="zinc">Optional {localAcquisitionProgress.completed.optional}/{localAcquisitionsByGroup.optional.length}</Tag>
                     )}
                   </div>
                 </div>
@@ -7434,6 +7696,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         return (
                             <li
                                 key={num}
+                                id={`chapter-mission-${num}`}
                                 className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
                             >
                                 <div className="flex w-full items-start justify-between gap-3">
@@ -7450,25 +7713,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                     )}
                                                 </div>
 
-                                                {/* Related global missables for this mission (injected) */}
-                                                {q && (() => {
-                                                    const related = getAcquisitionGoalsForMission(num);
-                                                    if (!related.length) return null;
-                                                    return (
-                                                        <div className="mt-2">
-                                                            <ul className="space-y-2 w-full">
-                                                                {related.map((goal) => (
-                                                                    <AcquisitionGoalCard
-                                                                        key={`acq-side-${num}-${goal.id}`}
-                                                                        goal={goal}
-                                                                        checked={checked}
-                                                                        setCheck={setCheck}
-                                                                    />
-                                                                ))}
-                                                            </ul>
-                                                        </div>
-                                                    );
-                                                })()}
+                                                <MissionAcquisitionList missionNumber={num} checked={checked} setCheck={setCheck} chronologicallyAvailable={chapterMissionSet.has(num)} />
                                             </>
                                         ) : (
                                             <div className="font-semibold">
@@ -7588,6 +7833,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                     return (
                                         <li
                                             key={num}
+                                            id={`chapter-mission-${num}`}
                                             className="space-y-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
                                         >
                                             <div className="flex w-full items-start gap-2">
@@ -7661,22 +7907,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                     )}
                                                 </div>
                                             </div>
-                                            {q && (() => {
-                                                const related = getAcquisitionGoalsForMission(num);
-                                                if (!related.length) return null;
-                                                return (
-                                                    <ul className="space-y-2 w-full">
-                                                        {related.map((goal) => (
-                                                            <AcquisitionGoalCard
-                                                                key={`acq-side-${num}-${goal.id}`}
-                                                                goal={goal}
-                                                                checked={checked}
-                                                                setCheck={setCheck}
-                                                            />
-                                                        ))}
-                                                    </ul>
-                                                );
-                                            })()}
+                                            <MissionAcquisitionList missionNumber={num} checked={checked} setCheck={setCheck} chronologicallyAvailable={chapterMissionSet.has(num)} />
                                         </li>
                                     );
                                 })}
@@ -7684,40 +7915,17 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         </Panel>
                     )}
 
-                    {(Array.isArray(b.missables) && b.missables.length > 0) && (() => {
-                        if (localMiss.length === 0) return null;
-
-                        return (
-                            <Panel
-                                title="Important Opportunities Now Available"
-                                border="border-red-600"
-                                buttonColor="bg-red-600"
-                                tone="red"
-                                persistKey={`panel:${b.key}:missNow`}
-                                right={
-                                    <div className="w-full sm:w-auto sm:min-w-[180px]">
-                                        <ProgressBar
-                                            label="Recruitment goals"
-                                            done={missDoneLocal}
-                                            total={localMiss.length}
-                                            color="amber"
-                                        />
-                                    </div>
-                                }
-                            >
-                                <ul className="space-y-2 w-full text-sm">
-                                    {localMiss.map((goal) => (
-                                        <AcquisitionGoalCard
-                                            key={`gm-local-${goal.id}`}
-                                            goal={goal}
-                                            checked={checked}
-                                            setCheck={setCheck}
-                                        />
-                                    ))}
-                                </ul>
-                            </Panel>
-                        );
-                    })()}
+                    {(["permanent", "recommended", "conditional", "optional"] as const).map((group) => (
+                      <ChapterAcquisitionPanel
+                        key={`${b.key}-${group}`}
+                        group={group}
+                        goals={localAcquisitionsByGroup[group]}
+                        chapterKey={b.key}
+                        missionNumbers={chapterMissionNumbers}
+                        checked={checked}
+                        setCheck={setCheck}
+                      />
+                    ))}
                   </div>
                 )}
               </div>

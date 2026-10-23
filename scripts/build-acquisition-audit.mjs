@@ -11,7 +11,8 @@ const refs = (goal) => goal.references.map((ref) => `[${escape(ref.label)}](${re
 const sources = (goal) => [...goal.sources, ...goal.extraMissionSources].map((source) => {
   const mission = source.missions.length ? source.missions.map((number) => `#${String(number).padStart(3, "0")}`).join(", ") : "un-numbered event";
   const target = source.target ? `; ${source.target}` : "";
-  return `${mission}${target}; ${source.method}; availability: ${escape(source.availability)} (record ${source.recordId}) — ${escape(source.note)}`;
+  const qualifiers = [source.rarity, source.hidden ? "Hidden item" : undefined].filter(Boolean).join(", ");
+  return `${mission}${target}; ${source.method}${qualifiers ? `; ${escape(qualifiers)}` : ""}; availability: ${escape(source.availability)} (record ${source.recordId}) — ${escape(source.note)}`;
 }).join("<br />") || "No mission source in legacy record; see the item-specific assessment.";
 const lines = [
   "# Acquisition audit",
@@ -36,6 +37,10 @@ const lines = [
   "- **Type 6 rewards:** Chill Rod and Sword Breaker are listed in the Type 6 random pool. The mission-by-mission repeatability of the reward missions was not established, so this pool is not presented as a safe renewable path.",
   "- **Limited treasure layouts:** Tulwar and Zeus Mace have conditional treasure-hunt paths. Layout and limited special-treasure placements prevent a blanket safe classification; both remain conditional warnings. Silver Coat is flagged by the Thieves' Guild guide, but its complete alternative source set remains unresolved.",
   "- **Recruitment offers:** Littlevilli's Clan League (#043) mission repeats. Elda's Cup, Hero Gaol, Snake Shield, and Wyrmstone are modeled as carried mission items rather than as generic encounter completion.",
+  "",
+  "## Walkthrough timing and remaining conditions",
+  "",
+  "Chapter counters include canonical goals linked to missions listed in that progression interval, with numbered mission prerequisites checked against earlier intervals and earlier mission entries in the same interval. A source gated by a later numbered mission is not counted in an earlier mission row. Non-numbered requirements such as calendar or pub eligibility, map placements, required items, and cutscenes are retained on the mission reference; chapter counters do not infer whether the player has satisfied those conditions. Follow the displayed mission prerequisites before relying on a listed opportunity.",
   "",
   "## Source references",
   "",

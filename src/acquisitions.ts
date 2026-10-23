@@ -579,6 +579,8 @@ export type AcquisitionSource = {
   recordId: number;
   missions: number[];
   target?: string;
+  rarity?: "Rare" | "Very Rare";
+  hidden?: boolean;
   method: string;
   availability: string;
   warning?: string;
@@ -680,8 +682,10 @@ const fallback = (kind: AcquisitionGoal["kind"], sourceCount: number): Assessmen
   rationale: "Conservative classification: the original source is preserved and unverified alternatives do not establish safety.",
   references: [kind === "steal" ? "steal" : "quest"],
 });
-const makeSource = (record: GlobalMissable): AcquisitionSource => {
+const makeSource = (record: GlobalMissable, item: string): AcquisitionSource => {
   const kind = kindFor(record);
+  const annotatedItem = record.missable.find((raw) => canonicalAcquisitionId(raw) === canonicalAcquisitionId(item)) ?? "";
+  const rarity = annotatedItem.match(/\((Very Rare|Rare)\)/i)?.[1];
   const availability = record.id === 6
     ? "Repeatable mission; join offer is random"
     : record.id === 69
@@ -691,6 +695,8 @@ const makeSource = (record: GlobalMissable): AcquisitionSource => {
     recordId: record.id,
     missions: [...new Set(record.mission ?? [])],
     target: record.warning?.match(/^Target:\s*(.+)$/i)?.[1],
+    rarity: rarity ? rarity.toLowerCase() === "very rare" ? "Very Rare" : "Rare" : undefined,
+    hidden: /\[Hidden\]/i.test(annotatedItem),
     method: kind === "steal" ? "Steal" : kind === "capture" ? "Capture" : kind === "blue-magic" ? "Learn Blue Magic" : kind === "recruit" ? "Recruitment opportunity / mission item" : kind === "mission" ? "Mission outcome" : "Mission reward / opportunity",
     availability,
     warning: record.warning,
@@ -700,7 +706,7 @@ const makeSource = (record: GlobalMissable): AcquisitionSource => {
 export const ACQUISITION_GOALS: AcquisitionGoal[] = [...grouped.entries()].map(([id, value]) => {
   const kind = kindFor(value.records[0]);
   const a = assessments[id] ?? fallback(kind, value.records.length);
-  const goalSources = value.records.map(makeSource);
+  const goalSources = value.records.map((record) => makeSource(record, value.item));
   const alternatives = a.alternatives?.length ? a.alternatives : (value.records.length > 1
     ? [`This guide lists ${value.records.length} fixed encounter sources above. Their repeatability and any additional shop/mission/treasure sources were not verified.`]
     : ["No sufficiently verified alternate acquisition path is recorded."]);
@@ -716,13 +722,108 @@ export const ACQUISITION_GOALS: AcquisitionGoal[] = [...grouped.entries()].map((
 }).sort((a, b) => a.item.localeCompare(b.item));
 
 export const getAcquisitionGoalsForMission = (mission: number) => ACQUISITION_GOALS.filter((goal) => [...goal.sources, ...goal.extraMissionSources].some((source) => source.missions.includes(mission)));
+export const getAcquisitionGoalsForDirectMission = (mission: number) => ACQUISITION_GOALS.filter((goal) => goal.sources.some((source) => source.missions.includes(mission)));
+export const getAcquisitionPreparationsForMission = (mission: number) => ACQUISITION_GOALS.flatMap((goal) =>
+  goal.extraMissionSources.filter((source) => source.missions.includes(mission)).map((source) => ({ goal, source })),
+);
 export const getAcquisitionGoalByRecordId = (recordId: number) => ACQUISITION_GOALS.find((goal) => goal.recordIds.includes(recordId));
 export const getAcquisitionGoalsByRecordIds = (recordIds: number[]) => [...new Set(recordIds.map(getAcquisitionGoalByRecordId).filter((goal): goal is AcquisitionGoal => !!goal))];
 export const acquisitionProgressKey = (goal: AcquisitionGoal) => goal.kind === "blue-magic" ? `blue:${goal.item}` : goal.kind === "capture" ? `cap:${goal.item}` : `acquired:${goal.id}`;
-export const getAcquisitionCounts = (goals = ACQUISITION_GOALS) => goals.reduce<Record<AcquisitionGroup, number>>((counts, goal) => {
-  counts[goal.group] += 1;
+export const acquisitionCheckedKey = (goal: AcquisitionGoal) =>
+  acquisitionProgressKey(goal).toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+export type AcquisitionGroupCounts = Record<AcquisitionGroup, number>;
+export type AcquisitionProgressCounts = { total: AcquisitionGroupCounts; completed: AcquisitionGroupCounts };
+
+const emptyAcquisitionGroupCounts = (): AcquisitionGroupCounts => ({
+  permanent: 0,
+  recommended: 0,
+  conditional: 0,
+  optional: 0,
+});
+
+const uniqueGoals = (goals: AcquisitionGoal[]) => [...new Map(goals.map((goal) => [goal.id, goal])).values()];
+
+export const getAcquisitionGoalsForMissions = (missionNumbers: readonly number[], goals = ACQUISITION_GOALS) => {
+  const missionSet = new Set(missionNumbers);
+  return uniqueGoals(goals.filter((goal) =>
+    goal.sources.some((source) => source.missions.some((mission) => missionSet.has(mission))),
+  ));
+};
+
+/**
+ * Resolves the canonical goals available in one chronological walkthrough block.
+ * Only sources whose mission is part of that block count; later sources in the
+ * same goal remain available to their own later mission blocks.
+ */
+export const getAcquisitionGoalsForChapter = (
+  missionNumbers: readonly number[],
+  recordIds: readonly number[] = [],
+  goals = ACQUISITION_GOALS,
+) => {
+  const missionSet = new Set(missionNumbers);
+  const recordSet = new Set(recordIds);
+  return uniqueGoals(goals.filter((goal) =>
+    goal.recordIds.some((recordId) => recordSet.has(recordId)) ||
+    goal.sources.some((source) => source.missions.some((mission) => missionSet.has(mission))),
+  ));
+};
+
+/**
+ * Filters a walkthrough interval's missions using explicit numbered mission
+ * prerequisites. A prerequisite listed earlier in the current interval is
+ * allowed because the player can complete that mission first; a prerequisite
+ * listed later or in a later interval keeps the acquisition out of the
+ * earlier mission row. Non-mission
+ * conditions (calendar, placement, cutscene, or required item) remain visible
+ * on the mission reference itself and are not guessed here.
+ */
+export const getChronologicallyAvailableMissionNumbers = (
+  missionNumbers: readonly number[],
+  previouslyAvailableMissionNumbers: readonly number[],
+  prerequisitesByMission: ReadonlyMap<number, readonly string[]>,
+) => {
+  const candidates = [...new Set(missionNumbers)];
+  const available = new Set(previouslyAvailableMissionNumbers);
+  const chronologicallyAvailable: number[] = [];
+  for (const missionNumber of candidates) {
+    const prerequisites = prerequisitesByMission.get(missionNumber) ?? [];
+    const referencedMissions = prerequisites.flatMap((prerequisite) =>
+      [...prerequisite.matchAll(/\(#(\d+)\)/g)].map((match) => Number(match[1])),
+    );
+    if (referencedMissions.every((prerequisiteMission) => available.has(prerequisiteMission))) {
+      chronologicallyAvailable.push(missionNumber);
+      available.add(missionNumber);
+    }
+  }
+  return chronologicallyAvailable;
+};
+
+export const getAcquisitionSourceMissions = (goal: AcquisitionGoal, missionNumbers?: readonly number[]) => {
+  const sources = new Set(goal.sources.flatMap((source) => source.missions));
+  if (missionNumbers) return [...new Set(missionNumbers.filter((mission) => sources.has(mission)))];
+  return [...sources];
+};
+
+export const getAcquisitionProgressCounts = (
+  goals: AcquisitionGoal[],
+  checked: Record<string, boolean>,
+): AcquisitionProgressCounts => {
+  const unique = uniqueGoals(goals);
+  const total = emptyAcquisitionGroupCounts();
+  const completed = emptyAcquisitionGroupCounts();
+  for (const goal of unique) {
+    total[goal.group] += 1;
+    if (checked[acquisitionCheckedKey(goal)]) completed[goal.group] += 1;
+  }
+  return { total, completed };
+};
+
+export const getAcquisitionCounts = (goals = ACQUISITION_GOALS) => {
+  const counts = emptyAcquisitionGroupCounts();
+  for (const goal of uniqueGoals(goals)) counts[goal.group] += 1;
   return counts;
-}, { permanent: 0, recommended: 0, conditional: 0, optional: 0 });
+};
 
 export const acquisitionDataDiagnostics = () => {
   const ids = ACQUISITION_GOALS.map((goal) => goal.id);
