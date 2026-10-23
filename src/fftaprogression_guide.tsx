@@ -5905,7 +5905,7 @@ const Panel: React.FC<{
 
   return (
     <div
-      className={`rounded-2xl p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`}
+      className={`rounded-2xl p-2 sm:p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`}
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <h4 className="font-bold text-zinc-900 dark:text-zinc-100">
@@ -7006,7 +7006,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
   ];
   
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 bg-zinc-100 dark:bg-zinc-900 transition-colors">
+    <div className="w-full max-w-6xl mx-auto p-2 sm:p-4 bg-zinc-100 dark:bg-zinc-900 transition-colors">
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-t-2xl ring-1 ring-zinc-950/10 dark:ring-white/10 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
@@ -7425,7 +7425,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
               <div id={`block-content-${keyify(b.key)}`} hidden={!isOpen}>
                 {isOpen && (
-                  <div className="p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <div className="p-3 sm:p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800">
                     <ul className="space-y-2">
                     {b.kind === "story" && quest.map((num) => {
                         const id = keyify(`quest-global:${num}`);
@@ -7588,7 +7588,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                     return (
                                         <li
                                             key={num}
-                                            className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
+                                            className="space-y-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
                                         >
                                             <div className="flex w-full items-start gap-2">
                                                 <input
@@ -7599,7 +7599,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                     onChange={() => setCheck(id)}
                                                     aria-label={`Mark side mission #${String(num).padStart(3, "0")} complete`}
                                                 />
-                                                <div className="min-w-0 w-full text-zinc-800 dark:text-zinc-200">
+                                                <div className="min-w-0 flex-1 text-zinc-800 dark:text-zinc-200">
                                                     {q ? (
                                                         <>
                                                             <label htmlFor={`side-${num}`} className="block w-fit cursor-pointer font-semibold text-zinc-900 dark:text-zinc-100">
@@ -7653,24 +7653,6 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                                 )}
                                                             </div>
 
-                                                            {q && (() => {
-                                                                const related = getAcquisitionGoalsForMission(num);
-                                                                if (!related.length) return null;
-                                                                return (
-                                                                    <div className="mt-2">
-                                                                        <ul className="space-y-2 w-full">
-                                                                            {related.map((goal) => (
-                                                                                <AcquisitionGoalCard
-                                                                                    key={`acq-side-${num}-${goal.id}`}
-                                                                                    goal={goal}
-                                                                                    checked={checked}
-                                                                                    setCheck={setCheck}
-                                                                                />
-                                                                            ))}
-                                                                        </ul>
-                                                                    </div>
-                                                                );
-                                                            })()}
                                                         </>
                                                     ) : (
                                                         <div className="font-semibold">
@@ -7679,6 +7661,22 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                     )}
                                                 </div>
                                             </div>
+                                            {q && (() => {
+                                                const related = getAcquisitionGoalsForMission(num);
+                                                if (!related.length) return null;
+                                                return (
+                                                    <ul className="space-y-2 w-full">
+                                                        {related.map((goal) => (
+                                                            <AcquisitionGoalCard
+                                                                key={`acq-side-${num}-${goal.id}`}
+                                                                goal={goal}
+                                                                checked={checked}
+                                                                setCheck={setCheck}
+                                                            />
+                                                        ))}
+                                                    </ul>
+                                                );
+                                            })()}
                                         </li>
                                     );
                                 })}
