@@ -3,6 +3,14 @@ import { ChevronDown, ChevronUp, MapPin } from "lucide-react";
 import mapGif from "./assets/ffta-map.gif";
 import { AuthSyncControl, type ProgressKeyLabel } from "./AuthSyncControl";
 import { useProgress } from "./progress";
+import {
+  ACQUISITION_GOALS,
+  GLOBAL_MISSABLES,
+  acquisitionProgressKey,
+  getAcquisitionGoalsByRecordIds,
+  getAcquisitionGoalsForMission,
+  type AcquisitionGoal,
+} from "./acquisitions";
 
 const keyify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
@@ -114,8 +122,9 @@ function CollapsibleTwoTables<L extends Row, R extends Row>({
         </svg>
       </button>
 
-      {open && (
-        <div id={contentId} className={`p-4 ${bodyClassName}`}>
+      <div id={contentId} hidden={!open}>
+        {open && (
+          <div className={`p-4 ${bodyClassName}`}>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <TableSection
               title={leftTitle}
@@ -138,8 +147,9 @@ function CollapsibleTwoTables<L extends Row, R extends Row>({
               dividerCls={dividerCls}
             />
           </div>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -5661,697 +5671,118 @@ const MAP_PLACEMENTS: Record<
 };
 
 
-// === Global Missables helpers (injected) ===
-type GlobalMissable = {
-    id: number;
-    type: string;
-    missable: string[];
-    warning?: string;
-    mission?: number[];
-    note: string;
+const goalKey = (goal: AcquisitionGoal) => keyify(acquisitionProgressKey(goal));
+const isGoalObtained = (goal: AcquisitionGoal, checked: Record<string, boolean>) =>
+  !!checked[goalKey(goal)];
+
+const goalGroupLabel: Record<AcquisitionGoal["group"], string> = {
+  permanent: "Permanent missable",
+  recommended: "Recommended acquisition",
+  conditional: "Conditional source",
+  optional: "Repeatable opportunity",
+};
+const goalPriorityLabel: Record<AcquisitionGoal["priority"], string> = {
+  essential: "Protect this opportunity",
+  "strongly-recommended": "Strongly recommended now",
+  recommended: "Recommended now",
+  optional: "Optional",
 };
 
-const getMissablesForMission = (num: number): GlobalMissable[] =>
-    GLOBAL_MISSABLES.filter((m) => Array.isArray(m.mission) && m.mission.includes(num));
-
-const missableKey = (m: GlobalMissable) => keyify(`miss-global:${m.id}`);
-
-// Treat a global missable as "auto-checked" if linked Blue/Capture entries are checked
-const isMissableAutoChecked = (m: GlobalMissable, checked: Record<string, boolean>) => {
-    const names = Array.isArray(m.missable) ? m.missable : [];
-    if (m.type === "Monster Bank") {
-        return names.some((nm) => !!checked[keyify(`cap:${nm}`)]);
-    }
-    if (m.type === "Blue Magic") {
-        return names.some((nm) => !!checked[keyify(`blue:${nm}`)]);
-    }
-    return false;
-};
-
-const isMissableChecked = (m: GlobalMissable, checked: Record<string, boolean>) => {
-    return !!checked[missableKey(m)] || isMissableAutoChecked(m, checked);
-};
-
-function MissableCard({
-    m,
-    checked,
-    setCheck,
+function AcquisitionGoalCard({
+  goal,
+  checked,
+  setCheck,
+  compact = false,
 }: {
-    m: GlobalMissable;
-    checked: Record<string, boolean>;
-    setCheck: (id: string) => void;
+  goal: AcquisitionGoal;
+  checked: Record<string, boolean>;
+  setCheck: (key: string, next?: boolean) => void;
+  compact?: boolean;
 }) {
-    const id = missableKey(m);
-    const manualChecked = !!checked[id];
-    const autoCap = m.type === "Monster Bank" && Array.isArray(m.missable) && m.missable.some((nm) => !!checked[keyify(`cap:${nm}`)]);
-    const autoBlue = m.type === "Blue Magic" && Array.isArray(m.missable) && m.missable.some((nm) => !!checked[keyify(`blue:${nm}`)]);
-    const autoChecked = !!(autoCap || autoBlue);
-    const isChecked = manualChecked || autoChecked;
-    const linkNames = Array.isArray(m.missable) ? m.missable : [];
-    const ensureChecked   = (key: string) => { if (!checked[key]) setCheck(key); };
-    const ensureUnchecked = (key: string) => { if (checked[key])  setCheck(key); };
-    const syncLinkedOnManualCheck = (nextManual: boolean) => {
-      if (m.type === "Monster Bank") {
-        linkNames.forEach((nm) =>
-          nextManual ? ensureChecked(keyify(`cap:${nm}`)) : ensureUnchecked(keyify(`cap:${nm}`))
-        );
-      } else if (m.type === "Blue Magic") {
-        linkNames.forEach((nm) =>
-          nextManual ? ensureChecked(keyify(`blue:${nm}`)) : ensureUnchecked(keyify(`blue:${nm}`))
-        );
-      }
-    };
+  const inputId = useId();
+  const done = isGoalObtained(goal, checked);
+  const recordLabels = goal.sources.flatMap((source) => source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`));
+  const allMissionLabels = [...new Set([...recordLabels, ...goal.extraMissionSources.flatMap((source) => source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`))])];
+  const legacyComplete = goal.recordIds.filter((recordId) => !!checked[keyify(`miss-global:${recordId}`)]);
+  const categoryText = goal.missability === "unverified"
+    ? "Missability not verified"
+    : goal.missability === "recoverable"
+      ? "A recovery path is documented"
+      : "Permanent loss is documented";
+  const borderColor = goal.missability === "permanent"
+    ? "border-red-300 dark:border-red-900/60"
+    : goal.missability === "unverified"
+      ? "border-amber-300 dark:border-amber-900/60"
+      : "border-zinc-200 dark:border-zinc-700";
 
-
-    // Card-level click: prevent label default + stop bubbling, toggle only this missable
-    const onCardClick = (e: React.SyntheticEvent) => {
-        if (typeof e.preventDefault === "function") e.preventDefault();
-        e.stopPropagation();
-        const nextManual = !manualChecked;
-        setCheck(id);
-        syncLinkedOnManualCheck(nextManual);
-    };
-
-    // Block parent handlers on mousedown/pointerdown as well (prevents label toggles)
-    const block = (e: React.SyntheticEvent) => {
-        if (typeof e.preventDefault === "function") e.preventDefault();
-        e.stopPropagation();
-    };
-
-    // Checkbox: allow default (so it visually toggles), stop bubbling, and persist state
-    const cbClick = (e: React.SyntheticEvent) => {
-        e.stopPropagation();
-    };
-    const cbChange = () => {
-        const nextManual = !manualChecked;
-        setCheck(id);
-        syncLinkedOnManualCheck(nextManual);
-    };
-
-    return (
-        <li
-            key={`gm-${m.id}`}
-            className="flex w-full items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10 cursor-pointer"
-            onClick={onCardClick}
-            onMouseDown={block}
-            onPointerDown={block}
-        >
-            <input
-                type="checkbox"
-                className="mt-0.5 accent-red-600 dark:accent-red-400"
-                checked={isChecked}
-                onChange={cbChange}
-                onClick={cbClick}
-            />
-            <div className="flex-1 min-w-0 text-sm text-zinc-800 dark:text-zinc-200">
-                <div className="font-semibold text-red-700 dark:text-red-300">
-                    Missable: {Array.isArray(m.missable) ? m.missable.join(", ") : "Unknown"}
+  return (
+    <li className={`min-w-0 rounded-xl border ${borderColor} bg-white dark:bg-zinc-800 p-2.5`}>
+      <div className="flex min-w-0 items-start gap-2.5">
+        <input
+          id={inputId}
+          type="checkbox"
+          className="mt-1 h-4 w-4 shrink-0 accent-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:accent-red-400 dark:focus-visible:outline-blue-300"
+          checked={done}
+          onChange={(event) => setCheck(goalKey(goal), event.currentTarget.checked)}
+          aria-label={`${goal.kind === "recruit" ? "Recruited" : goal.kind === "blue-magic" ? "Learned" : goal.kind === "capture" ? "Captured" : "Obtained"}: ${goal.item}`}
+        />
+        <div className="min-w-0 flex-1 text-sm text-zinc-800 dark:text-zinc-200">
+          <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
+            <label htmlFor={inputId} className="min-w-0 cursor-pointer font-semibold text-zinc-950 dark:text-zinc-100">
+              {goal.item}
+            </label>
+            <span className={goal.missability === "permanent" ? "font-semibold text-red-700 dark:text-red-300" : goal.missability === "unverified" ? "font-semibold text-amber-800 dark:text-amber-300" : "font-medium text-emerald-800 dark:text-emerald-300"}>
+              {goalGroupLabel[goal.group]}
+            </span>
+            {goal.group !== "permanent" && goal.priority !== "optional" && (
+              <span className="text-xs text-zinc-600 dark:text-zinc-400">{goalPriorityLabel[goal.priority]}</span>
+            )}
+            <span className={goal.missability === "permanent" ? "text-xs text-red-700 dark:text-red-300" : goal.missability === "unverified" ? "text-xs text-amber-800 dark:text-amber-300" : "text-xs text-emerald-800 dark:text-emerald-300"}>
+              {categoryText}
+            </span>
+          </div>
+          <p className="mt-0.5 text-xs leading-5 text-zinc-700 dark:text-zinc-300">
+            {compact ? goal.summary : <>{goal.summary}{allMissionLabels.length > 0 && <> <span className="font-medium">Available:</span> {allMissionLabels.join(", ")}.</>}</>}
+          </p>
+          <details className="mt-1.5 text-xs leading-5 marker:text-zinc-500">
+            <summary className="w-fit cursor-pointer rounded-sm font-medium text-blue-800 underline decoration-blue-300 underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:decoration-blue-700 dark:focus-visible:outline-blue-300">
+              Acquisition details
+            </summary>
+            <div className="mt-2 space-y-2 border-l-2 border-zinc-200 pl-3 dark:border-zinc-600">
+              <div><span className="font-semibold">Assessment:</span> {categoryText}. {goal.rationale}</div>
+              {goal.sources.length > 0 && (
+                <div>
+                  <div className="font-semibold">Listed encounters</div>
+                  <ul className="list-disc pl-5">
+                    {goal.sources.map((source, index) => (
+                      <li key={`${source.recordId}-${index}`}>
+                        {source.missions.length ? source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`).join(", ") : "Mission not numbered in the legacy record"}: {source.target ? `${source.target}; ` : ""}{source.method}. Availability: {source.availability}. {source.note}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                {!isChecked && (
-                    <>
-                        <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
-                            <span className="font-semibold">Type:</span> {m.type}
-                        </div>
-                        {m.warning && (
-                            <div className="text-xs italic text-red-700 dark:text-red-300 mt-1">
-                                {m.warning}
-                            </div>
-                        )}
-                        {m.note && (
-                            <div className="text-xs text-zinc-700 dark:text-zinc-300 mt-1">
-                                {m.note}
-                            </div>
-                        )}
-                    </>
-                )}
+              )}
+              {goal.extraMissionSources.length > 0 && (
+                <div>
+                  <div className="font-semibold">Item / recruitment setup</div>
+                  <ul className="list-disc pl-5">
+                    {goal.extraMissionSources.map((source, index) => <li key={`${source.recordId}-extra-${index}`}>{source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`).join(", ")}: {source.method}. Availability: {source.availability}. {source.note}</li>)}
+                  </ul>
+                </div>
+              )}
+              {goal.details.length > 0 && <ul className="list-disc pl-5">{goal.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
+              {goal.alternatives.length > 0 && <div><span className="font-semibold">Later alternatives:</span> {goal.alternatives.join(" ")}</div>}
+              <div><span className="font-semibold">Verification:</span> {goal.verification}.</div>
+              {goal.references.length > 0 && <div><span className="font-semibold">References:</span> {goal.references.map((reference, index) => <React.Fragment key={reference.url}>{index > 0 && ", "}<a className="underline underline-offset-2" href={reference.url} target="_blank" rel="noreferrer">{reference.label}</a></React.Fragment>)}</div>}
+              {legacyComplete.length > 0 && <p className="rounded bg-zinc-100 px-2 py-1 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200">Earlier save marked legacy encounter record{legacyComplete.length > 1 ? "s" : ""} {legacyComplete.join(", ")} complete. This historical state is preserved, but it does not establish item ownership.</p>}
             </div>
-        </li>
-    );
+          </details>
+        </div>
+      </div>
+    </li>
+  );
 }
 
-const GLOBAL_MISSABLES: { id: number; type: string; missable: string[]; warning?: string; mission?: number[]; note: string }[] = [
- {
-  id: 1,
-  type: "Recruiting-Related Missions",
-  missable: ["Eldena"],
-  warning: "Do NOT complete Caravan Guard (#168) or discard Elda's Cup before recruiting Eldena.",
-  note: "If you complete this mission before recruiting Eldena, you will lose Elda's Cup and miss the opportunity to recruit Eldena.",
-  mission: [168]
- },
- {
-  id: 2,
-  type: "Recruiting-Related Missions",
-  missable: ["Lini"],
-  warning: "Do NOT discard the Hero Gaol before recruiting Lini.",
-  note: "If you discard the Hero Gaol before recruiting Lini, you will miss the opportunity to recruit Lini.",
-  mission: []
- },
- {
-  id: 3,
-  type: "Recruiting-Related Missions",
-  missable: ["Pallanza"],
-  warning: "Do NOT complete A Dragon's Aid (#066) or discard the Wyrmstone before recruiting Pallanza.",
-  note: "If you complete this mission before recruiting Pallanza, you will lose the Wyrmstone and miss the opportunity to recruit Pallanza.",
-  mission: [66]
- },
- {
-  id: 4,
-  type: "Recruiting-Related Missions",
-  missable: ["Quin"],
-  warning: "Save before starting Missing Professor (#63).",
-  note: "If Quin doesn't offer to join, reset because this is the only chance to recruit Quin.",
-  mission: [63]
- },
- {
-  id: 5,
-  type: "Recruiting-Related Missions",
-  missable: ["Cheney"],
-  warning: "Do NOT discard the Snake Shield before recruiting Cheney.",
-  note: "If you discard the Snake Shield before recruiting Cheney, you will miss the opportunity to recruit Cheney."
- },
- {
-  id: 6,
-  type: "Recruiting-Related Missions",
-  missable: ["Littlevilli"],
-  warning: "Save before starting the Clan League (#043) mission.",
-  note: "Not \"technically\" missable as the mission repeats. Just to save your time, reset if Littlevilli doesn't request to join.",
-  mission: [43],
- },
- {
-  id: 7,
-  type: "Recruiting-Related Missions",
-  missable: ["Ezel"],
-  warning: "Do NOT complete \"Reconciliation\" alongside \"Left Behind\" or \"A Maiden's Cry\".",
-  note: "Possible bug can cause issues.",
- },
- {
-  id: 8,
-  type: "Recruiting-Related Missions",
-  missable: ["Ritz"],
-  warning: "Do NOT complete \"Reconciliation\" alongside \"Left Behind\" or \"A Maiden's Cry\".",
-  note: "Possible bug can cause issues."
- },
- {
-  id: 9,
-  type: "Recruiting-Related Missions",
-  missable: ["Babus"],
-  warning: "Do NOT complete \"Left Behind\" alongside \"A Maiden's Cry\" or \"Reconciliation\" and do NOT move on map before signing up for \"With Babus\".",
-  note: "Possible bug can cause issues."
- },
- {
-  id: 10,
-  type: "Recruiting-Related Missions",
-  missable: ["Shara"],
-  warning: "Do NOT complete \"A Maiden's Cry\" alongside \"Left Behind\" \"Reconciliation\" and do NOT move on map before signing up for \"With Babus\".",
-  note: "Possible bug can cause issues."
- },
- {
-  id: 11,
-  type: "Recruiting-Related Missions",
-  missable: ["Cid"],
-  warning: "Do NOT miss anything anything that can cause you to miss one of the 300 numbered quests.",
-  note: "You must complete all 300 numbered missions to recruit Cid."
- },
- {
-  id: 12,
-  type: "Monster Bank",
-  missable: ["Goblin"],
-  warning: "The blue Goblins disappear later in the game.",
-  note: "Capture ASAP. Available in A Lost Ring (#049), Snow in Lutia (#044), White Flowers (#055), Village Hunt (#037), and Tower Ruins (#032).",
-  mission: [49,44,55,37,32]
- },
- {
-  id: 13,
-  type: "Blue Magic",
-  missable: ["Goblin Punch"],
-  warning: "The blue Goblins disappear later in the game.",
-  note: "Learn ASAP. Available in A Lost Ring (#049), Snow in Lutia (#044), White Flowers (#055), Village Hunt (#037), and Tower Ruins (#032).",
-  mission: [49,44,55,37,32]
- },
- {
-  id: 14,
-  type: "Monster Bank",
-  missable: ["Thundrake"],
-  warning: "Thundrakes disappear later in the game.",
-  note: "Capture ASAP. Can capture in Pale Company (#011), Wyrm's Awaken (#102), A Dragon's Aid (#066), Ruby Red (#031), and To Amberavle (#022).",
-  mission: [11,102,66,31,22]
- },
- {
-  id: 15,
-  type: "Blue Magic",
-  missable: ["Dragon Force"],
-  warning: "Thundrakes disappear later in the game.",
-  note: "Learn ASAP. Can learn in Wind Sigil (#079), Magewrym (#034), The Worldwyrm (#088), Wyrm's Awaken (#102), A Dragon's Aid (#066), Ruby Red (#031), and To Amberavle (#022).",
-  mission: [79,34,88,102,66,31,22]
- },
- {
-  id: 16,
-  type: "Important Steals",
-  missable: ["Steal Weapon ability"],
-  warning: "Target: Thief",
-  note: "Can be obtained in Diaghilev Godeye (#027).",
-  mission: [27]
- },
- {
-  id: 17,
-  type: "Important Steals",
-  missable: ["Chill Rod [Hidden]"],
-  warning: "Target: Nu Mou Black Mage",
-  note: "Can be obtained in Frosty Mage (#045) [Hidden] or Hit Again! (#061) [Not Hidden].",
-  mission: [45, 61]
- },
- {
-  id: 18,
-  type: "Important Steals",
-  missable: ["Madu"],
-  warning: "Target: Red Mage",
-  note: "Can be obtained in Nubswood Base (#071).",
-  mission: [71]
- },
- {
-  id: 19,
-  type: "Important Steals",
-  missable: ["Cinqueda [Hidden]"],
-  warning: "Target: Thief (Zorlin Shape)",
-  note: "Can be obtained in Magic Wood (#009).",
-  mission: [9]
- },
- {
-  id: 20,
-  type: "Important Steals",
-  missable: ["Lotus Mace", "Mirage Vest", "Aegis Shield (Rare)"],
-  warning: "Target: Babus",
-  note: "Can be obatained in Emerald Keep (#010).",
-  mission: [10]
- },
- {
-  id: 21,
-  type: "Important Steals",
-  missable: ["Mandragora", "Cactus Stick (Rare) [Hidden]"],
-  warning: "Target: Alchemist",
-  note: "Can be obtained in Emerald Keep (#010).",
-  mission: [10]
- },
- {
-  id: 22,
-  type: "Important Steals",
-  missable: ["Stopshot Ability"],
-  warning: "Target: Gunner",
-  note: "Can be obtained in Emerald Keep (#010).",
-  mission: [10]
- },
- {
-  id: 23,
-  type: "Important Steals",
-  missable: ["Steal Weapon Ability"],
-  warning: "Target: Moogle Thief",
-  note: "Can be obtained in Fire Sigil (#076).",
-  mission: [76]
- },
- {
-  id: 24,
-  type: "Important Steals",
-  missable: ["Tulwar (Very Rare) [Hidden]", "Mirage Vest"],
-  warning: "Target: Blue Mage",
-  note: "Can be obtained in Jagd Hunt (#012).",
-  mission: [12]
- },
- {
-  id: 25,
-  type: "Important Steals",
-  missable: ["Genji Armlets (Rare)", "Dark Gear", "Petalchaser"],
-  warning: "Target: Ninja",
-  note: "Can be obtained in Jagd Hunt (#012).",
-  mission: [12]
- },
- {
-  id: 26,
-  type: "Important Steals",
-  missable: ["Gupti Aga [Hidden]"],
-  warning: "Target: Red Mage",
-  note: "Can be obtained in The Bounty (#013).",
-  mission: [13]
- },
- {
-  id: 27,
-  type: "Important Steals",
-  missable: ["Vigilante"],
-  warning: "Target: Paladin",
-  note: "Can be obtained in The Bounty (#013).",
-  mission: [13]
- },
- {
-  id: 28,
-  type: "Important Steals",
-  missable: ["Sword Breaker"],
-  warning: "Target: Moogle Thief",
-  note: "Can be obtained in Wanted! Gabbama Brothers (#026).",
-  mission: [26]
- },
- {
-  id: 29,
-  type: "Important Steals",
-  missable: ["Longbarrel"],
-  warning: "Target: Gunner",
-  note: "Can be obtained in Hit Again (#061).",
-  mission: [61]
-},
-{
-  id: 30,
-  type: "Important Steals",
-  missable: ["Zeus Mace [Hidden]"],
-  warning: "Target: Alchemist",
-  note: "Can be obtained in Golden Clock (#014).",
-  mission: [14]
- },
- {
-  id: 31,
-  type: "Important Steals",
-  missable: ["Genji Armor"],
-  warning: "Target: Templar",
-  note: "Can be obtained in Scouring Time (#015).",
-  mission: [15]
- },
- {
-  id: 32,
-  type: "Important Steals",
-  missable: ["Lordly Robe", "Lotus Mace"],
-  warning: "Target: Babus",
-  note: "Can be obtained in Scouring Time (Exodus) (#015). Solo battle - equip Steal on Marche.",
-  mission: [15]
- },
- {
-  id: 33,
-  type: "Important Steals",
-  missable: ["Master Bow", "Cachusha", "Dark Gear"],
-  warning: "Target: Assassin Celia",
-  note: "Can be obtained in Free Muscadet! (#082).",
-  mission: [82]
- },
- {
-  id: 34,
-  type: "Important Steals",
-  missable: ["Masamune", "Genji Shield", "Dark Gear", "Genji Armlets"],
-  warning: "Target: Assassin Redy",
-  note: "Can be obtained in Free Muscadet! (#082).",
-  mission: [82]
- },
- {
-  id: 35,
-  type: "Important Steals",
-  missable: ["Steal Weapon Ability"],
-  warning: "Target: Moogle Thief",
-  note: "Can be obtained in The Big Find (#016).",
-  mission: [16]
- },
- {
-  id: 36,
-  type: "Important Steals",
-  missable: ["Adaman Blade (Rare) [Hidden]"],
-  warning: "Target: Fighter",
-  note: "Can be obtained in The Big Find (#016).",
-  mission: [16]
- },
- {
-  id: 37,
-  type: "Important Steals",
-  missable: ["Genji Armlets"],
-  warning: "Target: Moogle Thief",
-  note: "Can be obtained in the Stolen Scoop (#104).",
-  mission: [104]
- },
- {
-  id: 38,
-  type: "Important Steals",
-  missable: ["Aegis Shield (Rare)"],
-  warning: "Target: Soldier",
-  note: "Can be obtained in the Stolen Scoop (#104).",
-  mission: [104]
- },
- {
-  id: 39,
-  type: "Important Steals",
-  missable: ["Master Bow"],
-  warning: "Target: Hunter",
-  note: "Can be obtained in the Smuggler Bust (#105).",
-  mission: [105]
- },
- {
-  id: 40,
-  type: "Important Steals",
-  missable: ["Outsider", "Calling Gun (Very Rare) [Hidden]"],
-  warning: "Target: Gunner",
-  note: "Can be obtained in Flesh & Bones (#053).",
-  mission: [53]
- },
- {
-  id: 41,
-  type: "Important Steals",
-  missable: ["Cachusha"],
-  warning: "Target: Archer",
-  note: "Can be obtained in Flesh & Bones (#053).",
-  mission: [53]
- },
- {
-  id: 42,
-  type: "Important Steals",
-  missable: ["Mirror Mail"],
-  warning: "Target: Soldier",
-  note: "Can be obtained in Desert Patrol (#017).",
-  mission: [17]
- },
- {
-  id: 43,
-  type: "Important Steals",
-  missable: ["Venus Blade"],
-  warning: "Target: Gladiator",
-  note: "Can be obtained in Desert Patrol (#017).",
-  mission: [17]
- },
- {
-  id: 44,
-  type: "Important Steals",
-  missable: ["Spring Staff", "Cheer Staff [Hidden]"],
-  warning: "Target: Bishop",
-  note: "Can be obtained in Desert Patrol (#017).",
-  mission: [17]
- },
- {
-  id: 45,
-  type: "Important Steals",
-  missable: ["Arch Sword [Hidden]"],
-  warning: "Target: Defender",
-  note: "Can be obtained in Desert Patrol (#017).",
-  mission: [17]
- },
- {
-  id: 46,
-  type: "Important Steals",
-  missable: ["Genji Shield (Rare)", "Genji Armor (Rare)"],
-  warning: "Target: Dragoon",
-  note: "Can be obtained in A Dragon's Aid (#066).",
-  mission: [66]
- },
- {
-  id: 47,
-  type: "Important Steals",
-  missable: ["Save the Queen", "Maximillian", "Bangaa Helm"],
-  warning: "Target: Llednar",
-  note: "Can be obtained in Quiet Sands (#018). Very short battle (two rounds), quickly steal what you can/need.",
-  mission: [18]
- },
- {
-  id: 48,
-  type: "Important Steals",
-  missable: ["Genji Shield (Rare)"],
-  warning: "Target: Assassin",
-  note: "Can be obtained in Showdown! (#060).",
-  mission: [60]
- },
- {
-  id: 49,
-  type: "Important Steals",
-  missable: ["Aegis Shield (Rare)", "Save the Queen [Hidden]"],
-  warning: "Target: Paladin",
-  note: "Can be obtained in Showdown! (#060).",
-  mission: [60]
- },
- {
-  id: 50,
-  type: "Important Steals",
-  missable: ["Masamune", "Genji Armlets"],
-  warning: "Target: Assassin",
-  note: "Can be obtained in Materite Now! (#019).",
-  mission: [19]
- },
- {
-  id: 51,
-  type: "Important Steals",
-  missable: ["Ribbon (Very Rare)"],
-  warning: "Target: Elementalist",
-  note: "Can be obtained in Materite Now! (#019).",
-  mission: [19]
- },
- {
-  id: 52,
-  type: "Important Steals",
-  missable: ["Nike Bow", "Bone Plate"],
-  warning: "Target: Sniper",
-  note: "Can be obtained in Materite Now! (#019).",
-  mission: [19]
- },
- {
-  id: 53,
-  type: "Important Steals",
-  missable: ["Mirage Vest", "Full-Life Ability"],
-  warning: "Target: White Mage",
-  note: "Can be obtained in Materite Now! (#019).",
-  mission: [19]
- },
- {
-  id: 54,
-  type: "Important Steals",
-  missable: ["Cheer Staff"],
-  warning: "Target: Summoner",
-  note: "Can be obtained in Materite Now! (#019).",
-  mission: [19]
- },
- {
-  id: 55,
-  type: "Important Steals",
-  missable: ["Madu", "Brint Set"],
-  warning: "Target: Red Mage",
-  note: "Can be obtained in Materite Now! (#019).",
-  mission: [19]
- },
- {
-  id: 56,
-  type: "Important Steals",
-  missable: ["Materia Blade [Hidden]"],
-  warning: "Target: Mog Knight",
-  note: "Can be obtained in Present Day (#020).",
-  mission: [20]
- },
- {
-  id: 57,
-  type: "Important Steals",
-  missable: ["Life Crosier", "Scorpion Tail [Hidden]"],
-  warning: "Target: Alchemist",
-  note: "Can be obtained in Present Day (#020).",
-  mission: [20]
- },
- {
-  id: 58,
-  type: "Important Steals",
-  missable: ["Save the Queen", "Maximillian", "Bangaa Helm"],
-  warning: "Target: Llednar",
-  note: "Can be obtained in Present Day (Llednar Variant) (#020). Very short solo battle (five rounds) - equip Steal on Marche.",
-  mission: [20]
- },
- {
-  id: 59,
-  type: "Important Steals",
-  missable: ["Mirage Vest"],
-  warning: "Target: Blue Mage",
-  note: "Can be obtained in Hidden Vein (#021).",
-  mission: [21]
- },
- {
-  id: 60,
-  type: "Important Steals",
-  missable: ["Orichalcum", "Bone Plate"],
-  warning: "Target: Juggler",
-  note: "Can be obtained in Hidden Vein (#021).",
-  mission: [21]
- },
- {
-  id: 61,
-  type: "Important Steals",
-  missable: ["Scorpion Tail"],
-  warning: "Target: Sage",
-  note: "Can be obtained in Hidden Vein (#021).",
-  mission: [21]
- },
- {
-  id: 62,
-  type: "Important Steals",
-  missable: ["Femme Fatale (Very Rare)", "Brint Set", "Ribbon"],
-  warning: "Target: Ritz",
-  note: "Can be obtained in Over the Hill (#023).",
-  mission: [23]
- },
- {
-  id: 63,
-  type: "Important Steals",
-  missable: ["Seventh Heaven", "Galmia Set", "Ribbon"],
-  warning: "Target: Shara",
-  note: "Can be obtained in Over the Hill (#023).",
-  mission: [23]
- },
- {
-  id: 64,
-  type: "Important Steals",
-  missable: ["Max's Oathbow"],
-  warning: "Target: Assassin",
-  note: "Can be obtained in Over the Hill (#023).",
-  mission: [23]
- },
- {
-  id: 65,
-  type: "Important Steals",
-  missable: ["Nirvana Staff", "Silver Coat"],
-  warning: "Target: Summoner",
-  note: "Can be obtained in Over the Hill (#023).",
-  mission: [23]
- },
- {
-  id: 66,
-  type: "Important Steals",
-  missable: ["Madu"],
-  warning: "Target: Fencer",
-  note: "Can be obtained in Over the Hill (#023).",
-  mission: [23]
- },
- {
-  id: 67,
-  type: "Important Steals",
-  missable: ["Madu"],
-  warning: "Target: Elementalist",
-  note: "Can be obtained in Over the Hill (#023).",
-  mission: [23]
- },
- {
-  id: 68,
-  type: "Miscellaneous",
-  missable: ["Iceprism Sword (Rare)"],
-  warning: "Can be missed according to decision made.",
-  note: "Successfully negotiate in Snow Fairy (#109)and give Ice Cream (Cyril Ice from (Malboro Hunt #225))",
-  mission: [109]
- },
- {
-  id: 69,
-  type: "Miscellaneous",
-  missable: ["Bracers", "Hades Bows", "Angel Rings"],
-  note: "Repeatable - excellent for farming Angel Rings (Rare).",
-  mission: [72]
- },
- {
-  id: 70,
-  type: "Miscellaneous",
-  missable: ["R4 Anti-Law"],
-  warning: "Failure results in R3 Anti-Law.",
-  note: "Successfully negotiate in Resistance (#106) to receive the R4 Anti-Law.",
-  mission: [106]
- },
- {
-  id: 71,
-  type: "Miscellaneous",
-  missable: ["Free Bervenia (#087)"],
-  warning: "If failed, may not reappear.",
-  note: "SAVE before attempting.",
-  mission: [87]
- },
-];
 
 const Tag: React.FC<{
   color: "blue" | "green" | "purple" | "red" | "amber";
@@ -6382,6 +5813,7 @@ const ProgressBar: React.FC<{
   color: "blue" | "green" | "purple" | "red" | "amber";
 }> = ({ done, total, label, color }) => {
   const percent = pct(done, total);
+  const max = Math.max(total, 1);
   const palette: Record<string, string> = {
     blue: "bg-blue-500",
     green: "bg-green-500",
@@ -6397,7 +5829,15 @@ const ProgressBar: React.FC<{
           {done}/{total} ({percent}%)
         </span>
       </div>
-      <div className="h-2 bg-zinc-200 dark:bg-zinc-700 rounded">
+      <div
+        className="h-2 bg-zinc-200 dark:bg-zinc-700 rounded"
+        role="progressbar"
+        aria-label={label}
+        aria-valuemin={0}
+        aria-valuemax={max}
+        aria-valuenow={Math.min(done, max)}
+        aria-valuetext={`${done} of ${total} ${label}`}
+      >
         <div
           className={`h-2 ${palette[color]} rounded`}
           style={{ width: `${percent}%` }}
@@ -6418,6 +5858,7 @@ const Panel: React.FC<{
   // NEW: persist this panel's open/closed state under a key
   persistKey?: string;
 }> = ({ title, subtitle, border, buttonColor, children, right, tone = "neutral", persistKey }) => {
+  const contentId = useId();
   const bgMap: Record<string, string> = {
     neutral: "bg-white dark:bg-zinc-800",
     blue: "bg-blue-50 dark:bg-blue-900/10",
@@ -6479,18 +5920,19 @@ const Panel: React.FC<{
         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           {right}
           <button
-            className={`${buttonColor} text-white text-sm px-3 py-1 rounded`}
+            type="button"
+            aria-expanded={open}
+            aria-controls={contentId}
+            className={`${buttonColor} text-white text-sm px-3 py-1 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-300`}
             onClick={handleToggle}
           >
             {open ? "Hide" : "Show"}
           </button>
         </div>
       </div>
-      {open && (
-        <>
-          <div className="mt-3">{children}</div>
-        </>
-      )}
+      <div id={contentId} hidden={!open}>
+        {open && <div className="mt-3">{children}</div>}
+      </div>
     </div>
   );
 };
@@ -6513,10 +5955,10 @@ const formatProgressKey = (key: string): ProgressKeyLabel => {
     return { category: "Capture", item: capture.monster };
   }
 
-  const missable = GLOBAL_MISSABLES.find((entry) => missableKey(entry) === key);
+  const missable = GLOBAL_MISSABLES.find((entry) => keyify(`miss-global:${entry.id}`) === key);
   if (missable) {
     return {
-      category: "Missable",
+      category: "Legacy Opportunity",
       item: missable.type,
       subItem: missable.missable.join(", "),
     };
@@ -6532,6 +5974,11 @@ const formatProgressKey = (key: string): ProgressKeyLabel => {
         item: `#${String(mission.number).padStart(3, "0")} ${mission.name}`,
       };
     }
+  }
+
+  const acquisition = ACQUISITION_GOALS.find((goal) => goalKey(goal) === key);
+  if (acquisition) {
+    return { category: "Acquisition", item: acquisition.item, subItem: acquisition.summary };
   }
 
   const [category = "Progress", ...rest] = key.split("-");
@@ -6678,7 +6125,8 @@ const FFTAProgressionGuide: React.FC = () => {
   };
 
   const handleFilePicked: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
-    const f = e.target.files?.[0];
+    const input = e.currentTarget;
+    const f = input.files?.[0];
     if (!f) return;
     setScreenMode("loading");
     try {
@@ -6690,7 +6138,7 @@ const FFTAProgressionGuide: React.FC = () => {
       alert("Failed to load save file.");
     } finally {
       setScreenMode("idle");
-      e.currentTarget.value = "";
+      input.value = "";
     }
   };
 
@@ -6732,14 +6180,18 @@ const FFTAProgressionGuide: React.FC = () => {
       ),
     [checked]
   );
-  const missTotal = GLOBAL_MISSABLES.length;
+  const permanentGoals = ACQUISITION_GOALS.filter((goal) => goal.group === "permanent");
+  const recommendedGoals = ACQUISITION_GOALS.filter((goal) => goal.group === "recommended");
+  const conditionalGoals = ACQUISITION_GOALS.filter((goal) => goal.group === "conditional");
+  const optionalGoals = ACQUISITION_GOALS.filter((goal) => goal.group === "optional");
+  const missTotal = permanentGoals.length;
   const missDone = useMemo(
       () =>
-          GLOBAL_MISSABLES.reduce(
-              (n, m) => n + (isMissableChecked(m, checked) ? 1 : 0),
+          permanentGoals.reduce(
+              (n, goal) => n + (isGoalObtained(goal, checked) ? 1 : 0),
               0
           ),
-      [checked]
+      [checked, permanentGoals]
   );
 
   const missionMap = useMemo(() => {
@@ -6757,6 +6209,21 @@ const FFTAProgressionGuide: React.FC = () => {
       ),
     [checked]
   );
+
+  const renderAcquisitionGroup = (title: string, goals: AcquisitionGoal[], group: AcquisitionGoal["group"], emptyText: string) => {
+    const done = goals.reduce((count, goal) => count + (isGoalObtained(goal, checked) ? 1 : 0), 0);
+    return (
+      <section className="space-y-2" aria-labelledby={`acquisition-${group}-heading`}>
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <h5 id={`acquisition-${group}-heading`} className="font-semibold text-zinc-900 dark:text-zinc-100">{title} <span className="text-xs font-normal text-zinc-600 dark:text-zinc-400">({goals.length} distinct goals)</span></h5>
+          {goals.length > 0 && <div className="w-full sm:w-56"><ProgressBar label={title} done={done} total={goals.length} color={group === "permanent" ? "red" : group === "conditional" ? "amber" : "blue"} /></div>}
+        </div>
+        {goals.length === 0
+          ? <p className="rounded-lg bg-zinc-100 p-3 text-sm text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{emptyText}</p>
+          : <ul className="space-y-2">{goals.map((goal) => <AcquisitionGoalCard key={goal.id} goal={goal} checked={checked} setCheck={setCheck} />)}</ul>}
+      </section>
+    );
+  };
 
   const blocks: Block[] = [
     {
@@ -7208,18 +6675,20 @@ const FFTAProgressionGuide: React.FC = () => {
             >
               <div className="flex items-start gap-2">
                 <input
+                  id={`blue-check-${keyify(n)}`}
                   type="checkbox"
-                  className="mt-1 accent-blue-600 dark:accent-blue-400"
+                  className="mt-1 accent-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:accent-blue-400"
                   checked={isChecked}
                   onChange={() => setCheck(id)}
+                  aria-label={`Learn ${b.name}`}
                 />
-                <div onClick={() => setCheck(id)} className="flex-1 cursor-pointer select-none">
-                  <div className={`font-semibold ${tagColor}`}>
+                <div className="min-w-0 flex-1">
+                  <label htmlFor={`blue-check-${keyify(n)}`} className={`block w-fit cursor-pointer select-none font-semibold ${tagColor}`}>
                     {b.name}{" "}
                     <span className="text-xs text-zinc-500 dark:text-zinc-400">
                       MP {b.mp}
                     </span>
-                  </div>
+                  </label>
                   {/* Hide everything below when checked */}
                   {!isChecked && (
                     <>
@@ -7299,18 +6768,20 @@ const FFTAProgressionGuide: React.FC = () => {
             >
               <div className="flex items-start gap-2">
                 <input
+                  id={`capture-check-${keyify(n)}`}
                   type="checkbox"
-                  className="mt-1 accent-green-600 dark:accent-green-400"
+                  className="mt-1 accent-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 dark:accent-green-400"
                   checked={isChecked}
                   onChange={() => setCheck(id)}
+                  aria-label={`Capture ${c.monster}`}
                 />
-                <div onClick={() => setCheck(id)} className="flex-1 cursor-pointer select-none">
-                  <div className={`font-semibold ${tagColor}`}>
+                <div className="min-w-0 flex-1">
+                  <label htmlFor={`capture-check-${keyify(n)}`} className={`block w-fit cursor-pointer select-none font-semibold ${tagColor}`}>
                     {c.monster}{" "}
                     <span className="text-xs text-zinc-500 dark:text-zinc-400">
                       ({c.family})
                     </span>
-                  </div>
+                  </label>
                   {/* Hide everything below when checked */}
                   {!isChecked && (
                     <>
@@ -7396,17 +6867,19 @@ const FFTAProgressionGuide: React.FC = () => {
               key={`mission-${n}`}
               className="whitespace-pre-line bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
             >
-              <label className="flex items-start gap-2">
+              <div className="flex items-start gap-2">
                 <input
+                  id={`quest-${n}`}
                   type="checkbox"
                   className="mt-1 accent-purple-600 dark:accent-purple-400"
                   checked={isChecked}
                   onChange={() => setCheck(id)}
+                  aria-label={`Mark mission #${String(q.number).padStart(3, "0")} ${q.name} complete`}
                 />
-                <div>
-                  <div className={`font-semibold ${tagColor}`}>
+                <div className="min-w-0 flex-1">
+                  <label htmlFor={`quest-${n}`} className={`block w-fit cursor-pointer font-semibold ${tagColor}`}>
                     #{String(q.number).padStart(3, "0")} — {q.name}
-                  </div>
+                  </label>
                   {/* Hide everything below when checked */}
                   {!isChecked && (
                     <>
@@ -7426,17 +6899,17 @@ const FFTAProgressionGuide: React.FC = () => {
                         <List l="Rewards" a={q.reward} />
                         <List l="Enemies" a={q.enemies} />
                       </div>
-                      <br></br>
-                  {/* ---- Global Missables tied to this mission (injected) ----*/}
-                  {!isChecked && (() => {
-                      const related = getMissablesForMission(n);
+                    </>
+                  )}
+                  {(() => {
+                      const related = getAcquisitionGoalsForMission(n);
                       if (!related.length) return null;
                       return (
                         <ul className="space-y-2 w-full text-sm">
-                            {related.map((m) => (
-                                <MissableCard
-                                    key={`gm-quest-${n}-${m.id}`}
-                                    m={m}
+                            {related.map((goal) => (
+                                <AcquisitionGoalCard
+                                    key={`acq-quest-${n}-${goal.id}`}
+                                    goal={goal}
                                     checked={checked}
                                     setCheck={setCheck}
                                 />
@@ -7444,11 +6917,8 @@ const FFTAProgressionGuide: React.FC = () => {
                         </ul>
                       );
                   })()}
-
-                    </>
-                  )}
                 </div>
-              </label>
+              </div>
             </li>
           );
         }
@@ -7557,16 +7027,18 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
       <div className="text-sm text-zinc-600 dark:text-zinc-400">
           Save or load your progress via a file.
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex w-full flex-col items-stretch gap-2 sm:w-auto sm:flex-row sm:items-center">
           <button
+              type="button"
               onClick={saveProgressToFile}
-              className="px-3 py-1 rounded text-white bg-emerald-600 hover:bg-emerald-700 text-sm"
+              className="w-full whitespace-nowrap rounded bg-emerald-600 px-3 py-1 text-sm text-white hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:w-auto"
           >
               Save Progress
           </button>
           <button
+              type="button"
               onClick={triggerLoadPicker}
-              className="px-3 py-1 rounded text-white bg-indigo-600 hover:bg-indigo-700 text-sm"
+              className="w-full whitespace-nowrap rounded bg-indigo-600 px-3 py-1 text-sm text-white hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:w-auto"
           >
               Load Progress
           </button>
@@ -7578,7 +7050,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
               onChange={handleFilePicked}
           />
           <button
-            className="px-3 py-1 text-sm rounded bg-rose-600 text-white hover:bg-rose-500"
+            className="w-full whitespace-nowrap rounded bg-rose-600 px-3 py-1 text-sm text-white hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:w-auto"
             type="button"
             onClick={requestClearProgress}
             title="Clear Slot 1 progress from this browser"
@@ -7588,6 +7060,12 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
       </div>
       </div>
 
+      <div className="bg-zinc-800/90 text-zinc-200 p-4 text-center text-sm mt-4 ring-1 ring-white/10">
+        <p>
+          Check off tasks as you complete them. Show/Hide panels to keep each
+          section compact.
+        </p>
+      </div>
 
       <div className="mt-3 grid grid-cols-1 gap-3">
         <Panel
@@ -7698,15 +7176,15 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
       <div className="mt-3">
         <Panel
-          title="Missables & Warnings"
-          subtitle='Take a moment to review the missables and warnings before proceeding to avoid later heartache. There are some items that can only be obtained via treasure hunting - the order I have provided for map location placement ensures you get them all!'
+          title="Missables & Important Opportunities"
+          subtitle={`${GLOBAL_MISSABLES.length} legacy records and ${GLOBAL_MISSABLES.reduce((sum, record) => sum + record.missable.length, 0)} item entries resolve to ${ACQUISITION_GOALS.length} distinct acquisition goals. A checked box means the goal was acquired; older encounter checks remain visible in each row's details.`}
           border="border-red-600"
           buttonColor="bg-red-600"
           tone="red"
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
-                label="Missables"
+                label="Permanent missables"
                 done={missDone}
                 total={missTotal}
                 color="red"
@@ -7714,16 +7192,12 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
             </div>
           }
         >
-          <ul className="space-y-2 w-full text-sm">
-            {GLOBAL_MISSABLES.map((m) => (
-              <MissableCard
-                key={`gm-global-${m.id}`}
-                m={m}
-                checked={checked}
-                setCheck={setCheck}
-              />
-            ))}
-          </ul>
+          <div className="space-y-5">
+            {renderAcquisitionGroup("Permanent Missables", permanentGoals, "permanent", "No verified permanent-loss goals are currently listed.")}
+            {renderAcquisitionGroup("Recommended Steals & Acquisitions", recommendedGoals, "recommended", "No current acquisition recommendations.")}
+            {renderAcquisitionGroup("Conditional / Unverified Items", conditionalGoals, "conditional", "No unresolved or conditional items.")}
+            {renderAcquisitionGroup("Optional / Repeatable Opportunities", optionalGoals, "optional", "No item is labeled safely repeatable unless a repeatable acquisition path is documented.")}
+          </div>
         </Panel>
       </div>
 
@@ -7860,6 +7334,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
           const blueNames = b.blue || [];
           const capNames = b.caps || [];
           const miss = b.missables || [];
+          const localMiss = getAcquisitionGoalsByRecordIds(miss);
           const quest = b.sidequests || [];
 
           const blueDoneLocal = blueNames.reduce(
@@ -7870,8 +7345,8 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
             (n, c) => n + (checked[keyify(`cap:${c}`)] ? 1 : 0),
             0
           );
-          const missDoneLocal = miss.reduce(
-            (n, m) => n + (checked[keyify(`miss-global:${m}`)] ? 1 : 0),
+          const missDoneLocal = localMiss.reduce(
+            (n, goal) => n + (isGoalObtained(goal, checked) ? 1 : 0),
             0
           );
           const questDoneLocal = quest.reduce(
@@ -7888,8 +7363,11 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                   : "bg-white dark:bg-zinc-800"
               }`}
             >
-              <div
-                className={`p-4 flex items-center justify-between cursor-pointer ${
+              <button
+                type="button"
+                aria-expanded={isOpen}
+                aria-controls={`block-content-${keyify(b.key)}`}
+                className={`w-full text-left p-4 flex items-center justify-between cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-blue-700 dark:focus-visible:outline-blue-300 ${
                   b.kind === "story"
                     ? "hover:bg-amber-100 dark:hover:bg-amber-900/20"
                     : "hover:bg-zinc-50 dark:hover:bg-zinc-800/70"
@@ -7931,9 +7409,9 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                         Sidequests {questDoneLocal}/{quest.length}
                       </Tag>
                     )}
-                    {miss.length > 0 && (
+                    {localMiss.length > 0 && (
                       <Tag color="red">
-                        Missables {missDoneLocal}/{miss.length}
+                        Goals {missDoneLocal}/{localMiss.length}
                       </Tag>
                     )}
                   </div>
@@ -7943,10 +7421,12 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                 ) : (
                   <ChevronDown className="text-zinc-500" />
                 )}
-              </div>
+              </button>
 
-              {isOpen && (
-                <div className="p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800">
+              <div id={`block-content-${keyify(b.key)}`} hidden={!isOpen}>
+                {isOpen && (
+                  <div className="p-4 space-y-4 border-t border-zinc-200 dark:border-zinc-800">
+                    <ul className="space-y-2">
                     {b.kind === "story" && quest.map((num) => {
                         const id = keyify(`quest-global:${num}`);
                         const q = missionMap.get(num);
@@ -7957,10 +7437,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                 className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
                             >
                                 <div className="flex w-full items-start justify-between gap-3">
-                                    <label
-                                        htmlFor={`side-${num}`}
-                                        className="flex-1 text-zinc-800 dark:text-zinc-200 cursor-pointer select-none"
-                                    >
+                                    <div className="min-w-0 flex-1 text-zinc-800 dark:text-zinc-200">
                                         {q ? (
                                             <>
                                                 <div className="italic">
@@ -7974,16 +7451,16 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                 </div>
 
                                                 {/* Related global missables for this mission (injected) */}
-                                                {q && !isChecked && (() => {
-                                                    const related = getMissablesForMission(num);
+                                                {q && (() => {
+                                                    const related = getAcquisitionGoalsForMission(num);
                                                     if (!related.length) return null;
                                                     return (
                                                         <div className="mt-2">
                                                             <ul className="space-y-2 w-full">
-                                                                {related.map((m) => (
-                                                                    <MissableCard
-                                                                        key={`gm-side-${num}-${m.id}`}
-                                                                        m={m}
+                                                                {related.map((goal) => (
+                                                                    <AcquisitionGoalCard
+                                                                        key={`acq-side-${num}-${goal.id}`}
+                                                                        goal={goal}
                                                                         checked={checked}
                                                                         setCheck={setCheck}
                                                                     />
@@ -7998,7 +7475,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                 No strategy available.
                                             </div>
                                         )}
-                                    </label>
+                                    </div>
 
                                     {/* Pretty completion toggle */}
                                     {num >= 1 && (
@@ -8035,6 +7512,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                             </li>
                         );
                     })}
+                    </ul>
 
                     {b.placements && b.placements.length > 0 && (
                         <MapPanel placements={b.placements} />
@@ -8112,23 +7590,21 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                             key={num}
                                             className="flex items-start gap-2 bg-white dark:bg-zinc-800 p-2 rounded-xl ring-1 ring-zinc-950/10 dark:ring-white/10"
                                         >
-                                            <label className="flex w-full items-start gap-2">
+                                            <div className="flex w-full items-start gap-2">
                                                 <input
                                                     id={`side-${num}`}
                                                     type="checkbox"
                                                     className="mt-0.5 accent-amber-600 dark:accent-amber-400"
                                                     checked={!!checked[id]}
                                                     onChange={() => setCheck(id)}
+                                                    aria-label={`Mark side mission #${String(num).padStart(3, "0")} complete`}
                                                 />
-                                                <label
-                                                    htmlFor={`side-${num}`}
-                                                    className="w-full text-zinc-800 dark:text-zinc-200 cursor-pointer select-none"
-                                                >
+                                                <div className="min-w-0 w-full text-zinc-800 dark:text-zinc-200">
                                                     {q ? (
                                                         <>
-                                                            <div className="font-semibold text-zinc-900 dark:text-zinc-100">
+                                                            <label htmlFor={`side-${num}`} className="block w-fit cursor-pointer font-semibold text-zinc-900 dark:text-zinc-100">
                                                                 #{String(q.number).padStart(3, "0")} — {q.name}
-                                                            </div>
+                                                            </label>
                                                             <div className="text-xs text-zinc-600 dark:text-zinc-400">
                                                                 {!isChecked && q.prerequisites && (
                                                                     <>
@@ -8177,16 +7653,16 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                                 )}
                                                             </div>
 
-                                                            {q && !isChecked && (() => {
-                                                                const related = getMissablesForMission(num);
+                                                            {q && (() => {
+                                                                const related = getAcquisitionGoalsForMission(num);
                                                                 if (!related.length) return null;
                                                                 return (
                                                                     <div className="mt-2">
                                                                         <ul className="space-y-2 w-full">
-                                                                            {related.map((m) => (
-                                                                                <MissableCard
-                                                                                    key={`gm-side-${num}-${m.id}`}
-                                                                                    m={m}
+                                                                            {related.map((goal) => (
+                                                                                <AcquisitionGoalCard
+                                                                                    key={`acq-side-${num}-${goal.id}`}
+                                                                                    goal={goal}
                                                                                     checked={checked}
                                                                                     setCheck={setCheck}
                                                                                 />
@@ -8201,8 +7677,8 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                                             #{String(num).padStart(3, "0")} — Unknown quest
                                                         </div>
                                                     )}
-                                                </label>
-                                            </label>
+                                                </div>
+                                            </div>
                                         </li>
                                     );
                                 })}
@@ -8211,15 +7687,11 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     )}
 
                     {(Array.isArray(b.missables) && b.missables.length > 0) && (() => {
-                        const localMiss = b.missables
-                            .map((id) => GLOBAL_MISSABLES.find((m) => m.id === id))
-                            .filter((m): m is GlobalMissable => !!m);
-
                         if (localMiss.length === 0) return null;
 
                         return (
                             <Panel
-                                title="Missables Now Available"
+                                title="Important Opportunities Now Available"
                                 border="border-red-600"
                                 buttonColor="bg-red-600"
                                 tone="red"
@@ -8227,19 +7699,19 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                 right={
                                     <div className="w-full sm:w-auto sm:min-w-[180px]">
                                         <ProgressBar
-                                            label="Missables"
+                                            label="Recruitment goals"
                                             done={missDoneLocal}
-                                            total={miss.length}
-                                            color="red"
+                                            total={localMiss.length}
+                                            color="amber"
                                         />
                                     </div>
                                 }
                             >
                                 <ul className="space-y-2 w-full text-sm">
-                                    {localMiss.map((m) => (
-                                        <MissableCard
-                                            key={`gm-local-${m.id}`}
-                                            m={m}
+                                    {localMiss.map((goal) => (
+                                        <AcquisitionGoalCard
+                                            key={`gm-local-${goal.id}`}
+                                            goal={goal}
                                             checked={checked}
                                             setCheck={setCheck}
                                         />
@@ -8248,19 +7720,14 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                             </Panel>
                         );
                     })()}
-                </div>
-            )}
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
       </div>
 
-      <div className="bg-zinc-800/90 text-zinc-200 p-4 rounded-b-2xl text-center text-sm mt-4 ring-1 ring-white/10">
-        <p>
-          Check off tasks as you complete them. Show/Hide panels keep each
-          section compact.
-        </p>
-      </div>
     </div>
   );
 };
