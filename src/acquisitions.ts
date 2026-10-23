@@ -604,6 +604,185 @@ export type AcquisitionGoal = {
   references: { label: string; url: string }[];
 };
 
+export type AcquisitionPlayerCopy = {
+  label: string;
+  instruction: string;
+  note?: string;
+  details: string[];
+  otherOpportunities: string[];
+  expandable: boolean;
+};
+
+type EditorialGuidance = {
+  instruction?: string;
+  note?: string;
+  details?: string[];
+};
+
+// Player copy is kept separate from the evidence and audit fields below. Add
+// item-specific instructions here when the route involves choices or timing.
+const playerGuidance: Partial<Record<string, EditorialGuidance>> = {
+  "angel-rings": {
+    instruction: "Steal Angel Rings from the Black Mage during Lutia Mop-Up (#072).",
+    note: "One normal clear gives you one chance; do not rely on repeating the mission to stock up.",
+  },
+  babus: {
+    instruction: "After the story, complete Left Behind, then go straight to the pub and accept With Babus.",
+    note: "To be safe, do not travel around the map or complete A Maiden's Cry with Left Behind before accepting With Babus.",
+  },
+  bracers: {
+    instruction: "Steal Bracers from the Sniper during Lutia Mop-Up (#072).",
+    note: "One normal clear gives you one chance; do not rely on repeating the mission to stock up.",
+  },
+  cheney: {
+    instruction: "Get Snake Shield in Hundred-Eye (#165). Keep it, then carry it into a mission that does not use it to recruit Cheney.",
+    note: "If you lose Snake Shield before Cheney joins, no reliable replacement is known.",
+  },
+  cid: {
+    instruction: "Complete all 300 numbered missions. Then visit Bervenia Palace and finish Cleanup Time to recruit Cid.",
+    note: "Some missed quests may be difficult to recover, so keep working through the numbered mission list.",
+  },
+  "dragon-force": {
+    instruction: "Have a Blue Mage learn Dragon Force from a Thundrake before its encounters are gone.",
+    note: "The Thundrake must cast Dragon Force while a Blue Mage is able to learn it.",
+    details: ["Control or Charm can help make the Thundrake use Dragon Force."],
+  },
+  eldena: {
+    instruction: "Get Elda's Cup in Hungry Ghost (#123), then recruit Eldena before Caravan Guard (#168).",
+    note: "Caravan Guard consumes the cup.",
+  },
+  ezel: {
+    instruction: "After To Ambervale (#022), complete Resistance (#106) and New Antilaw (#056). Choose Gossip at Cadoan's Card Shop, then complete Reconciliation to recruit Ezel.",
+    note: "Recruit Ezel before Royal Valley (#024), the final story battle.",
+  },
+  "free-bervenia-087": {
+    instruction: "Save before Free Bervenia! (#087), then complete the mission.",
+    note: "Failure may keep this mission from returning.",
+  },
+  goblin: {
+    instruction: "Capture a Goblin in any of the listed encounters before Goblins disappear from regular missions.",
+    note: "Capture one before finishing the remaining Goblin encounters if you want to complete the Monster Bank.",
+  },
+  "goblin-punch": {
+    instruction: "Have a Blue Mage learn Goblin Punch from a Goblin before its regular-mission encounters are gone.",
+    note: "The Goblin must use Goblin Punch while your Blue Mage can learn it.",
+    details: ["Control or Charm can help prompt an enemy to use an ability. The listed Paladin source is difficult to rely on, so use one of the Goblin encounters when possible."],
+  },
+  "hades-bows": {
+    instruction: "Steal Hades Bow from the Sniper during Lutia Mop-Up (#072).",
+    note: "One normal clear gives you one chance; do not rely on repeating the mission to stock up.",
+  },
+  "iceprism-sword": {
+    instruction: "In Snow Fairy (#109), negotiate successfully and bring Ice Cream from Malboro Hunt (#225).",
+    note: "The reward depends on both the negotiation and having Ice Cream; no reliable alternate route is known.",
+  },
+  lini: {
+    instruction: "Get Hero Gaol in Oasis Frogs (#062). Keep it, then take it to a mission that does not use it to recruit Lini.",
+    note: "If Hero Gaol is lost, no reliable replacement is known.",
+  },
+  littlevilli: {
+    instruction: "Recruit Littlevilli during Clan League (#043). If the offer does not appear, replay the mission.",
+  },
+  pallanza: {
+    instruction: "Get Wyrmstone in Ruby Red (#031), then carry it into A Dragon's Aid (#066) to recruit Pallanza.",
+    note: "A Dragon's Aid does not use Wyrmstone, so keep it until Pallanza joins.",
+  },
+  quin: {
+    instruction: "Save before Missing Professor (#063). Recruit Quin if the offer appears; otherwise reset and try again before leaving the mission.",
+    note: "This is Quin's only listed recruitment chance, and the offer is random.",
+  },
+  "r4-anti-law": {
+    instruction: "Negotiate successfully in Resistance (#106) to receive R4 Anti-Law.",
+    note: "Failing the negotiation gives R3 Anti-Law instead; no reliable way to recover R4 is known.",
+  },
+  ritz: {
+    instruction: "After the story, complete Mortal Snow. Ritz offers to join when the mission ends; Old Friends (#107) must be complete first.",
+    note: "To be safe, finish Mortal Snow before completing Reconciliation with Left Behind or A Maiden's Cry. If you decline, Ritz's Offer gives you another chance.",
+  },
+  shara: {
+    instruction: "After the story, complete A Maiden's Cry during Huntmoon, then visit a town to recruit Shara.",
+    note: "If you are also recruiting Babus, accept With Babus after Left Behind before travelling around the map.",
+  },
+  thundrake: {
+    instruction: "Capture a Thundrake in any listed encounter before its regular-mission appearances are gone.",
+    note: "Capture one before finishing the remaining Thundrake encounters if you want to complete the Monster Bank.",
+  },
+  tulwar: {
+    note: "Worth stealing now: a later treasure hunt depends on your map layout.",
+  },
+  "zeus-mace": {
+    note: "Worth stealing now: later treasure hunts depend on your map layout.",
+  },
+  "silver-coat": {
+    note: "Worth taking now if you want one; no reliable later route is known.",
+  },
+  "chill-rod": {
+    note: "Worth getting now: a later Type 6 mission reward is random.",
+    details: ["Chill Rod can also appear in a Type 6 random mission reward. Do not rely on that reward being available when you need it."],
+  },
+  "steal-weapon-ability": {
+    note: "Learning it early gives your Thief access to another useful stealing technique.",
+    details: ["Sword Breaker can also appear in a Type 6 random mission reward; that reward is not a dependable alternative."],
+  },
+};
+
+const playerLabel = (goal: AcquisitionGoal) => {
+  if (goal.group === "permanent") return "Missable";
+  if (goal.group === "optional") return "Optional";
+  if (goal.priority === "strongly-recommended") return "Strongly Recommended";
+  if (goal.priority === "recommended") return "Recommended";
+  return "Optional";
+};
+
+const formatPlayerOpportunity = (
+  goal: AcquisitionGoal,
+  source: AcquisitionSource,
+  missionName: (mission: number) => string,
+) => {
+  const missions = [...source.missions].sort((a, b) => a - b).map(missionName).join(", ");
+  const target = source.target ? ` from ${source.target}` : "";
+  const method = goal.kind === "steal" ? "Steal" : "Available";
+  const qualifiers = [source.rarity, source.hidden ? "hidden" : undefined].filter(Boolean).join(" · ");
+  return `${method}${target} during ${missions || "this opportunity"}${qualifiers ? ` (${qualifiers})` : ""}.`;
+};
+
+/** Build concise gameplay copy without exposing audit, confidence, or migration fields. */
+export const getAcquisitionPlayerCopy = (
+  goal: AcquisitionGoal,
+  missionName: (mission: number) => string = (mission) => `Mission #${String(mission).padStart(3, "0")}`,
+  missionContext?: number,
+): AcquisitionPlayerCopy => {
+  const editorial = playerGuidance[goal.id];
+  const orderedSources = [...goal.sources].sort((a, b) =>
+    (a.missions.length ? Math.min(...a.missions) : Number.MAX_SAFE_INTEGER) -
+    (b.missions.length ? Math.min(...b.missions) : Number.MAX_SAFE_INTEGER),
+  );
+  const sources = missionContext === undefined
+    ? orderedSources
+    : orderedSources.flatMap((source) => source.missions.includes(missionContext)
+      ? [{ ...source, missions: [missionContext] }]
+      : []);
+  const primarySource = sources[0];
+  const instruction = primarySource && goal.kind === "steal"
+    ? formatPlayerOpportunity(goal, primarySource, missionName)
+    : editorial?.instruction ?? "Check this opportunity before moving on.";
+  const otherOpportunities = goal.kind === "steal"
+    ? sources.slice(1).map((source) => formatPlayerOpportunity(goal, source, missionName))
+    : missionContext === undefined && (goal.kind === "capture" || goal.kind === "blue-magic")
+      ? [...new Set(sources.flatMap((source) => source.missions))].sort((a, b) => a - b).map(missionName)
+      : [];
+  const details = editorial?.details ?? [];
+  const expandable = details.length > 0 || otherOpportunities.length > 0;
+  return {
+    label: playerLabel(goal),
+    instruction,
+    note: editorial?.note,
+    details,
+    otherOpportunities,
+    expandable,
+  };
+};
+
 const refs = {
   quest: { label: "Quest Guide (Terence)", url: "https://gamefaqs.gamespot.com/gba/560436-final-fantasy-tactics-advance/faqs/27277" },
   steal: { label: "Stealing Guide (Nyst)", url: "https://gamefaqs.gamespot.com/gba/560436-final-fantasy-tactics-advance/faqs/25875" },
@@ -653,9 +832,12 @@ const assessments: Record<string, Assessment> = {
   "r4-anti-law": assessment("conditional", "unverified", "recommended", "partial", "Negotiate successfully in Resistance (#106); recovery after failure is unverified.", ["The legacy guide states failure gives R3 Anti-Law instead."], ["No alternate R4 source was verified."], "Reward depends on a conditional outcome and no safe retry path is documented.", ["quest"]),
   "free-bervenia-087": assessment("conditional", "unverified", "recommended", "partial", "The report that failed Free Bervenia (#087) may not return remains unverified.", ["The old guide recommends saving before attempting the mission.", "Failure behavior has not been verified across versions and prerequisites."], ["No guaranteed reappearance after failure is established."], "Keep the conservative warning while availability remains uncertain.", ["quest", "play"]),
   "angel-rings": assessment("conditional", "unverified", "optional", "partial", "Lutia Mop-Up (#072) is one listed source; the repeatable-farming claim is incorrect.", ["The quest listing marks the mission non-repeatable.", "The flee-and-reaccept approach is an exploit/failure loop and is not counted as a normal source."], ["No normal repeatable alternative was verified."], "The old note treated a failure exploit as repeatable farming.", ["quest", "guild"]),
+  bracers: assessment("conditional", "unverified", "optional", "partial", "Steal from the Sniper during Lutia Mop-Up (#072); no later route is established.", ["The Sniper carries Bracers during the one-time mission.", "Do not count the flee-and-reaccept loop as a normal repeatable source."], ["No normal repeatable alternative was verified."], "Keep the single listed opportunity available to players without presenting the flee loop as safe farming.", ["quest", "guild"]),
+  "hades-bows": assessment("conditional", "unverified", "optional", "partial", "Steal Hades Bow from the Sniper during Lutia Mop-Up (#072); no later route is established.", ["The Sniper carries Hades Bow during the one-time mission.", "Do not count the flee-and-reaccept loop as a normal repeatable source."], ["No normal repeatable alternative was verified."], "Keep the single listed opportunity available to players without presenting the flee loop as safe farming.", ["quest", "guild"]),
 };
 
 const kindFor = (record: GlobalMissable): AcquisitionGoal["kind"] => {
+  if (record.id === 69) return "steal";
   if (record.type === "Recruiting-Related Missions") return "recruit";
   if (record.type === "Monster Bank") return "capture";
   if (record.type === "Blue Magic") return "blue-magic";
@@ -686,6 +868,9 @@ const makeSource = (record: GlobalMissable, item: string): AcquisitionSource => 
   const kind = kindFor(record);
   const annotatedItem = record.missable.find((raw) => canonicalAcquisitionId(raw) === canonicalAcquisitionId(item)) ?? "";
   const rarity = annotatedItem.match(/\((Very Rare|Rare)\)/i)?.[1];
+  const lutiaTarget = record.id === 69
+    ? item.toLowerCase().includes("angel") ? "Black Mage" : "Sniper"
+    : undefined;
   const availability = record.id === 6
     ? "Repeatable mission; join offer is random"
     : record.id === 69
@@ -694,7 +879,7 @@ const makeSource = (record: GlobalMissable, item: string): AcquisitionSource => 
   return {
     recordId: record.id,
     missions: [...new Set(record.mission ?? [])],
-    target: record.warning?.match(/^Target:\s*(.+)$/i)?.[1],
+    target: lutiaTarget ?? record.warning?.match(/^Target:\s*(.+)$/i)?.[1],
     rarity: rarity ? rarity.toLowerCase() === "very rare" ? "Very Rare" : "Rare" : undefined,
     hidden: /\[Hidden\]/i.test(annotatedItem),
     method: kind === "steal" ? "Steal" : kind === "capture" ? "Capture" : kind === "blue-magic" ? "Learn Blue Magic" : kind === "recruit" ? "Recruitment opportunity / mission item" : kind === "mission" ? "Mission outcome" : "Mission reward / opportunity",
@@ -706,7 +891,18 @@ const makeSource = (record: GlobalMissable, item: string): AcquisitionSource => 
 export const ACQUISITION_GOALS: AcquisitionGoal[] = [...grouped.entries()].map(([id, value]) => {
   const kind = kindFor(value.records[0]);
   const a = assessments[id] ?? fallback(kind, value.records.length);
-  const goalSources = value.records.map((record) => makeSource(record, value.item));
+  const goalSources = value.records.flatMap((record) => {
+    const source = makeSource(record, value.item);
+    // The first Chill Rod steal is hidden; the later mission's copy is visible.
+    // Keep the two locations distinct so mission cards do not inherit the wrong qualifier.
+    if (id === "chill-rod" && source.missions.includes(45) && source.missions.includes(61)) {
+      return [
+        { ...source, missions: [45], hidden: true, note: "Steal the hidden Chill Rod from a Nu Mou Black Mage." },
+        { ...source, missions: [61], hidden: false, note: "Steal Chill Rod from a Nu Mou Black Mage; this copy is not hidden." },
+      ];
+    }
+    return [source];
+  });
   const alternatives = a.alternatives?.length ? a.alternatives : (value.records.length > 1
     ? [`This guide lists ${value.records.length} fixed encounter sources above. Their repeatability and any additional shop/mission/treasure sources were not verified.`]
     : ["No sufficiently verified alternate acquisition path is recorded."]);

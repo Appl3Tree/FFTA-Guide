@@ -13,10 +13,12 @@ import {
   getAcquisitionPreparationsForMission,
   getAcquisitionSourceMissions,
   getChronologicallyAvailableMissionNumbers,
+  getAcquisitionPlayerCopy,
   type AcquisitionGoal,
   type AcquisitionGroup,
 } from "./acquisitions";
 import { buildProgressSave, parseProgressSave } from "./progressSave";
+import { ACQUISITION_TRACKER_COLOR, TRACKER_COLOR, TRACKER_PALETTE, type TrackerColor } from "./trackerPalette";
 
 const keyify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
@@ -1840,7 +1842,7 @@ To win, focus all your attacks on Li-Grim. The Mateuses are dangerous, but wasti
       `2x Random Cards`,
     ],
     difficulty: `Hard`,
-    enemies: [`Black Mage`, `Time Mage (Steraiz)`],
+    enemies: [`Black Mage`, `Time Mage (Steraiz)`, `Sniper`],
   },
   {
     number: 73,
@@ -5681,57 +5683,50 @@ const goalKey = acquisitionCheckedKey;
 const isGoalObtained = (goal: AcquisitionGoal, checked: Record<string, boolean>) =>
   !!checked[goalKey(goal)];
 
-const goalGroupLabel: Record<AcquisitionGoal["group"], string> = {
-  permanent: "Missable",
-  recommended: "Recommended acquisition",
-  conditional: "Conditional opportunity",
-  optional: "Optional / repeatable",
+const acquisitionMissionLabel = (number: number) => {
+  const mission = MISSION_REF.find((entry) => entry.number === number);
+  return mission ? `${mission.name} (#${String(number).padStart(3, "0")})` : `Mission #${String(number).padStart(3, "0")}`;
 };
-const goalPriorityLabel: Record<AcquisitionGoal["priority"], string> = {
-  essential: "Protect before the cutoff",
-  "strongly-recommended": "Strongly Recommended",
-  recommended: "Recommended",
-  optional: "Optional",
-};
+
 const acquisitionGroupPresentation: Record<AcquisitionGroup, {
   panelTitle: string;
   chapterTitle: string;
-  color: "blue" | "red" | "amber" | "zinc";
+  color: TrackerColor;
   border: string;
   button: string;
-  tone: "blue" | "red" | "amber" | "neutral";
+  tone: TrackerColor;
 }> = {
   permanent: {
     panelTitle: "Missables",
     chapterTitle: "Missables Now Available",
-    color: "red",
-    border: "border-red-600",
-    button: "bg-red-600",
-    tone: "red",
+    color: ACQUISITION_TRACKER_COLOR.permanent,
+    border: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.permanent].border,
+    button: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.permanent].button,
+    tone: ACQUISITION_TRACKER_COLOR.permanent,
   },
   recommended: {
     panelTitle: "Recommended Acquisitions",
     chapterTitle: "Recommended Acquisitions Now Available",
-    color: "blue",
-    border: "border-blue-600",
-    button: "bg-blue-600",
-    tone: "blue",
+    color: ACQUISITION_TRACKER_COLOR.recommended,
+    border: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.recommended].border,
+    button: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.recommended].button,
+    tone: ACQUISITION_TRACKER_COLOR.recommended,
   },
   conditional: {
-    panelTitle: "Conditional & Unverified Acquisitions",
-    chapterTitle: "Conditional Opportunities Now Available",
-    color: "amber",
-    border: "border-amber-600",
-    button: "bg-amber-600",
-    tone: "amber",
+    panelTitle: "Use Caution",
+    chapterTitle: "Use Caution: Opportunities Now Available",
+    color: ACQUISITION_TRACKER_COLOR.conditional,
+    border: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.conditional].border,
+    button: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.conditional].button,
+    tone: ACQUISITION_TRACKER_COLOR.conditional,
   },
   optional: {
-    panelTitle: "Optional / Repeatable Opportunities",
+    panelTitle: "Optional Collectibles & Recruitment",
     chapterTitle: "Optional Opportunities Now Available",
-    color: "zinc",
-    border: "border-zinc-500",
-    button: "bg-zinc-600",
-    tone: "neutral",
+    color: ACQUISITION_TRACKER_COLOR.optional,
+    border: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.optional].border,
+    button: TRACKER_PALETTE[ACQUISITION_TRACKER_COLOR.optional].button,
+    tone: ACQUISITION_TRACKER_COLOR.optional,
   },
 };
 
@@ -5739,126 +5734,72 @@ function AcquisitionGoalCard({
   goal,
   checked,
   setCheck,
-  compact = false,
   missionContext,
+  showLabel,
 }: {
   goal: AcquisitionGoal;
   checked: Record<string, boolean>;
   setCheck: (key: string, next?: boolean) => void;
-  compact?: boolean;
   missionContext?: number;
+  showLabel?: boolean;
 }) {
   const inputId = useId();
   const done = isGoalObtained(goal, checked);
-  const recordLabels = goal.sources.flatMap((source) => source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`));
-  const allMissionLabels = [...new Set([...recordLabels, ...goal.extraMissionSources.flatMap((source) => source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`))])];
-  const legacyComplete = goal.recordIds.filter((recordId) => !!checked[keyify(`miss-global:${recordId}`)]);
-  const categoryText = goal.group === "permanent"
-    ? "Confirmed permanent missable"
-    : goal.group === "recommended"
-      ? goal.missability === "recoverable" ? "Later acquisition is documented" : "Later availability is unverified"
-      : goal.group === "conditional"
-        ? goal.missability === "recoverable" ? "Recovery path is documented; source is conditional" : "Permanent availability is unverified"
-        : goal.missability === "recoverable" ? "Repeatable path is documented" : "Optional source is unverified";
-  const groupTextColor = goal.group === "permanent"
-    ? "text-red-700 dark:text-red-300"
-    : goal.group === "recommended"
-      ? "text-blue-700 dark:text-blue-300"
-      : goal.group === "conditional"
-        ? "text-amber-800 dark:text-amber-300"
-        : "text-zinc-700 dark:text-zinc-300";
-  const borderColor = goal.group === "permanent"
-    ? "border-red-300 dark:border-red-900/60"
-    : goal.group === "recommended"
-      ? "border-blue-300 dark:border-blue-900/60"
-      : goal.group === "conditional"
-        ? "border-amber-300 dark:border-amber-900/60"
-        : "border-zinc-200 dark:border-zinc-700";
-  const contextualSources = missionContext === undefined
-    ? []
-    : [...goal.sources, ...goal.extraMissionSources].filter((source) => source.missions.includes(missionContext));
-  const opportunityHere = [...new Set(contextualSources.map((source) =>
-    [
-      source.target && source.method === "Steal" ? `Steal from ${source.target}` : source.method,
-      source.rarity,
-      source.hidden ? "Hidden item" : undefined,
-    ].filter(Boolean).join(" · "),
-  ))].join("; ");
-  const checkboxAccent = goal.group === "permanent"
-    ? "accent-red-600 dark:accent-red-400"
-    : goal.group === "recommended"
-      ? "accent-blue-600 dark:accent-blue-400"
-      : goal.group === "conditional"
-        ? "accent-amber-600 dark:accent-amber-400"
-        : "accent-zinc-600 dark:accent-zinc-400";
+  const presentation = acquisitionGroupPresentation[goal.group];
+  const copy = getAcquisitionPlayerCopy(goal, acquisitionMissionLabel, missionContext);
+  const colors = TRACKER_PALETTE[presentation.color];
+  const showPriority = showLabel ?? (goal.group === "recommended" || goal.group === "conditional");
+  const obtainedAction = goal.kind === "recruit" ? "Recruited"
+    : goal.kind === "blue-magic" ? "Learned"
+      : goal.kind === "capture" ? "Captured" : "Obtained";
 
   return (
-    <li className={`min-w-0 rounded-xl border ${borderColor} bg-white dark:bg-zinc-800 p-2.5`}>
+    <li className={`min-w-0 rounded-xl border ${colors.cardBorder} bg-white dark:bg-zinc-800 p-2.5`}>
       <div className="flex min-w-0 items-start gap-2.5">
         <input
           id={inputId}
           type="checkbox"
-          className={`mt-1 h-4 w-4 shrink-0 ${checkboxAccent} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-300`}
+          className={`mt-1 h-5 w-5 shrink-0 ${colors.accent} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-300`}
           checked={done}
           onChange={(event) => setCheck(goalKey(goal), event.currentTarget.checked)}
-          aria-label={`${goalGroupLabel[goal.group]}: ${goal.kind === "recruit" ? "Recruited" : goal.kind === "blue-magic" ? "Learned" : goal.kind === "capture" ? "Captured" : "Obtained"}: ${goal.item}`}
+          aria-label={`${copy.label}: ${obtainedAction} ${goal.item}`}
         />
         <div className="min-w-0 flex-1 text-sm text-zinc-800 dark:text-zinc-200">
-          <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
             <label htmlFor={inputId} className="min-w-0 cursor-pointer font-semibold text-zinc-950 dark:text-zinc-100">
               {goal.item}
             </label>
-            <span className={`font-semibold ${groupTextColor}`}>
-              {goalGroupLabel[goal.group]}
-            </span>
-            {goal.group !== "permanent" && goal.priority !== "optional" && (
-              <span className="text-xs text-zinc-600 dark:text-zinc-400">{goalPriorityLabel[goal.priority]}</span>
-            )}
-            <span className={`text-xs ${groupTextColor}`}>
-              {categoryText}
-            </span>
+            {showPriority && <Tag color={presentation.color}>{copy.label}</Tag>}
           </div>
-          <p className="mt-0.5 text-xs leading-5 text-zinc-700 dark:text-zinc-300">
-            {missionContext !== undefined && opportunityHere
-              ? <><span className="font-medium">Available here:</span> {opportunityHere}. {goal.summary}</>
-              : compact ? goal.summary : <>{goal.summary}{allMissionLabels.length > 0 && <> <span className="font-medium">Listed in:</span> {allMissionLabels.join(", ")}.</>}</>}
+          <p className="mt-1 text-sm leading-5 text-zinc-700 dark:text-zinc-300">
+            {copy.instruction}
           </p>
-          {goal.rationale && (goal.group === "recommended" || goal.group === "conditional") && (
-            <p className="mt-1 text-xs leading-5 text-zinc-600 dark:text-zinc-400"><span className="font-medium">Why prioritize:</span> {goal.rationale}</p>
+          {copy.note && (
+            <p className="mt-1 text-xs leading-5 text-zinc-600 dark:text-zinc-400">{copy.note}</p>
           )}
-          <details className="mt-1.5 text-xs leading-5 marker:text-zinc-500">
-            <summary className="w-fit cursor-pointer rounded-sm font-medium text-blue-800 underline decoration-blue-300 underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:decoration-blue-700 dark:focus-visible:outline-blue-300">
-              Acquisition details
-            </summary>
-            <div className="mt-2 space-y-2 border-l-2 border-zinc-200 pl-3 dark:border-zinc-600">
-              <div><span className="font-semibold">Assessment:</span> {categoryText}. {goal.rationale}</div>
-              {goal.sources.length > 0 && (
-                <div>
-                  <div className="font-semibold">Listed encounters</div>
-                  <ul className="list-disc pl-5">
-                    {goal.sources.map((source, index) => (
-                      <li key={`${source.recordId}-${index}`}>
-                        {source.missions.length ? source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`).join(", ") : "Mission not numbered in the legacy record"}: {source.target ? `${source.target}; ` : ""}{source.method}{source.rarity ? `; ${source.rarity}` : ""}{source.hidden ? "; hidden item" : ""}. Availability: {source.availability}. {source.note}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {goal.extraMissionSources.length > 0 && (
-                <div>
-                  <div className="font-semibold">Item / recruitment setup</div>
-                  <ul className="list-disc pl-5">
-                    {goal.extraMissionSources.map((source, index) => <li key={`${source.recordId}-extra-${index}`}>{source.missions.map((mission) => `#${String(mission).padStart(3, "0")}`).join(", ")}: {source.method}. Availability: {source.availability}. {source.note}</li>)}
-                  </ul>
-                </div>
-              )}
-              {goal.details.length > 0 && <ul className="list-disc pl-5">{goal.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
-              {goal.alternatives.length > 0 && <div><span className="font-semibold">Later alternatives:</span> {goal.alternatives.join(" ")}</div>}
-              <div><span className="font-semibold">Verification:</span> {goal.verification}.</div>
-              {goal.references.length > 0 && <div><span className="font-semibold">References:</span> {goal.references.map((reference, index) => <React.Fragment key={reference.url}>{index > 0 && ", "}<a className="underline underline-offset-2" href={reference.url} target="_blank" rel="noreferrer">{reference.label}</a></React.Fragment>)}</div>}
-              {legacyComplete.length > 0 && <p className="rounded bg-zinc-100 px-2 py-1 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200">Earlier save marked legacy encounter record{legacyComplete.length > 1 ? "s" : ""} {legacyComplete.join(", ")} complete. This historical state is preserved, but it does not establish item ownership.</p>}
-            </div>
-          </details>
+          {copy.expandable && (
+            <details className="mt-2 text-xs leading-5 marker:text-zinc-500">
+              <summary className="inline-flex min-h-11 w-fit cursor-pointer items-center rounded-sm py-1 font-medium text-blue-800 underline decoration-blue-300 underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:text-blue-300 dark:decoration-blue-700 dark:focus-visible:outline-blue-300">
+                {goal.kind === "capture" || goal.kind === "blue-magic"
+                  ? "Available encounters and details"
+                  : copy.otherOpportunities.length ? "Other opportunities and details" : "More details"}
+              </summary>
+              <div className="mt-1 space-y-2 border-l-2 border-zinc-200 pl-3 dark:border-zinc-600">
+                {copy.otherOpportunities.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold">{goal.kind === "capture" || goal.kind === "blue-magic" ? "Available encounters" : "Other opportunities"}</h4>
+                    <ul className="list-disc pl-5">{copy.otherOpportunities.map((opportunity) => <li key={opportunity}>{opportunity}</li>)}</ul>
+                  </div>
+                )}
+                {copy.details.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold">Important</h4>
+                    <ul className="list-disc pl-5">{copy.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>
+                  </div>
+                )}
+              </div>
+            </details>
+          )}
         </div>
       </div>
     </li>
@@ -5883,21 +5824,25 @@ const MissionAcquisitionList: React.FC<{
   const titleFor = (group: AcquisitionGroup, groupGoals: AcquisitionGoal[]) =>
     group === "permanent" ? "Missables"
       : group === "recommended" ? groupGoals.every((goal) => goal.kind === "steal") ? "Recommended Steals" : "Recommended Acquisitions"
-        : group === "conditional" ? "Conditional Opportunities" : "Optional Opportunities";
+        : group === "conditional" ? "Use Caution" : "Optional Collectibles & Recruitment";
+
+  const recruitmentPreparation = (goal: AcquisitionGoal) => {
+    const copy: Record<string, string> = {
+      eldena: "Get Elda's Cup here. Recruit Eldena before Caravan Guard (#168) consumes it.",
+      lini: "Get Hero Gaol here. Keep it until Lini joins your clan.",
+      pallanza: "Get Wyrmstone here. Carry it into A Dragon's Aid (#066) to recruit Pallanza; that mission does not consume it.",
+      cheney: "Get Snake Shield here. Keep it until you can carry it into a mission that does not use it and recruit Cheney.",
+    };
+    return copy[goal.id] ?? `Keep this item for ${goal.item}'s recruitment opportunity.`;
+  };
 
   return (
     <div className="mt-2 space-y-2" role="group" aria-label={`Acquisition opportunities for mission #${String(missionNumber).padStart(3, "0")}`}>
       {groups.map(({ group, goals: groupGoals }) => {
         const presentation = acquisitionGroupPresentation[group];
-        const headingColor = group === "permanent"
-          ? "text-red-700 dark:text-red-300"
-          : group === "recommended"
-            ? "text-blue-700 dark:text-blue-300"
-            : group === "conditional"
-              ? "text-amber-800 dark:text-amber-300"
-              : "text-zinc-700 dark:text-zinc-300";
+        const headingColor = TRACKER_PALETTE[presentation.color].text;
         return (
-          <section key={group} className={`rounded-lg border-l-2 ${presentation.border} pl-2`}>
+          <section key={group} className={`rounded-lg border-l-2 ${presentation.border} pl-2`} aria-label={titleFor(group, groupGoals)}>
             <h3 className={`mb-1 text-xs font-semibold ${headingColor}`}>{titleFor(group, groupGoals)}</h3>
             <ul className="space-y-2">
               {groupGoals.map((goal) => (
@@ -5919,7 +5864,7 @@ const MissionAcquisitionList: React.FC<{
           <ul className="space-y-1 text-xs leading-5 text-zinc-700 dark:text-zinc-300">
             {preparations.map(({ goal, source }) => (
               <li key={`prep-${missionNumber}-${goal.id}-${source.recordId}`}>
-                <span className="font-semibold">{goal.item}:</span> {source.method}. {source.note} The later recruitment opportunity is tracked separately.
+                <span className="font-semibold">{goal.item}:</span> {recruitmentPreparation(goal)}
               </li>
             ))}
           </ul>
@@ -5931,22 +5876,12 @@ const MissionAcquisitionList: React.FC<{
 
 
 const Tag: React.FC<{
-  color: "blue" | "green" | "purple" | "red" | "amber" | "zinc";
+  color: TrackerColor;
   children: React.ReactNode;
 }> = ({ color, children }) => {
-  const map: Record<string, string> = {
-    blue: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
-    green:
-      "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
-    purple:
-      "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
-    red: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300",
-    amber: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
-    zinc: "bg-zinc-100 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200",
-  };
   return (
     <span
-      className={`text-xs px-2 py-1 rounded inline-flex items-center gap-1 ring-1 ring-zinc-950/10 dark:ring-white/10 ${map[color]}`}
+      className={`text-xs px-2 py-1 rounded inline-flex items-center gap-1 ring-1 ring-zinc-950/10 dark:ring-white/10 ${TRACKER_PALETTE[color].badge}`}
     >
       {children}
     </span>
@@ -5957,18 +5892,10 @@ const ProgressBar: React.FC<{
   done: number;
   total: number;
   label: string;
-  color: "blue" | "green" | "purple" | "red" | "amber" | "zinc";
+  color: TrackerColor;
 }> = ({ done, total, label, color }) => {
   const percent = pct(done, total);
   const max = Math.max(total, 1);
-  const palette: Record<string, string> = {
-    blue: "bg-blue-500",
-    green: "bg-green-500",
-    purple: "bg-purple-500",
-    red: "bg-red-500",
-    amber: "bg-amber-500",
-    zinc: "bg-zinc-500",
-  };
   return (
     <div className="text-xs">
       <div className="flex flex-wrap items-end justify-between gap-1">
@@ -5987,7 +5914,7 @@ const ProgressBar: React.FC<{
         aria-valuetext={`${done} of ${total} ${label}`}
       >
         <div
-          className={`h-2 ${palette[color]} rounded`}
+          className={`h-2 ${TRACKER_PALETTE[color].progress} rounded`}
           style={{ width: `${percent}%` }}
         />
       </div>
@@ -6003,19 +5930,12 @@ const Panel: React.FC<{
   buttonColor: string;
   children: React.ReactNode;
   right?: React.ReactNode;
-  tone?: "neutral" | "blue" | "green" | "red" | "amber" | "purple";
+  tone?: "neutral" | TrackerColor;
   // NEW: persist this panel's open/closed state under a key
   persistKey?: string;
 }> = ({ id, title, subtitle, border, buttonColor, children, right, tone = "neutral", persistKey }) => {
   const contentId = useId();
-  const bgMap: Record<string, string> = {
-    neutral: "bg-white dark:bg-zinc-800",
-    blue: "bg-blue-50 dark:bg-blue-900/10",
-    green: "bg-green-50 dark:bg-green-900/10",
-    red: "bg-red-50 dark:bg-red-900/10",
-    amber: "bg-amber-50 dark:bg-amber-900/10",
-    purple: "bg-purple-50 dark:bg-purple-900/10",
-  };
+  const panelBackground = tone === "neutral" ? "bg-white dark:bg-zinc-800" : TRACKER_PALETTE[tone].panel;
 
   // localStorage key for per-panel visibility map
   const VIEW_KEY = "fftaProgress.view";
@@ -6055,7 +5975,7 @@ const Panel: React.FC<{
   return (
     <div
       id={id}
-      className={`rounded-2xl p-2 sm:p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${bgMap[tone]} transition-colors`}
+      className={`rounded-2xl p-2 sm:p-3 ring-1 ring-zinc-950/10 dark:ring-white/10 ${border} ${panelBackground} transition-colors`}
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <h2 className="font-bold text-zinc-900 dark:text-zinc-100">
@@ -6073,7 +5993,7 @@ const Panel: React.FC<{
             type="button"
             aria-expanded={open}
             aria-controls={contentId}
-            className={`${buttonColor} text-white text-sm px-3 py-1 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-300`}
+            className={`${buttonColor} min-h-11 min-w-11 text-white text-sm px-3 py-2 rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-300`}
             onClick={handleToggle}
           >
             {open ? "Hide" : "Show"}
@@ -6096,54 +6016,43 @@ const ChapterAcquisitionRow: React.FC<{
   const inputId = useId();
   const presentation = acquisitionGroupPresentation[goal.group];
   const missions = getAcquisitionSourceMissions(goal, missionNumbers);
-  const status = goal.group === "permanent"
-    ? "Confirmed permanent loss"
-    : goal.group === "recommended"
-      ? goal.missability === "recoverable" ? "Later path documented" : "Later path unverified"
-      : goal.group === "conditional"
-        ? "Availability or recovery uncertain"
-        : "Optional / repeatable";
-  const checkboxAccent = goal.group === "permanent"
-    ? "accent-red-600 dark:accent-red-400"
-    : goal.group === "recommended"
-      ? "accent-blue-600 dark:accent-blue-400"
-      : goal.group === "conditional"
-        ? "accent-amber-600 dark:accent-amber-400"
-        : "accent-zinc-600 dark:accent-zinc-400";
+  const copy = getAcquisitionPlayerCopy(goal, acquisitionMissionLabel);
+  const colors = TRACKER_PALETTE[presentation.color];
+  const obtainedAction = goal.kind === "recruit" ? "Recruited"
+    : goal.kind === "blue-magic" ? "Learned"
+      : goal.kind === "capture" ? "Captured" : "Obtained";
 
   return (
-    <li className="rounded-xl border border-zinc-200 bg-white p-2.5 dark:border-zinc-700 dark:bg-zinc-800">
+    <li className={`rounded-xl border ${colors.cardBorder} bg-white p-2.5 dark:bg-zinc-800`}>
       <div className="flex min-w-0 items-start gap-2.5">
         <input
           id={inputId}
           type="checkbox"
-          className={`mt-1 h-4 w-4 shrink-0 ${checkboxAccent} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-300`}
+          className={`mt-1 h-5 w-5 shrink-0 ${colors.accent} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-300`}
           checked={isGoalObtained(goal, checked)}
           onChange={(event) => setCheck(goalKey(goal), event.currentTarget.checked)}
-          aria-label={`${goalGroupLabel[goal.group]}: Obtained ${goal.item} (chapter summary)`}
+          aria-label={`${copy.label}: ${obtainedAction} ${goal.item}`}
         />
         <div className="min-w-0 flex-1 text-sm">
-          <div className="flex flex-wrap items-center gap-2">
-            <label htmlFor={inputId} className="cursor-pointer font-semibold text-zinc-950 dark:text-zinc-100">{goal.item}</label>
-            <Tag color={presentation.color}>{goalPriorityLabel[goal.priority]}</Tag>
-            <span className={`text-xs ${goal.group === "permanent" ? "text-red-700 dark:text-red-300" : goal.group === "recommended" ? "text-blue-700 dark:text-blue-300" : goal.group === "conditional" ? "text-amber-800 dark:text-amber-300" : "text-zinc-600 dark:text-zinc-300"}`}>{status}</span>
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <label htmlFor={inputId} className="min-w-0 cursor-pointer font-semibold text-zinc-950 dark:text-zinc-100">{goal.item}</label>
+            <Tag color={presentation.color}>{copy.label}</Tag>
           </div>
-          <p className="mt-1 text-xs leading-5 text-zinc-700 dark:text-zinc-300">{goal.summary}</p>
           {missions.length > 0 ? (
             <div className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
-              Available in this interval:{" "}
+              See in: {" "}
               {missions.map((mission, index) => (
                 <React.Fragment key={mission}>
                   {index > 0 && ", "}
-                  <a className="font-medium text-blue-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:focus-visible:outline-blue-300" href={`#chapter-mission-${mission}`}>
-                    #{String(mission).padStart(3, "0")}
+                  <a className="font-medium text-blue-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:text-blue-300 dark:focus-visible:outline-blue-300" href={`#chapter-mission-${mission}`}>
+                    {acquisitionMissionLabel(mission)}
                   </a>
                 </React.Fragment>
               ))}
             </div>
           ) : (
             <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
-              Chapter-level timing note. <a className="font-medium text-blue-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-300 dark:focus-visible:outline-blue-300" href={`#global-acquisitions-${goal.group}`}>Full details and references in {presentation.panelTitle}</a>.
+              {copy.instruction} <a className="font-medium text-blue-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:text-blue-300 dark:focus-visible:outline-blue-300" href={`#global-acquisitions-${goal.group}`}>More about {goal.item}</a>.
             </p>
           )}
         </div>
@@ -6163,12 +6072,12 @@ const ChapterAcquisitionPanel: React.FC<{
   if (goals.length === 0) return null;
   const presentation = acquisitionGroupPresentation[group];
   const subtitle = group === "permanent"
-    ? "Confirmed permanently missable goals first available in this progression interval."
+    ? "These can become permanently unavailable. Complete them before their cutoff points."
     : group === "recommended"
-      ? "These are not confirmed permanent missables. Later alternatives vary in reliability; the first listed opportunity may be substantially easier."
+      ? "Good gear opportunities to take while you are here; some are harder to find later."
       : group === "conditional"
-        ? "Caution: permanent availability or recovery has not been fully verified. These are not confirmed permanent missables."
-        : "Optional opportunities with a documented recovery or repeatable path.";
+        ? "Read these before finishing the mission; a later chance may be limited or unclear."
+        : "Optional goals for extra items and recruits.";
   return (
     <Panel
       title={presentation.chapterTitle}
@@ -6206,9 +6115,8 @@ const formatProgressKey = (key: string): ProgressKeyLabel => {
   const missable = GLOBAL_MISSABLES.find((entry) => keyify(`miss-global:${entry.id}`) === key);
   if (missable) {
     return {
-      category: "Legacy Opportunity",
-      item: missable.type,
-      subItem: missable.missable.join(", "),
+      category: "Earlier checklist",
+      item: missable.missable.join(", "),
     };
   }
 
@@ -6226,14 +6134,8 @@ const formatProgressKey = (key: string): ProgressKeyLabel => {
 
   const acquisition = ACQUISITION_GOALS.find((goal) => goalKey(goal) === key);
   if (acquisition) {
-    const category = acquisition.group === "permanent"
-      ? "Missable"
-      : acquisition.group === "recommended"
-        ? "Recommended acquisition"
-        : acquisition.group === "conditional"
-          ? "Conditional acquisition"
-          : "Optional opportunity";
-    return { category, item: acquisition.item, subItem: `${goalPriorityLabel[acquisition.priority]}. ${acquisition.summary}` };
+    const copy = getAcquisitionPlayerCopy(acquisition, acquisitionMissionLabel);
+    return { category: copy.label, item: acquisition.item, subItem: [copy.instruction, copy.note].filter(Boolean).join(" ") };
   }
 
   const [category = "Progress", ...rest] = key.split("-");
@@ -6810,7 +6712,7 @@ const FFTAProgressionGuide: React.FC = () => {
         title="World Map Placements"
         border="border-purple-600"
         buttonColor="bg-purple-600"
-        tone="purple"
+        tone={TRACKER_COLOR.mapPlacements}
         right={<></>}
       >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
@@ -7255,17 +7157,17 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
       <div className="mt-3 grid grid-cols-1 gap-3">
         <Panel
           title="Blue Magic Reference"
-          subtitle='When starting a battle, it is helpful to check the status of monsters and restart if it does not know the respective Blue Magic. Blue Magic can also be learned from enemy Blue Mages.'
-          border="border-blue-600"
-          buttonColor="bg-blue-600"
-          tone="blue"
+          subtitle="Blue Mages can learn these abilities from monsters that use them, or from enemy Blue Mages."
+          border={TRACKER_PALETTE[TRACKER_COLOR.blueMagic].border}
+          buttonColor={TRACKER_PALETTE[TRACKER_COLOR.blueMagic].button}
+          tone={TRACKER_COLOR.blueMagic}
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
                 label="Blue Magic"
                 done={blueDone}
                 total={blueTotal}
-                color="blue"
+                color={TRACKER_COLOR.blueMagic}
               />
             </div>
           }
@@ -7275,17 +7177,17 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
         <Panel
           title="Capturable Monsters Reference"
-          subtitle='You cannot capture a monster if it is asleep, charmed, or the last enemy on the field. Plan accordingly!'
-          border="border-green-600"
-          buttonColor="bg-green-600"
-          tone="green"
+          subtitle="A monster cannot be captured while asleep or charmed, or when it is the last enemy on the field."
+          border={TRACKER_PALETTE[TRACKER_COLOR.captures].border}
+          buttonColor={TRACKER_PALETTE[TRACKER_COLOR.captures].button}
+          tone={TRACKER_COLOR.captures}
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
                 label="Captures"
                 done={capDone}
                 total={capTotal}
-                color="green"
+                color={TRACKER_COLOR.captures}
               />
             </div>
           }
@@ -7318,17 +7220,17 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
 
         <Panel
           title="Mission Reference"
-          subtitle='If a quest does not appear, you may need to accept unwanted quests and promptly quit them to "empty" your available quest slots (max of 16 shown at a time).'
-          border="border-amber-600"
-          buttonColor="bg-amber-600"
-          tone="amber"
+          subtitle="Only 16 missions appear at the pub at once. Complete or abandon one to make room if the mission you want is missing."
+          border={TRACKER_PALETTE[TRACKER_COLOR.missions].border}
+          buttonColor={TRACKER_PALETTE[TRACKER_COLOR.missions].button}
+          tone={TRACKER_COLOR.missions}
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
                 label="Missions"
                 done={questDone}
                 total={questTotal}
-                color="amber"
+                color={TRACKER_COLOR.missions}
               />
             </div>
           }
@@ -7363,10 +7265,10 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
         <Panel
           id="global-acquisitions-permanent"
           title="Missables"
-          subtitle="Confirmed goals that can be permanently lost if their listed opportunity or cutoff is missed."
-          border="border-red-600"
-          buttonColor="bg-red-600"
-          tone="red"
+          subtitle="These characters, abilities, or items can become permanently unavailable. Complete them before passing their cutoff points."
+          border={acquisitionGroupPresentation.permanent.border}
+          buttonColor={acquisitionGroupPresentation.permanent.button}
+          tone={acquisitionGroupPresentation.permanent.tone}
           persistKey="panel:global:acquisitions:permanent"
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
@@ -7374,7 +7276,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                 label="Missables"
                 done={acquisitionProgress.completed.permanent}
                 total={permanentGoals.length}
-                color="red"
+                color={acquisitionGroupPresentation.permanent.color}
               />
             </div>
           }
@@ -7385,10 +7287,10 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
         <Panel
           id="global-acquisitions-recommended"
           title="Recommended Acquisitions"
-          subtitle="These are not confirmed permanent missables. Later alternatives vary in reliability and are called out per item; the first listed opportunity may be substantially easier."
-          border="border-blue-600"
-          buttonColor="bg-blue-600"
-          tone="blue"
+          subtitle="Collect these when you encounter them. Later opportunities may take more work or depend on a random reward."
+          border={acquisitionGroupPresentation.recommended.border}
+          buttonColor={acquisitionGroupPresentation.recommended.button}
+          tone={acquisitionGroupPresentation.recommended.tone}
           persistKey="panel:global:acquisitions:recommended"
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
@@ -7396,44 +7298,44 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                 label="Recommended Acquisitions"
                 done={acquisitionProgress.completed.recommended}
                 total={recommendedGoals.length}
-                color="blue"
+                color={acquisitionGroupPresentation.recommended.color}
               />
             </div>
           }
         >
-          {renderAcquisitionCards(recommendedGoals, "Recommended acquisitions")}
+          {renderAcquisitionCards(recommendedGoals, "Recommended Acquisitions")}
         </Panel>
 
         <Panel
           id="global-acquisitions-conditional"
-          title="Conditional & Unverified Acquisitions"
-          subtitle="Caution: permanent availability or alternate methods have not been fully verified. These are not confirmed permanent missables."
-          border="border-amber-600"
-          buttonColor="bg-amber-600"
-          tone="amber"
+          title="Use Caution"
+          subtitle="Some depend on a specific choice or have limited ways to try again. Check their instructions before leaving the mission."
+          border={acquisitionGroupPresentation.conditional.border}
+          buttonColor={acquisitionGroupPresentation.conditional.button}
+          tone={acquisitionGroupPresentation.conditional.tone}
           persistKey="panel:global:acquisitions:conditional"
           right={
             <div className="w-full sm:w-auto sm:min-w-[200px]">
               <ProgressBar
-                label="Conditional Acquisitions"
+                label="Use Caution"
                 done={acquisitionProgress.completed.conditional}
                 total={conditionalGoals.length}
-                color="amber"
+                color={acquisitionGroupPresentation.conditional.color}
               />
             </div>
           }
         >
-          {renderAcquisitionCards(conditionalGoals, "Conditional and unverified acquisitions")}
+          {renderAcquisitionCards(conditionalGoals, "Use Caution")}
         </Panel>
 
         {optionalGoals.length > 0 && (
           <Panel
             id="global-acquisitions-optional"
-            title="Optional / Repeatable Opportunities"
-            subtitle="Optional goal; a documented repeatable path is shown in its details."
-            border="border-zinc-500"
-            buttonColor="bg-zinc-600"
-            tone="neutral"
+            title="Optional Collectibles & Recruitment"
+            subtitle="Optional goals for extra characters and items. Littlevilli can be recruited by replaying Clan League."
+            border={acquisitionGroupPresentation.optional.border}
+            buttonColor={acquisitionGroupPresentation.optional.button}
+            tone={acquisitionGroupPresentation.optional.tone}
             persistKey="panel:global:acquisitions:optional"
             right={
               <div className="w-full sm:w-auto sm:min-w-[200px]">
@@ -7441,12 +7343,12 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                   label="Optional Opportunities"
                   done={acquisitionProgress.completed.optional}
                   total={optionalGoals.length}
-                  color="zinc"
+                  color={acquisitionGroupPresentation.optional.color}
                 />
               </div>
             }
           >
-            {renderAcquisitionCards(optionalGoals, "Optional and repeatable opportunities")}
+            {renderAcquisitionCards(optionalGoals, "Optional Collectibles and Recruitment")}
           </Panel>
         )}
       </div>
@@ -7614,7 +7516,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
               key={b.key}
               className={`rounded-2xl overflow-hidden ring-1 ring-zinc-950/10 dark:ring-white/10 transition-colors ${
                 b.kind === "story"
-                  ? "bg-amber-50 dark:bg-amber-900/10"
+                  ? TRACKER_PALETTE[TRACKER_COLOR.missions].panel
                   : "bg-white dark:bg-zinc-800"
               }`}
             >
@@ -7624,7 +7526,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                 aria-controls={`block-content-${keyify(b.key)}`}
                 className={`w-full text-left p-4 flex items-center justify-between cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-blue-700 dark:focus-visible:outline-blue-300 ${
                   b.kind === "story"
-                    ? "hover:bg-amber-100 dark:hover:bg-amber-900/20"
+                    ? "hover:bg-yellow-100 dark:hover:bg-yellow-900/20"
                     : "hover:bg-zinc-50 dark:hover:bg-zinc-800/70"
                 }`}
                 onClick={() => toggle(b.key)}
@@ -7640,7 +7542,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       </span>
                     )}
                     {b.placements && b.placements.length > 0 && (
-                      <Tag color="purple">
+                      <Tag color={TRACKER_COLOR.mapPlacements}>
                         <MapPin className="w-3 h-3" />
                         Place #
                         {b.placements
@@ -7655,7 +7557,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       </Tag>
                     )}
                     {capNames.length > 0 && (
-                      <Tag color="green">
+                      <Tag color={TRACKER_COLOR.captures}>
                         Captures {capDoneLocal}/{capNames.length}
                       </Tag>
                     )}
@@ -7665,16 +7567,16 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                       </Tag>
                     )}
                     {localAcquisitionsByGroup.permanent.length > 0 && (
-                      <Tag color="red">Missables {localAcquisitionProgress.completed.permanent}/{localAcquisitionsByGroup.permanent.length}</Tag>
+                      <Tag color={ACQUISITION_TRACKER_COLOR.permanent}>Missables {localAcquisitionProgress.completed.permanent}/{localAcquisitionsByGroup.permanent.length}</Tag>
                     )}
                     {localAcquisitionsByGroup.recommended.length > 0 && (
-                      <Tag color="blue">Recommended {localAcquisitionProgress.completed.recommended}/{localAcquisitionsByGroup.recommended.length}</Tag>
+                      <Tag color={ACQUISITION_TRACKER_COLOR.recommended}>Recommended {localAcquisitionProgress.completed.recommended}/{localAcquisitionsByGroup.recommended.length}</Tag>
                     )}
                     {localAcquisitionsByGroup.conditional.length > 0 && (
-                      <Tag color="amber">Conditional {localAcquisitionProgress.completed.conditional}/{localAcquisitionsByGroup.conditional.length}</Tag>
+                      <Tag color={ACQUISITION_TRACKER_COLOR.conditional}>Use Caution {localAcquisitionProgress.completed.conditional}/{localAcquisitionsByGroup.conditional.length}</Tag>
                     )}
                     {localAcquisitionsByGroup.optional.length > 0 && (
-                      <Tag color="zinc">Optional {localAcquisitionProgress.completed.optional}/{localAcquisitionsByGroup.optional.length}</Tag>
+                      <Tag color={ACQUISITION_TRACKER_COLOR.optional}>Optional {localAcquisitionProgress.completed.optional}/{localAcquisitionsByGroup.optional.length}</Tag>
                     )}
                   </div>
                 </div>
@@ -7766,9 +7668,9 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     {blueNames.length > 0 && (
                         <Panel
                             title="Blue Magic Now Available"
-                            border="border-blue-600"
-                            buttonColor="bg-blue-600"
-                            tone="blue"
+                            border={TRACKER_PALETTE[TRACKER_COLOR.blueMagic].border}
+                            buttonColor={TRACKER_PALETTE[TRACKER_COLOR.blueMagic].button}
+                            tone={TRACKER_COLOR.blueMagic}
                             persistKey={`panel:${b.key}:blueNow`}
                             right={
                                 <div className="w-full sm:w-auto sm:min-w-[180px]">
@@ -7776,7 +7678,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                         label="Blue Magic"
                                         done={blueDoneLocal}
                                         total={blueNames.length}
-                                        color="blue"
+                                        color={TRACKER_COLOR.blueMagic}
                                     />
                                 </div>
                             }
@@ -7788,9 +7690,9 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     {capNames.length > 0 && (
                         <Panel
                             title="Capturable Monsters Now Available"
-                            border="border-green-600"
-                            buttonColor="bg-green-600"
-                            tone="green"
+                            border={TRACKER_PALETTE[TRACKER_COLOR.captures].border}
+                            buttonColor={TRACKER_PALETTE[TRACKER_COLOR.captures].button}
+                            tone={TRACKER_COLOR.captures}
                             persistKey={`panel:${b.key}:capNow`}
                             right={
                                 <div className="w-full sm:w-auto sm:min-w-[180px]">
@@ -7798,7 +7700,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                         label="Captures"
                                         done={capDoneLocal}
                                         total={capNames.length}
-                                        color="green"
+                                        color={TRACKER_COLOR.captures}
                                     />
                                 </div>
                             }
@@ -7810,9 +7712,9 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                     {b.kind === "between" && quest.length > 0 && (
                         <Panel
                             title="Side Missions Now Available"
-                            border="border-amber-600"
-                            buttonColor="bg-amber-600"
-                            tone="amber"
+                            border={TRACKER_PALETTE[TRACKER_COLOR.sidequests].border}
+                            buttonColor={TRACKER_PALETTE[TRACKER_COLOR.sidequests].button}
+                            tone={TRACKER_COLOR.sidequests}
                             persistKey={`panel:${b.key}:sideNow`}
                             right={
                                 <div className="w-full sm:w-auto sm:min-w-[180px]">
@@ -7820,7 +7722,7 @@ const List = ({ l, a }: { l: string; a?: string[] }) =>
                                         label="Sidequests"
                                         done={questDoneLocal}
                                         total={quest.length}
-                                        color="amber"
+                                        color={TRACKER_COLOR.sidequests}
                                     />
                                 </div>
                             }

@@ -13,6 +13,7 @@ import {
   getAcquisitionPreparationsForMission,
   getAcquisitionGoalsForMission,
   getAcquisitionProgressCounts,
+  getAcquisitionPlayerCopy,
   getAcquisitionSourceMissions,
   getChronologicallyAvailableMissionNumbers,
 } from "../src/acquisitions.ts";
@@ -155,6 +156,83 @@ test("source rarity and hidden-item qualifiers remain visible metadata", () => {
   assert.equal(hiddenChill.hidden, true);
   assert.equal(rareCactus.rarity, "Rare");
   assert.equal(rareCactus.hidden, true);
+});
+
+test("player-facing guidance covers all 72 goals without exposing audit language", () => {
+  const missionName = (number) => `Mission #${String(number).padStart(3, "0")}`;
+  const prohibited = /verification|verified|unverified|documented|assessment|legacy record|repeatability|source confidence|audit/i;
+  assert.equal(ACQUISITION_GOALS.length, 72);
+  for (const goal of ACQUISITION_GOALS) {
+    const copy = getAcquisitionPlayerCopy(goal, missionName);
+    assert.ok(copy.label, `${goal.id} needs a player-facing label`);
+    assert.ok(copy.instruction, `${goal.id} needs an actionable instruction`);
+    assert.ok(!copy.instruction.startsWith("Check this opportunity"), `${goal.id} needs item-specific guidance`);
+    assert.ok(!prohibited.test(JSON.stringify(copy)), `${goal.id} exposes research terminology`);
+  }
+});
+
+test("source citations stay with the research data, outside player-facing copy", () => {
+  const chill = byId.get("chill-rod");
+  const copy = getAcquisitionPlayerCopy(chill);
+  assert.ok(chill.references.length > 0, "research references remain available internally");
+  assert.equal(Object.hasOwn(copy, "references"), false);
+});
+
+test("recruitment instructions do not turn cutoff missions into false acquisition alternatives", () => {
+  for (const id of ["eldena", "pallanza", "quin", "littlevilli", "iceprism-sword", "r4-anti-law", "free-bervenia-087"]) {
+    const copy = getAcquisitionPlayerCopy(byId.get(id));
+    assert.deepEqual(copy.otherOpportunities, [], `${id} should not repeat its own mission as another opportunity`);
+  }
+  const goblin = getAcquisitionPlayerCopy(byId.get("goblin"), (n) => `Quest ${n}`);
+  assert.deepEqual(goblin.otherOpportunities, ["Quest 32", "Quest 37", "Quest 44", "Quest 49", "Quest 55"]);
+});
+
+test("player copy gives contextual steal targets, timing, and cautious later alternatives", () => {
+  const missionName = (number) => ({
+    10: "Emerald Keep (#010)",
+    12: "Jagd Hunt (#012)",
+    14: "The Big Find (#014)",
+    23: "Over the Hill (#023)",
+    45: "Frosty Mage (#045)",
+    61: "Hit Again! (#061)",
+  }[number] ?? `Mission #${String(number).padStart(3, "0")}`);
+  const chillRod = byId.get("chill-rod");
+  const chillGlobal = getAcquisitionPlayerCopy(chillRod, missionName);
+  assert.equal(chillGlobal.label, "Strongly Recommended");
+  assert.match(chillGlobal.instruction, /Steal from Nu Mou Black Mage during Frosty Mage/);
+  assert.match(chillGlobal.note, /later Type 6 mission reward is random/i);
+  assert.match(chillGlobal.otherOpportunities.join(" "), /Hit Again! \(#061\)/);
+  const chillLaterMission = getAcquisitionPlayerCopy(chillRod, missionName, 61);
+  assert.match(chillLaterMission.instruction, /Hit Again! \(#061\)/);
+  assert.doesNotMatch(chillLaterMission.instruction, /hidden/i);
+
+  const tulwar = getAcquisitionPlayerCopy(byId.get("tulwar"), missionName, 12);
+  assert.match(tulwar.instruction, /Steal from Blue Mage during Jagd Hunt/);
+  assert.match(tulwar.note, /map layout/i);
+  const angelRing = getAcquisitionPlayerCopy(byId.get("angel-rings"), missionName, 72);
+  assert.equal(angelRing.label, "Optional");
+  assert.match(angelRing.instruction, /Steal from Black Mage/);
+  assert.match(angelRing.note, /do not rely on repeating/i);
+  const littlevilli = getAcquisitionPlayerCopy(byId.get("littlevilli"), missionName);
+  assert.equal(littlevilli.label, "Optional");
+  assert.match(littlevilli.instruction, /replay the mission/i);
+  assert.equal(littlevilli.note, undefined, "the instruction already tells the player how to try again");
+
+  const aegis = getAcquisitionPlayerCopy(byId.get("aegis-shield"), missionName);
+  assert.match(aegis.instruction, /Emerald Keep \(#010\)/);
+  assert.deepEqual(aegis.otherOpportunities, [
+    "Steal from Paladin during Mission #060 (Rare).",
+    "Steal from Soldier during Mission #104 (Rare).",
+  ], "global guidance puts the earliest listed chance first and orders later chances chronologically");
+});
+
+test("Lutia Mop-Up acquisition targets are modeled as steals, not generic mission rewards", () => {
+  for (const [id, target] of [["angel-rings", "Black Mage"], ["bracers", "Sniper"], ["hades-bows", "Sniper"]]) {
+    const goal = byId.get(id);
+    assert.equal(goal.kind, "steal");
+    assert.equal(goal.sources[0].target, target);
+    assert.deepEqual(goal.sources[0].missions, [72]);
+  }
 });
 
 test("Blue Magic and captures reuse their existing completion keys", () => {
